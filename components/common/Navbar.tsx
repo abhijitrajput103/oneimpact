@@ -58,7 +58,7 @@ export function Navbar() {
             isScrolled ? "max-w-4xl py-1.5 px-5 sm:px-6" : "max-w-6xl py-2 px-5 sm:px-7"
           )}
         >
-          {/* Branding Logo — Styled text matching logo font */}
+          {/* Branding Logo — Official OneImpact logo image */}
           <MagneticButton strength={0.2} textStrength={0.1}>
             <Link
               href="/"
@@ -66,9 +66,12 @@ export function Navbar() {
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={resetCursor}
             >
-              <span className="font-serif font-black lowercase text-black tracking-tight text-sm sm:text-base md:text-lg">one</span>
-              <span className="font-serif italic font-black lowercase text-black tracking-tight text-sm sm:text-base md:text-lg ml-0.5">impact</span>
-              <span className="text-black font-black ml-0.5 inline-block group-hover:scale-125 transition-transform duration-300">.</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/LOGO/oneimpact-logo.png"
+                alt="One Impact"
+                className="h-6 sm:h-7 md:h-8 w-auto object-contain"
+              />
             </Link>
           </MagneticButton>
 

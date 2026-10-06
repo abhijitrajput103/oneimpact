@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/common/Navbar";
+
 // ── DATA DEFINITIONS ──────────────────────────────────────────────────────────
 
 const CLIENT_LOGOS = [
@@ -22,99 +23,43 @@ const CLIENT_LOGOS = [
 
 const USP_CARDS = [
   {
-    head: "Custom Strategic Roadmap",
-    text: "Tailored SEO campaigns built around your commercial intent and revenue goals, never generic checklists.",
+    head: "Data-led",
+    text: "Strategy backed by intelligent data analysis.",
     chip: "#FFE9B8",
     icon: (
-      <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
     ),
   },
   {
-    head: "Transparent Reporting",
-    text: "Live dashboards and plain-English monthly updates focusing on qualified pipeline growth, not vanity traffic.",
+    head: "Sales-first",
+    text: "Designed to directly improve your sales performance.",
     chip: "#D6E5FF",
     icon: (
-      <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
     ),
   },
   {
-    head: "Technical SEO Rigor",
-    text: "Complete Core Web Vitals optimization, pristine crawl architectures, and rich schema markup implementation.",
+    head: "Made to fit",
+    text: "Tailor-made SEO solutions for every business type.",
     chip: "#E2F0D9",
     icon: (
-      <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
     ),
   },
   {
-    head: "AI-Optimized SEO (AIO)",
-    text: "Future-proof optimization engineered for ChatGPT Search, Google AI Overviews, and Perplexity LLM citations.",
+    head: "AI-enhanced",
+    text: "AI-enhanced SEO for smarter, more efficient execution.",
     chip: "#F0E1FF",
     icon: (
-      <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
     ),
   },
   {
-    head: "High-Intent Keyword Focus",
-    text: "We target terms with active commercial buyer intent that directly generate enquiries and sales.",
+    head: "Creative & Analytical",
+    text: "Blending creativity with data for impactful results.",
     chip: "#FFE3E0",
     icon: (
-      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-    ),
-  },
-  {
-    head: "High-Authority Link Equity",
-    text: "Strictly white-hat editorial outreach that builds natural domain authority and protects against penalty shocks.",
-    chip: "#FFE9B8",
-    icon: (
-      <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-    ),
-  },
-  {
-    head: "Local Map Pack Supremacy",
-    text: "Dominate Google 3-Pack local rankings with precision NAP consistency, citation audits, and GBP review engines.",
-    chip: "#D6E5FF",
-    icon: (
-      <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-    ),
-  },
-  {
-    head: "E-Commerce Revenue Growth",
-    text: "Category siloing, product schema integration, and faceted navigation tuning designed to accelerate Shopify/Woo checkout.",
-    chip: "#E2F0D9",
-    icon: (
-      <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-    ),
-  },
-  {
-    head: "Competitor Market Moats",
-    text: "We reverse-engineer what your top market rivals rank for, extract their backlink profiles, and outposition them.",
-    chip: "#F0E1FF",
-    icon: (
-      <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-    ),
-  },
-  {
-    head: "Zero Fluff Guarantee",
-    text: "No misleading impressions or bot traffic claims. We tie every sprint to keyword positions and business growth.",
-    chip: "#FFE3E0",
-    icon: (
-      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    ),
-  },
-  {
-    head: "Speed & Core Web Vitals",
-    text: "Lightning-fast page load times, sub-second LCP scores, and optimized JavaScript delivery across mobile devices.",
-    chip: "#FFE9B8",
-    icon: (
-      <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-    ),
-  },
-  {
-    head: "Dedicated Growth Lead",
-    text: "Direct access to senior search strategists who actively understand your brand ethos and industry dynamics.",
-    chip: "#D6E5FF",
-    icon: (
-      <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
     ),
   },
 ];
@@ -123,252 +68,406 @@ const EEAT_CARDS = [
   {
     k: "E",
     t: "Experience",
-    a: "Over half a decade scaling search growth across 50+ diverse industries, from venture-backed startups to enterprise conglomerates.",
+    a: "Our team has worked hands-on with brands across industries, successfully navigating SEO challenges and delivering results. From traffic surges to strategic keyword wins, we know what it takes to rank, and stay there.",
   },
   {
     k: "E",
     t: "Expertise",
-    a: "Technical architectural specialists, data engineers, and content directors certified in search semantics and semantic schema.",
+    a: "We bring together professionals from diverse sectors, each bringing unique insights to the table. No generic blueprints, just carefully crafted SEO plans built around your market, your goals, and your audience.",
   },
   {
     k: "A",
     t: "Authoritativeness",
-    a: "Building organic trust through editorial media placements, verified digital PR, and authoritative backlink graphs.",
+    a: "Our strategies help you earn credibility in your industry. By consistently publishing quality content and building the right links, we position your brand as a trusted voice in your space.",
   },
   {
     k: "T",
     t: "Trustworthiness",
-    a: "100% white-hat algorithmic safety, transparent analytics integrations, and zero risk of manual Google search penalties.",
+    a: "Transparency is non-negotiable. We set expectations early, deliver honest reports, and always keep you in the loop. Our work is measurable, ethical, and designed for long-term success.",
   },
 ];
 
 const QUOTES = [
   {
-    text: "One Impact transformed our organic search acquisition. We went from page 4 to holding the top 3 spots for our core high-intent queries.",
-    role: "Marketing Director, LenDen Club",
+    text: "They explained every change in plain language, and the monthly reports actually made sense to our whole team.",
+    role: "Marketing Head, home décor brand",
   },
   {
-    text: "Their technical audit caught indexation leaks that our in-house engineers had overlooked. Organic conversions jumped 180% within 4 months.",
-    role: "Head of Growth, Sweet Bengal",
+    text: "Our pages finally match what customers search for, and the enquiries we receive are a much better fit.",
+    role: "Founder, healthcare clinic",
   },
   {
-    text: "The local SEO strategy has been a game-changer. We dominate local map packs across all our retail branches in Maharashtra.",
-    role: "Founder, Moxie Beauty",
+    text: "Clear process, honest updates and a team that picks up the phone. SEO no longer feels like a black box.",
+    role: "Director, manufacturing company",
   },
 ];
 
 const HELPS_CARDS = [
   {
-    t: "Unstoppable Organic Traffic",
-    a: "Bring thousands of ready-to-buy prospects to your website without paying for every single click.",
+    t: "Better visibility where it counts",
+    a: "We help you rank for keywords your audience is actively searching. That means you show up just when they need your product or service.",
     chip: "#FFE9B8",
+    d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z",
+  },
+  {
+    t: "Traffic that converts",
+    a: "Unlike paid ads that reach broad audiences, SEO brings in users with intent: people already looking for what you offer.",
+    chip: "#D6E5FF",
     d: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
   },
   {
-    t: "Lower Customer Acquisition Costs",
-    a: "Organic search compounding creates an evergreen pipeline that reduces your reliance on rising paid ad costs.",
-    chip: "#D6E5FF",
+    t: "Higher rankings without paying for ads",
+    a: "Top organic rankings build trust and click-throughs. People trust what ranks naturally over what’s paid.",
+    chip: "#E2F0D9",
+    d: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+  },
+  {
+    t: "Cost-efficient, long-term strategy",
+    a: "No bidding wars or ad spend needed. Your optimized content keeps working for you over time.",
+    chip: "#F0E1FF",
     d: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
   },
   {
-    t: "Cement True Brand Authority",
-    a: "Searchers trust top organic results. Dominating position 1 signals unquestionable market leadership.",
-    chip: "#E2F0D9",
+    t: "An edge over competitors",
+    a: "While others rely solely on ads, your SEO presence makes sure you’re visible in the long run.",
+    chip: "#FFE3E0",
     d: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
   },
   {
-    t: "Exceptional Mobile User Experience",
-    a: "Google ranks fast, clean sites. Our optimizations directly improve navigation, speed, and overall on-site conversion.",
-    chip: "#F0E1FF",
-    d: "M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z",
-  },
-  {
-    t: "Evergreen Compounding ROI",
-    a: "Unlike paid campaigns that turn dark the moment spend stops, SEO assets continue driving leads for years.",
-    chip: "#FFE3E0",
-    d: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15",
-  },
-  {
-    t: "Unfair Competitive Moats",
-    a: "Displace entrenched competitors by winning the keywords your target demographic researches before buying.",
+    t: "Smarter decisions from real data",
+    a: "SEO tools give insight into user behavior and performance, helping you adjust campaigns intelligently.",
     chip: "#FFE9B8",
-    d: "M3 6l3 18h12l3-18H3zm3 4h12",
+    d: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
   },
 ];
 
 const BUT_WHY_CARDS = [
-  { t: "Custom Playbooks Only", a: "No canned templates. Every sprint is custom-designed for your competitive niche.", chip: "#FFBA39" },
-  { t: "Direct Senior Strategists", a: "Work with real SEO directors who make decisions, not junior account managers.", chip: "#7BAAFF" },
-  { t: "Revenue Over Clicks", a: "We celebrate bottom-line customer acquisitions and demo requests, not vanity impressions.", chip: "#FFBA39" },
-  { t: "AI Search Ready", a: "Built for LLM discovery engines so you appear in ChatGPT and Perplexity citations.", chip: "#7BAAFF" },
-  { t: "Agile Weekly Sprints", a: "Rapid implementation cycles ensuring technical recommendations actually get shipped.", chip: "#FFBA39" },
-  { t: "Strictly White-Hat", a: "100% compliant with Google Webmaster and Quality Rater Guidelines.", chip: "#7BAAFF" },
-  { t: "Complete Full-Stack Team", a: "Engineers, copywriters, and data analysts working simultaneously on your site.", chip: "#FFBA39" },
-  { t: "Zero Lock-In Contracts", a: "We earn your partnership every single month with verifiable commercial performance.", chip: "#7BAAFF" },
+  { t: "Proven industry experience", a: "We’ve successfully managed SEO for multinational and regional brands alike.", chip: "#FFBA39" },
+  { t: "AI-driven precision", a: "Our SEO solutions are enhanced with AI to streamline workflows and improve targeting.", chip: "#7BAAFF" },
+  { t: "Hyperlocal strategies", a: "We specialize in local SEO for businesses targeting specific regions or cities.", chip: "#FFBA39" },
+  { t: "Frequent SEO audits", a: "Regular performance checks to ensure strategies are still aligned with results.", chip: "#7BAAFF" },
+  { t: "Authority-boosting backlink building", a: "We earn backlinks from high DA and PA domains that improve rankings and credibility.", chip: "#FFBA39" },
+  { t: "Complete website optimization", a: "From technical fixes to content structure and UX, we optimize every corner of your site.", chip: "#7BAAFF" },
+  { t: "Trend-responsive SEO", a: "We track algorithm updates and audience behavior shifts to adjust quickly.", chip: "#FFBA39" },
+  { t: "User-centric design focus", a: "We make your site easier to navigate and convert by improving the overall experience.", chip: "#7BAAFF" },
 ];
 
-const CORE_SERVICES = [
+const EXPLORE_SERVICES = [
   {
-    t: "Technical SEO Audits & Architecture",
-    a: "Fixing crawl traps, canonical conflicts, JavaScript hydration bottlenecks, and Core Web Vitals to maximize search engine discovery.",
+    t: "SEO services",
+    a: "Our SEO services are built to elevate your visibility, generate qualified traffic, and convert leads. Every strategy we develop includes precise on-page SEO, keyword mapping, and content optimization, tailored to meet your business goals.",
     dot: "#FFBA39",
   },
   {
-    t: "On-Page Optimization & Semantic SEO",
-    a: "Restructuring content entities, heading hierarchies, title tags, and topical clusters that satisfy user intent completely.",
+    t: "CRO services (Conversion Rate Optimization)",
+    a: "Make the most of your existing traffic. With CRO, we optimize user journeys to lower bounce rates and increase conversion. It means less spend on new users, and more action from your current visitors.",
     dot: "#7BAAFF",
   },
   {
-    t: "Authoritative Link Building & Digital PR",
-    a: "Earning genuine editorial backlinks from high-DR industry publications that pass real domain equity and authority.",
+    t: "ASO services (App Store Optimization)",
+    a: "Want your app to show up when someone searches for related tools on the Play Store or App Store? Our ASO services include keyword optimization, localization, content updates, and more to increase installs.",
     dot: "#34C759",
   },
-];
-
-const ADVANCED_SERVICES = [
   {
-    t: "AI-Engine Optimization (AIO / GEO)",
-    a: "Optimizing your brand for generative AI citations in ChatGPT Search, Google AI Overviews, Perplexity, and Claude search.",
+    t: "SEO audit services",
+    a: "Our in-depth SEO audit uncovers the issues holding your website back. We review backlinks, content, load speeds, technical setup, and more to build a plan that elevates your SEO.",
     dot: "#AF52DE",
   },
   {
-    t: "E-Commerce Category & Product SEO",
-    a: "Schema-driven product catalogs, faceted search tuning, and category siloing that drives qualified commercial cart checkouts.",
+    t: "Enterprise SEO services",
+    a: "Have a large website or multiple locations? We create strategies tailored to large-scale businesses, including internal linking, crawl optimization, global content management, and collaboration across teams.",
     dot: "#FF9500",
   },
   {
-    t: "Enterprise Platform Search Strategy",
-    a: "Scalable programmatic SEO, international hreflang architectures, and multi-domain crawl management for high-scale sites.",
+    t: "Penalty recovery services",
+    a: "If Google hit your site with a penalty, we find the cause, clean it up, and future-proof your website with compliant white-hat strategies that align with algorithm guidelines.",
     dot: "#007AFF",
   },
 ];
 
-const WHY2_CARDS = [
-  { t: "Deep Technical Mastery", a: "We don't just advise; we write clean schema and optimize Next.js/React frontend code." },
-  { t: "Intent-First Keyword Mining", a: "Targeting the exact terminology high-value buyers use right before purchasing." },
-  { t: "Full-Funnel Content Architecture", a: "Top-of-funnel informational hubs supporting bottom-of-funnel conversion magnets." },
-  { t: "Proactive Algorithmic Defense", a: "Continuous monitoring to keep your site thriving through Core & Helpful Content updates." },
-  { t: "Holistic Digital Synergies", a: "SEO designed to complement your social, paid media, and brand narrative seamlessly." },
-  { t: "Transparent Analytics Dashboards", a: "Real-time Google Search Console & GA4 integrations with custom business KPI filters." },
-  { t: "Dedicated Communication Channel", a: "Direct Slack or WhatsApp line with your senior growth squad for immediate turnaround." },
+const WHY_ONEIMPACT_POINTS = [
+  { t: "SEO strategies tailored to you", a: "We don’t do cookie-cutter. Every SEO campaign we craft is built around your specific business goals, industry needs, and target audience." },
+  { t: "Up-to-the-minute algorithm know-how", a: "Our experts stay current with every Google algorithm shift, so your SEO strategy is always optimized for what search engines want right now." },
+  { t: "Cross-industry experience", a: "From startups to global brands, our team brings a wide range of insights to every campaign, helping us tackle SEO from multiple perspectives." },
+  { t: "Analytics-driven execution", a: "We base every decision on real-time data, not guesswork. That means higher efficiency, smarter strategy, and measurable outcomes." },
+  { t: "Success with competitive keywords", a: "We help businesses rank for some of the toughest keywords in their niche, and we’ll do the same for you." },
+  { t: "Scalable for growth", a: "Whether you’re local or global, our solutions are built to grow alongside your business, with long-term success in mind." },
+  { t: "Ethical, long-term SEO", a: "No gimmicks. We use white-hat strategies that build sustainable authority and long-term trust with both users and search engines." },
 ];
 
 const OFFER_TOPICS = [
   {
+    id: "audit",
+    label: "Audit and strategy",
+    intro: "A complete 360-degree diagnostic of your search health to build an actionable, revenue-focused roadmap.",
+    qs: [
+      {
+        q: "What is a technical SEO audit?",
+        intro: "A technical audit examines the behind-the-scenes setup of your site to identify any issues that might block search engines or affect user experience. We look at:",
+        bullets: [
+          "Crawl errors and indexing status",
+          "Site load speed and performance",
+          "Mobile usability and responsiveness",
+          "HTTPS setup and security layers",
+          "URL structures and navigation paths",
+          "Duplicate content cleanups",
+          "Meta and HTML tag accuracy",
+          "Redirect chains and broken links",
+          "Analytics and tracking health",
+          "Compliance with Core Web Vitals",
+        ],
+      },
+      {
+        q: "What does an on-page SEO audit cover?",
+        intro: "This audit evaluates how well each individual page is optimized for both search engines and visitors. It includes:",
+        bullets: [
+          "Title tags and meta descriptions",
+          "Heading tag hierarchy and structure",
+          "Internal and outbound linking patterns",
+          "Content depth, clarity, and keyword placement",
+          "Technical checks like page load speed, schema markup, mobile optimization, canonical tags, and image SEO",
+        ],
+      },
+      {
+        q: "What is an off-page SEO audit?",
+        intro: "Off-page audits help measure your brand’s authority across the web. We examine:",
+        bullets: [
+          "Strength and quality of your backlink profile",
+          "Your domain and page authority scores",
+          "Outreach, guest post, and link-building effectiveness",
+          "Online presence and community engagement",
+          "Any penalties or spammy link risks",
+        ],
+      },
+      {
+        q: "How does competitor analysis help with SEO?",
+        intro: "It provides a benchmark for your own strategy. With competitive insights, we:",
+        bullets: [
+          "Pinpoint which keywords are bringing your rivals traffic",
+          "Find content opportunities they’ve missed",
+          "Analyze their backlink and content tactics",
+          "Build smarter strategies that help you overtake them",
+        ],
+      },
+      {
+        q: "How are high-intent keywords discovered?",
+        intro: "We categorize search terms based on user intent: whether they’re ready to buy (transactional), researching (informational), or looking for a brand (navigational). Using advanced tools like SEMrush and Ahrefs, we:",
+        bullets: [
+          "Identify valuable keywords with high conversion potential",
+          "Align them with what your customers are looking for",
+          "Analyze which terms are bringing in traffic for top competitors",
+        ],
+      },
+    ],
+  },
+  {
     id: "tech",
     label: "Technical SEO",
-    intro: "The foundation of all search visibility. If bots can't render or parse your pages effectively, great content will never rank.",
+    intro: "The engine of search indexing. We engineer pristine architectures, schema, and sub-second performance.",
     qs: [
-      { q: "What does your technical SEO audit cover?", a: "We inspect server response times, HTTP header directives, indexability, XML sitemaps, robots.txt rules, JavaScript rendering, duplicate content canonicalization, and Core Web Vitals (LCP, FID/INP, CLS)." },
-      { q: "Do you implement fixes or just give advice?", a: "Unlike agencies that simply email a PDF of problems, our technical team works directly with your developers or implements fixes in your code repository directly." },
-      { q: "How do you handle Single Page Applications (Next.js/React)?", a: "We specialize in modern frontend stacks. We audit server-side rendering (SSR), static site generation (SSG), hydration states, and metadata tags to guarantee flawless bot indexing." },
+      {
+        q: "Why is Technical SEO foundational?",
+        a: "If search crawlers cannot render, crawl, or index your pages efficiently, even high-quality content will never achieve page-one rankings. Technical SEO resolves structural bottlenecks at the code level.",
+      },
+      {
+        q: "How do you optimize Core Web Vitals?",
+        a: "We systematically optimize Largest Contentful Paint (LCP), Interaction to Next Paint (INP), and Cumulative Layout Shift (CLS) through code splitting, caching strategies, and asset compression.",
+      },
+      {
+        q: "Do you support modern Single Page Applications (Next.js/React)?",
+        a: "Yes, our technical team works natively with modern JavaScript frameworks, optimizing Server-Side Rendering (SSR), Static Generation (SSG), and hydration to ensure seamless bot rendering.",
+      },
     ],
   },
   {
-    id: "onpage",
-    label: "On-Page SEO",
-    intro: "Transforming every page into an undeniable authority for its target search entity and user search intent.",
+    id: "content",
+    label: "Content marketing",
+    intro: "Intent-led editorial assets engineered to attract, educate, and convert high-value buyers.",
     qs: [
-      { q: "How do you optimize existing content?", a: "We perform semantic gap analysis against top ranking competitors, integrate missing subtopics, optimize internal link structures, and calibrate header hierarchies without keyword stuffing." },
-      { q: "What role does schema markup play?", a: "Rich schema (Article, Product, Organization, FAQPage, BreadcrumbList) helps search engines understand page context immediately, unlocking rich snippets and higher CTRs." },
-      { q: "How do you approach keyword cannibalization?", a: "We map out page intent matrices. If two URLs compete for the same query, we either consolidate content via 301 redirects or differentiate their topical focus." },
+      {
+        q: "How do you plan topic clusters?",
+        a: "We map comprehensive topical authorities around your core commercial offering, linking pillar pages to contextual supporting articles that signal domain expertise to search engines.",
+      },
+      {
+        q: "How do you align content with buyer intent?",
+        a: "We craft distinct content types for top-of-funnel discovery, mid-funnel comparison, and bottom-of-funnel decision-making, ensuring every visitor has a natural next step toward conversion.",
+      },
     ],
   },
   {
-    id: "offpage",
-    label: "Off-Page & Digital PR",
-    intro: "Building genuine editorial authority and brand mentions that Google's algorithms reward with first-page dominance.",
+    id: "link",
+    label: "Link building",
+    intro: "Strictly white-hat editorial outreach that builds genuine domain authority and trust.",
     qs: [
-      { q: "How do you acquire backlinks?", a: "Strictly through high-quality editorial outreach, data-driven PR stories, brand mentions, and thought leadership contributions. We never buy link-farm PBN links." },
-      { q: "How do you ensure link safety?", a: "Every target domain undergoes strict vetting for organic traffic trends, spam scores, topical relevance, and editorial guidelines to ensure 100% white-hat safety." },
-      { q: "Can bad backlinks hurt my site?", a: "Yes. If your site has legacy toxic or algorithmic link flags, we perform a thorough backlink audit and prepare disavow files to restore domain trust." },
+      {
+        q: "How do you earn backlinks?",
+        a: "Through data-driven digital PR, original research stories, thought leadership placements, and targeted outreach to respected industry publications. We never buy link-farm links.",
+      },
+      {
+        q: "How do you protect our site from link penalties?",
+        a: "Every prospective domain undergoes strict evaluation for organic traffic validity, spam score, and topical relevance to protect your backlink profile from algorithmic flags.",
+      },
     ],
   },
   {
     id: "local",
-    label: "Local SEO & Maps",
-    intro: "Ensure nearby customers looking for your services discover your business in Google Local 3-Packs and Maps.",
+    label: "Local SEO",
+    intro: "Capture high-intent nearby customers searching in Google Maps and the Local 3-Pack.",
     qs: [
-      { q: "What is Google Business Profile (GBP) optimization?", a: "We optimize your business categories, service menus, operational hours, geotagged imagery, Q&A sections, and implement review generation protocols." },
-      { q: "Why is NAP consistency so important?", a: "Matching Name, Address, and Phone number across every major directory verifies your physical authenticity to Google's local proximity algorithms." },
-      { q: "Can you rank multiple branches or franchise locations?", a: "Yes. We create localized landing pages for each branch with individual schema markup and local citation networks." },
-    ],
-  },
-  {
-    id: "aio",
-    label: "AI-Optimized SEO (AIO)",
-    intro: "The next frontier: getting cited and recommended by generative AI engines like ChatGPT, Google AI Overviews, and Perplexity.",
-    qs: [
-      { q: "What is AI-Optimized SEO (AIO / GEO)?", a: "It is the science of structuring factual knowledge, author credentials, entity citations, and concise direct answers so LLMs reference your brand as an authority." },
-      { q: "Will AI search replace traditional Google search?", a: "They coexist. Users increasingly ask complex comparative questions to LLMs while using Google for direct actions. Our hybrid approach wins both." },
-      { q: "How do you measure AI citations?", a: "We monitor prompt outputs across ChatGPT Search, Perplexity, and Google AI Overviews for your industry's core commercial queries." },
+      {
+        q: "What is Google Business Profile (GBP) optimization?",
+        a: "We optimize your business categories, service menus, operational hours, geotagged imagery, Q&A sections, and implement review generation protocols.",
+      },
+      {
+        q: "Why is NAP consistency so important?",
+        a: "Matching Name, Address, and Phone number across every major directory verifies your physical authenticity to Google's local proximity algorithms.",
+      },
     ],
   },
   {
     id: "ecom",
-    label: "E-Commerce SEO",
-    intro: "Turn search engines into your highest-converting acquisition channel for Shopify, WooCommerce, and custom stores.",
+    label: "E-commerce SEO",
+    intro: "Drive high-volume qualified buyer traffic into your collection and product checkout flows.",
     qs: [
-      { q: "How do you optimize category pages?", a: "Category pages drive the highest transaction volumes. We introduce targeted introductory guides, semantic internal links, and structured breadcrumb hierarchies." },
-      { q: "What about out-of-stock or discontinued items?", a: "We implement smart URL handling: redirecting discontinued SKUs to relevant parent collections or offering similar recommendations without losing link equity." },
-      { q: "How do you handle faceted navigation duplicates?", a: "We configure canonical tags and robots parameters to prevent infinite URL crawl loops from product filters like color, size, and price." },
+      {
+        q: "How do you optimize category pages?",
+        a: "Category pages drive the highest transaction volumes. We introduce targeted introductory guides, semantic internal links, and structured breadcrumb hierarchies.",
+      },
+      {
+        q: "How do you handle faceted navigation duplicates?",
+        a: "We configure canonical tags and robots parameters to prevent infinite URL crawl loops from product filters like color, size, and price.",
+      },
+    ],
+  },
+  {
+    id: "enterprise",
+    label: "Enterprise SEO",
+    intro: "Scalable search operations designed for complex architectures and multi-market platforms.",
+    qs: [
+      {
+        q: "How do you manage large-scale websites?",
+        a: "We create strategies tailored to large-scale businesses, including automated internal linking rules, crawl budget optimization, global content management, and cross-team development workflows.",
+      },
+    ],
+  },
+  {
+    id: "aio",
+    label: "Voice and AI search",
+    intro: "Prepare your brand for citation and discovery across ChatGPT, Perplexity, and AI Overviews.",
+    qs: [
+      {
+        q: "What is AI-Engine Optimization (AIO / GEO)?",
+        a: "It is the science of structuring factual knowledge, author credentials, entity citations, and concise direct answers so LLMs reference your brand as an authority.",
+      },
+    ],
+  },
+  {
+    id: "video",
+    label: "Video SEO",
+    intro: "Optimize your video assets for rich YouTube search and Google Video carousel visibility.",
+    qs: [
+      {
+        q: "How does Video SEO benefit organic search?",
+        a: "With VideoObject schema, strategic timestamp chapters, and optimized transcripts, your video content captures prime visual real estate directly on the SERPs.",
+      },
+    ],
+  },
+  {
+    id: "mobile",
+    label: "Mobile SEO and ASO",
+    intro: "Maximize mobile web performance and climb Play Store and App Store rankings.",
+    qs: [
+      {
+        q: "What is App Store Optimization (ASO)?",
+        a: "Our ASO services include title and subtitle keyword optimization, localized app descriptions, icon/screenshot conversion testing, and ratings management to increase organic installs.",
+      },
     ],
   },
 ];
 
 const LOCAL_ROWS = [
-  { n: "1", name: "One Impact Partner Location", meta: "4.9 ★ (180+ Reviews) · Digital Agency · Mumbai", pin: "#FFBA39", bg: "#F5F5F7" },
-  { n: "2", name: "Featured Commercial Hub", meta: "5.0 ★ (95+ Reviews) · Creative Studio · BKC", pin: "#7BAAFF", bg: "#FFFFFF" },
-  { n: "3", name: "Verified Service Branch", meta: "4.8 ★ (140+ Reviews) · Marketing Headquarters · Andheri", pin: "#34C759", bg: "#FFFFFF" },
+  { n: "1", name: "Your Business", meta: "Open now. Top-rated in your area.", pin: "#FFBA39", bg: "#F5F5F7" },
+  { n: "2", name: "Nearby Competitor", meta: "Closes soon", pin: "#7BAAFF", bg: "#FFFFFF" },
+  { n: "3", name: "Another Listing", meta: "2.4 km away", pin: "#34C759", bg: "#FFFFFF" },
 ];
 
-const FAQ_GENERAL = [
+const FAQ_ALL = [
   {
-    q: "How long does SEO take to produce measurable results?",
-    a: "While technical fixes and indexing corrections can produce gains in as little as 30 to 45 days, substantial organic traffic and revenue growth typically manifest within 3 to 6 months as domain authority compounds.",
+    q: "Why aren’t we getting enough sales from online channels?",
+    a: "If your site attracts the wrong kind of traffic or doesn’t clearly show value, your sales can suffer. Weak CTAs or missing conversion strategies are often to blame. Start by examining user behavior, improving targeting, and experimenting with your messaging and landing pages.",
+    cat: "obstacles",
   },
   {
-    q: "How does One Impact differ from traditional SEO agencies?",
-    a: "We don't sell canned monthly packages or hand you off to junior account handlers. We operate as your dedicated growth squad, combining deep technical engineering, semantic content strategy, and revenue attribution.",
+    q: "How can we increase our online brand awareness and visibility?",
+    a: "Create and share content your audience finds useful: blogs, videos, and infographics. Spread it through social media and collaborate with influencers. Earning backlinks from trusted sites also boosts your brand’s reach and credibility.",
+    cat: "obstacles",
   },
   {
-    q: "Do you guarantee #1 rankings on Google?",
-    a: "No ethical agency can guarantee a specific #1 spot because search algorithms update daily. What we do guarantee is strict adherence to white-hat best practices, transparent work, and consistent organic visibility gains.",
+    q: "Why is our website not reaching our target audience or appearing in relevant searches?",
+    a: "You might not be targeting the right keywords, or your content may lack depth or relevance. Technical SEO issues like slow site speed or crawl errors can also block visibility. A detailed SEO audit and strong, focused content can help get you on the radar.",
+    cat: "obstacles",
   },
   {
-    q: "Can SEO replace our paid advertising spend?",
-    a: "SEO and PPC work best together. However, over time, a strong organic search presence drastically lowers your blended customer acquisition cost (CAC), allowing you to reduce ad spend without sacrificing revenue.",
+    q: "How can we differentiate ourselves from competitors in search results?",
+    a: "Use unique selling points (USPs) in your page titles and meta descriptions. Focus on specific, long-tail keywords and add schema markup, like review ratings, to visually stand out in search listings.",
+    cat: "obstacles",
   },
   {
-    q: "What is included in the free SEO audit?",
-    a: "A real senior strategist analyzes your website's crawlability, Core Web Vitals, keyword rankings, backlink health, and competitor gaps, followed by actionable recommendations delivered directly via WhatsApp or email.",
+    q: "Why is our online store not generating enough traffic?",
+    a: "If you’re not getting organic search visibility or investing in promotion, traffic will be low. Combine SEO, pay-per-click ads, and product-centered content to bring qualified visitors to your site.",
+    cat: "obstacles",
+  },
+  {
+    q: "How can we improve our website’s SEO to drive more relevant traffic?",
+    a: "Start with smart keyword research. Refine your titles and headings, write authoritative content, speed up your site, make sure it’s mobile-friendly, and build high-quality backlinks for credibility.",
+    cat: "obstacles",
+  },
+  {
+    q: "How can we ensure we rank higher for local searches and reach local customers?",
+    a: "Claim and fully optimize your Google Business Profile. Keep your name, address, and phone number consistent everywhere. Gather genuine local reviews and publish content focused on your specific city or neighborhood.",
+    cat: "obstacles",
+  },
+  {
+    q: "Why aren’t our marketing efforts converting into actual customers?",
+    a: "If your message doesn’t align with user intent or your landing pages don’t guide users clearly, conversions drop. Check that your calls-to-action are compelling and that your site supports an easy, logical buying journey.",
+    cat: "why",
+  },
+  {
+    q: "How can we improve the user experience to reduce bounce rates and increase engagement?",
+    a: "Make sure your site loads quickly, works great on mobile, and is easy to navigate. Use eye-catching visuals and strong CTAs. Tools like heat maps and usability tests can help identify where users get stuck.",
+    cat: "why",
+  },
+  {
+    q: "Why is our online advertising not delivering a strong ROI?",
+    a: "Broad or poorly targeted ads, weak creatives, and missing conversion tracking can all limit ROI. Improve audience segmentation, A/B test your ads, make sure analytics are set up properly, and invest more in high-performing campaigns.",
+    cat: "why",
+  },
+  {
+    q: "How can we improve customer acquisition through our website and drive more conversions?",
+    a: "Make your value clear, simplify your forms, include testimonials and trust elements, and use offers like free trials or discounts. Retarget users who showed interest but didn’t convert the first time.",
+    cat: "why",
+  },
+  {
+    q: "Why is our e-commerce site not performing well despite strong products?",
+    a: "Great products need more than a listing. You need persuasive copy, quality visuals, intuitive navigation, visible trust signals, and a seamless checkout to turn visitors into customers.",
+    cat: "why",
+  },
+  {
+    q: "Why is our website not converting traffic into repeat customers?",
+    a: "Without follow-up tactics like email sequences, loyalty programs, and personalized suggestions, customers may not return. Re-engage them with exclusive offers and tailored experiences after purchase.",
+    cat: "why",
+  },
+  {
+    q: "Why isn’t our website ranking on search engines for important keywords?",
+    a: "Your content might be too shallow, your on-page SEO may be lacking, or you may need more backlinks. Analyze your top competitors, find the gaps, and enhance your content and authority.",
+    cat: "why",
+  },
+  {
+    q: "Why are our blog posts not getting enough traffic, and how can we optimize them to rank better?",
+    a: "You may be targeting the wrong keywords or not using internal and external links effectively. Choose better topics with keyword tools, refine your meta titles and descriptions, structure posts with clear headings, and promote your content through outreach.",
+    cat: "why",
   },
 ];
-
-const FAQ_SERVICES = [
-  {
-    q: "Do you offer SEO for website migrations or redesigns?",
-    a: "Yes. Site migrations carry immense risk of traffic loss if 301 redirects and canonicals aren't mapped 1-to-1. We manage pre-launch audits, URL mapping, and post-launch monitoring to safeguard your rankings.",
-  },
-  {
-    q: "Can you help recover from an algorithmic or manual penalty?",
-    a: "Absolutely. We perform deep forensic analysis to identify the root cause—whether toxic link profiles, thin content, or technical rendering traps—and execute a systematic recovery roadmap.",
-  },
-  {
-    q: "How do you measure and report ROI to our leadership team?",
-    a: "We integrate directly with Google Search Console, Google Analytics 4, and your CRM to track organic impressions, click-through rates, qualified form fills, and actual commercial revenue.",
-  },
-  {
-    q: "What access or resources do you need from our team to start?",
-    a: "We typically require access to Google Search Console, GA4, your CMS or code repository (if we are directly implementing fixes), and a 45-minute onboarding discovery call.",
-  },
-  {
-    q: "Do we need to sign a long-term lock-in contract?",
-    a: "No. We believe our performance should earn your business every month. Our engagements run on flexible milestone-based agreements with zero long-term handcuffs.",
-  },
-];
-
-// ── COMPONENT ─────────────────────────────────────────────────────────────────
 
 export default function SeoServicesPage() {
   // Audit Form 1 State
@@ -384,9 +483,8 @@ export default function SeoServicesPage() {
   const [sent2, setSent2] = useState(false);
 
   // Tabs State
-  const [svcTab, setSvcTab] = useState<"core" | "adv">("core");
-  const [offerTab, setOfferTab] = useState("tech");
-  const [faqTab, setFaqTab] = useState<"gen" | "svc">("gen");
+  const [offerTab, setOfferTab] = useState("audit");
+  const [faqTab, setFaqTab] = useState<"all" | "obstacles" | "why">("all");
 
   // Carousel State
   const carTrackRef = useRef<HTMLDivElement>(null);
@@ -444,14 +542,15 @@ export default function SeoServicesPage() {
   };
 
   const activeOffer = OFFER_TOPICS.find((t) => t.id === offerTab) || OFFER_TOPICS[0];
+  const displayedFaqs = faqTab === "all" ? FAQ_ALL : FAQ_ALL.filter((f) => f.cat === faqTab);
 
   return (
     <div className="bg-white text-black font-sans text-[17px] leading-relaxed antialiased selection:bg-[#FFBA39] selection:text-black min-h-screen">
       {/* ── 1. ORIGINAL ONE IMPACT NAVBAR ─────────────────────────────────── */}
       <Navbar />
 
-      {/* ── 3. HERO SECTION ────────────────────────────────────────────────── */}
-      <section id="top" className="relative overflow-hidden bg-white pt-24 pb-20 md:pt-32 md:pb-32">
+      {/* ── 2. HERO SECTION ────────────────────────────────────────────────── */}
+      <section id="top" className="relative overflow-hidden bg-white pt-24 pb-4 md:pt-32 md:pb-6">
         {/* Ambient Gradient Glows */}
         <div
           aria-hidden="true"
@@ -466,7 +565,7 @@ export default function SeoServicesPage() {
           {/* Left Column: Headlines & Intro */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             <span className="text-[15px] font-semibold text-[#8E8E93] tracking-wide uppercase">
-              SEO Services by One Impact
+              SEO services by OneImpact
             </span>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-[4.2rem] leading-[1.08] tracking-tight font-bold text-black">
               Smart, Search‑First SEO That Brings Lasting Results
@@ -475,9 +574,10 @@ export default function SeoServicesPage() {
               Rank Higher. Beat the Competition. Grow Organically with Us.
             </p>
             <p className="text-[17px] sm:text-[18px] text-neutral-600 leading-relaxed max-w-2xl">
-              At One Impact, we treat SEO as a mission to fuel your business’s digital success,
-              not just another service. We’re committed to delivering clarity and measurable
-              growth through focused, strategic SEO tailored to your specific commercial niche.
+              At OneImpact, we treat SEO as a mission to fuel your business’s digital success, not just another service. We’re committed to delivering clarity and measurable growth through focused, strategic SEO tailored to your needs.
+            </p>
+            <p className="text-[16px] sm:text-[17px] text-neutral-600 leading-relaxed max-w-2xl font-medium">
+              Outperform your competition with OneImpact’s reliable and results-driven SEO services.
             </p>
 
             {/* Hero CTAs */}
@@ -507,7 +607,7 @@ export default function SeoServicesPage() {
                 href="#usps"
                 className="text-black font-semibold text-[16px] px-4 py-3.5 inline-flex items-center gap-1.5 hover:translate-x-1 transition-all"
               >
-                Why One Impact →
+                Why OneImpact →
               </a>
             </div>
           </div>
@@ -522,17 +622,17 @@ export default function SeoServicesPage() {
                       Free for your website
                     </span>
                     <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                      Get Your Free SEO Audit
+                      Get your free SEO audit
                     </h2>
                     <p className="text-[14.5px] text-neutral-400">
-                      A senior growth strategist reviews your website and responds within 24 hours.
+                      A real person from our team reviews your website and gets back to you.
                     </p>
                   </div>
 
                   {/* Name Input */}
                   <div className="flex flex-col gap-1.5 mt-2">
                     <label className="text-[13px] font-medium text-neutral-300">
-                      Your Name
+                      Your name
                     </label>
                     <input
                       type="text"
@@ -554,7 +654,7 @@ export default function SeoServicesPage() {
                   {/* Phone Input */}
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[13px] font-medium text-neutral-300">
-                      Phone or WhatsApp Number
+                      Phone or WhatsApp number
                     </label>
                     <input
                       type="tel"
@@ -578,7 +678,7 @@ export default function SeoServicesPage() {
                   {/* Website Address Input */}
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[13px] font-medium text-neutral-300">
-                      Website Address
+                      Website address
                     </label>
                     <input
                       type="text"
@@ -602,7 +702,7 @@ export default function SeoServicesPage() {
                   {/* Need Selection */}
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[13px] font-medium text-neutral-300">
-                      What Do You Need? <span className="text-neutral-500">(optional)</span>
+                      What do you need? <span className="text-neutral-500">(optional)</span>
                     </label>
                     <select
                       value={form1.need}
@@ -624,11 +724,11 @@ export default function SeoServicesPage() {
                     type="submit"
                     className="mt-2 h-14 rounded-full bg-[#FFBA39] hover:bg-[#FFC75E] text-black font-bold text-[16.5px] transition-all transform active:scale-95 shadow-lg"
                   >
-                    Get My Free SEO Audit
+                    Get my free SEO audit
                   </button>
 
                   <p className="text-center text-xs text-neutral-500 mt-1">
-                    No spam. We reply with real insights directly on WhatsApp or call.
+                    No spam, no sales scripts. We’ll reply on WhatsApp or call.
                   </p>
                 </form>
               ) : (
@@ -670,39 +770,60 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 4. CLIENT LOGOS MARQUEE ────────────────────────────────────────── */}
-      <section aria-label="Brands we work with" className="py-12 border-y border-neutral-100 bg-neutral-50/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-6 text-center">
-          <p className="text-sm font-semibold tracking-wider uppercase text-neutral-500">
-            Trusted by Ambitious Brands Across India
+      {/* ── 3. CLIENT LOGOS MARQUEE ────────────────────────────────────────── */}
+      <section aria-label="Brands we work with" className="pt-4 pb-8 md:pt-6 md:pb-10 border-y border-neutral-100 bg-neutral-50/50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-5 text-center">
+          <p className="text-xs md:text-sm font-semibold tracking-wider uppercase text-neutral-500">
+            Brands we work with
           </p>
         </div>
-        <div className="overflow-hidden select-none [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-          <div className="flex gap-16 w-max animate-marquee items-center">
+        <div className="overflow-hidden select-none [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="brands-marquee-track flex gap-12 sm:gap-16 items-center">
             {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, idx) => (
-              <div key={idx} className="flex items-center justify-center grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100">
+              <div
+                key={idx}
+                className="flex items-center justify-center transition-transform duration-300 hover:scale-110 cursor-pointer flex-shrink-0 px-2"
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  className="h-9 w-auto max-w-[130px] object-contain"
+                  className="h-8 sm:h-9 md:h-10 w-auto max-w-[120px] sm:max-w-[140px] md:max-w-[155px] object-contain mix-blend-multiply transition-all"
                 />
               </div>
             ))}
           </div>
         </div>
+
+        <style jsx>{`
+          @keyframes brandsMarquee {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          .brands-marquee-track {
+            width: max-content;
+            animation: brandsMarquee 32s linear infinite;
+          }
+          .brands-marquee-track:hover {
+            animation-play-state: paused !important;
+          }
+        `}</style>
       </section>
 
-      {/* ── 5. WHY ONEIMPACT / USPs CAROUSEL ──────────────────────────────── */}
+      {/* ── 4. WHY ONEIMPACT / USPs CAROUSEL ──────────────────────────────── */}
       <section id="usps" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-black max-w-xl">
-                SEO That Fits Your Business. Not a Template.
+                SEO that fits your business. Not a template.
               </h2>
               <p className="text-lg text-neutral-600 mt-3 max-w-xl">
-                Swipe through what you get with One Impact as your search optimization partner.
+                Swipe through what you get with OneImpact as your SEO services provider.
               </p>
             </div>
             {/* Arrows */}
@@ -767,17 +888,17 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 6. E-E-A-T FRAMEWORK & CLIENT TESTIMONIALS ──────────────────────── */}
+      {/* ── 5. E-E-A-T FRAMEWORK & CLIENT TESTIMONIALS ──────────────────────── */}
       <section id="proof" className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center gap-6">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-950">
             Having a website or posting on social media won’t cut it anymore.
           </h2>
-          <p className="text-xl text-neutral-800 leading-relaxed max-w-3xl">
+          <p className="text-xl text-neutral-800 leading-relaxed max-w-3xl font-medium">
             Today’s digital success depends on having a precise SEO strategy that makes your brand visible when and where it matters.
           </p>
-          <p className="text-neutral-600 text-base sm:text-lg max-w-2xl">
-            At One Impact, our mission is to create meaningful and lasting change for our clients. As a search engine optimization agency, we focus on custom strategies that grow organic traffic and drive qualified buyer leads.
+          <p className="text-neutral-600 text-base sm:text-lg max-w-3xl leading-relaxed">
+            At OneImpact, our mission is to create meaningful and lasting change for our clients. As a search engine optimization agency, we focus on building custom strategies that grow organic traffic, improve search visibility, and bring in qualified leads using intent-based keyword targeting.
           </p>
         </div>
 
@@ -785,9 +906,9 @@ export default function SeoServicesPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold tracking-tight text-neutral-900">
-              At One Impact, we follow the E-E-A-T framework
+              At OneImpact, we follow the E-E-A-T framework
             </h3>
-            <p className="text-sm text-neutral-500 mt-1">
+            <p className="text-sm text-neutral-500 mt-1 font-medium">
               Experience, Expertise, Authoritativeness, Trustworthiness
             </p>
           </div>
@@ -814,33 +935,41 @@ export default function SeoServicesPage() {
           {QUOTES.map((q, idx) => (
             <div
               key={idx}
-              className="bg-white border border-neutral-200 rounded-3xl p-7 flex flex-col justify-between shadow-sm gap-6"
+              className="bg-white border border-neutral-200/80 rounded-3xl p-7 flex flex-col justify-between shadow-sm gap-6 hover:shadow-md transition-shadow"
             >
-              <div className="flex flex-col gap-3">
-                <div className="flex text-[#FFBA39]">
+              <div className="flex flex-col gap-3.5">
+                <div className="flex gap-1 text-[#FFBA39] text-sm">
                   {"★".repeat(5)}
                 </div>
-                <blockquote className="text-[17px] font-medium text-neutral-800 leading-snug">
+                <blockquote className="text-[15.5px] font-semibold text-neutral-900 leading-snug">
                   “{q.text}”
                 </blockquote>
               </div>
-              <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
-                {q.role}
-              </p>
+              <div className="flex items-center gap-2.5 pt-2 border-t border-neutral-100">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/LOGO/oneimpact-logo.png"
+                  alt="One Impact"
+                  className="h-4 sm:h-4.5 w-auto object-contain flex-shrink-0"
+                />
+                <span className="text-xs text-neutral-500 font-medium">
+                  {q.role}
+                </span>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── 7. HOW OPTIMIZING FOR SEO HELPS ────────────────────────────────── */}
+      {/* ── 6. HOW OPTIMIZING FOR SEO HELPS ────────────────────────────────── */}
       <section id="why" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-950">
-              How Optimizing for SEO Helps Your Business
+              How optimizing for SEO helps
             </h2>
             <p className="text-lg text-neutral-600 mt-2">
-              Here’s what happens when your brand ranks where users are actively looking:
+              Here’s what happens when you optimize for SEO:
             </p>
           </div>
 
@@ -870,11 +999,11 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 8. BUT WHY ONE IMPACT? ────────────────────────────────────────── */}
+      {/* ── 7. BUT WHY ONEIMPACT? ────────────────────────────────────────── */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-950 mb-12">
-            Why Partner with One Impact?
+            But why OneImpact?
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -897,47 +1026,21 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 9. EXPLORE OUR SEO SERVICES ─────────────────────────────────────── */}
+      {/* ── 8. EXPLORE OUR SEO SERVICES ─────────────────────────────────────── */}
       <section id="services" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-            <div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-950">
-                Explore Our SEO Services
-              </h2>
-              <p className="text-lg text-neutral-600 mt-2 max-w-xl">
-                Comprehensive search capabilities tailored to your specific commercial lifecycle.
-              </p>
-            </div>
-
-            {/* Segmented Control */}
-            <div className="inline-flex bg-neutral-200/80 p-1 rounded-full border border-neutral-300">
-              <button
-                onClick={() => setSvcTab("core")}
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                  svcTab === "core"
-                    ? "bg-white text-black shadow-sm"
-                    : "text-neutral-600 hover:text-black"
-                }`}
-              >
-                Core Services
-              </button>
-              <button
-                onClick={() => setSvcTab("adv")}
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                  svcTab === "adv"
-                    ? "bg-white text-black shadow-sm"
-                    : "text-neutral-600 hover:text-black"
-                }`}
-              >
-                Advanced & Specialized
-              </button>
-            </div>
+          <div className="mb-10">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-950">
+              Explore our SEO services
+            </h2>
+            <p className="text-lg text-neutral-600 mt-2 max-w-2xl">
+              Curious about what else we bring to the table? Here’s a deeper look at our SEO offerings.
+            </p>
           </div>
 
           {/* Service Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {(svcTab === "core" ? CORE_SERVICES : ADVANCED_SERVICES).map((svc, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {EXPLORE_SERVICES.map((svc, i) => (
               <div
                 key={i}
                 className="bg-white rounded-3xl p-8 flex flex-col gap-4 border border-black/5 shadow-md"
@@ -958,16 +1061,16 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 10. WHY ONEIMPACT YELLOW BANNER ─────────────────────────────────── */}
+      {/* ── 9. WHY ONEIMPACT YELLOW BANNER ─────────────────────────────────── */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-[#FFBA39] rounded-[36px] p-8 sm:p-12 lg:p-16 text-black">
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-8">
-              Why One Impact?
+              Why OneImpact?
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {WHY2_CARDS.map((w, i) => (
+              {WHY_ONEIMPACT_POINTS.map((w, i) => (
                 <div
                   key={i}
                   className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 flex flex-col gap-2 shadow-sm"
@@ -981,14 +1084,14 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 11. WHAT WE OFFER (ACCORDIONS) ─────────────────────────────────── */}
+      {/* ── 10. WHAT WE OFFER (ACCORDIONS) ─────────────────────────────────── */}
       <section id="offer" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-950">
-            What We Offer
+            What we offer
           </h2>
           <p className="text-lg text-neutral-600 mt-2 mb-8">
-            Pick a topic to see exactly how our specialized team approaches it.
+            Pick a topic to see exactly how we approach it.
           </p>
 
           {/* Horizontal Topic Pill Selector */}
@@ -1016,16 +1119,31 @@ export default function SeoServicesPage() {
 
             <div className="divide-y divide-neutral-200">
               {activeOffer.qs.map((q, idx) => (
-                <details key={idx} className="group py-5 first:pt-0 last:pb-0">
-                  <summary className="flex justify-between items-center cursor-pointer list-none text-lg font-semibold text-neutral-900 select-none">
+                <details key={idx} open={idx === 0} className="group py-5 first:pt-0 last:pb-0">
+                  <summary className="flex justify-between items-center cursor-pointer list-none text-lg font-bold text-neutral-900 select-none">
                     <span>{q.q}</span>
                     <span className="text-xl transition-transform duration-200 group-open:rotate-45 text-neutral-400">
                       +
                     </span>
                   </summary>
-                  <p className="mt-3 text-neutral-600 leading-relaxed text-[16px] max-w-3xl">
-                    {q.a}
-                  </p>
+                  <div className="mt-3 text-neutral-700 leading-relaxed text-[15.5px] max-w-3xl">
+                    {"intro" in q && q.intro && (
+                      <p className="mb-2 text-neutral-700">{q.intro}</p>
+                    )}
+                    {"bullets" in q && Array.isArray(q.bullets) && (
+                      <ul className="space-y-1.5 pl-0 my-2">
+                        {q.bullets.map((b, bIdx) => (
+                          <li key={bIdx} className="flex items-start gap-2 text-neutral-600">
+                            <span className="text-neutral-800 select-none font-bold">•</span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {"a" in q && q.a && (
+                      <p>{q.a}</p>
+                    )}
+                  </div>
                 </details>
               ))}
             </div>
@@ -1033,7 +1151,7 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 12. LOCAL SEO THAT PUTS YOU ON THE MAP ──────────────────────────── */}
+      {/* ── 11. LOCAL SEO THAT PUTS YOU ON THE MAP ──────────────────────────── */}
       <section id="local" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7 flex flex-col gap-6">
@@ -1041,16 +1159,19 @@ export default function SeoServicesPage() {
               Local SEO That Puts You on the Map
             </h2>
             <p className="text-lg text-neutral-700 leading-relaxed">
-              Trying to connect with customers in your neighborhood? Our Local SEO services ensure your business appears at the precise moment nearby buyers search. At One Impact, we fine-tune your Google Business Profile, local map citations, and location directories so you capture top spots in the Google Local 3-Pack.
+              Trying to connect with local customers? Our Local SEO services are built to make sure your business appears in the right place at the right time. At OneImpact, we fine-tune your digital footprint, optimizing your Google Business Profile, local map listings, directories, and citations, so your brand shows up exactly where nearby customers are looking.
             </p>
             <p className="text-base text-neutral-600 leading-relaxed">
-              We manage geo-targeted keyword strategies, review generation workflows, and strict NAP (Name, Address, Phone) consistency across the entire web.
+              We handle everything from geo-specific keyword strategies and managing reviews to ensuring NAP (Name, Address, Phone) consistency across the web. Whether you operate from one location or several, our tailored approach helps you attract attention locally and earn trust in your neighborhood.
+            </p>
+            <p className="text-base text-neutral-600 leading-relaxed font-medium">
+              No shortcuts, just strategic moves that help local customers discover your business when it matters most.
             </p>
             <a
               href="#audit"
               className="mt-2 self-start bg-[#FFBA39] hover:bg-[#FFC75E] text-black font-bold text-[16px] px-8 py-3.5 rounded-full transition-all shadow-md active:scale-95"
             >
-              Let’s Make Your Brand the Go-To Name in Town
+              Let’s make your brand the go-to name in town
             </a>
           </div>
 
@@ -1098,60 +1219,70 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 13. FREQUENTLY ASKED QUESTIONS ──────────────────────────────────── */}
+      {/* ── 12. FREQUENTLY ASKED QUESTIONS ──────────────────────────────────── */}
       <section id="faq" className="py-24 bg-[#F5F5F7]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-950">
-              Questions, Answered
+              Questions, answered
             </h2>
             <p className="text-lg text-neutral-600 mt-2">
-              Have questions? You can also{" "}
+              Anything else?{" "}
               <a
                 href="https://wa.me/918369018104"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-black underline"
               >
-                message us directly on WhatsApp
+                Message us on WhatsApp
               </a>
               .
             </p>
           </div>
 
-          {/* FAQ Switcher */}
+          {/* FAQ Filter Switcher */}
           <div className="flex justify-center mb-8">
             <div className="inline-flex bg-neutral-200/80 p-1 rounded-full border border-neutral-300">
               <button
-                onClick={() => setFaqTab("gen")}
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                  faqTab === "gen"
+                onClick={() => setFaqTab("all")}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                  faqTab === "all"
                     ? "bg-white text-black shadow-sm"
                     : "text-neutral-600 hover:text-black"
                 }`}
               >
-                General Questions
+                All Questions ({FAQ_ALL.length})
               </button>
               <button
-                onClick={() => setFaqTab("svc")}
-                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                  faqTab === "svc"
+                onClick={() => setFaqTab("obstacles")}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                  faqTab === "obstacles"
                     ? "bg-white text-black shadow-sm"
                     : "text-neutral-600 hover:text-black"
                 }`}
               >
-                Services & Process
+                Business Obstacles
+              </button>
+              <button
+                onClick={() => setFaqTab("why")}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                  faqTab === "why"
+                    ? "bg-white text-black shadow-sm"
+                    : "text-neutral-600 hover:text-black"
+                }`}
+              >
+                Why OneImpact
               </button>
             </div>
           </div>
 
           {/* Accordion List */}
           <div className="bg-white rounded-3xl p-8 sm:p-10 border border-black/5 divide-y divide-neutral-200 shadow-sm">
-            {(faqTab === "gen" ? FAQ_GENERAL : FAQ_SERVICES).map((f, idx) => (
+            {displayedFaqs.map((f, idx) => (
               <details key={idx} className="group py-5 first:pt-0 last:pb-0">
                 <summary className="flex justify-between items-center cursor-pointer list-none text-lg font-semibold text-neutral-900 select-none">
-                  <span>{f.q}</span>
-                  <span className="text-xl transition-transform duration-200 group-open:rotate-45 text-neutral-400">
+                  <span className="pr-4">{f.q}</span>
+                  <span className="text-xl transition-transform duration-200 group-open:rotate-45 text-neutral-400 flex-shrink-0">
                     +
                   </span>
                 </summary>
@@ -1164,7 +1295,7 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 14. BOTTOM AUDIT CONVERSION SECTION ─────────────────────────────── */}
+      {/* ── 13. BOTTOM AUDIT CONVERSION SECTION ─────────────────────────────── */}
       <section id="audit2" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-[#F5F5F7] rounded-[40px] p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative overflow-hidden">
@@ -1177,10 +1308,10 @@ export default function SeoServicesPage() {
             {/* Left Column: Direct Outreach */}
             <div className="lg:col-span-7 flex flex-col gap-6 relative z-10">
               <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-950">
-                Outperform Your Competition.
+                Outperform your competition.
               </h2>
               <p className="text-lg text-neutral-700 leading-relaxed max-w-lg">
-                Get a comprehensive free SEO audit and see exactly what’s holding your website back from holding position 1 on Google. Zero obligation.
+                Get a free SEO audit and see exactly what’s holding your website back. No obligation.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
@@ -1207,11 +1338,11 @@ export default function SeoServicesPage() {
                 {!sent2 ? (
                   <form onSubmit={handleSubmit2} className="flex flex-col gap-4">
                     <h3 className="text-2xl font-bold text-white">
-                      Request Your Free Audit
+                      Get your free SEO audit
                     </h3>
 
                     <div className="flex flex-col gap-1">
-                      <label className="text-xs font-medium text-neutral-300">Your Name</label>
+                      <label className="text-xs font-medium text-neutral-300">Your name</label>
                       <input
                         type="text"
                         placeholder="First and last name"
@@ -1226,7 +1357,7 @@ export default function SeoServicesPage() {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="text-xs font-medium text-neutral-300">Phone or WhatsApp</label>
+                      <label className="text-xs font-medium text-neutral-300">Phone or WhatsApp number</label>
                       <input
                         type="tel"
                         placeholder="98XXX XXXXX"
@@ -1241,7 +1372,7 @@ export default function SeoServicesPage() {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="text-xs font-medium text-neutral-300">Website URL</label>
+                      <label className="text-xs font-medium text-neutral-300">Website address</label>
                       <input
                         type="text"
                         placeholder="yourbrand.com"
@@ -1259,7 +1390,7 @@ export default function SeoServicesPage() {
                       type="submit"
                       className="mt-2 h-12 rounded-full bg-[#FFBA39] hover:bg-[#FFC75E] text-black font-bold text-sm transition-all transform active:scale-95"
                     >
-                      Get Free Audit Now
+                      Get my free SEO audit
                     </button>
                   </form>
                 ) : (
@@ -1279,14 +1410,14 @@ export default function SeoServicesPage() {
         </div>
       </section>
 
-      {/* ── 15. FOOTER ──────────────────────────────────────────────────────── */}
+      {/* ── 14. FOOTER ──────────────────────────────────────────────────────── */}
       <footer className="bg-[#F5F5F7] border-t border-neutral-200 text-neutral-800 text-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Col 1: Brand */}
           <div className="flex flex-col gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/logo.png" alt="One Impact" className="h-9 w-auto object-contain self-start" />
-            <p className="text-neutral-600 text-sm">
+            <img src="/LOGO/oneimpact-logo.png" alt="One Impact" className="h-8 w-auto object-contain self-start" />
+            <p className="text-neutral-600 text-sm max-w-xs">
               360-degree digital marketing for that ONE big bang IMPACT.
             </p>
           </div>
@@ -1297,16 +1428,16 @@ export default function SeoServicesPage() {
               Services
             </span>
             <Link href="/seo" className="text-neutral-600 hover:text-black">
-              SEO & AI-Optimized Search
+              SEO and AIO
             </Link>
             <Link href="/#services" className="text-neutral-600 hover:text-black">
-              Social Media Marketing
+              Social media
             </Link>
             <Link href="/#services" className="text-neutral-600 hover:text-black">
-              Branding & Design
+              Branding and design
             </Link>
             <Link href="/#services" className="text-neutral-600 hover:text-black">
-              Web Development
+              Website development
             </Link>
           </div>
 
@@ -1316,22 +1447,25 @@ export default function SeoServicesPage() {
               Company
             </span>
             <Link href="/#about-banner" className="text-neutral-600 hover:text-black">
-              About Us
+              About us
             </Link>
             <Link href="/#proof" className="text-neutral-600 hover:text-black">
-              Why Us
+              Why us
             </Link>
             <Link href="/#showreel" className="text-neutral-600 hover:text-black">
-              Work & Portfolio
+              Blog
+            </Link>
+            <Link href="/#contact" className="text-neutral-600 hover:text-black">
+              Contact
             </Link>
           </div>
 
           {/* Col 4: Contact */}
           <div className="flex flex-col gap-2.5">
             <span className="font-bold text-black uppercase tracking-wider text-xs">
-              Contact
+              Location & Contact
             </span>
-            <span className="text-neutral-600">Mumbai, Maharashtra, India</span>
+            <span className="text-neutral-600">Mumbai, Maharashtra</span>
             <a href="mailto:teamhr@oneimpact.co" className="text-neutral-600 hover:text-black">
               teamhr@oneimpact.co
             </a>
@@ -1342,11 +1476,11 @@ export default function SeoServicesPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-neutral-300 text-center text-xs text-neutral-500">
-          © {new Date().getFullYear()} One Impact. All rights reserved.
+          © 2026 One Impact. All rights reserved.
         </div>
       </footer>
 
-      {/* ── 16. MOBILE STICKY BAR ───────────────────────────────────────────── */}
+      {/* ── 15. MOBILE STICKY BAR ───────────────────────────────────────────── */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-xl border-t border-neutral-200 p-3 px-4 flex items-center gap-3">
         <a
           href="https://wa.me/918369018104"
@@ -1368,7 +1502,7 @@ export default function SeoServicesPage() {
           href="#audit"
           className="flex-1 bg-[#FFBA39] text-black font-bold text-center py-3 rounded-full text-sm shadow-sm"
         >
-          Get Free SEO Audit
+          Get my free SEO audit
         </a>
       </div>
     </div>
