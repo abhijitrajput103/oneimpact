@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black: #050505;
+  --color-off-white: #F5F5F7;
+  --color-warm-white: #FAF9F6;
+  --color-accent-blue: #0066FF;
+  --color-accent-yellow: #FFD700;
+
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-sans), Manrope, system-ui, sans-serif;
+
+  /* Custom Easings for transitions */
+  --ease-main: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-reveal: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Custom Base Resets and Styles */
+@layer base {
+  html {
+    scroll-behavior: initial !important; /* Lenis drives scrolling; standard scroll-behavior must be bypassed */
+    background-color: #050505;
+    color: #F5F5F7;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: #050505;
+    color: #F5F5F7;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom text selection */
+  ::selection {
+    background-color: var(--color-accent-blue);
+    color: var(--color-off-white);
+  }
+
+  /* Remove default cursor on desktops when interactive custom cursor is enabled */
+  @media (pointer: fine) {
+    .custom-cursor-active,
+    .custom-cursor-active * {
+      cursor: none !important;
+    }
+  }
+}
+
+/* Premium utility classes */
+@layer utilities {
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .glassmorphism-dark {
+    background: rgba(5, 5, 5, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Lenis smooth scrolling specifications */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
