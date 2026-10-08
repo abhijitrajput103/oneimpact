@@ -96,12 +96,13 @@ export function Navbar() {
             {/* CTA Button */}
             <a
               href="#contact"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-display text-[10px] sm:text-xs font-black tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 text-[#DA9F37] bg-black hover:bg-black/85"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-display text-[10px] sm:text-xs font-black tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 text-[#DA9F37] !text-[#DA9F37] bg-black hover:bg-black/85"
+              style={{ color: "#DA9F37" }}
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={resetCursor}
             >
-              <span>CONTACT</span>
-              <span className="text-xs transition-transform duration-300 group-hover:translate-x-1">→</span>
+              <span style={{ color: "#DA9F37" }}>CONTACT</span>
+              <span className="text-xs transition-transform duration-300 group-hover:translate-x-1" style={{ color: "#DA9F37" }}>→</span>
             </a>
 
             {/* Mobile Hamburger Toggle Button */}
@@ -164,7 +165,8 @@ export function Navbar() {
           <a
             href="#contact"
             onClick={() => setIsMenuOpen(false)}
-            className="w-full py-4 rounded-full font-display text-sm font-black tracking-wider uppercase text-[#DA9F37] bg-black hover:bg-black/85 transition-transform active:scale-95 text-center shadow-lg"
+            className="w-full py-4 rounded-full font-display text-sm font-black tracking-wider uppercase text-[#DA9F37] !text-[#DA9F37] bg-black hover:bg-black/85 transition-transform active:scale-95 text-center shadow-lg"
+            style={{ color: "#DA9F37" }}
           >
             GET IN TOUCH →
           </a>

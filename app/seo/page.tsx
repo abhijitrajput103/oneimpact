@@ -1059,11 +1059,11 @@ export default function SeoLandingPage() {
         .seo-landing-root textarea {
           cursor: text !important;
         }
-        .seo-landing-root a {
+        .seo-landing-root a:not(header a):not(.bg-black) {
           color: #000000;
           transition: color 150ms ease;
         }
-        .seo-landing-root a:hover {
+        .seo-landing-root a:not(header a):not(.bg-black):hover {
           color: #3a3a3c;
         }
         .seo-landing-root .press {
