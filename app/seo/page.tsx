@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { Navbar } from "@/components/common/Navbar";
 
 // ── DATA DEFINITIONS MATCHING EXACT REFERENCE DESIGN ─────────────────────────
 
@@ -1007,6 +1008,14 @@ export default function SeoLandingPage() {
   const activeFaqGroup = FAQ_GROUPS[faqIdx];
   const activeServices = SVC_GROUPS[svcIdx];
 
+  // Ensure normal system cursor on SEO page
+  useEffect(() => {
+    document.body.classList.remove("custom-cursor-active");
+    return () => {
+      document.body.classList.add("custom-cursor-active");
+    };
+  }, []);
+
   return (
     <div
       className="seo-landing-root"
@@ -1023,8 +1032,32 @@ export default function SeoLandingPage() {
       }}
     >
       <style jsx global>{`
+        body:has(.seo-landing-root),
+        body:has(.seo-landing-root) *,
+        .seo-landing-root,
         .seo-landing-root * {
+          cursor: auto !important;
           box-sizing: border-box;
+        }
+        body:has(.seo-landing-root) a,
+        body:has(.seo-landing-root) button,
+        body:has(.seo-landing-root) select,
+        body:has(.seo-landing-root) summary,
+        body:has(.seo-landing-root) [role="button"],
+        body:has(.seo-landing-root) [role="tab"],
+        .seo-landing-root a,
+        .seo-landing-root button,
+        .seo-landing-root select,
+        .seo-landing-root summary,
+        .seo-landing-root [role="button"],
+        .seo-landing-root [role="tab"] {
+          cursor: pointer !important;
+        }
+        body:has(.seo-landing-root) input,
+        body:has(.seo-landing-root) textarea,
+        .seo-landing-root input,
+        .seo-landing-root textarea {
+          cursor: text !important;
         }
         .seo-landing-root a {
           color: #000000;
@@ -1207,140 +1240,8 @@ export default function SeoLandingPage() {
         }
       `}</style>
 
-      {/* ── TOP ANNOUNCEMENTS MARQUEE ────────────────────────────────────────── */}
-      <div
-        aria-label="Announcements"
-        style={{
-          background: "#000000",
-          color: "#FFFFFF",
-          height: "38px",
-          display: "flex",
-          alignItems: "center",
-          fontSize: "13.5px",
-          fontWeight: 500,
-          letterSpacing: 0,
-        }}
-      >
-        <div className="marqwrap" style={{ overflow: "hidden", width: "100%" }}>
-          <div className="marq2" style={{ display: "flex", width: "max-content", alignItems: "center" }}>
-            {[...NOTICES, ...NOTICES].map((notice, i) => (
-              <span
-                key={i}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  padding: "0 30px",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                <span
-                  style={{
-                    width: "6px",
-                    height: "6px",
-                    borderRadius: "50%",
-                    background: "#FFBA39",
-                  }}
-                />
-                {notice}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── STICKY GLASS HEADER / NAVBAR ──────────────────────────────────────── */}
-      <header
-        className="glass"
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          background: "rgba(255, 255, 255, 0.72)",
-          backdropFilter: "blur(24px) saturate(180%)",
-          WebkitBackdropFilter: "blur(24px) saturate(180%)",
-        }}
-      >
-        <nav
-          aria-label="Main"
-          style={{
-            maxWidth: "1360px",
-            margin: "0 auto",
-            padding: "0 clamp(16px, 3vw, 32px)",
-            height: "60px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "24px",
-          }}
-        >
-          <Link href="/" aria-label="One Impact home" style={{ display: "flex", alignItems: "center" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/LOGO/oneimpact-logo.png"
-              alt="One Impact"
-              style={{ display: "block", height: "30px", width: "auto" }}
-            />
-          </Link>
-
-          <div className="navlinks" style={{ fontSize: "14px", letterSpacing: 0 }}>
-            <a href="#why" style={{ color: "#3A3A3C", textDecoration: "none" }}>
-              Why SEO
-            </a>
-            <a href="#services" style={{ color: "#3A3A3C", textDecoration: "none" }}>
-              Services
-            </a>
-            <a href="#offer" style={{ color: "#3A3A3C", textDecoration: "none" }}>
-              What we offer
-            </a>
-            <a href="#local" style={{ color: "#3A3A3C", textDecoration: "none" }}>
-              Local SEO
-            </a>
-            <a href="#faq" style={{ color: "#3A3A3C", textDecoration: "none" }}>
-              FAQs
-            </a>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <a
-              className="navcall"
-              href="https://wa.me/918369018104"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ fontSize: "14px", color: "#3A3A3C", textDecoration: "none", letterSpacing: 0 }}
-            >
-              WhatsApp us
-            </a>
-            <a
-              className="press y"
-              href="#audit"
-              style={{
-                background: "#FFBA39",
-                color: "#000000",
-                textDecoration: "none",
-                fontWeight: 600,
-                fontSize: "14px",
-                letterSpacing: 0,
-                padding: "8px 16px",
-                borderRadius: "999px",
-                minHeight: "36px",
-                display: "inline-flex",
-                alignItems: "center",
-              }}
-            >
-              Free SEO audit
-            </a>
-          </div>
-        </nav>
-        <div
-          aria-hidden="true"
-          style={{
-            height: "1px",
-            background:
-              "linear-gradient(90deg, transparent, rgba(0,0,0,0.08) 20%, rgba(0,0,0,0.08) 80%, transparent)",
-          }}
-        />
-      </header>
+      {/* ── ORIGINAL ONE IMPACT NAVBAR ────────────────────────────────────────── */}
+      <Navbar />
 
       {/* ── HERO SECTION ────────────────────────────────────────────────────── */}
       <section id="top" style={{ position: "relative", overflow: "hidden", background: "#FFFFFF" }}>
@@ -1380,7 +1281,7 @@ export default function SeoLandingPage() {
             position: "relative",
             maxWidth: "1360px",
             margin: "0 auto",
-            padding: "clamp(40px, 7vw, 96px) clamp(16px, 3vw, 32px) clamp(56px, 8vw, 112px)",
+            padding: "clamp(100px, 11vw, 136px) clamp(16px, 3vw, 32px) clamp(56px, 8vw, 112px)",
           }}
         >
           {/* Left Column */}
@@ -2183,7 +2084,7 @@ export default function SeoLandingPage() {
                 <img
                   src="/LOGO/oneimpact-logo.png"
                   alt="Client logo"
-                  style={{ display: "block", height: "20px", width: "auto", opacity: 0.7 }}
+                  style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 0.7 }}
                 />
                 <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
                   {q.role}
@@ -2629,7 +2530,7 @@ export default function SeoLandingPage() {
 
           <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #D2D2D7" }}>
             {activeOffer.qs.map((f, qIdx) => (
-              <details key={qIdx} open={qIdx === 0} style={{ borderTop: "1px solid #D2D2D7" }}>
+              <details key={qIdx} style={{ borderTop: "1px solid #D2D2D7" }}>
                 <summary
                   style={{
                     display: "flex",
@@ -3282,12 +3183,19 @@ export default function SeoLandingPage() {
             gap: "28px",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "12px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/LOGO/oneimpact-logo.png"
               alt="One Impact"
-              style={{ display: "block", height: "30px", width: "auto" }}
+              style={{
+                display: "block",
+                height: "32px",
+                width: "auto",
+                maxWidth: "110px",
+                objectFit: "contain",
+                alignSelf: "flex-start",
+              }}
             />
             <span style={{ color: "#6E6E73" }}>360-degree digital marketing for that ONE big bang IMPACT.</span>
           </div>

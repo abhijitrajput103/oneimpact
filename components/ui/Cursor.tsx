@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "@/gsap";
 import { useCursor } from "@/hooks/useCursor";
 
 export function Cursor() {
+  const pathname = usePathname();
   const cursorRef = useRef<HTMLDivElement>(null);
   const { cursorType, cursorText, magneticTarget } = useCursor();
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -119,7 +121,7 @@ export function Cursor() {
     }
   }, [cursorType, isTouchDevice]);
 
-  if (isTouchDevice) return null;
+  if (isTouchDevice || pathname?.startsWith("/seo")) return null;
 
   return (
     <div
