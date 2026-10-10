@@ -5,14 +5,16 @@ import { gsap } from "@/gsap";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/utils/cn";
 
-// Showreel Instagram reels — clean card-style links
+// Showreel Instagram reels — with authentic cover thumbnails & links
 const SHOWREEL_REELS = [
   {
     id: 1,
     reelId: "DZFZYEasxaC",
     url: "https://www.instagram.com/reel/DZFZYEasxaC/",
-    label: "Interior Design",
-    gradient: "from-rose-500/80 via-pink-600/60 to-purple-700/80",
+    label: "Spatial Design",
+    title: "Sanjay Puri Interiors",
+    thumbnail: "/images/reels/reel-1.jpg",
+    gradient: "from-rose-500/10 via-pink-600/10 to-purple-700/10",
     rotation: -8,
     offsetY: 20,
   },
@@ -20,8 +22,10 @@ const SHOWREEL_REELS = [
     id: 2,
     reelId: "C5a7zP5LDvg",
     url: "https://www.instagram.com/reel/C5a7zP5LDvg/",
-    label: "Architecture",
-    gradient: "from-amber-500/80 via-orange-600/60 to-red-700/80",
+    label: "Architecture Series",
+    title: "Dialogues Directory",
+    thumbnail: "/images/reels/reel-2.jpg",
+    gradient: "from-amber-500/10 via-orange-600/10 to-red-700/10",
     rotation: 4,
     offsetY: -10,
   },
@@ -30,7 +34,9 @@ const SHOWREEL_REELS = [
     reelId: "DSRk3L1kS23",
     url: "https://www.instagram.com/reel/DSRk3L1kS23/",
     label: "Brand Film",
-    gradient: "from-cyan-500/80 via-blue-600/60 to-indigo-700/80",
+    title: "Cafe Pibatie",
+    thumbnail: "/images/reels/reel-3.jpg",
+    gradient: "from-cyan-500/10 via-blue-600/10 to-indigo-700/10",
     rotation: -3,
     offsetY: 15,
   },
@@ -38,8 +44,10 @@ const SHOWREEL_REELS = [
     id: 4,
     reelId: "DGCm30TqayX",
     url: "https://www.instagram.com/reel/DGCm30TqayX/",
-    label: "Campaign",
-    gradient: "from-emerald-500/80 via-teal-600/60 to-cyan-700/80",
+    label: "Campaign Film",
+    title: "Sweet Bengal",
+    thumbnail: "/images/reels/reel-4.jpg",
+    gradient: "from-emerald-500/10 via-teal-600/10 to-cyan-700/10",
     rotation: 6,
     offsetY: -15,
   },
@@ -47,8 +55,10 @@ const SHOWREEL_REELS = [
     id: 5,
     reelId: "DPa2vfZk71z",
     url: "https://www.instagram.com/reel/DPa2vfZk71z/",
-    label: "Social Media",
-    gradient: "from-violet-500/80 via-purple-600/60 to-fuchsia-700/80",
+    label: "Luxury Storytelling",
+    title: "Vinanti Manji",
+    thumbnail: "/images/reels/reel-5.jpg",
+    gradient: "from-violet-500/10 via-purple-600/10 to-fuchsia-700/10",
     rotation: -5,
     offsetY: 10,
   },
@@ -239,11 +249,21 @@ export function Showreel({ className }: ShowreelProps) {
                   "relative overflow-hidden rounded-2xl w-[130px] h-[170px] sm:w-[170px] sm:h-[220px] md:w-[200px] md:h-[260px] lg:w-[240px] lg:h-[310px]",
                   "shadow-2xl transition-shadow duration-500 ease-out group-hover:shadow-[0_20px_50px_rgba(255,215,0,0.2)]"
                 )}>
-                  {/* Gradient background */}
+                  {/* Thumbnail image */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={reel.thumbnail}
+                    alt={reel.label}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                    draggable={false}
+                  />
+
+                  {/* Gradient overlay */}
                   <div className={cn("absolute inset-0 bg-gradient-to-br", reel.gradient)} />
 
                   {/* Subtle noise texture overlay */}
-                  <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")" }} />
+                  <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")" }} />
 
                   {/* Center play button */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 sm:gap-4">

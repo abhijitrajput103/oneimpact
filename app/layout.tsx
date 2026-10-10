@@ -47,7 +47,7 @@ export default function RootLayout({
       lang="en"
       className={`${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
     >
-      <body className="bg-black text-off-white font-sans min-h-full flex flex-col custom-cursor-active overflow-x-hidden">
+      <body className="bg-black text-off-white font-sans min-h-full flex flex-col overflow-x-hidden">
         <Providers>
           {/* Custom interactive cursor rendered globally */}
           <Cursor />

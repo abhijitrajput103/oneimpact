@@ -39,13 +39,7 @@
     color: var(--color-off-white);
   }
 
-  /* Remove default cursor on desktops when interactive custom cursor is enabled */
-  @media (pointer: fine) {
-    .custom-cursor-active,
-    .custom-cursor-active * {
-      cursor: none !important;
-    }
-  }
+  /* Standard cursor restored */
 }
 
 /* Premium utility classes */

@@ -168,25 +168,36 @@ export function AboutBanner({ className }: AboutBannerProps) {
       </div>
 
       {/* ═══════════════════════════════════════════ */}
-      {/* CLIENT LOGOS STRIP                         */}
+      {/* CLIENT LOGOS STRIP — Auto-scrolling Marquee */}
       {/* ═══════════════════════════════════════════ */}
       <div
-        className="logo-strip relative z-0 py-10 sm:py-12 md:py-14 -mt-8 sm:-mt-12 md:-mt-16"
+        className="logo-strip relative z-0 pt-16 sm:pt-20 md:pt-24 pb-10 sm:pb-12 md:pb-14 -mt-8 sm:-mt-12 md:-mt-16"
         style={{ backgroundColor: "#FFFFFF" }}
       >
-        <div className="px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32">
-          <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-10 md:gap-14 lg:gap-16">
-            {CLIENT_LOGOS.map((logo) => (
+        <style>{`
+          @keyframes logoMarquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+          .logo-marquee-track {
+            animation: logoMarquee 30s linear infinite;
+          }
+          .logo-marquee-track:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+        <div className="overflow-hidden">
+          <div className="logo-marquee-track flex items-center gap-12 sm:gap-16 md:gap-20 w-max">
+            {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
               <div
-                key={logo.name}
-                className="client-logo flex items-center justify-center transition-opacity duration-300 hover:opacity-100 opacity-70"
-                style={{ opacity: 0 }}
+                key={`${logo.name}-${i}`}
+                className="client-logo flex-shrink-0 flex items-center justify-center"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  className="h-8 sm:h-10 md:h-12 w-auto max-w-[100px] sm:max-w-[120px] md:max-w-[140px] object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  className="h-8 sm:h-10 md:h-12 w-auto max-w-[100px] sm:max-w-[120px] md:max-w-[140px] object-contain hover:scale-110 transition-transform duration-300"
                   draggable={false}
                 />
               </div>
