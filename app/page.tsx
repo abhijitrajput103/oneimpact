@@ -9,6 +9,7 @@ import { Hero } from "@/components/hero/Hero";
 import { Showreel } from "@/components/showroom/Showreel";
 import { AboutBanner } from "@/components/showroom/AboutBanner";
 import { CardSwapSection } from "@/components/showroom/CardSwapSection";
+import { ContactFormSection } from "@/components/contact/ContactFormSection";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +50,9 @@ export default function Home() {
 
             {/* Featured Projects Card Swap */}
             <CardSwapSection />
+
+            {/* Project Inquiry & Contact Form Section */}
+            <ContactFormSection />
           </main>
 
           <Footer />

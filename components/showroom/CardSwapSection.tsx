@@ -149,7 +149,7 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
         }}
       />
 
-      <div className="relative z-[1] px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28 pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-24 md:pb-32 lg:pb-36">
+      <div className="relative z-[1] px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28 pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-8 sm:pb-10 md:pb-12 lg:pb-14">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-8">
           {/* Left — Text content */}
           <div className="w-full lg:w-[42%] xl:w-[38%] shrink-0 z-10 lg:pr-4">

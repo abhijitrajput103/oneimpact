@@ -7,21 +7,21 @@ import { cn } from "@/utils/cn";
 
 // Client/partner logos — image-based from /LOGO/ folder
 const CLIENT_LOGOS = [
-  { name: "LenDen Club", src: "/LOGO/LEDEN Clube.png" },
-  { name: "Axis Trustee", src: "/LOGO/axistrustee.png" },
-  { name: "Sweet Bengal", src: "/LOGO/SWEET BENGAL.jpg" },
-  { name: "DSCI", src: "/LOGO/dsci.webp" },
-  { name: "Bloomberg Quint", src: "/LOGO/bloomberg-quint-vector-logo.png" },
-  { name: "DSP Mutual Fund", src: "/LOGO/DSP Mutual fund.png" },
-  { name: "MOXIE Beauty", src: "/LOGO/MOXIE Beauty.png" },
-  { name: "PayU", src: "/LOGO/PayU.svg.webp" },
-  { name: "SMAAASH", src: "/LOGO/SMAAASH.jpg" },
-  { name: "Sweet India", src: "/LOGO/SWEDT INDIA.jpg" },
-  { name: "LiveLaw", src: "/LOGO/livelaw-logo.png" },
-  { name: "SnapDeal", src: "/LOGO/sanpdealbrandlogo_2.avif" },
-  { name: "Jharkhand", src: "/LOGO/800px-Jharkhand_emblem.png" },
-  { name: "IL", src: "/LOGO/logo-il.jpg" },
-  { name: "Winston", src: "/LOGO/winston-faridabad-ma84f9666c.jpg" },
+  { name: "LenDen Club", src: "/LOGO/transparent/LEDEN Clube.png" },
+  { name: "Axis Trustee", src: "/LOGO/transparent/axistrustee.png" },
+  { name: "Sweet Bengal", src: "/LOGO/transparent/SWEET BENGAL.png" },
+  { name: "DSCI", src: "/LOGO/transparent/dsci.png" },
+  { name: "Bloomberg Quint", src: "/LOGO/transparent/bloomberg-quint-vector-logo.png" },
+  { name: "DSP Mutual Fund", src: "/LOGO/transparent/DSP Mutual fund.png" },
+  { name: "MOXIE Beauty", src: "/LOGO/transparent/MOXIE Beauty.png" },
+  { name: "PayU", src: "/LOGO/transparent/PayU.svg.png" },
+  { name: "SMAAASH", src: "/LOGO/transparent/SMAAASH.png" },
+  { name: "Sweet India", src: "/LOGO/transparent/SWEDT INDIA.png" },
+  { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.png" },
+  { name: "SnapDeal", src: "/LOGO/transparent/sanpdealbrandlogo_2.png" },
+  { name: "Jharkhand", src: "/LOGO/transparent/800px-Jharkhand_emblem.png" },
+  { name: "IL", src: "/LOGO/transparent/logo-il.png" },
+  { name: "Winston", src: "/LOGO/transparent/winston-faridabad-ma84f9666c.png" },
 ];
 
 
@@ -153,11 +153,11 @@ export function AboutBanner({ className }: AboutBannerProps) {
             <div className="flex-shrink-0 about-cta" style={{ opacity: 0 }}>
               <a
                 href="#about"
-                className="inline-block px-12 sm:px-16 md:px-20 py-3.5 sm:py-4 rounded-full font-display text-sm sm:text-base font-extrabold tracking-wider uppercase transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 text-center min-w-[200px] sm:min-w-[240px]"
+                className="inline-flex items-center justify-center w-[260px] sm:w-[320px] md:w-[380px] lg:w-[420px] py-4 sm:py-4.5 rounded-full font-display text-sm sm:text-base md:text-lg font-black tracking-[0.18em] uppercase transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl active:scale-95 text-center"
                 style={{
                   backgroundColor: "#FFD700",
                   color: "#1A1A2E",
-                  boxShadow: "0 4px 25px rgba(255, 215, 0, 0.4)",
+                  boxShadow: "0 6px 30px rgba(255, 215, 0, 0.45)",
                 }}
               >
                 ABOUT US
@@ -171,7 +171,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
       {/* CLIENT LOGOS STRIP — Auto-scrolling Marquee */}
       {/* ═══════════════════════════════════════════ */}
       <div
-        className="logo-strip relative z-0 pt-10 sm:pt-12 md:pt-14 pb-8 sm:pb-10 md:pb-12 -mt-6 sm:-mt-8 md:-mt-10"
+        className="logo-strip relative z-0 pt-12 sm:pt-16 md:pt-18 pb-10 sm:pb-14 md:pb-16 -mt-6 sm:-mt-8 md:-mt-10"
         style={{ backgroundColor: "#FFFFFF" }}
       >
         <style>{`
@@ -180,24 +180,24 @@ export function AboutBanner({ className }: AboutBannerProps) {
             to { transform: translateX(-50%); }
           }
           .logo-marquee-track {
-            animation: logoMarquee 30s linear infinite;
+            animation: logoMarquee 42s linear infinite;
           }
           .logo-marquee-track:hover {
             animation-play-state: paused;
           }
         `}</style>
         <div className="overflow-hidden">
-          <div className="logo-marquee-track flex items-center gap-12 sm:gap-16 md:gap-20 w-max">
+          <div className="logo-marquee-track flex items-center gap-16 sm:gap-20 md:gap-24 lg:gap-28 w-max">
             {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
               <div
                 key={`${logo.name}-${i}`}
-                className="client-logo flex-shrink-0 flex items-center justify-center"
+                className="client-logo flex-shrink-0 flex items-center justify-center px-2"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  className="h-8 sm:h-10 md:h-12 w-auto max-w-[100px] sm:max-w-[120px] md:max-w-[140px] object-contain hover:scale-110 transition-transform duration-300"
+                  className="h-12 sm:h-16 md:h-20 lg:h-22 w-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] object-contain hover:scale-110 transition-transform duration-300"
                   draggable={false}
                 />
               </div>

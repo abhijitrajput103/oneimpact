@@ -62,7 +62,7 @@ export function Hero({ className }: HeroProps) {
       ref={containerRef}
       id="hero"
       className={cn(
-        "relative w-screen h-screen overflow-hidden flex flex-col justify-center items-center z-10 select-none pb-12 sm:pb-16 md:pb-20",
+        "relative w-full h-[100dvh] min-h-[100dvh] overflow-hidden flex flex-col justify-center items-center z-10 select-none pb-12 sm:pb-16 md:pb-20",
         className
       )}
       style={{
