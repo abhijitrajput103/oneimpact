@@ -45,9 +45,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
     >
-      <body className="bg-black text-off-white font-sans min-h-full flex flex-col overflow-x-hidden">
+      <body
+        suppressHydrationWarning
+        className="bg-black text-off-white font-sans min-h-full flex flex-col overflow-x-hidden"
+      >
         <Providers>
           {/* Custom interactive cursor rendered globally */}
           <Cursor />

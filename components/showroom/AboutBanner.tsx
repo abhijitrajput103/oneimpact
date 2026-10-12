@@ -105,7 +105,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
 
   // Split text into word spans for animation
   const headingText =
-    "We started One Impact in 2020,& Bhidu! apan abhi bhi market mein macha rahe hai..";
+    "We started One Impact in 2020 Bhidu! apan abhi bhi market mein macha rahe hai..";
   const words = headingText.split(" ");
 
   return (
@@ -117,7 +117,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
       {/* ═══════════════════════════════════════════ */}
       {/* BLUE BANNER AREA                           */}
       {/* ═══════════════════════════════════════════ */}
-      <div className="relative z-10 w-full pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-16 md:pb-20">
+      <div className="relative z-10 w-full pt-6 sm:pt-8 md:pt-10 pb-6 sm:pb-8 md:pb-10">
         {/* Background paper cut SVG - Full Width & Height */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -128,7 +128,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
         />
 
         {/* Banner content */}
-        <div className="relative z-[5] px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 pt-8 sm:pt-12 md:pt-16 pb-4 sm:pb-8">
+        <div className="relative z-[5] px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 pt-4 sm:pt-6 md:pt-8 pb-3 sm:pb-4">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-16">
             {/* Heading */}
             <div className="max-w-3xl">
@@ -149,11 +149,11 @@ export function AboutBanner({ className }: AboutBannerProps) {
               </h2>
             </div>
 
-            {/* ABOUT US CTA */}
+            {/* ABOUT US CTA — widened horizontally */}
             <div className="flex-shrink-0 about-cta" style={{ opacity: 0 }}>
               <a
                 href="#about"
-                className="inline-block px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-display text-sm sm:text-base font-extrabold tracking-wider uppercase transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
+                className="inline-block px-12 sm:px-16 md:px-20 py-3.5 sm:py-4 rounded-full font-display text-sm sm:text-base font-extrabold tracking-wider uppercase transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 text-center min-w-[200px] sm:min-w-[240px]"
                 style={{
                   backgroundColor: "#FFD700",
                   color: "#1A1A2E",
@@ -171,7 +171,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
       {/* CLIENT LOGOS STRIP — Auto-scrolling Marquee */}
       {/* ═══════════════════════════════════════════ */}
       <div
-        className="logo-strip relative z-0 pt-16 sm:pt-20 md:pt-24 pb-10 sm:pb-12 md:pb-14 -mt-8 sm:-mt-12 md:-mt-16"
+        className="logo-strip relative z-0 pt-10 sm:pt-12 md:pt-14 pb-8 sm:pb-10 md:pb-12 -mt-6 sm:-mt-8 md:-mt-10"
         style={{ backgroundColor: "#FFFFFF" }}
       >
         <style>{`

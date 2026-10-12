@@ -6,7 +6,6 @@ import { useGSAP } from "@gsap/react";
 import { cn } from "@/utils/cn";
 import { ColorRevealHero } from "./ColorRevealHero";
 import { HeroTitle } from "./HeroTitle";
-import { HeroCTA } from "./HeroCTA";
 import { ScrollIndicator } from "./ScrollIndicator";
 
 
@@ -46,15 +45,6 @@ export function Hero({ className }: HeroProps) {
           ease: "none",
         })
         .to(
-          ".hero-cta-section",
-          {
-            scale: 0.92,
-            opacity: 0,
-            ease: "none",
-          },
-          "<"
-        )
-        .to(
           ".hero-scroll-indicator",
           {
             y: 30,
@@ -88,9 +78,6 @@ export function Hero({ className }: HeroProps) {
 
       {/* Main core typography block */}
       <HeroTitle className="hero-title-section relative z-20" />
-
-      {/* Magnetic glowing CTA */}
-      <HeroCTA className="hero-cta-section relative z-20" />
 
       {/* Looping indicator */}
       <ScrollIndicator className="hero-scroll-indicator" />

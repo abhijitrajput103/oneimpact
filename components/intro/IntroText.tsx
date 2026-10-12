@@ -71,15 +71,15 @@ export function IntroText({ isClicked, className }: IntroTextProps) {
         className
       )}
     >
-      <h1 className="font-display text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter text-off-white leading-[0.95] mb-4">
+      <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-white leading-[1.02] mb-4">
         <div className="overflow-hidden py-1">
-          <span className="intro-word inline-block opacity-0">BREAK THE</span>
+          <span className="intro-word inline-block opacity-0 text-white">Break The</span>
         </div>
         <div className="overflow-hidden py-1">
-          <span className="intro-word inline-block text-accent-blue opacity-0">GLASS.</span>
+          <span className="intro-word inline-block text-[#DA9F37] opacity-0">Glass</span>
         </div>
       </h1>
-      <p className="intro-prompt font-display text-[9px] md:text-xs font-bold tracking-widest text-off-white/40 uppercase mt-4 opacity-0">
+      <p className="intro-prompt font-display text-[9px] md:text-xs font-bold tracking-widest text-[#DA9F37]/80 uppercase mt-4 opacity-0">
         [ Click anywhere to enter One Impact ]
       </p>
     </div>

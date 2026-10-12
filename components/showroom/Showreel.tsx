@@ -150,8 +150,8 @@ export function Showreel({ className }: ShowreelProps) {
     { scope: sectionRef }
   );
 
-  const showText = "Show";
-  const reelText = "reel";
+  const ourText = "Our";
+  const workText = "Work";
 
   return (
     <section
@@ -165,23 +165,22 @@ export function Showreel({ className }: ShowreelProps) {
 
       {/* Content container */}
       <div className="relative z-[5] px-4 sm:px-8 md:px-12 lg:px-20 pt-8 sm:pt-10 md:pt-14 lg:pt-16 pb-12 sm:pb-16 md:pb-20">
-        {/* Title: "Showreel" */}
+        {/* Title: "Our Work" */}
         <div className="text-center mb-6 sm:mb-8 md:mb-10">
           <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-none overflow-hidden py-2">
-            {showText.split("").map((char, i) => (
+            {ourText.split("").map((char, i) => (
               <span
-                key={`show-${i}`}
+                key={`our-${i}`}
                 className="showreel-char inline-block text-off-white"
-                style={{ opacity: 0 }}
               >
                 {char}
               </span>
             ))}
-            {reelText.split("").map((char, i) => (
+            <span className="showreel-char inline-block text-off-white">&nbsp;</span>
+            {workText.split("").map((char, i) => (
               <span
-                key={`reel-${i}`}
+                key={`work-${i}`}
                 className="showreel-char inline-block text-accent-yellow"
-                style={{ opacity: 0 }}
               >
                 {char}
               </span>
@@ -193,12 +192,9 @@ export function Showreel({ className }: ShowreelProps) {
         </div>
 
         {/* Description paragraph */}
-        <p
-          className="showreel-description text-center max-w-2xl lg:max-w-3xl mx-auto text-off-white/60 text-xs sm:text-sm md:text-base leading-relaxed font-sans mb-10 sm:mb-16 md:mb-24"
-          style={{ opacity: 0 }}
-        >
+        <p className="showreel-description text-center max-w-2xl lg:max-w-3xl mx-auto text-off-white/60 text-xs sm:text-sm md:text-base leading-relaxed font-sans mb-10 sm:mb-16 md:mb-24">
           Every frame we craft tells a story of vision, passion, and relentless attention to detail.
-          From intimate brand moments to grand experiential campaigns, our showreel captures the
+          From intimate brand moments to grand experiential campaigns, our work captures the
           creative pulse that drives everything we do — bold aesthetics, cinematic storytelling,
           and designs that leave a lasting impression.
         </p>
