@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { gsap } from "@/gsap";
 import { useLenis } from "@/hooks/useLenis";
 import { GlassOverlay } from "./GlassOverlay";
@@ -12,19 +12,21 @@ import { IntroText } from "./IntroText";
 
 // Audio player stubs
 const playImpactSound = () => {
-  // TODO: Implement metallic hammer hit audio player
-  // const audio = new Audio("/audio/hammer-impact.mp3");
-  // audio.volume = 0.8;
-  // audio.play();
   console.log("[Audio] Hammer impact played.");
 };
 
 const playBreakSound = () => {
-  // TODO: Implement glass shatter & cracking audio player
-  // const audio = new Audio("/audio/glass-break.mp3");
-  // audio.volume = 0.7;
-  // audio.play();
   console.log("[Audio] Glass break played.");
+};
+
+/** Detect touch-primary devices (smartphones / tablets) */
+const isTouchDevice = (): boolean => {
+  if (typeof window === "undefined") return false;
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    window.matchMedia("(pointer: coarse)").matches
+  );
 };
 
 interface GlassBreakIntroProps {
@@ -35,6 +37,7 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
   const [isClicked, setIsClicked] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const blurRef = useRef<HTMLDivElement>(null);
@@ -47,8 +50,28 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
 
   const lenis = useLenis();
 
-  // Stop scrolling on mount, restore on unmount (or completion)
+  const completeIntro = useCallback(() => {
+    setIsActive(false);
+    sessionStorage.setItem("oneimpact-intro", "true");
+
+    // Clear and dispose of canvas loops (safe no-ops if never spawned)
+    crackRef.current?.clearCanvas();
+    shardsRef.current?.clear();
+    particlesRef.current?.clear();
+
+    if (lenis) {
+      lenis.start();
+    }
+    if (onComplete) {
+      onComplete();
+    }
+  }, [lenis, onComplete]);
+
+  // Detect mobile & stop Lenis on mount; always restore on unmount
   useEffect(() => {
+    const mobile = isTouchDevice();
+    setIsMobile(mobile);
+
     if (lenis) {
       lenis.stop();
     }
@@ -59,6 +82,8 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
       setPrefersReducedMotion(mediaQuery.matches);
     });
 
+    // Safety: ensure Lenis is ALWAYS restarted on unmount,
+    // even if completeIntro was never called (prevents permanent freeze)
     return () => {
       if (lenis) {
         lenis.start();
@@ -66,7 +91,33 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     };
   }, [lenis]);
 
+  // ─── MOBILE: lightweight tap-to-dismiss ────────────────────────────
+  const handleMobileTap = useCallback(() => {
+    if (isClicked || !isActive) return;
+    setIsClicked(true);
+
+    // Simple, lightweight fade-out — no canvas, no particles, no shards
+    const tl = gsap.timeline({
+      onComplete: () => {
+        completeIntro();
+      },
+    });
+
+    tl.to(containerRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  }, [isClicked, isActive, completeIntro]);
+
+  // ─── DESKTOP: full glass-break experience ──────────────────────────
   const handleGlassClick = (e: React.MouseEvent) => {
+    // On mobile use the lightweight handler instead
+    if (isMobile) {
+      handleMobileTap();
+      return;
+    }
+
     if (isClicked || !isActive) return;
     setIsClicked(true);
 
@@ -97,7 +148,7 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     hammerRef.current?.triggerSwing(() => {
       // 2. On Impact: Shake screen, Play sound stubs
       playImpactSound();
-      
+
       const shakeTimeline = gsap.timeline();
       shakeTimeline
         .to(containerRef.current, {
@@ -108,19 +159,17 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
           yoyo: true,
           ease: "power1.inOut",
         })
-        .set(containerRef.current, { x: 0, y: 0 }); // reset layout alignment
+        .set(containerRef.current, { x: 0, y: 0 });
 
       // 3. Draw cracks radiating outward
       crackRef.current?.generateCrack(cx, cy, () => {
-        // Crack completes — now shatter the glass
         playBreakSound();
 
         // 4. Spawn falling glass shards & dust particles
         particlesRef.current?.spawnParticles(cx, cy);
         shardsRef.current?.spawnShards(cx, cy);
 
-        // 5. INSTANTLY remove the frosted glass, blur, and crack lines
-        //    The canvas-drawn falling shards visually replace the glass pane
+        // 5. Remove the frosted glass, blur, and crack lines
         crackRef.current?.clearCanvas();
 
         gsap.set(glassRef.current, { opacity: 0, pointerEvents: "none" });
@@ -134,30 +183,36 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     });
   };
 
-  const completeIntro = () => {
-    setIsActive(false);
-    sessionStorage.setItem("oneimpact-intro", "true");
-    
-    // Clear and dispose of canvas loops
-    crackRef.current?.clearCanvas();
-    shardsRef.current?.clear();
-    particlesRef.current?.clear();
-
-    if (lenis) {
-      lenis.start();
-    }
-    if (onComplete) {
-      onComplete();
-    }
-  };
-
   if (!isActive) return null;
 
+  // ─── MOBILE RENDER: lightweight overlay, no canvases/particles ─────
+  if (isMobile) {
+    return (
+      <div
+        ref={containerRef}
+        onTouchEnd={handleMobileTap}
+        onClick={handleMobileTap}
+        className="fixed inset-0 w-screen h-screen z-[9999] overflow-hidden select-none"
+        style={{ touchAction: "manipulation" }}
+      >
+        {/* Blur backdrop */}
+        <div className="absolute inset-0 z-0 bg-transparent backdrop-blur-[14px]" />
+
+        {/* Glass overlay & tap prompt */}
+        <div className="absolute inset-0 z-10 w-full h-full">
+          <GlassOverlay />
+          <IntroText isClicked={isClicked} />
+        </div>
+      </div>
+    );
+  }
+
+  // ─── DESKTOP RENDER: full glass-break experience ───────────────────
   return (
     <div
       ref={containerRef}
       onClick={handleGlassClick}
-      className="fixed inset-0 w-screen h-screen z-9999 overflow-hidden custom-cursor-active select-none"
+      className="fixed inset-0 w-screen h-screen z-[9999] overflow-hidden custom-cursor-active select-none"
     >
       {/* Layer 2: Website Blur Overlay */}
       <div

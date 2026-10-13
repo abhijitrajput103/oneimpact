@@ -238,7 +238,6 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
           alt="One Impact Hero Illustration"
           className="w-full h-full object-cover object-center select-none pointer-events-none"
           draggable={false}
-          priority-target="true"
         />
       </div>
 
