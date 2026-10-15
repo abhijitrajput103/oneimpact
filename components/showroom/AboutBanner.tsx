@@ -52,8 +52,8 @@ export function AboutBanner({ className }: AboutBannerProps) {
             ease: "reveal-ease",
             scrollTrigger: {
               trigger: section,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
+              start: "top 85%",
+              once: true,
             },
           }
         );
@@ -72,8 +72,8 @@ export function AboutBanner({ className }: AboutBannerProps) {
             ease: "back.out(1.6)",
             scrollTrigger: {
               trigger: section,
-              start: "top 70%",
-              toggleActions: "play none none reverse",
+              start: "top 85%",
+              once: true,
             },
           }
         );
@@ -93,8 +93,8 @@ export function AboutBanner({ className }: AboutBannerProps) {
             ease: "power3.out",
             scrollTrigger: {
               trigger: section.querySelector(".logo-strip"),
-              start: "top 90%",
-              toggleActions: "play none none reverse",
+              start: "top 92%",
+              once: true,
             },
           }
         );

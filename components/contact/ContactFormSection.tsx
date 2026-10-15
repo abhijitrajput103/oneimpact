@@ -54,8 +54,8 @@ export function ContactFormSection() {
             ease: "power3.out",
             scrollTrigger: {
               trigger: section,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
+              start: "top 90%",
+              once: true,
             },
           }
         );

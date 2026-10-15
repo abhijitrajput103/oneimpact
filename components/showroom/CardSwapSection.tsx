@@ -79,8 +79,8 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
             ease: "reveal-ease",
             scrollTrigger: {
               trigger: section,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
+              start: "top 85%",
+              once: true,
             },
           }
         );
@@ -99,8 +99,8 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
             ease: "power3.out",
             scrollTrigger: {
               trigger: section,
-              start: "top 75%",
-              toggleActions: "play none none reverse",
+              start: "top 85%",
+              once: true,
             },
           }
         );
@@ -119,8 +119,8 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
             ease: "power3.out",
             scrollTrigger: {
               trigger: section,
-              start: "top 65%",
-              toggleActions: "play none none reverse",
+              start: "top 85%",
+              once: true,
             },
           }
         );
