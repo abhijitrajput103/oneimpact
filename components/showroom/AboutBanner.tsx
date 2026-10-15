@@ -53,7 +53,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
             scrollTrigger: {
               trigger: section,
               start: "top 80%",
-              toggleActions: "play none none none",
+              toggleActions: "play none none reverse",
             },
           }
         );
@@ -73,7 +73,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
             scrollTrigger: {
               trigger: section,
               start: "top 70%",
-              toggleActions: "play none none none",
+              toggleActions: "play none none reverse",
             },
           }
         );
@@ -94,7 +94,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
             scrollTrigger: {
               trigger: section.querySelector(".logo-strip"),
               start: "top 90%",
-              toggleActions: "play none none none",
+              toggleActions: "play none none reverse",
             },
           }
         );
@@ -199,6 +199,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
                   alt={logo.name}
                   className="h-12 sm:h-16 md:h-20 lg:h-22 w-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] object-contain hover:scale-110 transition-transform duration-300"
                   draggable={false}
+                  loading="lazy"
                 />
               </div>
             ))}

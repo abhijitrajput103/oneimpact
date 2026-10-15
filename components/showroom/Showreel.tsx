@@ -106,7 +106,7 @@ export function Showreel({ className }: ShowreelProps) {
           scrollTrigger: {
             trigger: section,
             start: "top 80%",
-            toggleActions: "play none none none",
+            toggleActions: "play none none reverse",
           },
         }
       );
@@ -123,7 +123,7 @@ export function Showreel({ className }: ShowreelProps) {
           scrollTrigger: {
             trigger: section,
             start: "top 75%",
-            toggleActions: "play none none none",
+            toggleActions: "play none none reverse",
           },
         }
       );
@@ -142,7 +142,7 @@ export function Showreel({ className }: ShowreelProps) {
           scrollTrigger: {
             trigger: section.querySelector(".showreel-card"),
             start: "top 90%",
-            toggleActions: "play none none none",
+            toggleActions: "play none none reverse",
           },
         }
       );

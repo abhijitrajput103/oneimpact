@@ -10,14 +10,32 @@ interface SmoothScrollProviderProps {
   children: React.ReactNode;
 }
 
+/** Detect touch-primary devices */
+function isTouchPrimary(): boolean {
+  if (typeof window === "undefined") return false;
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    window.matchMedia("(pointer: coarse)").matches
+  );
+}
+
 export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    // Instantiate Lenis with premium smooth scroll settings
+    // On mobile/touch devices, skip Lenis entirely — native scroll is smoother
+    if (isTouchPrimary()) {
+      // Still connect ScrollTrigger to native scroll for GSAP animations
+      ScrollTrigger.defaults({ scroller: window });
+      ScrollTrigger.refresh();
+      return;
+    }
+
+    // Desktop: Instantiate Lenis with premium smooth scroll settings
     const lenisInstance = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential out easing
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
@@ -34,14 +52,12 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       ScrollTrigger.update();
     });
 
-    // Use GSAP's ticker to drive Lenis updates (ensures perfect sync with GSAP animations)
+    // Use GSAP's ticker to drive Lenis updates
     const updateTicker = (time: number) => {
       lenisInstance.raf(time * 1000);
     };
 
     gsap.ticker.add(updateTicker);
-
-    // Disable lag smoothing to prevent visual desync in heavy scroll animations
     gsap.ticker.lagSmoothing(0);
 
     return () => {

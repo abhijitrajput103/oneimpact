@@ -61,19 +61,25 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
 
     if (lenis) {
       lenis.start();
+    } else {
+      // Mobile: restore body overflow
+      document.body.style.overflow = "";
     }
     if (onComplete) {
       onComplete();
     }
   }, [lenis, onComplete]);
 
-  // Detect mobile & stop Lenis on mount; always restore on unmount
+  // Detect mobile & stop scrolling on mount; always restore on unmount
   useEffect(() => {
     const mobile = isTouchDevice();
     setIsMobile(mobile);
 
     if (lenis) {
       lenis.stop();
+    } else {
+      // Mobile: no Lenis, lock scroll via body overflow
+      document.body.style.overflow = "hidden";
     }
 
     // Check accessibility reduced-motion query
@@ -82,11 +88,12 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
       setPrefersReducedMotion(mediaQuery.matches);
     });
 
-    // Safety: ensure Lenis is ALWAYS restarted on unmount,
-    // even if completeIntro was never called (prevents permanent freeze)
+    // Safety: ensure scrolling is ALWAYS restored on unmount
     return () => {
       if (lenis) {
         lenis.start();
+      } else {
+        document.body.style.overflow = "";
       }
     };
   }, [lenis]);
