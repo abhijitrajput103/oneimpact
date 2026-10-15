@@ -150,16 +150,16 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
       />
 
       <div className="relative z-[1] px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28 pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-8 sm:pb-10 md:pb-12 lg:pb-14">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-8">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 sm:gap-6 lg:gap-8">
           {/* Left — Text content */}
           <div className="w-full lg:w-[42%] xl:w-[38%] shrink-0 z-10 lg:pr-4">
             {/* Subtitle */}
-            <span className="text-accent-yellow font-display text-[10px] md:text-xs font-extrabold tracking-widest uppercase block mb-4">
+            <span className="text-accent-yellow font-display text-[10px] md:text-xs font-extrabold tracking-widest uppercase block mb-2 sm:mb-4">
               {"// "}OUR SERVICES & EXPERTISE
             </span>
 
             {/* Heading */}
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-off-white flex flex-wrap gap-x-[0.25em] mb-6">
+            <h2 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-off-white flex flex-wrap gap-x-[0.25em] mb-3 sm:mb-6">
               {words.map((word, i) => (
                 <span
                   key={i}
@@ -177,7 +177,7 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
 
             {/* Description */}
             <p
-              className="swap-description text-off-white/50 text-sm sm:text-base leading-relaxed font-sans max-w-md"
+              className="swap-description text-off-white/50 text-xs sm:text-base leading-relaxed font-sans max-w-md"
               style={{ opacity: 0 }}
             >
               Every project is a canvas where strategy meets artistry. 
@@ -186,12 +186,12 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
             </p>
 
             {/* Decorative accent line */}
-            <div className="mt-8 w-16 h-[2px] bg-gradient-to-r from-accent-yellow via-accent-yellow/50 to-transparent" />
+            <div className="mt-3 sm:mt-6 md:mt-8 w-16 h-[2px] bg-gradient-to-r from-accent-yellow via-accent-yellow/50 to-transparent" />
           </div>
 
           {/* Right — Card Swap */}
           <div className="card-swap-wrapper w-full lg:w-[58%] xl:w-[62%] relative flex flex-col items-center lg:items-end overflow-visible" style={{ opacity: 0 }}>
-            <div className="relative w-full h-[400px] sm:h-[450px] md:h-[490px] lg:h-[520px] xl:h-[560px]">
+            <div className="relative w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[560px]">
               <CardSwap
                 ref={cardSwapRef}
                 width={560}

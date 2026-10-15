@@ -319,45 +319,50 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
           .card-swap-container {
             right: auto;
             left: 50%;
-            bottom: 20px;
-            transform: translateX(-50%) scale(0.82);
-            transform-origin: bottom center;
+            top: 50%;
+            bottom: auto;
+            transform: translate(-50%, -50%) scale(0.78);
+            transform-origin: center center;
           }
         }
         @media (max-width: 768px) {
           .card-swap-container {
             right: auto;
             left: 50%;
-            bottom: 15px;
-            transform: translateX(-50%) scale(0.68);
-            transform-origin: bottom center;
+            top: 50%;
+            bottom: auto;
+            transform: translate(-50%, -50%) scale(0.66);
+            transform-origin: center center;
           }
         }
         @media (max-width: 640px) {
           .card-swap-container {
             right: auto;
             left: 50%;
-            bottom: 10px;
-            transform: translateX(-50%) scale(0.55);
-            transform-origin: bottom center;
+            top: 48%;
+            bottom: auto;
+            transform: translate(-50%, -50%) scale(0.55);
+            transform-origin: center center;
           }
         }
         @media (max-width: 480px) {
           .card-swap-container {
             right: auto;
             left: 50%;
-            bottom: 10px;
-            transform: translateX(-50%) scale(0.46);
-            transform-origin: bottom center;
+            top: 48%;
+            bottom: auto;
+            transform: translate(-50%, -50%) scale(0.48);
+            transform-origin: center center;
           }
         }
         @media (max-width: 380px) {
           .card-swap-container {
             right: auto;
             left: 50%;
-            bottom: 10px;
-            transform: translateX(-50%) scale(0.38);
-            transform-origin: bottom center;
+            top: 48%;
+            bottom: auto;
+            transform: translate(-50%, -50%) scale(0.42);
+            transform-origin: center center;
           }
         }
       `}</style>
