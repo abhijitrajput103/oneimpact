@@ -13,42 +13,49 @@ const PROJECTS = [
     category: "BRANDING",
     description: "Crafting bespoke brand narratives, identity systems, and high-impact visual design that command attention.",
     gradient: "from-amber-950/70 via-black/40 to-transparent",
-    image: "/images/Service page_branding.webp",
+    image: "/images/service-branding.webp",
   },
   {
     title: "Interactive Web & Digital Engineering",
-    category: "WEBSITE DEVELOPMENT",
+    category: "WEBSITE DEV",
     description: "High-performance digital architectures, bespoke UI/UX, and immersive interactive web experiences.",
     gradient: "from-zinc-950/80 via-black/40 to-transparent",
-    image: "/images/Service page_website development.webp",
+    image: "/images/service-website-development.webp",
   },
   {
     title: "Organic Search & Traffic Growth",
     category: "SEO SERVICES",
     description: "Technical SEO audits, domain authority building, and data-backed strategies for scalable organic ranking dominance.",
     gradient: "from-amber-950/70 via-black/40 to-transparent",
-    image: "/images/Service page_SEO.webp",
+    image: "/images/service-seo.webp",
   },
   {
     title: "Commercial Studio & Art Direction",
-    category: "CONTENT & CREATIVE",
+    category: "CONTENT & FILM",
     description: "Cinematic commercial photography, high-end studio film production, and viral visual asset creation.",
     gradient: "from-stone-950/80 via-black/40 to-transparent",
-    image: "/images/Service page_content & creative.webp",
+    image: "/images/service-content-creative.webp",
   },
   {
-    title: "Creator Partnerships & PR",
-    category: "INFLUENCER MARKETING",
+    title: "Creator Partnerships & Strategic PR",
+    category: "INFLUENCER PR",
     description: "Curating high-converting creator alliances that amplify brand authority, reach, and organic engagement.",
     gradient: "from-rose-950/70 via-black/40 to-transparent",
-    image: "/images/Service page_Influencer marketing.webp",
+    image: "/images/service-influencer-marketing.webp",
   },
   {
     title: "Creator-Led Social Campaigns",
-    category: "USER GENERATED CONTENT",
+    category: "UGC CAMPAIGNS",
     description: "Relatable, authentic creator-led video content engineered for paid social performance and viral conversions.",
     gradient: "from-zinc-950/80 via-black/40 to-transparent",
-    image: "/images/Service page_UGC.webp",
+    image: "/images/service-ugc.webp",
+  },
+  {
+    title: "Performance & Social Media Marketing",
+    category: "SOCIAL MEDIA",
+    description: "Data-driven social media growth, viral content strategy, and multi-channel campaign management for market leadership.",
+    gradient: "from-purple-950/70 via-black/40 to-transparent",
+    image: "/images/service-social-media.webp",
   },
 ];
 
@@ -196,8 +203,8 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
                 ref={cardSwapRef}
                 width={560}
                 height={315}
-                cardDistance={24}
-                verticalDistance={32}
+                cardDistance={26}
+                verticalDistance={36}
                 delay={4500}
                 pauseOnHover={true}
                 skewAmount={4}
@@ -207,7 +214,7 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
                   <Card key={i}>
                     {/* Card interior */}
                     <div className="relative w-full h-full overflow-hidden rounded-2xl group/card cursor-pointer bg-zinc-950 shadow-2xl">
-                      {/* Background image — pristine showcase without obscuring text overlays */}
+                      {/* Background image */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={project.image}
@@ -217,25 +224,28 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
                         draggable={false}
                       />
 
-                      {/* Top-right card index badge + click to swap button */}
-                      <div className="absolute top-4 right-4 flex items-center gap-2 z-20">
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            cardSwapRef.current?.swap();
-                          }}
-                          aria-label="Click to swap card"
-                          className="hidden sm:inline-flex items-center gap-1.5 text-[9px] uppercase font-bold tracking-widest text-off-white/90 bg-black/70 hover:bg-black/90 hover:text-accent-yellow active:scale-95 transition-all duration-200 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 hover:border-accent-yellow/60 cursor-pointer pointer-events-auto shadow-md"
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow animate-pulse" />
-                          CLICK TO SWAP
-                        </button>
-                        <div className="w-8 h-8 rounded-full border border-white/15 bg-black/60 backdrop-blur-md flex items-center justify-center">
-                          <span className="text-off-white/80 font-display text-xs font-bold">
-                            {String(i + 1).padStart(2, "0")}
+                      {/* Subtle gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 pointer-events-none z-10" />
+
+                      {/* Service Name Pill at Top Right (Uncovered across all stacked cards!) */}
+                      <div className="absolute top-2 sm:top-2.5 right-2 sm:right-3.5 z-30 flex items-center pointer-events-none">
+                        <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/25 shadow-lg whitespace-nowrap">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow shadow-[0_0_8px_#DA9F37]" />
+                          <span className="text-[8.5px] sm:text-[10px] font-display font-extrabold tracking-wider text-off-white uppercase">
+                            <span className="text-accent-yellow mr-1">0{i + 1}</span>
+                            {project.category}
                           </span>
                         </div>
+                      </div>
+
+                      {/* Bottom Card Title & Narrative */}
+                      <div className="absolute inset-x-0 bottom-0 p-3 sm:p-5 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none z-20 flex flex-col justify-end">
+                        <span className="text-[7.5px] sm:text-[9.5px] font-display font-black tracking-widest text-accent-yellow uppercase block mb-0.5">
+                          FEATURED SERVICE // {project.category}
+                        </span>
+                        <h3 className="text-xs sm:text-base md:text-lg font-display font-bold text-white tracking-tight leading-tight line-clamp-1 drop-shadow">
+                          {project.title}
+                        </h3>
                       </div>
                     </div>
                   </Card>

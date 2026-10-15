@@ -78,6 +78,7 @@ interface CardSwapProps {
   delay?: number;
   pauseOnHover?: boolean;
   onCardClick?: (index: number) => void;
+  onCardChange?: (index: number) => void;
   skewAmount?: number;
   easing?: "elastic" | "smooth";
   children: React.ReactNode;
@@ -91,6 +92,7 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
   delay = 4500,
   pauseOnHover = true,
   onCardClick,
+  onCardChange,
   skewAmount = 4,
   easing = "smooth",
   children,
@@ -123,6 +125,8 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
       }
     });
 
+    onCardChange?.(order.current[0]);
+
     const startInterval = () => {
       clearInterval(intervalRef.current);
       intervalRef.current = setInterval(() => {
@@ -144,6 +148,8 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
       startInterval();
 
       const [front, ...rest] = order.current;
+      onCardChange?.(rest[0]);
+
       const elFront = refs[front]?.current;
       if (!elFront) return;
 
