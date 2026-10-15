@@ -15,17 +15,17 @@ const NOTICES = [
 ];
 
 const CLIENT_LOGOS = [
-  { name: "LenDen Club", src: "/LOGO/LEDEN Clube.png" },
-  { name: "Axis Trustee", src: "/LOGO/axistrustee.png" },
-  { name: "Sweet Bengal", src: "/LOGO/SWEET BENGAL.jpg" },
+  { name: "LenDen Club", src: "/LOGO/LEDEN Clube.webp" },
+  { name: "Axis Trustee", src: "/LOGO/axistrustee.webp" },
+  { name: "Sweet Bengal", src: "/LOGO/SWEET BENGAL.webp" },
   { name: "DSCI", src: "/LOGO/dsci.webp" },
-  { name: "Bloomberg Quint", src: "/LOGO/bloomberg-quint-vector-logo.png" },
-  { name: "DSP Mutual Fund", src: "/LOGO/DSP Mutual fund.png" },
-  { name: "MOXIE Beauty", src: "/LOGO/MOXIE Beauty.png" },
+  { name: "Bloomberg Quint", src: "/LOGO/bloomberg-quint-vector-logo.webp" },
+  { name: "DSP Mutual Fund", src: "/LOGO/DSP Mutual fund.webp" },
+  { name: "MOXIE Beauty", src: "/LOGO/MOXIE Beauty.webp" },
   { name: "PayU", src: "/LOGO/PayU.svg.webp" },
-  { name: "SMAAASH", src: "/LOGO/SMAAASH.jpg" },
-  { name: "Sweet India", src: "/LOGO/SWEDT INDIA.jpg" },
-  { name: "LiveLaw", src: "/LOGO/livelaw-logo.png" },
+  { name: "SMAAASH", src: "/LOGO/SMAAASH.webp" },
+  { name: "Sweet India", src: "/LOGO/SWEDT INDIA.webp" },
+  { name: "LiveLaw", src: "/LOGO/livelaw-logo.webp" },
   { name: "SnapDeal", src: "/LOGO/sanpdealbrandlogo_2.avif" },
 ];
 
@@ -2082,7 +2082,7 @@ export default function SeoLandingPage() {
               <figcaption style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/LOGO/oneimpact-logo.png"
+                  src="/LOGO/oneimpact-logo.webp"
                   alt="Client logo"
                   style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 0.7 }}
                 />
@@ -3186,7 +3186,7 @@ export default function SeoLandingPage() {
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "12px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/LOGO/oneimpact-logo.png"
+              src="/LOGO/oneimpact-logo.webp"
               alt="One Impact"
               style={{
                 display: "block",

@@ -48,6 +48,16 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
     >
+      <head>
+        {/* Preload hero mobile image so scratch-to-reveal loads instantly */}
+        <link
+          rel="preload"
+          as="image"
+          href="/images/One_impact _illustration_Mobile.webp"
+          type="image/webp"
+          media="(max-width: 767px)"
+        />
+      </head>
       <body
         suppressHydrationWarning
         className="bg-black text-off-white font-sans min-h-full flex flex-col overflow-x-hidden"

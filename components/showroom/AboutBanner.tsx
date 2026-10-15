@@ -7,21 +7,21 @@ import { cn } from "@/utils/cn";
 
 // Client/partner logos — image-based from /LOGO/ folder
 const CLIENT_LOGOS = [
-  { name: "LenDen Club", src: "/LOGO/transparent/LEDEN Clube.png" },
-  { name: "Axis Trustee", src: "/LOGO/transparent/axistrustee.png" },
-  { name: "Sweet Bengal", src: "/LOGO/transparent/SWEET BENGAL.png" },
-  { name: "DSCI", src: "/LOGO/transparent/dsci.png" },
-  { name: "Bloomberg Quint", src: "/LOGO/transparent/bloomberg-quint-vector-logo.png" },
-  { name: "DSP Mutual Fund", src: "/LOGO/transparent/DSP Mutual fund.png" },
-  { name: "MOXIE Beauty", src: "/LOGO/transparent/MOXIE Beauty.png" },
-  { name: "PayU", src: "/LOGO/transparent/PayU.svg.png" },
-  { name: "SMAAASH", src: "/LOGO/transparent/SMAAASH.png" },
-  { name: "Sweet India", src: "/LOGO/transparent/SWEDT INDIA.png" },
-  { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.png" },
-  { name: "SnapDeal", src: "/LOGO/transparent/sanpdealbrandlogo_2.png" },
-  { name: "Jharkhand", src: "/LOGO/transparent/800px-Jharkhand_emblem.png" },
-  { name: "IL", src: "/LOGO/transparent/logo-il.png" },
-  { name: "Winston", src: "/LOGO/transparent/winston-faridabad-ma84f9666c.png" },
+  { name: "LenDen Club", src: "/LOGO/transparent/LEDEN Clube.webp" },
+  { name: "Axis Trustee", src: "/LOGO/transparent/axistrustee.webp" },
+  { name: "Sweet Bengal", src: "/LOGO/transparent/SWEET BENGAL.webp" },
+  { name: "DSCI", src: "/LOGO/transparent/dsci.webp" },
+  { name: "Bloomberg Quint", src: "/LOGO/transparent/bloomberg-quint-vector-logo.webp" },
+  { name: "DSP Mutual Fund", src: "/LOGO/transparent/DSP Mutual fund.webp" },
+  { name: "MOXIE Beauty", src: "/LOGO/transparent/MOXIE Beauty.webp" },
+  { name: "PayU", src: "/LOGO/transparent/PayU.svg.webp" },
+  { name: "SMAAASH", src: "/LOGO/transparent/SMAAASH.webp" },
+  { name: "Sweet India", src: "/LOGO/transparent/SWEDT INDIA.webp" },
+  { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
+  { name: "SnapDeal", src: "/LOGO/transparent/sanpdealbrandlogo_2.webp" },
+  { name: "Jharkhand", src: "/LOGO/transparent/800px-Jharkhand_emblem.webp" },
+  { name: "IL", src: "/LOGO/transparent/logo-il.webp" },
+  { name: "Winston", src: "/LOGO/transparent/winston-faridabad-ma84f9666c.webp" },
 ];
 
 

@@ -27,6 +27,11 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      // Skip loader on repeat visits
+      if (sessionStorage.getItem("oneimpact-loaded") === "true") {
+        setIsLoading(false);
+      }
+
       // Skip GlassBreakIntro entirely on mobile — only show scratch-to-reveal hero
       const mobile = isTouchDevice();
       const hasSeenIntro = sessionStorage.getItem("oneimpact-intro") === "true";

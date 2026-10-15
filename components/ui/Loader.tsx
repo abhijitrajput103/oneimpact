@@ -17,6 +17,12 @@ export function Loader({ onComplete }: LoaderProps) {
     const container = containerRef.current;
     if (!container) return;
 
+    // Check if already loaded in this session
+    if (typeof window !== "undefined" && sessionStorage.getItem("oneimpact-loaded") === "true") {
+      if (onComplete) onComplete();
+      return;
+    }
+
     // Split words or run simple animations
     const tl = gsap.timeline();
 
@@ -27,9 +33,9 @@ export function Loader({ onComplete }: LoaderProps) {
       {
         y: "0%",
         opacity: 1,
-        duration: 0.8,
+        duration: 0.5,
         ease: "power4.out",
-        stagger: 0.08,
+        stagger: 0.05,
       }
     );
 
@@ -39,17 +45,18 @@ export function Loader({ onComplete }: LoaderProps) {
       ...container.querySelectorAll<HTMLElement>(".loader-word"),
     ].filter((node): node is HTMLElement => node !== null);
 
-    // Counter animation object
+    // Fast counter animation (0.9s instead of 2.2s for blazing-fast initial load)
     const counterObj = { value: 0 };
     gsap.to(counterObj, {
       value: 100,
-      duration: 2.2,
+      duration: 0.9,
       ease: "power2.out",
       onUpdate: () => {
         setProgress(Math.floor(counterObj.value));
       },
       onComplete: () => {
-        // Exit timeline on counter completion
+        sessionStorage.setItem("oneimpact-loaded", "true");
+        // Quick exit timeline
         const exitTl = gsap.timeline({
           onComplete: () => {
             if (onComplete) onComplete();
@@ -58,20 +65,20 @@ export function Loader({ onComplete }: LoaderProps) {
 
         exitTl
           .to(exitTargets, {
-            y: -40,
+            y: -30,
             opacity: 0,
-            duration: 0.6,
+            duration: 0.35,
             ease: "power3.in",
-            stagger: 0.05,
+            stagger: 0.03,
           })
           .to(
             container,
             {
               clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-              duration: 1.0,
+              duration: 0.5,
               ease: "power4.inOut",
             },
-            "-=0.2"
+            "-=0.1"
           );
       },
     });

@@ -44,7 +44,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-duck",
         type: "image",
-        src: "/images/stickers/duck.png",
+        src: "/images/stickers/duck.webp",
         x: xPos(0.02, 24),
         y: 6,
         rotation: -8,
@@ -54,7 +54,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-rocket",
         type: "image",
-        src: "/images/stickers/rocket.png",
+        src: "/images/stickers/rocket.webp",
         x: xPos(0.16, 22),
         y: 16,
         rotation: 12,
@@ -64,7 +64,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-lightning",
         type: "image",
-        src: "/images/stickers/lightning.png",
+        src: "/images/stickers/lightning.webp",
         x: xPos(0.30, 20),
         y: 4,
         rotation: -5,
@@ -74,7 +74,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-star",
         type: "image",
-        src: "/images/stickers/star.png",
+        src: "/images/stickers/star.webp",
         x: xPos(0.44, 22),
         y: 12,
         rotation: 15,
@@ -84,7 +84,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-peace",
         type: "image",
-        src: "/images/stickers/peace.png",
+        src: "/images/stickers/peace.webp",
         x: xPos(0.58, 22),
         y: 18,
         rotation: -12,
@@ -94,7 +94,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-smiley",
         type: "image",
-        src: "/images/stickers/smiley.png",
+        src: "/images/stickers/smiley.webp",
         x: xPos(0.72, 20),
         y: 10,
         rotation: 6,
@@ -104,7 +104,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-illustrator",
         type: "image",
-        src: "/images/stickers/Illustrator.png",
+        src: "/images/stickers/Illustrator.webp",
         x: xPos(0.84, 22),
         y: 5,
         rotation: -10,
@@ -114,7 +114,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-photoshop",
         type: "image",
-        src: "/images/stickers/photoshop.png",
+        src: "/images/stickers/photoshop.webp",
         x: xPos(0.10, 22),
         y: 22,
         rotation: 8,
@@ -124,7 +124,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-aftereffects",
         type: "image",
-        src: "/images/stickers/after effects.png",
+        src: "/images/stickers/after effects.webp",
         x: xPos(0.24, 22),
         y: 8,
         rotation: -6,
@@ -134,7 +134,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-premiere",
         type: "image",
-        src: "/images/stickers/premier pro.png",
+        src: "/images/stickers/premier pro.webp",
         x: xPos(0.38, 22),
         y: 20,
         rotation: 10,
@@ -144,7 +144,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-instagram",
         type: "image",
-        src: "/images/stickers/instgram.png",
+        src: "/images/stickers/instgram.webp",
         x: xPos(0.52, 22),
         y: 24,
         rotation: -8,
@@ -154,7 +154,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-meta",
         type: "image",
-        src: "/images/stickers/Meta.png",
+        src: "/images/stickers/Meta.webp",
         x: xPos(0.66, 22),
         y: 14,
         rotation: 14,
@@ -200,7 +200,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-duck",
         type: "image",
-        src: "/images/stickers/duck.png",
+        src: "/images/stickers/duck.webp",
         x: xPos(0.03, 32),
         y: 8,
         rotation: -8,
@@ -210,7 +210,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-rocket",
         type: "image",
-        src: "/images/stickers/rocket.png",
+        src: "/images/stickers/rocket.webp",
         x: xPos(0.17, 30),
         y: 16,
         rotation: 12,
@@ -220,7 +220,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-lightning",
         type: "image",
-        src: "/images/stickers/lightning.png",
+        src: "/images/stickers/lightning.webp",
         x: xPos(0.31, 28),
         y: 5,
         rotation: -5,
@@ -230,7 +230,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-star",
         type: "image",
-        src: "/images/stickers/star.png",
+        src: "/images/stickers/star.webp",
         x: xPos(0.45, 30),
         y: 14,
         rotation: 15,
@@ -240,7 +240,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-peace",
         type: "image",
-        src: "/images/stickers/peace.png",
+        src: "/images/stickers/peace.webp",
         x: xPos(0.59, 30),
         y: 20,
         rotation: -12,
@@ -250,7 +250,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-smiley",
         type: "image",
-        src: "/images/stickers/smiley.png",
+        src: "/images/stickers/smiley.webp",
         x: xPos(0.73, 28),
         y: 12,
         rotation: 6,
@@ -260,7 +260,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-illustrator",
         type: "image",
-        src: "/images/stickers/Illustrator.png",
+        src: "/images/stickers/Illustrator.webp",
         x: xPos(0.85, 30),
         y: 6,
         rotation: -10,
@@ -270,7 +270,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-photoshop",
         type: "image",
-        src: "/images/stickers/photoshop.png",
+        src: "/images/stickers/photoshop.webp",
         x: xPos(0.10, 30),
         y: 28,
         rotation: 8,
@@ -280,7 +280,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-aftereffects",
         type: "image",
-        src: "/images/stickers/after effects.png",
+        src: "/images/stickers/after effects.webp",
         x: xPos(0.24, 30),
         y: 10,
         rotation: -6,
@@ -290,7 +290,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-premiere",
         type: "image",
-        src: "/images/stickers/premier pro.png",
+        src: "/images/stickers/premier pro.webp",
         x: xPos(0.38, 30),
         y: 24,
         rotation: 10,
@@ -300,7 +300,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-instagram",
         type: "image",
-        src: "/images/stickers/instgram.png",
+        src: "/images/stickers/instgram.webp",
         x: xPos(0.52, 30),
         y: 30,
         rotation: -8,
@@ -310,7 +310,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-meta",
         type: "image",
-        src: "/images/stickers/Meta.png",
+        src: "/images/stickers/Meta.webp",
         x: xPos(0.66, 30),
         y: 18,
         rotation: 14,
@@ -355,7 +355,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-duck",
         type: "image",
-        src: "/images/stickers/duck.png",
+        src: "/images/stickers/duck.webp",
         x: xPos(0.04, 60),
         y: 10,
         rotation: -8,
@@ -365,7 +365,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-rocket",
         type: "image",
-        src: "/images/stickers/rocket.png",
+        src: "/images/stickers/rocket.webp",
         x: xPos(0.18, 55),
         y: 25,
         rotation: 12,
@@ -375,7 +375,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-lightning",
         type: "image",
-        src: "/images/stickers/lightning.png",
+        src: "/images/stickers/lightning.webp",
         x: xPos(0.32, 50),
         y: 5,
         rotation: -5,
@@ -385,7 +385,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-star",
         type: "image",
-        src: "/images/stickers/star.png",
+        src: "/images/stickers/star.webp",
         x: xPos(0.44, 55),
         y: 18,
         rotation: 15,
@@ -395,7 +395,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-peace",
         type: "image",
-        src: "/images/stickers/peace.png",
+        src: "/images/stickers/peace.webp",
         x: xPos(0.56, 55),
         y: 35,
         rotation: -12,
@@ -405,7 +405,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-smiley",
         type: "image",
-        src: "/images/stickers/smiley.png",
+        src: "/images/stickers/smiley.webp",
         x: xPos(0.68, 50),
         y: 15,
         rotation: 6,
@@ -415,7 +415,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-illustrator",
         type: "image",
-        src: "/images/stickers/Illustrator.png",
+        src: "/images/stickers/Illustrator.webp",
         x: xPos(0.80, 50),
         y: 10,
         rotation: -10,
@@ -425,7 +425,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-photoshop",
         type: "image",
-        src: "/images/stickers/photoshop.png",
+        src: "/images/stickers/photoshop.webp",
         x: xPos(0.11, 50),
         y: 40,
         rotation: 8,
@@ -435,7 +435,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-aftereffects",
         type: "image",
-        src: "/images/stickers/after effects.png",
+        src: "/images/stickers/after effects.webp",
         x: xPos(0.24, 50),
         y: 15,
         rotation: -6,
@@ -445,7 +445,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-premiere",
         type: "image",
-        src: "/images/stickers/premier pro.png",
+        src: "/images/stickers/premier pro.webp",
         x: xPos(0.38, 50),
         y: 35,
         rotation: 10,
@@ -455,7 +455,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-instagram",
         type: "image",
-        src: "/images/stickers/instgram.png",
+        src: "/images/stickers/instgram.webp",
         x: xPos(0.62, 50),
         y: 45,
         rotation: -8,
@@ -465,7 +465,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
       {
         id: "sticker-meta",
         type: "image",
-        src: "/images/stickers/Meta.png",
+        src: "/images/stickers/Meta.webp",
         x: xPos(0.74, 50),
         y: 22,
         rotation: 14,
@@ -510,7 +510,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-duck",
       type: "image",
-      src: "/images/stickers/duck.png",
+      src: "/images/stickers/duck.webp",
       x: xPos(0.04, 130),
       y: 10,
       rotation: -8,
@@ -520,7 +520,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-rocket",
       type: "image",
-      src: "/images/stickers/rocket.png",
+      src: "/images/stickers/rocket.webp",
       x: xPos(0.18, 100),
       y: 30,
       rotation: 12,
@@ -530,7 +530,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-lightning",
       type: "image",
-      src: "/images/stickers/lightning.png",
+      src: "/images/stickers/lightning.webp",
       x: xPos(0.32, 85),
       y: 5,
       rotation: -5,
@@ -540,7 +540,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-star",
       type: "image",
-      src: "/images/stickers/star.png",
+      src: "/images/stickers/star.webp",
       x: xPos(0.44, 90),
       y: 20,
       rotation: 15,
@@ -550,7 +550,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-peace",
       type: "image",
-      src: "/images/stickers/peace.png",
+      src: "/images/stickers/peace.webp",
       x: xPos(0.56, 95),
       y: 40,
       rotation: -12,
@@ -560,7 +560,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-smiley",
       type: "image",
-      src: "/images/stickers/smiley.png",
+      src: "/images/stickers/smiley.webp",
       x: xPos(0.68, 85),
       y: 15,
       rotation: 6,
@@ -570,7 +570,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-illustrator",
       type: "image",
-      src: "/images/stickers/Illustrator.png",
+      src: "/images/stickers/Illustrator.webp",
       x: xPos(0.80, 80),
       y: 10,
       rotation: -10,
@@ -580,7 +580,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-photoshop",
       type: "image",
-      src: "/images/stickers/photoshop.png",
+      src: "/images/stickers/photoshop.webp",
       x: xPos(0.11, 80),
       y: 45,
       rotation: 8,
@@ -590,7 +590,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-aftereffects",
       type: "image",
-      src: "/images/stickers/after effects.png",
+      src: "/images/stickers/after effects.webp",
       x: xPos(0.24, 80),
       y: 15,
       rotation: -6,
@@ -600,7 +600,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-premiere",
       type: "image",
-      src: "/images/stickers/premier pro.png",
+      src: "/images/stickers/premier pro.webp",
       x: xPos(0.38, 80),
       y: 40,
       rotation: 10,
@@ -610,7 +610,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-instagram",
       type: "image",
-      src: "/images/stickers/instgram.png",
+      src: "/images/stickers/instgram.webp",
       x: xPos(0.62, 80),
       y: 50,
       rotation: -8,
@@ -620,7 +620,7 @@ function getResponsiveStickers(containerWidth: number): StickerData[] {
     {
       id: "sticker-meta",
       type: "image",
-      src: "/images/stickers/Meta.png",
+      src: "/images/stickers/Meta.webp",
       x: xPos(0.74, 80),
       y: 25,
       rotation: 14,

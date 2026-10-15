@@ -137,7 +137,7 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
           {/* Float and inertia wrapper */}
           <div ref={floatRef} className="origin-[15px_15px]">
             {/* Custom Sledge/Claw Hammer SVG Graphic */}
-            <Image src="/images/hammer-oneimpact.png" alt="Hammer" width={120} height={120} />
+            <Image src="/images/hammer-oneimpact.webp" alt="Hammer" width={120} height={120} />
           </div>
         </div>
       </div>
