@@ -3,11 +3,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/common/Navbar";
-
-// ── DATA DEFINITIONS MATCHING EXACT REFERENCE DESIGN ─────────────────────────
+import { LiveDashboardPreview } from "@/components/seo/LiveDashboardPreview";
 
 const NOTICES = [
-  "Free SEO audit for your website. Fill the form and our team will get back to you.",
+  "SEO audit for your website. Fill the form and our team will get back to you.",
   "Now optimising for AI search: ChatGPT, Gemini and Perplexity.",
   "Local SEO for your city, from Google Business Profile to citations.",
   "White-hat SEO only. No shortcuts, no gimmicks.",
@@ -15,19 +14,24 @@ const NOTICES = [
 ];
 
 const CLIENT_LOGOS = [
-  { name: "LenDen Club", src: "/LOGO/LEDEN Clube.webp" },
-  { name: "Axis Trustee", src: "/LOGO/axistrustee.webp" },
-  { name: "Sweet Bengal", src: "/LOGO/SWEET BENGAL.webp" },
-  { name: "DSCI", src: "/LOGO/dsci.webp" },
-  { name: "Bloomberg Quint", src: "/LOGO/bloomberg-quint-vector-logo.webp" },
-  { name: "DSP Mutual Fund", src: "/LOGO/DSP Mutual fund.webp" },
-  { name: "MOXIE Beauty", src: "/LOGO/MOXIE Beauty.webp" },
-  { name: "PayU", src: "/LOGO/PayU.svg.webp" },
-  { name: "SMAAASH", src: "/LOGO/SMAAASH.webp" },
-  { name: "Sweet India", src: "/LOGO/SWEDT INDIA.webp" },
-  { name: "LiveLaw", src: "/LOGO/livelaw-logo.webp" },
-  { name: "SnapDeal", src: "/LOGO/sanpdealbrandlogo_2.avif" },
+  { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
+  { name: "SnapDeal", src: "/LOGO/transparent/sanpdealbrandlogo_2.webp" },
+  { name: "LenDen Club", src: "/LOGO/transparent/LEDEN Clube.webp" },
+  { name: "Axis Trustee", src: "/LOGO/transparent/axistrustee.webp" },
+  { name: "Sweet Bengal", src: "/LOGO/transparent/SWEET BENGAL.webp" },
+  { name: "DSCI", src: "/LOGO/transparent/dsci.webp" },
+  { name: "Bloomberg Quint", src: "/LOGO/transparent/bloomberg-quint-vector-logo.webp" },
+  { name: "DSP Mutual Fund", src: "/LOGO/transparent/DSP Mutual fund.webp" },
+  { name: "MOXIE Beauty", src: "/LOGO/transparent/MOXIE Beauty.webp" },
+  { name: "PayU", src: "/LOGO/transparent/PayU.svg.webp" },
+  { name: "SMAAASH", src: "/LOGO/transparent/SMAAASH.webp" },
+  { name: "Sweet India", src: "/LOGO/transparent/SWEDT INDIA.webp" },
+  { name: "Jharkhand", src: "/LOGO/transparent/800px-Jharkhand_emblem.webp" },
+  { name: "IL", src: "/LOGO/transparent/logo-il.webp" },
+  { name: "Winston", src: "/LOGO/transparent/winston-faridabad-ma84f9666c.webp" },
 ];
+
+
 
 const USP_CARDS = [
   {
@@ -858,7 +862,7 @@ const FAQ_GROUPS = [
       },
       {
         q: "How can we improve customer acquisition through our website and drive more conversions?",
-        a: "Make your value clear, simplify your forms, include testimonials and trust elements, and use offers like free trials or discounts. Retarget users who showed interest but didn’t convert the first time.",
+        a: "Make your value clear, simplify your forms, include testimonials and trust elements, and use offers like introductory trials or discounts. Retarget users who showed interest but didn’t convert the first time.",
       },
       {
         q: "Why is our e-commerce site not performing well despite strong products?",
@@ -929,11 +933,15 @@ export default function SeoLandingPage() {
   // State for Service tabs (Organic vs Platform)
   const [svcIdx, setSvcIdx] = useState(0);
 
+  // State for Why OneImpact tabs (What We Do vs How We Customise For You)
+  const [whyTab, setWhyTab] = useState(0);
+
   // State for Offer tabs (17 categories)
   const [offerIdx, setOfferIdx] = useState(0);
 
   // State for FAQ tabs (Obstacles vs Why)
   const [faqIdx, setFaqIdx] = useState(0);
+  const [faqExpanded, setFaqExpanded] = useState(false);
 
   // Carousel track state
   const [carIdx, setCarIdx] = useState(0);
@@ -1006,6 +1014,7 @@ export default function SeoLandingPage() {
 
   const activeOffer = OFFER_TOPICS[offerIdx];
   const activeFaqGroup = FAQ_GROUPS[faqIdx];
+  const visibleFaqs = faqExpanded ? activeFaqGroup.qs : activeFaqGroup.qs.slice(0, 5);
   const activeServices = SVC_GROUPS[svcIdx];
 
   // Ensure normal system cursor on SEO page
@@ -1240,10 +1249,10 @@ export default function SeoLandingPage() {
         }
       `}</style>
 
-      {/* ── ORIGINAL ONE IMPACT NAVBAR ────────────────────────────────────────── */}
+      {/* ── NAVBAR  */}
       <Navbar />
 
-      {/* ── HERO SECTION ────────────────────────────────────────────────────── */}
+      {/* ── HERO SECTION ──────────── */}
       <section id="top" style={{ position: "relative", overflow: "hidden", background: "#FFFFFF" }}>
         {/* Glow ambient blurs */}
         <div
@@ -1294,14 +1303,14 @@ export default function SeoLandingPage() {
               className="seo-heading"
               style={{
                 margin: 0,
-                fontSize: "clamp(2.8rem, 5.8vw, 5rem)",
-                lineHeight: 1.03,
-                letterSpacing: "-0.045em",
+                fontSize: "clamp(2.6rem, 5.2vw, 4.8rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.04em",
                 fontWeight: 700,
-                maxWidth: "14ch",
+                maxWidth: "18ch",
               }}
             >
-              Smart, Search‑First SEO That Brings Lasting Results
+              Your Next Customer is searching for you!
             </h1>
 
             <p
@@ -1317,13 +1326,7 @@ export default function SeoLandingPage() {
             </p>
 
             <p style={{ margin: 0, fontSize: "19px", lineHeight: 1.5, color: "#3A3A3C", maxWidth: "50ch" }}>
-              At OneImpact, we treat SEO as a mission to fuel your business’s digital success, not just another
-              service. We’re committed to delivering clarity and measurable growth through focused, strategic SEO
-              tailored to your needs.
-            </p>
-
-            <p style={{ margin: 0, fontSize: "19px", lineHeight: 1.5, color: "#3A3A3C", maxWidth: "50ch" }}>
-              Outperform your competition with OneImpact’s reliable and results-driven SEO services.
+              We will make sure they find you
             </p>
 
             {/* CTAs */}
@@ -1422,9 +1425,6 @@ export default function SeoLandingPage() {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#FFBA39", letterSpacing: 0 }}>
-                    Free for your website
-                  </span>
                   <h2
                     className="seo-heading"
                     style={{
@@ -1435,7 +1435,7 @@ export default function SeoLandingPage() {
                       fontWeight: 700,
                     }}
                   >
-                    Get your free SEO audit
+                    Get your SEO audit
                   </h2>
                   <p style={{ margin: 0, fontSize: "15.5px", color: "#C7C7CC", letterSpacing: 0 }}>
                     A real person from our team reviews your website and gets back to you.
@@ -1591,7 +1591,7 @@ export default function SeoLandingPage() {
                     marginTop: "4px",
                   }}
                 >
-                  Get my free SEO audit
+                  Get my SEO audit
                 </button>
 
                 <span style={{ fontSize: "13px", color: "#8E8E93", textAlign: "center", letterSpacing: 0 }}>
@@ -1677,30 +1677,56 @@ export default function SeoLandingPage() {
       </section>
 
       {/* ── BRANDS WE WORK WITH MARQUEE ───────────────────────────────────────── */}
-      <section aria-label="Brands we work with" style={{ padding: "0 0 clamp(56px, 7vw, 88px)" }}>
-        <p style={{ margin: "0 0 22px", fontSize: "14px", color: "#6E6E73", textAlign: "center", letterSpacing: 0 }}>
+      <section
+        aria-label="Brands we work with"
+        style={{
+          padding: "clamp(44px, 5.5vw, 64px) 0 clamp(48px, 6vw, 72px)",
+          backgroundColor: "#FAFAFC",
+          borderTop: "1px solid #E5E5EA",
+          borderBottom: "1px solid #E5E5EA",
+          position: "relative",
+          zIndex: 10,
+        }}
+      >
+        <p
+          style={{
+            margin: "0 0 clamp(22px, 3vw, 32px)",
+            fontSize: "14.5px",
+            fontWeight: 500,
+            color: "#6E6E73",
+            textAlign: "center",
+            letterSpacing: "-0.01em",
+          }}
+        >
           Brands we work with
         </p>
         <div
           className="marqwrap"
           style={{
             overflow: "hidden",
-            WebkitMaskImage: "linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent)",
-            maskImage: "linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent)",
+            width: "100%",
+            WebkitMaskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+            maskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
           }}
         >
           <div
             className="marq"
-            style={{ display: "flex", gap: "72px", width: "max-content", alignItems: "center" }}
+            style={{
+              display: "flex",
+              gap: "clamp(56px, 6vw, 96px)",
+              width: "max-content",
+              alignItems: "center",
+            }}
           >
             {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, idx) => (
               <div
-                key={idx}
+                key={`${logo.name}-${idx}`}
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
+                  padding: "0 8px",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1709,13 +1735,15 @@ export default function SeoLandingPage() {
                   alt={logo.name}
                   style={{
                     display: "block",
-                    height: "38px",
+                    height: "clamp(46px, 5.2vw, 68px)",
                     width: "auto",
-                    maxWidth: "140px",
+                    maxWidth: "clamp(160px, 18vw, 240px)",
                     objectFit: "contain",
-                    opacity: 0.65,
-                    mixBlendMode: "multiply",
+                    transition: "transform 0.3s ease",
                   }}
+                  className="transition-transform duration-300 hover:scale-110"
+                  draggable={false}
+                  loading="lazy"
                 />
               </div>
             ))}
@@ -1723,8 +1751,814 @@ export default function SeoLandingPage() {
         </div>
       </section>
 
+      {/* ── REALITY STATEMENT SECTION ────────────────────────────────────────── */}
+      <section
+        style={{
+          backgroundColor: "#FFFFFF",
+          padding: "clamp(80px, 10vw, 132px) clamp(20px, 4vw, 36px)",
+          position: "relative",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "980px",
+            margin: "0 auto",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <h2
+            className="seo-heading"
+            style={{
+              margin: 0,
+              fontSize: "clamp(2.4rem, 4.6vw, 3.8rem)",
+              lineHeight: 1.15,
+              letterSpacing: "-0.04em",
+              fontWeight: 700,
+              color: "#000000",
+              maxWidth: "24ch",
+            }}
+          >
+            Having a website or posting on social media won’t cut it anymore.
+          </h2>
+
+          <p
+            style={{
+              margin: "clamp(18px, 2.5vw, 26px) 0 clamp(26px, 3.5vw, 38px)",
+              fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)",
+              lineHeight: 1.35,
+              fontWeight: 600,
+              letterSpacing: "-0.02em",
+              color: "#0066FF",
+              maxWidth: "34ch",
+            }}
+          >
+            How will people find it if it is not SEO optimised?
+          </p>
+
+          <p
+            style={{
+              margin: "0 0 18px",
+              fontSize: "clamp(1.1rem, 1.5vw, 1.28rem)",
+              lineHeight: 1.55,
+              fontWeight: 500,
+              color: "#1D1D1F",
+              maxWidth: "64ch",
+            }}
+          >
+            Today’s digital success depends on having a precise SEO strategy that makes your brand visible when and where it matters.
+          </p>
+
+          <p
+            style={{
+              margin: 0,
+              fontSize: "clamp(1rem, 1.35vw, 1.12rem)",
+              lineHeight: 1.65,
+              color: "#6E6E73",
+              maxWidth: "74ch",
+            }}
+          >
+            At OneImpact, our mission is to create meaningful and lasting change for our clients. As a search engine optimization agency, we focus on building custom strategies that grow organic traffic, improve search visibility, and bring in qualified leads using intent-based keyword targeting.
+          </p>
+        </div>
+      </section>
+
+      {/* ── LIVE ANALYTICS & CLIENT DASHBOARD PREVIEW ─────────────────────── */}
+      <LiveDashboardPreview />
+
+      {/* ── CLIENT REVIEWS ───────────────────────────────────────────────── */}
+      <section
+        id="reviews"
+        style={{
+          backgroundColor: "#FFFFFF",
+          padding: "0 clamp(16px, 3vw, 32px) clamp(56px, 7vw, 84px)",
+        }}
+      >
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              gap: "16px",
+            }}
+          >
+            {QUOTES.map((q, idx) => (
+              <figure
+                key={idx}
+                style={{
+                  margin: 0,
+                  background: "#FFFFFF",
+                  border: "1px solid #E5E5EA",
+                  borderRadius: "24px",
+                  padding: "28px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "20px",
+                  justifyContent: "space-between",
+                  boxShadow: "0 2px 14px rgba(0, 0, 0, 0.03)",
+                }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                  <span style={{ display: "inline-flex", gap: "3px", color: "#FFBA39" }} aria-label="Rated 5 out of 5">
+                    {[...Array(5)].map((_, sIdx) => (
+                      <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
+                      </svg>
+                    ))}
+                  </span>
+                  <blockquote
+                    style={{
+                      margin: 0,
+                      fontSize: "18px",
+                      lineHeight: 1.45,
+                      fontWeight: 600,
+                      letterSpacing: "-0.02em",
+                      color: "#1D1D1F",
+                    }}
+                  >
+                    “{q.text}”
+                  </blockquote>
+                </div>
+                <figcaption style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/LOGO/oneimpact-logo.webp"
+                    alt="Client logo"
+                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 0.7 }}
+                  />
+                  <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
+                    {q.role}
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 3.6: PROOF / E-E-A-T FRAMEWORK ────────────────────────── */}
+      <section
+        id="proof"
+        style={{
+          maxWidth: "1360px",
+          margin: "0 auto",
+          padding: "clamp(16px, 2.5vw, 32px) clamp(16px, 3vw, 32px) clamp(32px, 4vw, 48px)",
+        }}
+      >
+        {/* E-E-A-T Header */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+            textAlign: "center",
+          }}
+        >
+          <h2
+            className="seo-heading"
+            style={{ margin: 0, fontSize: "clamp(2rem, 3.6vw, 2.8rem)", letterSpacing: "-0.035em", fontWeight: 700 }}
+          >
+            At OneImpact, we follow the E-E-A-T framework
+          </h2>
+          <p style={{ margin: "0 0 28px", color: "#6E6E73", fontSize: "17px" }}>
+            Experience, Expertise, Authoritativeness, Trustworthiness
+          </p>
+        </div>
+
+        {/* E-E-A-T Cards Grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
+            gap: "16px",
+            maxWidth: "1040px",
+            margin: "0 auto",
+          }}
+        >
+          {EEAT_CARDS.map((e, idx) => (
+            <div
+              key={idx}
+              style={{
+                background: "#F5F5F7",
+                borderRadius: "28px",
+                padding: "28px 26px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                className="seo-heading"
+                style={{
+                  fontSize: "88px",
+                  lineHeight: 0.9,
+                  fontWeight: 700,
+                  letterSpacing: "-0.06em",
+                  color: "#000000",
+                }}
+              >
+                {e.k}
+              </span>
+              <span
+                aria-hidden="true"
+                style={{ width: "32px", height: "4px", borderRadius: "999px", background: "#FFBA39" }}
+              />
+              <h4
+                className="seo-heading"
+                style={{ margin: "6px 0 0", fontSize: "21px", letterSpacing: "-0.025em", fontWeight: 700 }}
+              >
+                {e.t}
+              </h4>
+              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px" }}>{e.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── SECTION: WHAT WE DO & HOW WE CUSTOMISE FOR YOU ────────────────── */}
+      <section
+        id="why-oneimpact"
+        style={{
+          maxWidth: "1360px",
+          margin: "0 auto",
+          padding: "clamp(40px, 5vw, 56px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+          borderTop: "1px solid #EBEBED",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            gap: "24px",
+            marginBottom: "36px",
+          }}
+        >
+          <div>
+            <h2
+              className="seo-heading"
+              style={{
+                margin: "0 0 10px",
+                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.045em",
+                fontWeight: 700,
+              }}
+            >
+              {whyTab === 0 ? "What We Do" : "How We Customise For You"}
+            </h2>
+            <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73", maxWidth: "52ch" }}>
+              {whyTab === 0
+                ? "Full-spectrum SEO execution built to generate compounding organic traffic and rankings."
+                : "No cookie-cutter playbooks. Every strategy is built around your market, audience, and revenue goals."}
+            </p>
+          </div>
+
+          {/* Elevated Segmented Switcher Pill with Shiny Theme Yellow */}
+          <div
+            role="tablist"
+            aria-label="Capabilities and Customisation Switcher"
+            style={{
+              position: "relative",
+              display: "inline-grid",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              background: "#F2F2F5",
+              border: "1px solid #E5E5EA",
+              borderRadius: "999px",
+              padding: "4px",
+              boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.06)",
+              width: "min(460px, 100%)",
+            }}
+          >
+            {/* Sliding shiny theme-yellow indicator pill with button's #FFBA39 and btn-sheen */}
+            <span
+              aria-hidden="true"
+              className="btn-sheen"
+              style={{
+                position: "absolute",
+                top: "4px",
+                bottom: "4px",
+                left: "4px",
+                width: "calc((100% - 8px) / 2)",
+                transform: `translateX(${whyTab * 100}%)`,
+                transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
+                background: "#FFBA39",
+                borderRadius: "999px",
+                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+              }}
+            />
+
+            {/* Tab 0 */}
+            <button
+              type="button"
+              role="tab"
+              aria-selected={whyTab === 0}
+              onClick={() => setWhyTab(0)}
+              style={{
+                position: "relative",
+                zIndex: 1,
+                font: "inherit",
+                fontSize: "14.5px",
+                fontWeight: whyTab === 0 ? 700 : 500,
+                color: whyTab === 0 ? "#000000" : "#555558",
+                background: "transparent",
+                border: 0,
+                borderRadius: "999px",
+                minHeight: "42px",
+                padding: "8px 18px",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                transition: "color 200ms ease",
+                whiteSpace: "nowrap",
+                letterSpacing: "-0.015em",
+              }}
+            >
+              <span>What We Do</span>
+              <span
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  padding: "1px 7px",
+                  borderRadius: "999px",
+                  background: whyTab === 0 ? "rgba(0, 0, 0, 0.12)" : "rgba(0, 0, 0, 0.05)",
+                  color: whyTab === 0 ? "#000000" : "#8E8E93",
+                  transition: "all 200ms ease",
+                }}
+              >
+                8
+              </span>
+            </button>
+
+            {/* Tab 1 */}
+            <button
+              type="button"
+              role="tab"
+              aria-selected={whyTab === 1}
+              onClick={() => setWhyTab(1)}
+              style={{
+                position: "relative",
+                zIndex: 1,
+                font: "inherit",
+                fontSize: "14.5px",
+                fontWeight: whyTab === 1 ? 700 : 500,
+                color: whyTab === 1 ? "#000000" : "#555558",
+                background: "transparent",
+                border: 0,
+                borderRadius: "999px",
+                minHeight: "42px",
+                padding: "8px 18px",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                transition: "color 200ms ease",
+                whiteSpace: "nowrap",
+                letterSpacing: "-0.015em",
+              }}
+            >
+              <span>How We Customise For You</span>
+              <span
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  padding: "1px 7px",
+                  borderRadius: "999px",
+                  background: whyTab === 1 ? "rgba(0, 0, 0, 0.12)" : "rgba(0, 0, 0, 0.05)",
+                  color: whyTab === 1 ? "#000000" : "#8E8E93",
+                  transition: "all 200ms ease",
+                }}
+              >
+                7
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Tab 0: What We Do (8 cards) */}
+        {whyTab === 0 && (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
+              gap: "14px",
+            }}
+          >
+            {BUT_WHY_CARDS.map((w, idx) => (
+              <div
+                key={idx}
+                style={{
+                  background: "#F5F5F7",
+                  borderRadius: "22px",
+                  padding: "24px 22px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                  border: "1px solid rgba(0, 0, 0, 0.03)",
+                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)",
+                  transition: "transform 200ms ease, box-shadow 200ms ease",
+                }}
+              >
+                <span
+                  style={{
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "50%",
+                    background: w.chip === "#FFBA39"
+                      ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)"
+                      : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: w.chip === "#FFBA39"
+                      ? "0 3px 8px rgba(255, 186, 57, 0.35)"
+                      : "0 3px 8px rgba(0, 102, 255, 0.35)",
+                  }}
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={w.chip === "#FFBA39" ? "#1D1D1F" : "#FFFFFF"}
+                    strokeWidth="2.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12.5l4.5 4.5L19 7.5" />
+                  </svg>
+                </span>
+                <h3
+                  className="seo-heading"
+                  style={{
+                    margin: "2px 0 0",
+                    fontSize: "18.5px",
+                    letterSpacing: "-0.025em",
+                    fontWeight: 700,
+                    lineHeight: 1.25,
+                    color: "#1D1D1F",
+                  }}
+                >
+                  {w.t}
+                </h3>
+                <p style={{ margin: 0, color: "#6E6E73", fontSize: "14.5px", lineHeight: 1.5 }}>{w.a}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Tab 1: How We Customise For You (7 cards) */}
+        {whyTab === 1 && (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
+              gap: "14px",
+            }}
+          >
+            {WHY2_POINTS.map((w, idx) => (
+              <div
+                key={idx}
+                style={{
+                  background: "#F5F5F7",
+                  borderRadius: "22px",
+                  padding: "24px 22px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                  border: "1px solid rgba(0, 0, 0, 0.03)",
+                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)",
+                  transition: "transform 200ms ease, box-shadow 200ms ease",
+                }}
+              >
+                <span
+                  style={{
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "50%",
+                    background: idx % 2 === 0
+                      ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)"
+                      : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: idx % 2 === 0
+                      ? "0 3px 8px rgba(255, 186, 57, 0.35)"
+                      : "0 3px 8px rgba(0, 102, 255, 0.35)",
+                  }}
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={idx % 2 === 0 ? "#1D1D1F" : "#FFFFFF"}
+                    strokeWidth="2.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12.5l4.5 4.5L19 7.5" />
+                  </svg>
+                </span>
+                <h3
+                  className="seo-heading"
+                  style={{
+                    margin: "2px 0 0",
+                    fontSize: "18.5px",
+                    letterSpacing: "-0.025em",
+                    fontWeight: 700,
+                    lineHeight: 1.25,
+                    color: "#1D1D1F",
+                  }}
+                >
+                  {w.t}
+                </h3>
+                <p style={{ margin: 0, color: "#6E6E73", fontSize: "14.5px", lineHeight: 1.5 }}>{w.a}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* ── SECTION 8: EXPLORE OUR SEO SERVICES ────────────────────────────── */}
+      <section
+        id="services"
+        style={{
+          maxWidth: "1360px",
+          margin: "0 auto",
+          padding: "clamp(24px, 3vw, 40px) clamp(16px, 3vw, 32px) clamp(24px, 3.5vw, 36px)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+          gap: "24px",
+          marginBottom: "12px",
+        }}
+      >
+        <h2
+          className="seo-heading"
+          style={{
+            margin: 0,
+            fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+            lineHeight: 1.05,
+            letterSpacing: "-0.045em",
+            fontWeight: 700,
+            maxWidth: "14ch",
+          }}
+        >
+          Explore our SEO services
+        </h2>
+
+        {/* Segmented Switcher for Services */}
+        <div
+          role="tablist"
+          aria-label="Service groups"
+          style={{
+            position: "relative",
+            display: "grid",
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+            background: "#F2F2F5",
+            border: "1px solid #E5E5EA",
+            borderRadius: "999px",
+            padding: "4px",
+            boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)",
+            width: "min(420px, 100%)",
+          }}
+        >
+          <span
+            aria-hidden="true"
+            className="btn-sheen"
+            style={{
+              position: "absolute",
+              top: "4px",
+              bottom: "4px",
+              left: "4px",
+              width: "calc((100% - 8px) / 2)",
+              transform: `translateX(${svcIdx * 100}%)`,
+              transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
+              background: "#FFBA39",
+              borderRadius: "999px",
+              boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+            }}
+          />
+          {SVC_GROUPS.map((grp, i) => (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              className="press"
+              aria-selected={svcIdx === i}
+              onClick={() => setSvcIdx(i)}
+              style={{
+                position: "relative",
+                zIndex: 1,
+                font: "inherit",
+                fontSize: "15px",
+                fontWeight: svcIdx === i ? 650 : 500,
+                color: svcIdx === i ? "#000000" : "#555558",
+                background: "transparent",
+                border: 0,
+                borderRadius: "999px",
+                minHeight: "44px",
+                padding: "9px 18px",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                whiteSpace: "nowrap",
+                letterSpacing: "-0.015em",
+                transition: "color 200ms ease",
+              }}
+            >
+              {grp.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <p style={{ margin: "0 0 32px", fontSize: "19px", color: "#6E6E73", maxWidth: "56ch" }}>
+        Curious about what else we bring to the table? Here’s a deeper look at our SEO offerings.
+      </p>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+          gap: "14px",
+        }}
+      >
+        {activeServices.items.map((s, i) => (
+          <div
+            key={i}
+            style={{
+              background: "#FFFFFF",
+              border: "1px solid #E5E5EA",
+              borderRadius: "24px",
+              padding: "28px 26px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "12px",
+              boxShadow: "0 20px 40px -32px rgba(0,0,0,0.3)",
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{ width: "10px", height: "10px", borderRadius: "50%", background: s.dot }}
+            />
+            <h3
+              className="seo-heading"
+              style={{ margin: 0, fontSize: "21px", letterSpacing: "-0.03em", fontWeight: 700 }}
+            >
+              {s.t}
+            </h3>
+            <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px" }}>{s.a}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Section Separator */}
+    <div
+      style={{
+        maxWidth: "1360px",
+        margin: "0 auto",
+        padding: "0 clamp(16px, 3vw, 32px)",
+      }}
+    >
+      <div style={{ height: "1px", background: "rgba(0, 0, 0, 0.08)" }} />
+    </div>
+
+    {/* ── SECTION 10: WHAT WE OFFER (ACCORDIONS) ─────────────────────────── */}
+    <section
+      id="offer"
+      style={{
+        maxWidth: "1360px",
+        margin: "0 auto",
+        padding: "clamp(24px, 3.5vw, 40px) clamp(16px, 3vw, 32px) clamp(56px, 7vw, 80px)",
+      }}
+    >
+      <h2
+        className="seo-heading"
+        style={{
+          margin: "0 0 12px",
+          fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+          lineHeight: 1.05,
+          letterSpacing: "-0.045em",
+          fontWeight: 700,
+        }}
+      >
+        What we offer
+      </h2>
+      <p style={{ margin: "0 0 28px", fontSize: "19px", color: "#6E6E73" }}>
+        Pick a topic to see exactly how we approach it.
+      </p>
+
+      {/* Horizontal Topic Pill Row */}
+      <div className="scrollrow" role="tablist" aria-label="Offer topics">
+        {OFFER_TOPICS.map((t, i) => (
+          <button
+            key={i}
+            type="button"
+            role="tab"
+            className="press"
+            aria-selected={offerIdx === i}
+            onClick={() => setOfferIdx(i)}
+            style={{
+              font: "inherit",
+              fontSize: "15px",
+              fontWeight: offerIdx === i ? 600 : 500,
+              color: "#000000",
+              background: offerIdx === i
+                ? "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)"
+                : "#FFFFFF",
+              border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`,
+              boxShadow: offerIdx === i
+                ? "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
+                : "0 1px 2px rgba(0, 0, 0, 0.03)",
+              borderRadius: "999px",
+              minHeight: "44px",
+              padding: "8px 18px",
+              cursor: "pointer",
+              transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+        {/* Offer Accordions Tabpanel */}
+        <div
+          role="tabpanel"
+          style={{
+            marginTop: "20px",
+            background: "#F5F5F7",
+            borderRadius: "28px",
+            padding: "clamp(20px, 4vw, 44px)",
+          }}
+        >
+          {"intro" in activeOffer && activeOffer.intro && (
+            <p className="prewrap" style={{ margin: "0 0 20px", fontSize: "17.5px", color: "#3A3A3C", maxWidth: "75ch" }}>
+              {activeOffer.intro}
+            </p>
+          )}
+
+          <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #D2D2D7" }}>
+            {activeOffer.qs.map((f, qIdx) => (
+              <details key={qIdx} style={{ borderTop: "1px solid #D2D2D7" }}>
+                <summary
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "16px",
+                    padding: "18px 0",
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    letterSpacing: "-0.02em",
+                    minHeight: "44px",
+                  }}
+                >
+                  {f.q}
+                  <svg
+                    className="chev"
+                    style={{ flex: "none" }}
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </summary>
+                <p className="prewrap" style={{ margin: "0 0 18px", color: "#3A3A3C", maxWidth: "75ch" }}>
+                  {f.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── SECTION 4: WHY ONEIMPACT / USPs CAROUSEL ────────────────────────── */}
-      <section id="usps" style={{ background: "#F5F5F7", padding: "clamp(72px, 10vw, 128px) 0" }}>
+      <section id="usps" style={{ background: "#F5F5F7", padding: "clamp(52px, 6.5vw, 80px) 0" }}>
         <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px)" }}>
           <div
             style={{
@@ -1841,56 +2675,64 @@ export default function SeoLandingPage() {
                   className="car-card"
                   style={{
                     background: "#FFFFFF",
-                    borderRadius: "28px",
-                    padding: "30px 28px",
-                    minHeight: "290px",
+                    borderRadius: "22px",
+                    padding: "20px 22px",
+                    minHeight: "145px",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-between",
-                    gap: "28px",
-                    boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
+                    justifyContent: "flex-start",
+                    gap: "12px",
+                    border: "1px solid rgba(0, 0, 0, 0.04)",
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.03)",
                   }}
                 >
-                  <span
-                    style={{
-                      width: "52px",
-                      height: "52px",
-                      borderRadius: "16px",
-                      background: u.chip,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <svg
-                      width="26"
-                      height="26"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#000000"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
+                  {/* Top row: Icon on left, Title on right */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                    <span
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "14px",
+                        background: u.chip,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
                     >
-                      <path d={u.d} />
-                    </svg>
-                  </span>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                      <svg
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#000000"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d={u.d} />
+                      </svg>
+                    </span>
                     <h3
                       className="seo-heading"
                       style={{
                         margin: 0,
-                        fontSize: "28px",
-                        letterSpacing: "-0.04em",
+                        fontSize: "21px",
+                        letterSpacing: "-0.03em",
                         fontWeight: 700,
-                        lineHeight: 1.1,
+                        lineHeight: 1.2,
+                        color: "#1D1D1F",
                       }}
                     >
                       {u.head}
                     </h3>
-                    <p style={{ margin: 0, fontSize: "17px", color: "#3A3A3C" }}>{u.text}</p>
                   </div>
+
+                  {/* Text below */}
+                  <p style={{ margin: 0, fontSize: "14.5px", lineHeight: 1.48, color: "#515154" }}>
+                    {u.text}
+                  </p>
                 </div>
               ))}
             </div>
@@ -1921,179 +2763,7 @@ export default function SeoLandingPage() {
         </div>
       </section>
 
-      {/* ── SECTION 5: PROOF / E-E-A-T FRAMEWORK & CLIENT TESTIMONIALS ────────── */}
-      <section
-        id="proof"
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px) 0",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1040px",
-            margin: "0 auto",
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            gap: "22px",
-            alignItems: "center",
-          }}
-        >
-          <h2
-            className="seo-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-            }}
-          >
-            Having a website or posting on social media won’t cut it anymore.
-          </h2>
-          <p style={{ margin: 0, fontSize: "21px", lineHeight: 1.45, color: "#3A3A3C" }}>
-            Today’s digital success depends on having a precise SEO strategy that makes your brand visible when and
-            where it matters.
-          </p>
-          <p style={{ margin: 0, fontSize: "19px", lineHeight: 1.5, color: "#6E6E73" }}>
-            At OneImpact, our mission is to create meaningful and lasting change for our clients. As a search engine
-            optimization agency, we focus on building custom strategies that grow organic traffic, improve search
-            visibility, and bring in qualified leads using intent-based keyword targeting.
-          </p>
-        </div>
 
-        {/* E-E-A-T Header */}
-        <div
-          style={{
-            marginTop: "clamp(56px, 7vw, 88px)",
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-            textAlign: "center",
-          }}
-        >
-          <h3
-            className="seo-heading"
-            style={{ margin: 0, fontSize: "clamp(1.5rem, 2.4vw, 2rem)", letterSpacing: "-0.035em", fontWeight: 700 }}
-          >
-            At OneImpact, we follow the E-E-A-T framework
-          </h3>
-          <p style={{ margin: "0 0 28px", color: "#6E6E73" }}>
-            Experience, Expertise, Authoritativeness, Trustworthiness
-          </p>
-        </div>
-
-        {/* E-E-A-T Cards Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
-            gap: "16px",
-            maxWidth: "1040px",
-            margin: "0 auto",
-          }}
-        >
-          {EEAT_CARDS.map((e, idx) => (
-            <div
-              key={idx}
-              style={{
-                background: "#F5F5F7",
-                borderRadius: "28px",
-                padding: "28px 26px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-              }}
-            >
-              <span
-                aria-hidden="true"
-                className="seo-heading"
-                style={{
-                  fontSize: "88px",
-                  lineHeight: 0.9,
-                  fontWeight: 700,
-                  letterSpacing: "-0.06em",
-                  color: "#000000",
-                }}
-              >
-                {e.k}
-              </span>
-              <span
-                aria-hidden="true"
-                style={{ width: "32px", height: "4px", borderRadius: "999px", background: "#FFBA39" }}
-              />
-              <h4
-                className="seo-heading"
-                style={{ margin: "6px 0 0", fontSize: "21px", letterSpacing: "-0.025em", fontWeight: 700 }}
-              >
-                {e.t}
-              </h4>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px" }}>{e.a}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Client Quotes */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
-            gap: "16px",
-            marginTop: "16px",
-          }}
-        >
-          {QUOTES.map((q, idx) => (
-            <figure
-              key={idx}
-              style={{
-                margin: 0,
-                background: "#FFFFFF",
-                border: "1px solid #E5E5EA",
-                borderRadius: "24px",
-                padding: "28px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "20px",
-                justifyContent: "space-between",
-              }}
-            >
-              <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                <span style={{ display: "inline-flex", gap: "3px", color: "#FFBA39" }} aria-label="Rated 5 out of 5">
-                  {[...Array(5)].map((_, sIdx) => (
-                    <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
-                    </svg>
-                  ))}
-                </span>
-                <blockquote
-                  style={{
-                    margin: 0,
-                    fontSize: "18px",
-                    lineHeight: 1.45,
-                    fontWeight: 600,
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  “{q.text}”
-                </blockquote>
-              </div>
-              <figcaption style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/LOGO/oneimpact-logo.webp"
-                  alt="Client logo"
-                  style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 0.7 }}
-                />
-                <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
-                  {q.role}
-                </span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
 
       {/* ── SECTION 6: HOW OPTIMIZING FOR SEO HELPS ────────────────────────── */}
       <section
@@ -2184,390 +2854,11 @@ export default function SeoLandingPage() {
         </div>
       </section>
 
-      {/* ── SECTION 7: BUT WHY ONEIMPACT? ─────────────────────────────────── */}
-      <section
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px) 0",
-        }}
-      >
-        <h2
-          className="seo-heading"
-          style={{
-            margin: "0 0 40px",
-            fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.045em",
-            fontWeight: 700,
-          }}
-        >
-          But why OneImpact?
-        </h2>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
-            gap: "14px",
-          }}
-        >
-          {BUT_WHY_CARDS.map((w, idx) => (
-            <div
-              key={idx}
-              style={{
-                background: "#F5F5F7",
-                borderRadius: "24px",
-                padding: "26px 24px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-              }}
-            >
-              <span
-                style={{
-                  width: "34px",
-                  height: "34px",
-                  borderRadius: "50%",
-                  background: w.chip,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#000000"
-                  strokeWidth="2.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12.5l4.5 4.5L19 7.5" />
-                </svg>
-              </span>
-              <h3
-                className="seo-heading"
-                style={{
-                  margin: "4px 0 0",
-                  fontSize: "19px",
-                  letterSpacing: "-0.025em",
-                  fontWeight: 700,
-                  lineHeight: 1.25,
-                }}
-              >
-                {w.t}
-              </h3>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px" }}>{w.a}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      {/* ── SECTION 8: EXPLORE OUR SEO SERVICES ────────────────────────────── */}
-      <section
-        id="services"
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px) 0",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: "24px",
-            marginBottom: "12px",
-          }}
-        >
-          <h2
-            className="seo-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-              maxWidth: "14ch",
-            }}
-          >
-            Explore our SEO services
-          </h2>
 
-          {/* Segmented Switcher for Services */}
-          <div
-            role="tablist"
-            aria-label="Service groups"
-            style={{
-              position: "relative",
-              display: "grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              background: "#E8E8ED",
-              borderRadius: "999px",
-              padding: "3px",
-              width: "min(400px, 100%)",
-            }}
-          >
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                top: "3px",
-                bottom: "3px",
-                left: "3px",
-                width: "calc((100% - 6px) / 2)",
-                transform: `translateX(${svcIdx * 100}%)`,
-                transition: "transform 420ms cubic-bezier(0.32,0.72,0,1)",
-                background: "#FFFFFF",
-                borderRadius: "999px",
-                boxShadow: "0 3px 8px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.04)",
-              }}
-            />
-            {SVC_GROUPS.map((grp, i) => (
-              <button
-                key={i}
-                type="button"
-                role="tab"
-                className="press"
-                aria-selected={svcIdx === i}
-                onClick={() => setSvcIdx(i)}
-                style={{
-                  position: "relative",
-                  zIndex: 1,
-                  font: "inherit",
-                  fontSize: "15px",
-                  fontWeight: svcIdx === i ? 600 : 500,
-                  color: "#000000",
-                  background: "transparent",
-                  border: 0,
-                  borderRadius: "999px",
-                  minHeight: "42px",
-                  padding: "8px 14px",
-                  cursor: "pointer",
-                }}
-              >
-                {grp.label}
-              </button>
-            ))}
-          </div>
-        </div>
 
-        <p style={{ margin: "0 0 32px", fontSize: "19px", color: "#6E6E73", maxWidth: "56ch" }}>
-          Curious about what else we bring to the table? Here’s a deeper look at our SEO offerings.
-        </p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
-            gap: "14px",
-          }}
-        >
-          {activeServices.items.map((s, i) => (
-            <div
-              key={i}
-              style={{
-                background: "#FFFFFF",
-                border: "1px solid #E5E5EA",
-                borderRadius: "24px",
-                padding: "28px 26px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-                boxShadow: "0 20px 40px -32px rgba(0,0,0,0.3)",
-              }}
-            >
-              <span
-                aria-hidden="true"
-                style={{ width: "10px", height: "10px", borderRadius: "50%", background: s.dot }}
-              />
-              <h3
-                className="seo-heading"
-                style={{ margin: 0, fontSize: "21px", letterSpacing: "-0.03em", fontWeight: 700 }}
-              >
-                {s.t}
-              </h3>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px" }}>{s.a}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── SECTION 9: WHY ONEIMPACT YELLOW BANNER ─────────────────────────── */}
-      <section
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px) 0",
-        }}
-      >
-        <div style={{ background: "#FFBA39", borderRadius: "36px", padding: "clamp(28px, 5vw, 64px)" }}>
-          <h2
-            className="seo-heading"
-            style={{
-              margin: "0 0 36px",
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-            }}
-          >
-            Why OneImpact?
-          </h2>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 270px), 1fr))",
-              gap: "12px",
-            }}
-          >
-            {WHY2_POINTS.map((w, i) => (
-              <div
-                key={i}
-                style={{
-                  background: "#FFFFFF",
-                  borderRadius: "22px",
-                  padding: "24px 22px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "8px",
-                }}
-              >
-                <h3
-                  className="seo-heading"
-                  style={{
-                    margin: 0,
-                    fontSize: "18.5px",
-                    letterSpacing: "-0.025em",
-                    fontWeight: 700,
-                    lineHeight: 1.25,
-                  }}
-                >
-                  {w.t}
-                </h3>
-                <p style={{ margin: 0, color: "#3A3A3C", fontSize: "15.5px" }}>{w.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── SECTION 10: WHAT WE OFFER (ACCORDIONS) ─────────────────────────── */}
-      <section
-        id="offer"
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px) 0",
-        }}
-      >
-        <h2
-          className="seo-heading"
-          style={{
-            margin: "0 0 12px",
-            fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.045em",
-            fontWeight: 700,
-          }}
-        >
-          What we offer
-        </h2>
-        <p style={{ margin: "0 0 28px", fontSize: "19px", color: "#6E6E73" }}>
-          Pick a topic to see exactly how we approach it.
-        </p>
-
-        {/* Horizontal Topic Pill Row */}
-        <div className="scrollrow" role="tablist" aria-label="Offer topics">
-          {OFFER_TOPICS.map((t, i) => (
-            <button
-              key={i}
-              type="button"
-              role="tab"
-              className="press"
-              aria-selected={offerIdx === i}
-              onClick={() => setOfferIdx(i)}
-              style={{
-                font: "inherit",
-                fontSize: "15px",
-                fontWeight: offerIdx === i ? 600 : 500,
-                color: "#000000",
-                background: offerIdx === i ? "#FFBA39" : "#FFFFFF",
-                border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`,
-                borderRadius: "999px",
-                minHeight: "44px",
-                padding: "8px 18px",
-                cursor: "pointer",
-              }}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Offer Accordions Tabpanel */}
-        <div
-          role="tabpanel"
-          style={{
-            marginTop: "20px",
-            background: "#F5F5F7",
-            borderRadius: "28px",
-            padding: "clamp(20px, 4vw, 44px)",
-          }}
-        >
-          {"intro" in activeOffer && activeOffer.intro && (
-            <p className="prewrap" style={{ margin: "0 0 20px", fontSize: "17.5px", color: "#3A3A3C", maxWidth: "75ch" }}>
-              {activeOffer.intro}
-            </p>
-          )}
-
-          <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #D2D2D7" }}>
-            {activeOffer.qs.map((f, qIdx) => (
-              <details key={qIdx} style={{ borderTop: "1px solid #D2D2D7" }}>
-                <summary
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: "16px",
-                    padding: "18px 0",
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    letterSpacing: "-0.02em",
-                    minHeight: "44px",
-                  }}
-                >
-                  {f.q}
-                  <svg
-                    className="chev"
-                    style={{ flex: "none" }}
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                </summary>
-                <p className="prewrap" style={{ margin: "0 0 18px", color: "#3A3A3C", maxWidth: "75ch" }}>
-                  {f.a}
-                </p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── SECTION 11: LOCAL SEO THAT PUTS YOU ON THE MAP ─────────────────── */}
       <section
@@ -2805,7 +3096,10 @@ export default function SeoLandingPage() {
               role="tab"
               className="press"
               aria-selected={faqIdx === i}
-              onClick={() => setFaqIdx(i)}
+              onClick={() => {
+                setFaqIdx(i);
+                setFaqExpanded(false);
+              }}
               style={{
                 position: "relative",
                 zIndex: 1,
@@ -2826,9 +3120,9 @@ export default function SeoLandingPage() {
           ))}
         </div>
 
-        {/* FAQ Accordion List */}
+        {/* FAQ Accordion List (Shows 5 by default, expands on Load More) */}
         <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #E5E5EA" }}>
-          {activeFaqGroup.qs.map((f, idx) => (
+          {visibleFaqs.map((f, idx) => (
             <details key={idx} style={{ borderTop: "1px solid #E5E5EA" }}>
               <summary
                 style={{
@@ -2865,6 +3159,57 @@ export default function SeoLandingPage() {
             </details>
           ))}
         </div>
+
+        {/* Load More / Show Less Toggle Button */}
+        {activeFaqGroup.qs.length > 5 && (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "32px" }}>
+            <button
+              type="button"
+              className="press"
+              onClick={() => setFaqExpanded((prev) => !prev)}
+              style={{
+                font: "inherit",
+                fontSize: "15px",
+                fontWeight: 600,
+                color: "#1D1D1F",
+                background: "#FFFFFF",
+                border: "1.5px solid #D2D2D7",
+                borderRadius: "999px",
+                padding: "11px 24px",
+                minHeight: "44px",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "10px",
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+                transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)",
+              }}
+            >
+              <span>
+                {faqExpanded
+                  ? "Show fewer questions"
+                  : `Load more (${activeFaqGroup.qs.length - 5} more questions)`}
+              </span>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{
+                  transform: faqExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 250ms ease",
+                }}
+                aria-hidden="true"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+          </div>
+        )}
       </section>
 
       {/* ── SECTION 13: BOTTOM AUDIT CONVERSION SECTION ─────────────────────── */}
@@ -2921,7 +3266,7 @@ export default function SeoLandingPage() {
               Outperform your competition.
             </h2>
             <p style={{ margin: 0, fontSize: "19px", color: "#3A3A3C", maxWidth: "44ch" }}>
-              Get a free SEO audit and see exactly what’s holding your website back. No obligation.
+              Get an SEO audit and see exactly what’s holding your website back. No obligation.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
               <a
@@ -3000,7 +3345,7 @@ export default function SeoLandingPage() {
                   className="seo-heading"
                   style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.035em", fontWeight: 700 }}
                 >
-                  Get your free SEO audit
+                  Get your SEO audit
                 </h3>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -3115,7 +3460,7 @@ export default function SeoLandingPage() {
                     marginTop: "4px",
                   }}
                 >
-                  Get my free SEO audit
+                  Get my SEO audit
                 </button>
               </form>
             ) : (
@@ -3171,7 +3516,7 @@ export default function SeoLandingPage() {
         </div>
       </section>
 
-      {/* ── FOOTER ──────────────────────────────────────────────────────────── */}
+      {/*  FOOTER  */}
       <footer style={{ background: "#F5F5F7", color: "#000000", fontSize: "13.5px", letterSpacing: 0 }}>
         <div
           style={{
@@ -3312,7 +3657,7 @@ export default function SeoLandingPage() {
             justifyContent: "center",
           }}
         >
-          Get my free SEO audit
+          Get my SEO audit
         </a>
       </div>
     </div>
