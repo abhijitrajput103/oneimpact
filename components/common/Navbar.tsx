@@ -1,17 +1,36 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { useCursor } from "@/hooks/useCursor";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 
+const SERVICE_LINKS = [
+  { label: "SEO Services", href: "/seo" },
+  { label: "Social Media Marketing Services", href: "/social-media-marketing" },
+];
+
 export function Navbar() {
   const scrollDirection = useScrollDirection();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(true);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { setCursorType, resetCursor } = useCursor();
+
+  const handleServicesEnter = () => {
+    if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    setIsServicesOpen(true);
+  };
+
+  const handleServicesLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 180);
+  };
 
   useEffect(() => {
     const checkScroll = () => {
@@ -36,12 +55,12 @@ export function Navbar() {
     };
   }, [isMenuOpen]);
 
-  const navLinks = [
-    { label: "Work", href: "/#showreel" },
-    { label: "Showroom", href: "/#card-swap" },
-    { label: "SEO Services", href: "/seo" },
-    { label: "About", href: "/#about-banner" },
-  ];
+  // Clean up timer on unmount
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    };
+  }, []);
 
   return (
     <>
@@ -77,18 +96,113 @@ export function Navbar() {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-5 sm:gap-7 md:gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative py-1 group"
+            <a
+              href="/#showreel"
+              className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative py-1 group"
+              onMouseEnter={() => setCursorType("hover")}
+              onMouseLeave={resetCursor}
+            >
+              <span>Work</span>
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-125" />
+            </a>
+
+            <a
+              href="/#card-swap"
+              className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative py-1 group"
+              onMouseEnter={() => setCursorType("hover")}
+              onMouseLeave={resetCursor}
+            >
+              <span>Showroom</span>
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-125" />
+            </a>
+
+            {/* Services with Clean Matching Submenu */}
+            <div
+              className="relative py-1"
+              onMouseEnter={handleServicesEnter}
+              onMouseLeave={handleServicesLeave}
+            >
+              <button
+                type="button"
+                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative inline-flex items-center gap-1.5 py-1"
                 onMouseEnter={() => setCursorType("hover")}
                 onMouseLeave={resetCursor}
+                aria-expanded={isServicesOpen}
+                aria-haspopup="true"
               >
-                <span>{link.label}</span>
+                <span>Services</span>
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className={cn(
+                    "transition-transform duration-300 ease-out",
+                    isServicesOpen ? "rotate-180" : ""
+                  )}
+                  aria-hidden="true"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-125" />
-              </a>
-            ))}
+              </button>
+
+              {/* Submenu Dropdown Panel */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "100%",
+                  left: "50%",
+                  transform: `translateX(-50%) translateY(${isServicesOpen ? "8px" : "-4px"})`,
+                  opacity: isServicesOpen ? 1 : 0,
+                  pointerEvents: isServicesOpen ? "auto" : "none",
+                  transition: "opacity 220ms ease, transform 220ms ease",
+                  zIndex: 60,
+                }}
+              >
+                <div
+                  style={{
+                    background: "#DA9F37",
+                    border: "1.5px solid rgba(0, 0, 0, 0.14)",
+                    borderRadius: "18px",
+                    padding: "6px",
+                    minWidth: "290px",
+                    boxShadow: "0 18px 40px rgba(0, 0, 0, 0.28)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "3px",
+                  }}
+                >
+                  {SERVICE_LINKS.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsServicesOpen(false)}
+                      className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/90 hover:text-[#DA9F37] hover:bg-black uppercase transition-all duration-200 cursor-none px-4 py-2.5 rounded-xl block text-center whitespace-nowrap"
+                      onMouseEnter={() => setCursorType("hover")}
+                      onMouseLeave={resetCursor}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <a
+              href="/#about-banner"
+              className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative py-1 group"
+              onMouseEnter={() => setCursorType("hover")}
+              onMouseLeave={resetCursor}
+            >
+              <span>About</span>
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-125" />
+            </a>
           </nav>
 
           {/* Right Area: CTA & Mobile Hamburger */}
@@ -144,23 +258,88 @@ export function Navbar() {
             : "opacity-0 pointer-events-none scale-95"
         )}
       >
-        <div className="w-full max-w-sm flex flex-col items-center gap-6 text-center">
-          <span className="text-black/60 font-display text-xs font-black tracking-widest uppercase mb-2">
+        <div className="w-full max-w-sm flex flex-col items-center gap-4 sm:gap-5 text-center">
+          <span className="text-black/60 font-display text-xs font-black tracking-widest uppercase mb-1">
             Navigation
           </span>
 
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1.5"
-            >
-              {link.label}
-            </a>
-          ))}
+          <a
+            href="/#showreel"
+            onClick={() => setIsMenuOpen(false)}
+            className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1"
+          >
+            Work
+          </a>
 
-          <div className="w-16 h-[2px] bg-black/20 my-4" />
+          <a
+            href="/#card-swap"
+            onClick={() => setIsMenuOpen(false)}
+            className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1"
+          >
+            Showroom
+          </a>
+
+          {/* Services on Mobile */}
+          <div className="w-full flex flex-col items-center py-1">
+            <button
+              type="button"
+              onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+              className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 inline-flex items-center gap-2"
+            >
+              <span>Services</span>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={cn(
+                  "transition-transform duration-300",
+                  isMobileServicesOpen ? "rotate-180" : ""
+                )}
+                aria-hidden="true"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+
+            <div
+              className={cn(
+                "flex flex-col items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out",
+                isMobileServicesOpen
+                  ? "max-h-36 opacity-100 mt-2.5 mb-1"
+                  : "max-h-0 opacity-0 pointer-events-none"
+              )}
+            >
+              <Link
+                href="/seo"
+                onClick={() => setIsMenuOpen(false)}
+                className="font-display text-base sm:text-lg font-bold tracking-wider text-black/85 hover:text-black uppercase py-1"
+              >
+                SEO Services
+              </Link>
+              <Link
+                href="/social-media-marketing"
+                onClick={() => setIsMenuOpen(false)}
+                className="font-display text-base sm:text-lg font-bold tracking-wider text-black/85 hover:text-black uppercase py-1"
+              >
+                Social Media Marketing Services
+              </Link>
+            </div>
+          </div>
+
+          <a
+            href="/#about-banner"
+            onClick={() => setIsMenuOpen(false)}
+            className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1"
+          >
+            About
+          </a>
+
+          <div className="w-16 h-[2px] bg-black/20 my-2" />
 
           <a
             href="#contact"
