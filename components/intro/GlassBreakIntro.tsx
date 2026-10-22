@@ -59,6 +59,9 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     shardsRef.current?.clear();
     particlesRef.current?.clear();
 
+    document.body.classList.remove("custom-cursor-active");
+    document.body.style.cursor = "";
+
     if (lenis) {
       lenis.start();
     } else {
@@ -75,6 +78,11 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     const mobile = isTouchDevice();
     setIsMobile(mobile);
 
+    if (!mobile) {
+      document.body.classList.add("custom-cursor-active");
+      document.body.style.cursor = "none";
+    }
+
     if (lenis) {
       lenis.stop();
     } else {
@@ -88,8 +96,10 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
       setPrefersReducedMotion(mediaQuery.matches);
     });
 
-    // Safety: ensure scrolling is ALWAYS restored on unmount
+    // Safety: ensure scrolling & cursor are ALWAYS restored on unmount
     return () => {
+      document.body.classList.remove("custom-cursor-active");
+      document.body.style.cursor = "";
       if (lenis) {
         lenis.start();
       } else {
@@ -219,7 +229,8 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     <div
       ref={containerRef}
       onClick={handleGlassClick}
-      className="fixed inset-0 w-screen h-screen z-[9999] overflow-hidden custom-cursor-active select-none"
+      className="fixed inset-0 w-screen h-screen z-[9999] overflow-hidden custom-cursor-active select-none cursor-none"
+      style={{ cursor: "none" }}
     >
       {/* Layer 2: Website Blur Overlay */}
       <div

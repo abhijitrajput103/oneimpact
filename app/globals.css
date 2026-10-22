@@ -39,7 +39,13 @@
     color: var(--color-off-white);
   }
 
-  /* Standard cursor restored */
+  /* Standard cursor restored; hide native cursor when custom intro hammer is active */
+  body.custom-cursor-active,
+  body.custom-cursor-active *,
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
 }
 
 /* Premium utility classes */
