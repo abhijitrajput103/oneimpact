@@ -77,7 +77,7 @@ export function Navbar() {
             isScrolled ? "max-w-4xl py-1.5 px-5 sm:px-6" : "max-w-6xl py-2 px-5 sm:px-7"
           )}
         >
-          {/* Branding Logo — Official OneImpact logo image */}
+          {/* Branding Logo — Official One Impact logo image */}
           <MagneticButton strength={0.2} textStrength={0.1}>
             <Link
               href="/"
@@ -194,15 +194,15 @@ export function Navbar() {
               </div>
             </div>
 
-            <a
-              href="/#about-banner"
+            <Link
+              href="/about"
               className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative py-1 group"
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={resetCursor}
             >
               <span>About</span>
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-125" />
-            </a>
+            </Link>
           </nav>
 
           {/* Right Area: CTA & Mobile Hamburger */}
@@ -331,13 +331,13 @@ export function Navbar() {
             </div>
           </div>
 
-          <a
-            href="/#about-banner"
+          <Link
+            href="/about"
             onClick={() => setIsMenuOpen(false)}
             className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1"
           >
             About
-          </a>
+          </Link>
 
           <div className="w-16 h-[2px] bg-black/20 my-2" />
 

@@ -115,7 +115,7 @@ export function LiveDashboardPreview() {
               lineHeight: 1.5,
             }}
           >
-            Every OneImpact client receives a dedicated live dashboard connected directly to Google Search Console, GA4, and LLM citation indices.
+            Every One Impact client receives a dedicated live dashboard connected directly to Google Search Console, GA4, and LLM citation indices.
           </p>
         </div>
 

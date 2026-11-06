@@ -453,7 +453,7 @@ const OFFER_TOPICS = [
   {
     label: "Link building",
     intro:
-      "Getting other websites to link to yours isn’t just good for SEO, it’s essential. But not all links are created equal. At OneImpact, we stay away from shortcuts. Instead, we take the white-hat route. That means we focus on real, relevant links that actually make sense, through solid content, smart outreach, and meaningful relationships.",
+      "Getting other websites to link to yours isn’t just good for SEO, it’s essential. But not all links are created equal. At One Impact, we stay away from shortcuts. Instead, we take the white-hat route. That means we focus on real, relevant links that actually make sense, through solid content, smart outreach, and meaningful relationships.",
     qs: [
       {
         q: "Our off-page SEO approach",
@@ -883,46 +883,46 @@ const FAQ_GROUPS = [
     ],
   },
   {
-    label: "Why OneImpact",
+    label: "Why One Impact",
     qs: [
       {
-        q: "How does OneImpact tailor SEO strategies for maximum ROI?",
+        q: "How does One Impact tailor SEO strategies for maximum ROI?",
         a: "We begin with a deep dive into your market, audience, and competitors. From there, we build a custom SEO plan that targets the keywords, content themes, and technical improvements most likely to deliver tangible, profitable results for your business.",
       },
       {
-        q: "How will OneImpact improve my online visibility and customer engagement?",
+        q: "How will One Impact improve my online visibility and customer engagement?",
         a: "We fine-tune your site’s structure, produce strategic, audience-focused content, and apply proven on-page and off-page SEO techniques. This helps your brand appear in the right searches and keeps users interested and engaged once they land on your site.",
       },
       {
-        q: "How does OneImpact optimize websites for search engines and users to maximize conversions?",
+        q: "How does One Impact optimize websites for search engines and users to maximize conversions?",
         a: "We strike the right balance between technical performance and user experience. From fast-loading pages and mobile responsiveness to persuasive messaging and calls-to-action, our work enhances both your visibility in search engines and your site’s ability to convert visitors.",
       },
       {
-        q: "What measurable results can I expect with OneImpact’s CRO-focused SEO?",
+        q: "What measurable results can I expect with One Impact’s CRO-focused SEO?",
         a: "You’ll see clear, trackable progress, like more organic traffic, reduced bounce rates, longer site visits, and higher conversion rates. We deliver detailed reports so you can see how our work translates into leads, sales, and growth.",
       },
       {
-        q: "How can OneImpact optimize my site to attract high-converting traffic?",
+        q: "How can One Impact optimize my site to attract high-converting traffic?",
         a: "We pinpoint keywords that signal buying intent, create landing pages tailored to your ideal customer profiles, and enhance your technical SEO so your highest-value pages perform best. The result is a steady flow of users who are ready to take action.",
       },
       {
-        q: "How does OneImpact ensure that my site ranks for the most relevant, high-converting keywords?",
+        q: "How does One Impact ensure that my site ranks for the most relevant, high-converting keywords?",
         a: "Through in-depth keyword research, we focus on search terms that blend strong volume, low competition, and clear user intent. We continually optimize and update content so your site maintains strong positions for keywords that matter most to your bottom line.",
       },
       {
-        q: "Why should I trust OneImpact to increase website traffic and sales?",
+        q: "Why should I trust One Impact to increase website traffic and sales?",
         a: "We help brands across industries grow their visibility and revenue through results-driven SEO. Our work is backed by data, built on strategy, and guided by experience, giving you the confidence that every move we make is grounded in real performance goals.",
       },
       {
-        q: "What makes OneImpact’s approach to SEO different from other agencies?",
+        q: "What makes One Impact’s approach to SEO different from other agencies?",
         a: "Unlike cookie-cutter SEO solutions, our approach combines deep technical know-how with conversion expertise. We don’t just chase rankings. We focus on outcomes that actually move the needle for your business.",
       },
       {
-        q: "Why is OneImpact the right choice for improving my brand’s local SEO performance?",
+        q: "Why is One Impact the right choice for improving my brand’s local SEO performance?",
         a: "Our team specializes in optimizing for local visibility. From fine-tuning your Google Business Profile to building city-specific content and cleaning up citations, we help your business show up when local customers search for services you offer.",
       },
       {
-        q: "What strategies does OneImpact use to convert organic traffic into paying customers?",
+        q: "What strategies does One Impact use to convert organic traffic into paying customers?",
         a: "We craft persuasive on-page content, design smooth user journeys, run A/B tests for continuous improvement, and create strong internal links that guide users where you want them to go, turning interest into action and visitors into loyal customers.",
       },
     ],
@@ -933,7 +933,7 @@ export default function SeoLandingPage() {
   // State for Service tabs (Organic vs Platform)
   const [svcIdx, setSvcIdx] = useState(0);
 
-  // State for Why OneImpact tabs (What We Do vs How We Customise For You)
+  // State for Why One Impact tabs (What We Do vs How We Customise For You)
   const [whyTab, setWhyTab] = useState(0);
 
   // State for Offer tabs (17 categories)
@@ -1296,7 +1296,7 @@ export default function SeoLandingPage() {
           {/* Left Column */}
           <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
             <span style={{ fontSize: "17px", fontWeight: 600, color: "#6E6E73", letterSpacing: "-0.01em" }}>
-              SEO services by OneImpact
+              SEO services by One Impact
             </span>
 
             <h1
@@ -1380,7 +1380,7 @@ export default function SeoLandingPage() {
                   gap: "4px",
                 }}
               >
-                Why OneImpact
+                Why One Impact
                 <svg
                   width="16"
                   height="16"
@@ -1820,7 +1820,7 @@ export default function SeoLandingPage() {
               maxWidth: "74ch",
             }}
           >
-            At OneImpact, our mission is to create meaningful and lasting change for our clients. As a search engine optimization agency, we focus on building custom strategies that grow organic traffic, improve search visibility, and bring in qualified leads using intent-based keyword targeting.
+            At One Impact, our mission is to create meaningful and lasting change for our clients. As a search engine optimization agency, we focus on building custom strategies that grow organic traffic, improve search visibility, and bring in qualified leads using intent-based keyword targeting.
           </p>
         </div>
       </section>
@@ -1920,7 +1920,7 @@ export default function SeoLandingPage() {
             className="seo-heading"
             style={{ margin: 0, fontSize: "clamp(2rem, 3.6vw, 2.8rem)", letterSpacing: "-0.035em", fontWeight: 700 }}
           >
-            At OneImpact, we follow the E-E-A-T framework
+            At One Impact, we follow the E-E-A-T framework
           </h2>
           <p style={{ margin: "0 0 28px", color: "#6E6E73", fontSize: "17px" }}>
             Experience, Expertise, Authoritativeness, Trustworthiness
@@ -2585,7 +2585,7 @@ export default function SeoLandingPage() {
                 SEO that fits your business. Not a template.
               </h2>
               <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73", maxWidth: "50ch" }}>
-                Swipe through what you get with OneImpact as your SEO services provider.
+                Swipe through what you get with One Impact as your SEO services provider.
               </p>
             </div>
 
@@ -2666,7 +2666,7 @@ export default function SeoLandingPage() {
             ref={trackRef}
             onScroll={handleTrackScroll}
             aria-roledescription="carousel"
-            aria-label="Top reasons to choose OneImpact"
+            aria-label="Top reasons to choose One Impact"
           >
             <div className="car-track">
               {USP_CARDS.map((u, i) => (
@@ -2894,7 +2894,7 @@ export default function SeoLandingPage() {
             </h2>
             <p style={{ margin: 0, fontSize: "18px", color: "#3A3A3C" }}>
               Trying to connect with local customers? Our Local SEO services are built to make sure your business
-              appears in the right place at the right time. At OneImpact, we fine-tune your digital footprint,
+              appears in the right place at the right time. At One Impact, we fine-tune your digital footprint,
               optimizing your Google Business Profile, local map listings, directories, and citations, so your brand
               shows up exactly where nearby customers are looking.
             </p>

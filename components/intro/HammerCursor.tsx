@@ -25,19 +25,19 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
       triggerSwing(onImpact: () => void) {
         if (!swingRef.current) return;
 
-        // Perform the swing timeline
+        // Perform the swing timeline for hammer coming from right to left
         const tl = gsap.timeline();
         tl.to(swingRef.current, {
-          rotation: -45, // Wind-up backswing
-          x: -10,
-          y: -10,
-          duration: 0.15,
+          rotation: 35, // Wind-up backswing (pulling back up-right)
+          x: 14,
+          y: -8,
+          duration: 0.14,
           ease: "power2.out",
         })
           .to(swingRef.current, {
-            rotation: 25, // Powerful downswing
-            x: 5,
-            y: 5,
+            rotation: -25, // Powerful downswing (slamming down-left onto target)
+            x: -10,
+            y: 6,
             duration: 0.1,
             ease: "power3.in",
             onComplete: () => {
@@ -46,15 +46,17 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
             },
           })
           .to(swingRef.current, {
-            rotation: -10, // Rebound bounce
-            duration: 0.15,
+            rotation: 6, // Rebound bounce
+            x: 2,
+            y: 0,
+            duration: 0.14,
             ease: "power2.out",
           })
           .to(swingRef.current, {
             rotation: 0, // Rest to center
             x: 0,
             y: 0,
-            duration: 0.3,
+            duration: 0.28,
             ease: "power2.inOut",
           });
       },
@@ -66,13 +68,16 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
       const floatEl = floatRef.current;
       if (!cursor || !floatEl) return;
 
-      // Position center pivot
-      gsap.set(cursor, { xPercent: -15, yPercent: -15, x: -100, y: -100 });
+      // Position center pivot on striking face of hammer
+      // Default initial position on right side of screen
+      const startX = typeof window !== "undefined" ? window.innerWidth * 0.72 : -100;
+      const startY = typeof window !== "undefined" ? window.innerHeight * 0.45 : -100;
+      gsap.set(cursor, { xPercent: -24, yPercent: -23, x: startX, y: startY });
 
       const xTo = gsap.quickTo(cursor, "x", { duration: 0.1, ease: "power3.out" });
       const yTo = gsap.quickTo(cursor, "y", { duration: 0.1, ease: "power3.out" });
 
-      let lastX = 0;
+      let lastX = startX;
       let lastTime = Date.now();
 
       const handleMouseMove = (e: MouseEvent) => {
@@ -85,7 +90,7 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
         // Inertia angle calculation based on horizontal mouse velocity
         if (dt > 0) {
           const speedX = (e.clientX - lastX) / dt;
-          const tilt = gsap.utils.clamp(-25, 25, speedX * 35);
+          const tilt = gsap.utils.clamp(-20, 20, speedX * 25);
           
           gsap.to(floatEl, {
             rotation: tilt,
@@ -132,12 +137,19 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
           display: cursorType === "hidden" ? "none" : "block",
         }}
       >
-        {/* Swing rotation wrapper */}
-        <div ref={swingRef} className="origin-[15px_15px]">
+        {/* Swing rotation wrapper with pivot at hammer striking face */}
+        <div ref={swingRef} className="origin-[29px_27px]">
           {/* Float and inertia wrapper */}
-          <div ref={floatRef} className="origin-[15px_15px]">
-            {/* Custom Sledge/Claw Hammer SVG Graphic */}
-            <Image src="/images/hammer-oneimpact.webp" alt="Hammer" width={120} height={120} />
+          <div ref={floatEl => { (floatRef as React.MutableRefObject<HTMLDivElement | null>).current = floatEl; }} className="origin-[29px_27px]">
+            {/* Custom Sledge/Claw Hammer Graphic coming from right */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/hammer-right-v4.webp"
+              alt="Hammer"
+              width={120}
+              height={120}
+              className="w-[120px] h-[120px] object-contain drop-shadow-xl"
+            />
           </div>
         </div>
       </div>

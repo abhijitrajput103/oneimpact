@@ -9,8 +9,28 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
 
-  // Aggressive caching headers for static assets + pages
+  // Redirect legacy /services routes to canonical top-level routes
+  async redirects() {
+    return [
+      {
+        source: "/services/seo",
+        destination: "/seo",
+        permanent: true,
+      },
+      {
+        source: "/services/social-media-marketing",
+        destination: "/social-media-marketing",
+        permanent: true,
+      },
+    ];
+  },
+
+  // Aggressive caching headers for static assets + pages (production only)
   async headers() {
+    if (process.env.NODE_ENV !== "production") {
+      return [];
+    }
+
     return [
       {
         // Cache all static assets (images, fonts, videos, JS, CSS) for 1 year
