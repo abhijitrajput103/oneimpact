@@ -10,6 +10,8 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 const SERVICE_LINKS = [
   { label: "SEO Services", href: "/seo" },
   { label: "Social Media Marketing Services", href: "/social-media-marketing" },
+  { label: "Influencer Marketing Services", href: "/influencer-marketing" },
+  { label: "Branding Services", href: "/branding-services" },
 ];
 
 export function Navbar() {

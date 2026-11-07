@@ -3549,10 +3549,13 @@ export default function SeoLandingPage() {
             <Link href="/seo" style={{ color: "#6E6E73", textDecoration: "none" }}>
               SEO and AIO
             </Link>
-            <Link href="/#services" style={{ color: "#6E6E73", textDecoration: "none" }}>
+            <Link href="/social-media-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>
               Social media
             </Link>
-            <Link href="/#services" style={{ color: "#6E6E73", textDecoration: "none" }}>
+            <Link href="/influencer-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>
+              Influencer marketing
+            </Link>
+            <Link href="/branding-services" style={{ color: "#6E6E73", textDecoration: "none" }}>
               Branding and design
             </Link>
             <Link href="/#services" style={{ color: "#6E6E73", textDecoration: "none" }}>
