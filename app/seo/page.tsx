@@ -3558,7 +3558,7 @@ export default function SeoLandingPage() {
             <Link href="/branding-services" style={{ color: "#6E6E73", textDecoration: "none" }}>
               Branding and design
             </Link>
-            <Link href="/#services" style={{ color: "#6E6E73", textDecoration: "none" }}>
+            <Link href="/web-development" style={{ color: "#6E6E73", textDecoration: "none" }}>
               Website development
             </Link>
           </div>

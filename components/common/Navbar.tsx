@@ -12,6 +12,7 @@ const SERVICE_LINKS = [
   { label: "Social Media Marketing Services", href: "/social-media-marketing" },
   { label: "Influencer Marketing Services", href: "/influencer-marketing" },
   { label: "Branding Services", href: "/branding-services" },
+  { label: "Web Development Services", href: "/web-development" },
 ];
 
 export function Navbar() {
@@ -211,7 +212,7 @@ export function Navbar() {
           <div className="flex items-center gap-2 sm:gap-3">
             {/* CTA Button */}
             <a
-              href="#contact"
+              href="/#contact"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-display text-[10px] sm:text-xs font-black tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 text-[#DA9F37] !text-[#DA9F37] bg-black hover:bg-black/85"
               style={{ color: "#DA9F37" }}
               onMouseEnter={() => setCursorType("hover")}
@@ -312,24 +313,20 @@ export function Navbar() {
               className={cn(
                 "flex flex-col items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out",
                 isMobileServicesOpen
-                  ? "max-h-36 opacity-100 mt-2.5 mb-1"
+                  ? "max-h-96 opacity-100 mt-2.5 mb-1"
                   : "max-h-0 opacity-0 pointer-events-none"
               )}
             >
-              <Link
-                href="/seo"
-                onClick={() => setIsMenuOpen(false)}
-                className="font-display text-base sm:text-lg font-bold tracking-wider text-black/85 hover:text-black uppercase py-1"
-              >
-                SEO Services
-              </Link>
-              <Link
-                href="/social-media-marketing"
-                onClick={() => setIsMenuOpen(false)}
-                className="font-display text-base sm:text-lg font-bold tracking-wider text-black/85 hover:text-black uppercase py-1"
-              >
-                Social Media Marketing Services
-              </Link>
+              {SERVICE_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="font-display text-base sm:text-lg font-bold tracking-wider text-black/85 hover:text-black uppercase py-1"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -344,7 +341,7 @@ export function Navbar() {
           <div className="w-16 h-[2px] bg-black/20 my-2" />
 
           <a
-            href="#contact"
+            href="/#contact"
             onClick={() => setIsMenuOpen(false)}
             className="w-full py-4 rounded-full font-display text-sm font-black tracking-wider uppercase text-[#DA9F37] !text-[#DA9F37] bg-black hover:bg-black/85 transition-transform active:scale-95 text-center shadow-lg"
             style={{ color: "#DA9F37" }}

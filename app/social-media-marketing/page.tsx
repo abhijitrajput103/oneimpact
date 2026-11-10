@@ -1237,7 +1237,7 @@ export default function SmmLandingPage() {
             <a href="/social-media-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>Social media</a>
             <a href="/influencer-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>Influencer marketing</a>
             <a href="/branding-services" style={{ color: "#6E6E73", textDecoration: "none" }}>Branding and design</a>
-            <a href="#" style={{ color: "#6E6E73", textDecoration: "none" }}>Website development</a>
+            <a href="/web-development" style={{ color: "#6E6E73", textDecoration: "none" }}>Website development</a>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
             <span style={{ fontWeight: 600 }}>Company</span>

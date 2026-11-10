@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
 
-  // Redirect legacy /services routes to canonical top-level routes
+  // Redirect legacy /services routes and aliases to canonical top-level routes
   async redirects() {
     return [
       {
@@ -20,6 +20,41 @@ const nextConfig: NextConfig = {
       {
         source: "/services/social-media-marketing",
         destination: "/social-media-marketing",
+        permanent: true,
+      },
+      {
+        source: "/services/influencer-marketing",
+        destination: "/influencer-marketing",
+        permanent: true,
+      },
+      {
+        source: "/services/branding",
+        destination: "/branding-services",
+        permanent: true,
+      },
+      {
+        source: "/services/branding-services",
+        destination: "/branding-services",
+        permanent: true,
+      },
+      {
+        source: "/branding",
+        destination: "/branding-services",
+        permanent: true,
+      },
+      {
+        source: "/services/web-development",
+        destination: "/web-development",
+        permanent: true,
+      },
+      {
+        source: "/services/website-development",
+        destination: "/web-development",
+        permanent: true,
+      },
+      {
+        source: "/website-development",
+        destination: "/web-development",
         permanent: true,
       },
     ];
