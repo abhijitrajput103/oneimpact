@@ -23,59 +23,54 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
     // Expose the triggerSwing method to the parent coordinator
     useImperativeHandle(ref, () => ({
       triggerSwing(onImpact: () => void) {
-        if (!swingRef.current) return;
+        if (!swingRef.current) {
+          onImpact();
+          return;
+        }
 
-        // Perform the swing timeline for hammer coming from right to left
+        // Instant high-velocity hammer swing
         const tl = gsap.timeline();
         tl.to(swingRef.current, {
-          rotation: 35, // Wind-up backswing (pulling back up-right)
-          x: 14,
-          y: -8,
-          duration: 0.14,
-          ease: "power2.out",
+          rotation: -28, // Instant powerful downward strike
+          x: -12,
+          y: 8,
+          duration: 0.04, // 40ms instant snap
+          ease: "power4.in",
+          onComplete: () => {
+            onImpact();
+          },
         })
           .to(swingRef.current, {
-            rotation: -25, // Powerful downswing (slamming down-left onto target)
-            x: -10,
-            y: 6,
-            duration: 0.1,
-            ease: "power3.in",
-            onComplete: () => {
-              // Impact point - execute crack canvas trigger
-              onImpact();
-            },
-          })
-          .to(swingRef.current, {
-            rotation: 6, // Rebound bounce
-            x: 2,
-            y: 0,
-            duration: 0.14,
+            rotation: 6, // Instant recoil bounce
+            x: 4,
+            y: -2,
+            duration: 0.08,
             ease: "power2.out",
           })
           .to(swingRef.current, {
             rotation: 0, // Rest to center
             x: 0,
             y: 0,
-            duration: 0.28,
-            ease: "power2.inOut",
+            duration: 0.16,
+            ease: "power2.out",
           });
       },
     }));
 
-    // Mouse tracking & inertia rotation using GSAP quickTo
+    // Mouse tracking & inertia rotation using direct low-latency GSAP quickTo
     useEffect(() => {
       const cursor = cursorRef.current;
       const floatEl = floatRef.current;
       if (!cursor || !floatEl) return;
 
       // Position center pivot on striking face of hammer
-      // Default initial position on right side of screen
       const startX = typeof window !== "undefined" ? window.innerWidth * 0.72 : -100;
       const startY = typeof window !== "undefined" ? window.innerHeight * 0.45 : -100;
       gsap.set(cursor, { xPercent: -24, yPercent: -23, x: startX, y: startY });
 
-      const xTo = gsap.quickTo(cursor, "x", { duration: 0.1, ease: "power3.out" });
-      const yTo = gsap.quickTo(cursor, "y", { duration: 0.1, ease: "power3.out" });
+      let hasMoved = false;
+      const xTo = gsap.quickTo(cursor, "x", { duration: 0.02, ease: "none" });
+      const yTo = gsap.quickTo(cursor, "y", { duration: 0.02, ease: "none" });
 
       let lastX = startX;
       let lastTime = Date.now();
@@ -84,8 +79,13 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
         const now = Date.now();
         const dt = now - lastTime;
         
-        xTo(e.clientX);
-        yTo(e.clientY);
+        if (!hasMoved) {
+          gsap.set(cursor, { x: e.clientX, y: e.clientY });
+          hasMoved = true;
+        } else {
+          xTo(e.clientX);
+          yTo(e.clientY);
+        }
 
         // Inertia angle calculation based on horizontal mouse velocity
         if (dt > 0) {
@@ -94,7 +94,7 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
           
           gsap.to(floatEl, {
             rotation: tilt,
-            duration: 0.4,
+            duration: 0.25,
             ease: "power2.out",
             overwrite: "auto",
           });

@@ -107,7 +107,7 @@ export function AboutMission() {
         <h2
           className="mission-headline font-display font-black uppercase leading-[1.0] tracking-tight mb-10 sm:mb-14"
           style={{
-            color: "#DA9F37",
+            color: "#f9d230",
             fontSize: "clamp(2.5rem, 9vw, 7rem)",
             opacity: 0,
           }}
@@ -129,9 +129,9 @@ export function AboutMission() {
             style={{ color: "rgba(250, 249, 246, 0.8)" }}
           >
             TO REIMAGINE HOW BRANDS SHOW UP IN THE WORLD — MORE{" "}
-            <span style={{ color: "#DA9F37" }}>THOUGHTFUL</span>, MORE{" "}
-            <span style={{ color: "#DA9F37" }}>EXPRESSIVE</span>, AND FULL OF{" "}
-            <span style={{ color: "#DA9F37" }}>CHARACTER</span>.
+            <span style={{ color: "#f9d230" }}>THOUGHTFUL</span>, MORE{" "}
+            <span style={{ color: "#f9d230" }}>EXPRESSIVE</span>, AND FULL OF{" "}
+            <span style={{ color: "#f9d230" }}>CHARACTER</span>.
           </h3>
         </div>
 
@@ -181,7 +181,7 @@ export function AboutMission() {
           </div>
 
           <div className="lg:col-span-3 space-y-6 sm:space-y-8">
-            <div className="font-display text-5xl sm:text-6xl leading-none" style={{ color: "#DA9F37" }}>&ldquo;</div>
+            <div className="font-display text-5xl sm:text-6xl leading-none" style={{ color: "#f9d230" }}>&ldquo;</div>
             <blockquote
               className="font-display text-2xl sm:text-3xl md:text-4xl font-bold leading-snug tracking-tight"
               style={{ color: "#FAF9F6" }}
@@ -189,7 +189,7 @@ export function AboutMission() {
               We didn&apos;t want to be louder.
               <br />
               We wanted to be{" "}
-              <em style={{ color: "#DA9F37" }}>impossible to ignore</em>.
+              <em style={{ color: "#f9d230" }}>impossible to ignore</em>.
             </blockquote>
             <div className="flex items-center gap-4 pt-5" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
               <div>

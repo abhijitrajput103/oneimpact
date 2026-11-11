@@ -18,11 +18,11 @@ export function GlassOverlay({ className }: GlassOverlayProps) {
         className
       )}
     >
-      {/* Frosted Glass Layer with Diagonal Gradient & Inner Shadow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] via-white/[0.01] to-black/[0.15] shadow-[inset_0_0_150px_rgba(255,255,255,0.06)]" />
+      {/* Frosted Glass Layer with visible glass tint */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.12] via-white/[0.06] to-white/[0.03] shadow-[inset_0_0_200px_rgba(255,255,255,0.08)]" />
 
-      {/* Light Reflection highlights */}
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.12)_0%,rgba(255,255,255,0)_50%,rgba(0,0,0,0.25)_100%)]" />
+      {/* Light Reflection highlights — visible glare streak */}
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.04)_40%,rgba(255,255,255,0)_55%,rgba(0,0,0,0.15)_100%)]" />
 
       {/* Subtle Scratch Pattern Overlay */}
       <div
@@ -34,8 +34,8 @@ export function GlassOverlay({ className }: GlassOverlayProps) {
       />
 
       {/* Premium Beveled Border / Glass sheet edge */}
-      <div className="absolute inset-6 border border-white/5 rounded-[4px]" />
-      <div className="absolute inset-[25px] border border-black/10 rounded-[4px]" />
+      <div className="absolute inset-6 border border-white/[0.12] rounded-[4px]" />
+      <div className="absolute inset-[25px] border border-white/[0.06] rounded-[4px]" />
     </div>
   );
 }

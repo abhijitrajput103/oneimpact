@@ -7,6 +7,7 @@ import { cn } from "@/utils/cn";
 import { ColorRevealHero } from "./ColorRevealHero";
 import { HeroTitle } from "./HeroTitle";
 import { ScrollIndicator } from "./ScrollIndicator";
+import { IconBubblePop } from "./IconBubblePop";
 
 
 interface HeroProps {
@@ -62,7 +63,7 @@ export function Hero({ className }: HeroProps) {
       ref={containerRef}
       id="hero"
       className={cn(
-        "relative w-full h-[100dvh] min-h-[100dvh] overflow-hidden flex flex-col justify-center items-center z-10 select-none pb-12 sm:pb-16 md:pb-20",
+        "relative w-full min-h-[100dvh] max-sm:min-h-[max(100dvh,177.78vw)] md:min-h-[max(100dvh,56.25vw)] overflow-hidden flex flex-col justify-center items-center z-10 select-none pb-12 sm:pb-16 md:pb-20",
         className
       )}
       style={{
@@ -72,6 +73,9 @@ export function Hero({ className }: HeroProps) {
     >
       {/* Interactive color reveal artwork background */}
       <ColorRevealHero />
+
+      {/* Clickable icon bubble pop — childhood bubble game */}
+      <IconBubblePop />
 
       {/* Gradient overlay for text readability */}
       <div className="absolute inset-0 z-[5] pointer-events-none bg-gradient-to-b from-black/50 via-transparent to-black/40" />

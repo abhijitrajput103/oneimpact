@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/common/Navbar";
+import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
 const NOTICES = [
   "Free branding consultation. Fill the form and our team will get back to you.",
@@ -135,37 +136,37 @@ const HELPS_CARDS = [
     t: "Clear positioning",
     a: "A strong brand strategy defines your place in the market. It helps customers understand what makes you different.",
     d: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Stronger first impressions",
     a: "Consistent visuals and messaging build trust from the first interaction. People are more likely to engage with brands they recognize.",
     d: "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Customer loyalty",
     a: "When your brand reflects your values, people connect emotionally. That connection keeps them coming back.",
     d: "M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Better marketing results",
     a: "With clear messaging, your campaigns become more focused. This makes every marketing effort go further.",
     d: "M3 10v4h4l6 4V6L7 10H3zM17 8a5 5 0 0 1 0 8",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Higher perceived value",
     a: "A well-presented brand feels premium. Customers are often willing to pay more for a brand they trust.",
     d: "M12 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12zM8.5 13.5L7 21l5-3 5 3-1.5-7.5",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Improved internal alignment",
     a: "A defined brand gives your team direction. Everyone on your team knows how to represent your business.",
     d: "M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21v-1a6 6 0 0 1 12 0v1M16 3.5a4 4 0 0 1 0 7.5M22 21v-1a6 6 0 0 0-4-5.6",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
 ];
 
@@ -173,42 +174,42 @@ const BUT_WHY_CARDS = [
   {
     t: "Brand strategy first",
     a: "We help you define what your brand stands for, who it’s for, and how it should appear in the world.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Brand identity creation",
     a: "We create a look and feel that reflects your brand’s personality and values, including colors, fonts, and tone of voice.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Research-driven strategy",
     a: "We rely on research to understand your industry, audience, and competitors, so decisions come from insight, not guesswork.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Experience and expertise",
     a: "We work with brands across different verticals and stages of growth, and adapt to what each one needs.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Audience connection",
     a: "We help you define your audience and create messages that feel personal and relatable.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Strategic brand positioning",
     a: "We identify what makes your brand different and valuable, so you stand out while staying relevant.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Brand equity and growth",
     a: "We help your brand build recognition and trust over time: a long-term asset, not a short-term fix.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "End-to-end support",
     a: "We guide your brand from idea to execution, whether you’re starting fresh or rebranding.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
 ];
 
@@ -254,32 +255,32 @@ const SVC_GROUPS = [
       {
         t: "Brand identity development",
         a: "We help create the visual and verbal elements that define your brand, like your logo, color palette, typography, and tone of voice. This ensures your brand looks and feels the same across all platforms, building recognition and trust over time.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Brand positioning",
         a: "This involves identifying what makes your brand unique and where it fits in the market. We define how you want customers to perceive your brand, helping you stand out from competitors with a clear and focused message.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Brand messaging and storytelling",
         a: "We craft messaging that reflects your brand’s values and voice. This includes taglines, mission statements, and brand stories that connect with your audience on an emotional level and create a lasting impression.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Brand audits and research",
         a: "We assess your current brand performance through research and analysis. This helps identify gaps, strengths, and opportunities, allowing us to refine your brand strategy based on data and customer insights.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Brand consistency and guidelines",
         a: "We create brand guidelines that define how your brand should look, sound, and feel across all platforms. This includes logo usage, color schemes, tone of voice, and visual elements, ensuring your brand remains consistent everywhere.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Brand naming",
         a: "We develop distinctive, memorable, and meaningful names for brands, products, and services. The right name conveys your values, tone, and positioning, and is built to last.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
     ],
   },
@@ -289,17 +290,17 @@ const SVC_GROUPS = [
       {
         t: "E-commerce brand strategy",
         a: "We help online businesses build a unique brand presence that connects with their target audience. From product messaging to website tone and visuals, we align every element with your business goals to boost trust and conversions.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Local brand strategy",
         a: "This focuses on building your brand’s identity within a specific geographic area. We tailor your messaging, visuals, and positioning to connect with local audiences and make your brand more relatable to the community.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Digital brand strategy",
         a: "We develop a clear brand identity for your digital presence across websites, social media, ads, and more. This includes defining your brand voice, visual style, and messaging to ensure consistency and impact online.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
     ],
   },
@@ -721,10 +722,10 @@ export default function BrandingServicesPage() {
           transform: none;
         }
         .branding-landing-root .y:hover {
-          background-color: #ffc75e !important;
+          background-color: #fae066 !important;
         }
         .branding-landing-root :focus-visible {
-          outline: 3px solid #7baaff;
+          outline: 3px solid #4066c6;
           outline-offset: 3px;
         }
         .branding-landing-root .fd::placeholder {
@@ -732,8 +733,8 @@ export default function BrandingServicesPage() {
         }
         .branding-landing-root .fd:focus {
           outline: none;
-          border-color: #ffba39 !important;
-          box-shadow: 0 0 0 4px rgba(255, 186, 57, 0.3);
+          border-color: #f9d230 !important;
+          box-shadow: 0 0 0 4px rgba(249, 210, 48, 0.3);
         }
         .branding-landing-root .prewrap {
           white-space: pre-line;
@@ -955,7 +956,7 @@ export default function BrandingServicesPage() {
             width: "380px",
             height: "380px",
             borderRadius: "50%",
-            background: "#FFBA39",
+            background: "#f9d230",
             opacity: 0.55,
             filter: "blur(70px)",
           }}
@@ -969,7 +970,7 @@ export default function BrandingServicesPage() {
             width: "320px",
             height: "320px",
             borderRadius: "50%",
-            background: "#7BAAFF",
+            background: "#4066c6",
             opacity: 0.55,
             filter: "blur(80px)",
           }}
@@ -1136,7 +1137,7 @@ export default function BrandingServicesPage() {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#FFBA39", letterSpacing: 0 }}>
+                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#f9d230", letterSpacing: 0 }}>
                     Free for your brand
                   </span>
                   <h2
@@ -1294,7 +1295,7 @@ export default function BrandingServicesPage() {
                     fontWeight: 650,
                     letterSpacing: "-0.01em",
                     color: "#000000",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
                     minHeight: "54px",
@@ -1326,7 +1327,7 @@ export default function BrandingServicesPage() {
                     width: "56px",
                     height: "56px",
                     borderRadius: "50%",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -1536,7 +1537,7 @@ export default function BrandingServicesPage() {
                   width: "32px",
                   height: "4px",
                   borderRadius: "999px",
-                  background: "#FFBA39",
+                  background: "#f9d230",
                 }}
                 aria-hidden="true"
               />
@@ -1590,7 +1591,7 @@ export default function BrandingServicesPage() {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                  <span style={{ display: "inline-flex", gap: "3px", color: "#FFBA39" }} aria-label="Rated 5 out of 5">
+                  <span style={{ display: "inline-flex", gap: "3px", color: "#f9d230" }} aria-label="Rated 5 out of 5">
                     {[...Array(5)].map((_, sIdx) => (
                       <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
@@ -1615,7 +1616,7 @@ export default function BrandingServicesPage() {
                   <img
                     src="/LOGO/oneimpact-logo.webp"
                     alt="Client logo"
-                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 0.7 }}
+                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 1 }}
                   />
                   <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
                     {q.role}
@@ -1766,9 +1767,9 @@ export default function BrandingServicesPage() {
                 width: "calc((100% - 8px) / 2)",
                 transform: `translateX(${whyTab * 100}%)`,
                 transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#FFBA39",
+                background: "#f9d230",
                 borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
               }}
             />
             {["But why OneImpact?", "Why OneImpact?"].map((label, i) => (
@@ -1846,20 +1847,20 @@ export default function BrandingServicesPage() {
                       height: "36px",
                       borderRadius: "50%",
                       background:
-                        w.chip === "#FFBA39"
-                          ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)"
-                          : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)",
+                        w.chip === "#f9d230"
+                          ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
+                          : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flex: "none",
                       boxShadow:
-                        w.chip === "#FFBA39"
-                          ? "0 3px 8px rgba(255, 186, 57, 0.35)"
-                          : "0 3px 8px rgba(0, 102, 255, 0.35)",
+                        w.chip === "#f9d230"
+                          ? "0 3px 8px rgba(249, 210, 48, 0.35)"
+                          : "0 3px 8px rgba(64, 102, 198, 0.35)",
                     }}
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={w.chip === "#FFBA39" ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={w.chip === "#f9d230" ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M5 12.5l4.5 4.5L19 7.5" />
                     </svg>
                   </span>
@@ -1901,16 +1902,16 @@ export default function BrandingServicesPage() {
                       borderRadius: "50%",
                       background:
                         idx % 2 === 0
-                          ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)"
-                          : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)",
+                          ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
+                          : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flex: "none",
                       boxShadow:
                         idx % 2 === 0
-                          ? "0 3px 8px rgba(255, 186, 57, 0.35)"
-                          : "0 3px 8px rgba(0, 102, 255, 0.35)",
+                          ? "0 3px 8px rgba(249, 210, 48, 0.35)"
+                          : "0 3px 8px rgba(64, 102, 198, 0.35)",
                     }}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={idx % 2 === 0 ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -1987,9 +1988,9 @@ export default function BrandingServicesPage() {
                 width: "calc((100% - 8px) / 2)",
                 transform: `translateX(${svcIdx * 100}%)`,
                 transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#FFBA39",
+                background: "#f9d230",
                 borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
               }}
             />
             {SVC_GROUPS.map((grp, i) => (
@@ -2109,12 +2110,12 @@ export default function BrandingServicesPage() {
                 color: "#000000",
                 background:
                   offerIdx === i
-                    ? "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)"
+                    ? "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)"
                     : "#FFFFFF",
                 border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`,
                 boxShadow:
                   offerIdx === i
-                    ? "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
+                    ? "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
                     : "0 1px 2px rgba(0, 0, 0, 0.03)",
                 borderRadius: "999px",
                 minHeight: "44px",
@@ -2182,13 +2183,13 @@ export default function BrandingServicesPage() {
                   fontSize: "14.5px",
                   fontWeight: 650,
                   color: "#000000",
-                  background: "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)",
+                  background: "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)",
                   border: "1.5px solid #000000",
                   borderRadius: "999px",
                   minHeight: "42px",
                   padding: "8px 22px",
                   cursor: "pointer",
-                  boxShadow: "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
+                  boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
                 }}
               >
                 {offerExpanded ? "Show fewer questions" : `Load more (${activeOffer.qs.length - 5} more questions)`}
@@ -2386,7 +2387,7 @@ export default function BrandingServicesPage() {
                 fontSize: "17px",
                 padding: "14px 24px",
                 minHeight: "52px",
-                background: "#FFBA39",
+                background: "#f9d230",
                 color: "#000000",
                 textDecoration: "none",
                 border: 0,
@@ -2454,7 +2455,7 @@ export default function BrandingServicesPage() {
                   height: "36px",
                   borderRadius: "50% 50% 50% 0",
                   transform: "rotate(-45deg)",
-                  background: "#FFBA39",
+                  background: "#f9d230",
                   boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
                 }}
               />
@@ -2487,7 +2488,7 @@ export default function BrandingServicesPage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      background: i === 0 ? "#FFBA39" : "#E5E5EA",
+                      background: i === 0 ? "#f9d230" : "#E5E5EA",
                     }}
                   >
                     {i + 1}
@@ -2502,6 +2503,12 @@ export default function BrandingServicesPage() {
           </figure>
         </div>
       </section>
+
+      {/* ── REELS SHOWCASE (IN-WEBSITE) */}
+      <ServiceReelsSection
+        heading="Brand storytelling in motion"
+        subtitle="See how our visual identities and brand films come alive on screen."
+      />
 
       {/* ── FAQs */}
       <section
@@ -2560,9 +2567,9 @@ export default function BrandingServicesPage() {
                 width: `calc((100% - 8px) / ${FAQ_GROUPS.length})`,
                 transform: `translateX(${faqIdx * 100}%)`,
                 transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#FFBA39",
+                background: "#f9d230",
                 borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
               }}
             />
             {FAQ_GROUPS.map((g, i) => (
@@ -2643,13 +2650,13 @@ export default function BrandingServicesPage() {
                 fontSize: "14.5px",
                 fontWeight: 650,
                 color: "#000000",
-                background: "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)",
+                background: "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)",
                 border: "1.5px solid #000000",
                 borderRadius: "999px",
                 minHeight: "42px",
                 padding: "8px 22px",
                 cursor: "pointer",
-                boxShadow: "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
+                boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
               }}
             >
               {faqExpanded ? "Show fewer" : `Load more (${activeFaqGroup.qs.length - 5} more)`}
@@ -2689,7 +2696,7 @@ export default function BrandingServicesPage() {
               width: "360px",
               height: "360px",
               borderRadius: "50%",
-              background: "#FFBA39",
+              background: "#f9d230",
               opacity: 0.5,
               filter: "blur(80px)",
             }}
@@ -2887,7 +2894,7 @@ export default function BrandingServicesPage() {
                     fontWeight: 650,
                     letterSpacing: "-0.01em",
                     color: "#000000",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
                     minHeight: "54px",
@@ -2915,7 +2922,7 @@ export default function BrandingServicesPage() {
                     width: "56px",
                     height: "56px",
                     borderRadius: "50%",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -3046,7 +3053,7 @@ export default function BrandingServicesPage() {
           href="#audit"
           style={{
             flex: 1,
-            background: "#FFBA39",
+            background: "#f9d230",
             color: "#000000",
             textDecoration: "none",
             fontWeight: 650,

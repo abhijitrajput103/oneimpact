@@ -76,7 +76,7 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "w-full mx-auto transition-all duration-500 ease-main rounded-full bg-[#DA9F37]/95 backdrop-blur-xl border border-black/10 shadow-md flex items-center justify-between",
+            "w-full mx-auto transition-all duration-500 ease-main rounded-full bg-[#f9d230]/95 backdrop-blur-xl border border-black/10 shadow-md flex items-center justify-between",
             isScrolled ? "max-w-4xl py-1.5 px-5 sm:px-6" : "max-w-6xl py-2 px-5 sm:px-7"
           )}
         >
@@ -170,7 +170,7 @@ export function Navbar() {
               >
                 <div
                   style={{
-                    background: "#DA9F37",
+                    background: "#f9d230",
                     border: "1.5px solid rgba(0, 0, 0, 0.14)",
                     borderRadius: "18px",
                     padding: "6px",
@@ -186,7 +186,7 @@ export function Navbar() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsServicesOpen(false)}
-                      className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/90 hover:text-[#DA9F37] hover:bg-black uppercase transition-all duration-200 cursor-none px-4 py-2.5 rounded-xl block text-center whitespace-nowrap"
+                      className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/90 hover:text-[#f9d230] hover:bg-black uppercase transition-all duration-200 cursor-none px-4 py-2.5 rounded-xl block text-center whitespace-nowrap"
                       onMouseEnter={() => setCursorType("hover")}
                       onMouseLeave={resetCursor}
                     >
@@ -213,13 +213,13 @@ export function Navbar() {
             {/* CTA Button */}
             <a
               href="/#contact"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-display text-[10px] sm:text-xs font-black tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 text-[#DA9F37] !text-[#DA9F37] bg-black hover:bg-black/85"
-              style={{ color: "#DA9F37" }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-display text-[10px] sm:text-xs font-black tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 text-[#f9d230] !text-[#f9d230] bg-black hover:bg-black/85"
+              style={{ color: "#f9d230" }}
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={resetCursor}
             >
-              <span style={{ color: "#DA9F37" }}>CONTACT</span>
-              <span className="text-xs transition-transform duration-300 group-hover:translate-x-1" style={{ color: "#DA9F37" }}>→</span>
+              <span style={{ color: "#f9d230" }}>CONTACT</span>
+              <span className="text-xs transition-transform duration-300 group-hover:translate-x-1" style={{ color: "#f9d230" }}>→</span>
             </a>
 
             {/* Mobile Hamburger Toggle Button */}
@@ -255,7 +255,7 @@ export function Navbar() {
       {/* Mobile Navigation Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-30 md:hidden bg-[#DA9F37]/95 backdrop-blur-2xl flex flex-col justify-center items-center transition-all duration-500 ease-in-out px-6",
+          "fixed inset-0 z-30 md:hidden bg-[#f9d230]/95 backdrop-blur-2xl flex flex-col justify-center items-center transition-all duration-500 ease-in-out px-6",
           isMenuOpen
             ? "opacity-100 pointer-events-auto scale-100"
             : "opacity-0 pointer-events-none scale-95"
@@ -343,8 +343,8 @@ export function Navbar() {
           <a
             href="/#contact"
             onClick={() => setIsMenuOpen(false)}
-            className="w-full py-4 rounded-full font-display text-sm font-black tracking-wider uppercase text-[#DA9F37] !text-[#DA9F37] bg-black hover:bg-black/85 transition-transform active:scale-95 text-center shadow-lg"
-            style={{ color: "#DA9F37" }}
+            className="w-full py-4 rounded-full font-display text-sm font-black tracking-wider uppercase text-[#f9d230] !text-[#f9d230] bg-black hover:bg-black/85 transition-transform active:scale-95 text-center shadow-lg"
+            style={{ color: "#f9d230" }}
           >
             GET IN TOUCH →
           </a>

@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 
 /**
  * About Hero — Exact Sweet Tape replication:
- * 1. Crumpled gold paper texture background (#DA9F37)
+ * 1. Crumpled gold paper texture background (#f9d230)
  * 2. EXACT Sweet Tape parabolic arched/warped headline:
  *    - "ONE" arches along top curve
  *    - "IMPACT" arches boldly across viewport edge-to-edge
@@ -159,7 +159,7 @@ export function AboutHero() {
     <section
       ref={sectionRef}
       className="relative w-full min-h-[105vh] sm:min-h-[110vh] md:min-h-[115vh] overflow-hidden flex flex-col items-center justify-between pt-24 sm:pt-28 md:pt-32 pb-6 sm:pb-8 md:pb-10"
-      style={{ backgroundColor: "#DA9F37" }}
+      style={{ backgroundColor: "#f9d230" }}
     >
       {/* 1. Full-bleed crumpled gold paper texture overlay */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -187,7 +187,7 @@ export function AboutHero() {
       <div className="relative z-20 w-full max-w-[1400px] mx-auto px-2 sm:px-6 md:px-8 flex flex-col items-center text-center">
         {/* Top small label / ticker — like Sweet Tape */}
         <div className="hero-top-badge mb-3 sm:mb-5 flex items-center justify-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#1A1A1A]/30 bg-[#DA9F37]/40 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#1A1A1A]/30 bg-[#f9d230]/40 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#1A1A1A] animate-pulse" />
             <span className="font-sans text-[10px] sm:text-xs font-black tracking-[0.25em] text-[#1A1A1A] uppercase">
               STICK WITH YOU THROUGH THREE GENERATIONS
@@ -468,7 +468,7 @@ export function AboutHero() {
                     <span className="w-2 h-2 rounded-full bg-[#27C93F]" />
                   </div>
                   <div className="font-mono text-[8.5px] sm:text-[10px] text-[#888] font-semibold flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#DA9F37]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#f9d230]" />
                     ONE IMPACT // DIGITAL ENGINE v2.4
                   </div>
                   <div className="font-mono text-[8px] text-[#666] hidden sm:block">
@@ -491,14 +491,14 @@ export function AboutHero() {
                   {/* Creative Agency Dashboard Graphic inside screen */}
                   <div className="relative z-0 flex items-center justify-between">
                     <div>
-                      <span className="font-sans text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-[#DA9F37]">
+                      <span className="font-sans text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-[#f9d230]">
                         Active Campaign
                       </span>
                       <h4 className="font-sans font-black text-[11px] sm:text-sm md:text-base text-white uppercase tracking-tight">
                         UNLIMITED IMPACT
                       </h4>
                     </div>
-                    <div className="px-2 py-0.5 rounded bg-[#DA9F37]/20 border border-[#DA9F37]/40 text-[#DA9F37] font-mono text-[8px] sm:text-[9px] font-bold">
+                    <div className="px-2 py-0.5 rounded bg-[#f9d230]/20 border border-[#f9d230]/40 text-[#f9d230] font-mono text-[8px] sm:text-[9px] font-bold">
                       99.4% ENGAGEMENT
                     </div>
                   </div>
@@ -509,7 +509,7 @@ export function AboutHero() {
                       (h, i) => (
                         <div
                           key={i}
-                          className="flex-1 bg-gradient-to-t from-[#DA9F37] to-white rounded-full"
+                          className="flex-1 bg-gradient-to-t from-[#f9d230] to-white rounded-full"
                           style={{ height: `${h * 0.25}px` }}
                         />
                       )
@@ -519,7 +519,7 @@ export function AboutHero() {
                   {/* Bottom metrics bar in screen */}
                   <div className="relative z-0 flex items-center justify-between text-[7px] sm:text-[9px] font-mono text-[#777] border-t border-[#1F2026] pt-1 sm:pt-1.5">
                     <span>STATUS: SCALING CLIENTS</span>
-                    <span className="text-[#DA9F37] font-bold">SCROLL TO UNLOCK</span>
+                    <span className="text-[#f9d230] font-bold">SCROLL TO UNLOCK</span>
                   </div>
 
                   {/* =========================================================================
@@ -538,7 +538,7 @@ export function AboutHero() {
                       className="absolute w-44 h-44 sm:w-60 sm:h-60 rounded-full pointer-events-none -z-10"
                       style={{
                         background:
-                          "radial-gradient(circle, rgba(218,159,55,0.7) 0%, rgba(218,159,55,0.25) 45%, rgba(218,159,55,0) 75%)",
+                          "radial-gradient(circle, rgba(249, 210, 48,0.7) 0%, rgba(249, 210, 48,0.25) 45%, rgba(249, 210, 48,0) 75%)",
                         filter: "blur(6px)",
                       }}
                     />
@@ -549,9 +549,9 @@ export function AboutHero() {
                       style={{
                         background:
                           "linear-gradient(135deg, #1A1B1F 0%, #0C0D10 100%)",
-                        border: "2px solid #DA9F37",
+                        border: "2px solid #f9d230",
                         boxShadow:
-                          "0 25px 50px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.3), 0 0 35px rgba(218,159,55,0.5)",
+                          "0 25px 50px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.3), 0 0 35px rgba(249, 210, 48,0.5)",
                       }}
                     >
                       {/* Official One Impact Logo Image — inverted to pure bright white for maximum contrast */}
@@ -565,11 +565,11 @@ export function AboutHero() {
 
                       {/* Gold Badge Ribbon Text */}
                       <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#DA9F37] shadow-[0_0_8px_#DA9F37]" />
-                        <span className="font-sans text-[7.5px] sm:text-[9px] md:text-[10px] font-black tracking-[0.28em] text-[#DA9F37] uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#f9d230] shadow-[0_0_8px_#f9d230]" />
+                        <span className="font-sans text-[7.5px] sm:text-[9px] md:text-[10px] font-black tracking-[0.28em] text-[#f9d230] uppercase">
                           UNSTOPPABLE
                         </span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#DA9F37] shadow-[0_0_8px_#DA9F37]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#f9d230] shadow-[0_0_8px_#f9d230]" />
                       </div>
                     </div>
                   </div>

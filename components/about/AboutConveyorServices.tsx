@@ -32,39 +32,39 @@ function Track1Items() {
           className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:grayscale group-hover:contrast-125 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#DA9F37] uppercase">
+        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#f9d230] uppercase">
           IDENTITY SYSTEM
         </span>
       </div>
 
       {/* Pill 2: Circular Seal Badge */}
-      <div className="h-28 sm:h-36 md:h-44 w-28 sm:w-36 md:w-44 rounded-full border-2 border-[#DA9F37] bg-[#101217] flex-shrink-0 flex flex-col items-center justify-center p-3 text-center shadow-lg shadow-[#DA9F37]/10">
-        <span className="font-mono text-[8px] sm:text-[9px] font-black tracking-widest text-[#DA9F37] uppercase">
+      <div className="h-28 sm:h-36 md:h-44 w-28 sm:w-36 md:w-44 rounded-full border-2 border-[#f9d230] bg-[#101217] flex-shrink-0 flex flex-col items-center justify-center p-3 text-center shadow-lg shadow-[#f9d230]/10">
+        <span className="font-mono text-[8px] sm:text-[9px] font-black tracking-widest text-[#f9d230] uppercase">
           ONE IMPACT
         </span>
         <span className="font-sans text-xs sm:text-sm font-black text-white mt-0.5">
           DISCIPLINE
         </span>
-        <div className="w-6 h-0.5 bg-[#DA9F37] my-1" />
+        <div className="w-6 h-0.5 bg-[#f9d230] my-1" />
         <span className="font-sans text-[8px] sm:text-[9px] font-bold text-neutral-400">
           01 BRANDING
         </span>
       </div>
 
       {/* Pill 3: Primary Text Stadium Pill */}
-      <div className="h-28 sm:h-36 md:h-44 px-8 sm:px-12 md:px-16 rounded-full border border-[#DA9F37]/40 bg-gradient-to-r from-[#121418] via-[#161820] to-[#121418] flex-shrink-0 flex items-center gap-4 sm:gap-6 shadow-2xl">
+      <div className="h-28 sm:h-36 md:h-44 px-8 sm:px-12 md:px-16 rounded-full border border-[#f9d230]/40 bg-gradient-to-r from-[#121418] via-[#161820] to-[#121418] flex-shrink-0 flex items-center gap-4 sm:gap-6 shadow-2xl">
         <div className="flex flex-col">
-          <span className="font-mono text-xs sm:text-sm md:text-base font-black text-[#DA9F37]">
+          <span className="font-mono text-xs sm:text-sm md:text-base font-black text-[#f9d230]">
             01
           </span>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#DA9F37] mt-1" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#f9d230] mt-1" />
         </div>
         <div className="flex flex-col">
           <h2 className="font-sans font-black text-xl sm:text-3xl md:text-5xl text-white uppercase tracking-tight leading-none whitespace-nowrap">
             BRAND ARCHITECTURE.
           </h2>
           <div className="flex items-center gap-2 mt-1 sm:mt-2">
-            <span className="px-2 py-0.5 rounded-full bg-[#DA9F37]/20 border border-[#DA9F37]/30 text-[#DA9F37] font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-[#f9d230]/20 border border-[#f9d230]/30 text-[#f9d230] font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-wider">
               01 BRANDING
             </span>
             <span className="font-mono text-[9px] sm:text-[11px] text-neutral-400 uppercase tracking-widest hidden sm:inline whitespace-nowrap">
@@ -87,7 +87,7 @@ function Track1Items() {
 
       {/* Pill 5: Handwritten Note Pill */}
       <div className="h-28 sm:h-36 md:h-44 px-6 sm:px-10 rounded-full border border-white/10 bg-[#0E1014] flex-shrink-0 flex items-center justify-center text-center shadow-lg">
-        <p className="font-display italic text-xs sm:text-sm md:text-base text-[#DA9F37] font-bold max-w-[220px] sm:max-w-[260px] leading-snug">
+        <p className="font-display italic text-xs sm:text-sm md:text-base text-[#f9d230] font-bold max-w-[220px] sm:max-w-[260px] leading-snug">
           “A brand is not a logo. It is an unfair advantage in the market.”
         </p>
       </div>
@@ -119,14 +119,14 @@ function Track2Items() {
           alt="Website Development"
           className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:grayscale group-hover:contrast-125 group-hover:scale-105"
         />
-        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#DA9F37] uppercase">
+        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#f9d230] uppercase">
           WEB ARCHITECTURE
         </span>
       </div>
 
       {/* Pill 2: Sweet Tape Style Doodle Note Pill */}
-      <div className="h-28 sm:h-36 md:h-44 px-6 sm:px-10 rounded-full border border-[#DA9F37]/30 bg-[#0C0E12] flex-shrink-0 flex items-center justify-center shadow-lg">
-        <div className="text-left font-mono text-[10px] sm:text-xs text-[#DA9F37] leading-relaxed whitespace-nowrap">
+      <div className="h-28 sm:h-36 md:h-44 px-6 sm:px-10 rounded-full border border-[#f9d230]/30 bg-[#0C0E12] flex-shrink-0 flex items-center justify-center shadow-lg">
+        <div className="text-left font-mono text-[10px] sm:text-xs text-[#f9d230] leading-relaxed whitespace-nowrap">
           <div>same code.</div>
           <div>same templates.</div>
           <div className="font-bold underline">same routine. until now.</div>
@@ -134,22 +134,22 @@ function Track2Items() {
       </div>
 
       {/* Pill 3: Primary Text Stadium Pill */}
-      <div className="h-28 sm:h-36 md:h-44 px-8 sm:px-12 md:px-16 rounded-full border border-[#DA9F37]/40 bg-gradient-to-r from-[#121418] via-[#161820] to-[#121418] flex-shrink-0 flex items-center gap-4 sm:gap-6 shadow-2xl">
+      <div className="h-28 sm:h-36 md:h-44 px-8 sm:px-12 md:px-16 rounded-full border border-[#f9d230]/40 bg-gradient-to-r from-[#121418] via-[#161820] to-[#121418] flex-shrink-0 flex items-center gap-4 sm:gap-6 shadow-2xl">
         <div className="flex flex-col">
-          <span className="font-mono text-xs sm:text-sm md:text-base font-black text-[#DA9F37]">
+          <span className="font-mono text-xs sm:text-sm md:text-base font-black text-[#f9d230]">
             02
           </span>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#DA9F37] mt-1" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#f9d230] mt-1" />
         </div>
         <div className="flex flex-col">
           <h2 className="font-sans font-black text-xl sm:text-3xl md:text-5xl text-white uppercase tracking-tight leading-none whitespace-nowrap">
             DIGITAL PLATFORMS & SEARCH.
           </h2>
           <div className="flex items-center gap-2 mt-1 sm:mt-2">
-            <span className="px-2 py-0.5 rounded-full bg-[#DA9F37]/20 border border-[#DA9F37]/30 text-[#DA9F37] font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-[#f9d230]/20 border border-[#f9d230]/30 text-[#f9d230] font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-wider">
               02 WEBSITE DEV
             </span>
-            <span className="px-2 py-0.5 rounded-full bg-[#DA9F37]/20 border border-[#DA9F37]/30 text-[#DA9F37] font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-[#f9d230]/20 border border-[#f9d230]/30 text-[#f9d230] font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-wider">
               03 SEO SERVICES
             </span>
             <span className="font-mono text-[9px] sm:text-[11px] text-neutral-400 uppercase tracking-widest hidden sm:inline whitespace-nowrap">
@@ -164,7 +164,7 @@ function Track2Items() {
         <span className="font-sans text-xl sm:text-2xl md:text-3xl font-black text-white">
           #1
         </span>
-        <span className="font-mono text-[8px] sm:text-[9px] font-bold text-[#DA9F37] uppercase">
+        <span className="font-mono text-[8px] sm:text-[9px] font-bold text-[#f9d230] uppercase">
           RANKINGS
         </span>
         <span className="font-mono text-[7px] text-neutral-400 mt-1">
@@ -180,7 +180,7 @@ function Track2Items() {
           alt="SEO Strategy"
           className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:grayscale group-hover:contrast-125 group-hover:scale-105"
         />
-        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#DA9F37] uppercase">
+        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#f9d230] uppercase">
           SEARCH ENGINE ENGINE
         </span>
       </div>
@@ -212,34 +212,34 @@ function Track3Items() {
           alt="Content and Film"
           className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:grayscale group-hover:contrast-125 group-hover:scale-105"
         />
-        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#DA9F37] uppercase">
+        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#f9d230] uppercase">
           CINEMATIC PRODUCTION
         </span>
       </div>
 
       {/* Pill 2: Primary Text Stadium Pill */}
-      <div className="h-28 sm:h-36 md:h-44 px-8 sm:px-12 md:px-16 rounded-full border border-[#DA9F37]/40 bg-gradient-to-r from-[#121418] via-[#161820] to-[#121418] flex-shrink-0 flex items-center gap-4 sm:gap-6 shadow-2xl">
+      <div className="h-28 sm:h-36 md:h-44 px-8 sm:px-12 md:px-16 rounded-full border border-[#f9d230]/40 bg-gradient-to-r from-[#121418] via-[#161820] to-[#121418] flex-shrink-0 flex items-center gap-4 sm:gap-6 shadow-2xl">
         <div className="flex flex-col">
-          <span className="font-mono text-xs sm:text-sm md:text-base font-black text-[#DA9F37]">
+          <span className="font-mono text-xs sm:text-sm md:text-base font-black text-[#f9d230]">
             03
           </span>
-          <div className="w-1.5 h-1.5 rounded-full bg-[#DA9F37] mt-1" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#f9d230] mt-1" />
         </div>
         <div className="flex flex-col">
           <h2 className="font-sans font-black text-xl sm:text-3xl md:text-5xl text-white uppercase tracking-tight leading-none whitespace-nowrap">
             CONTENT, MEDIA & VIRAL REACH.
           </h2>
           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-1 sm:mt-2">
-            <span className="px-2 py-0.5 rounded-full bg-[#DA9F37]/20 border border-[#DA9F37]/30 text-[#DA9F37] font-mono text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-[#f9d230]/20 border border-[#f9d230]/30 text-[#f9d230] font-mono text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider">
               04 CONTENT & FILM
             </span>
-            <span className="px-2 py-0.5 rounded-full bg-[#DA9F37]/20 border border-[#DA9F37]/30 text-[#DA9F37] font-mono text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-[#f9d230]/20 border border-[#f9d230]/30 text-[#f9d230] font-mono text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider">
               05 INFLUENCER PR
             </span>
-            <span className="px-2 py-0.5 rounded-full bg-[#DA9F37]/20 border border-[#DA9F37]/30 text-[#DA9F37] font-mono text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-[#f9d230]/20 border border-[#f9d230]/30 text-[#f9d230] font-mono text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider">
               06 UGC
             </span>
-            <span className="px-2 py-0.5 rounded-full bg-[#DA9F37]/20 border border-[#DA9F37]/30 text-[#DA9F37] font-mono text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider">
+            <span className="px-2 py-0.5 rounded-full bg-[#f9d230]/20 border border-[#f9d230]/30 text-[#f9d230] font-mono text-[8px] sm:text-[9.5px] font-bold uppercase tracking-wider">
               07 SOCIAL MEDIA
             </span>
           </div>
@@ -261,7 +261,7 @@ function Track3Items() {
           alt="Influencer PR"
           className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:grayscale group-hover:contrast-125 group-hover:scale-105"
         />
-        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#DA9F37] uppercase">
+        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#f9d230] uppercase">
           INFLUENCER NETWORK
         </span>
       </div>
@@ -274,7 +274,7 @@ function Track3Items() {
           alt="UGC Campaigns"
           className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:grayscale group-hover:contrast-125 group-hover:scale-105"
         />
-        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#DA9F37] uppercase">
+        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#f9d230] uppercase">
           UGC CREATIVE
         </span>
       </div>
@@ -287,7 +287,7 @@ function Track3Items() {
           alt="Social Media"
           className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:grayscale group-hover:contrast-125 group-hover:scale-105"
         />
-        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#DA9F37] uppercase">
+        <span className="absolute bottom-3 left-6 font-mono text-[9px] font-bold tracking-widest text-[#f9d230] uppercase">
           SOCIAL MEDIA DOMINATION
         </span>
       </div>
@@ -390,15 +390,15 @@ export function AboutConveyorServices() {
         className="absolute inset-0 pointer-events-none -z-0"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(218,159,55,0.08) 0%, rgba(7,8,10,0.85) 75%)",
+            "radial-gradient(ellipse at center, rgba(249, 210, 48,0.08) 0%, rgba(7,8,10,0.85) 75%)",
         }}
       />
 
       {/* Top Indicator Pill */}
       <div className="absolute top-4 sm:top-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/15 bg-black/60 backdrop-blur-md">
-          <span className="w-2 h-2 rounded-full bg-[#DA9F37] animate-pulse" />
-          <span className="font-sans text-[10px] sm:text-xs font-black tracking-[0.22em] text-[#DA9F37] uppercase">
+          <span className="w-2 h-2 rounded-full bg-[#f9d230] animate-pulse" />
+          <span className="font-sans text-[10px] sm:text-xs font-black tracking-[0.22em] text-[#f9d230] uppercase">
             3 CORE DISCIPLINES • 7 MASTER SERVICES
           </span>
         </div>
@@ -459,7 +459,7 @@ export function AboutConveyorServices() {
         >
           <path
             d="M0 30V15L30 5L60 20L90 6L120 18L150 4L180 16L210 10L240 22L270 5L300 15L330 25L360 8L390 20L420 5L450 16L480 10L510 22L540 6L570 18L600 3L630 15L660 24L690 8L720 16L750 5L780 20L810 10L840 22L870 3L900 16L930 10L960 24L990 6L1020 18L1050 5L1080 15L1110 22L1140 8L1170 20L1200 6L1230 16L1260 10L1290 24L1320 5L1350 18L1380 10L1410 20L1440 6V30Z"
-            fill="#DA9F37"
+            fill="#f9d230"
           />
         </svg>
       </div>

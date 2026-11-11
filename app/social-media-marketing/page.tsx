@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/common/Navbar";
+import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
 const NOTICES = [
   "Get a social media audit for your brand. Fill the form and our team will get back to you.",
@@ -48,45 +49,45 @@ const QUOTES = [
 ];
 
 const HELPS_CARDS = [
-  { t: "Content strategies in your brand's voice", a: "Social media marketing companies curate content strategies that speak your brand's voice and goals, so your content connects with the right audience.", d: "M4 20h4L19 9l-4-4L4 16zM13 7l4 4", chip: "#FFBA39" },
-  { t: "Consistency and engagement on your socials", a: "Consistent engagement activity keeps your brand relevant to its audience.", d: "M4 12a8 8 0 0 1 14-5.3M20 4v5h-5M20 12a8 8 0 0 1-14 5.3M4 20v-5h5", chip: "#7BAAFF" },
-  { t: "Performance tracking via paid tools", a: "With specific data, insights and learnings, you make smarter decisions by seeing what's working and what needs more improvement.", d: "M4 20V10M10 20V4M16 20v-7M22 20H2", chip: "#FFBA39" },
-  { t: "Managed online communities", a: "Gone are the days when posting about your business was enough. Social media fosters real interactions, and an open line of communication builds trust and loyalty.", d: "M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21v-1a6 6 0 0 1 12 0v1M16 3.5a4 4 0 0 1 0 7.5M22 21v-1a6 6 0 0 0-4-5.6", chip: "#7BAAFF" },
-  { t: "Paid campaigns, set up and managed", a: "By targeting the right audience at the right time, social media marketing companies improve ROI efficiently, with continuous optimization to keep improving results.", d: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z", chip: "#FFBA39" },
-  { t: "A creative approach", a: "With multiple ideas and expert visualizers, social media agencies bring creative consistency across visual and written content that reinforces brand identity.", d: "M12 3a9 9 0 1 0 0 18c1 0 1.6-.8 1.3-1.7-.5-1.3.4-2.3 1.7-2.3H17a4 4 0 0 0 4-4c0-5.5-4-10-9-10zM8 12h.01M10 7.5h.01M15 7.5h.01", chip: "#7BAAFF" },
+  { t: "Content strategies in your brand's voice", a: "Social media marketing companies curate content strategies that speak your brand's voice and goals, so your content connects with the right audience.", d: "M4 20h4L19 9l-4-4L4 16zM13 7l4 4", chip: "#f9d230" },
+  { t: "Consistency and engagement on your socials", a: "Consistent engagement activity keeps your brand relevant to its audience.", d: "M4 12a8 8 0 0 1 14-5.3M20 4v5h-5M20 12a8 8 0 0 1-14 5.3M4 20v-5h5", chip: "#4066c6" },
+  { t: "Performance tracking via paid tools", a: "With specific data, insights and learnings, you make smarter decisions by seeing what's working and what needs more improvement.", d: "M4 20V10M10 20V4M16 20v-7M22 20H2", chip: "#f9d230" },
+  { t: "Managed online communities", a: "Gone are the days when posting about your business was enough. Social media fosters real interactions, and an open line of communication builds trust and loyalty.", d: "M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21v-1a6 6 0 0 1 12 0v1M16 3.5a4 4 0 0 1 0 7.5M22 21v-1a6 6 0 0 0-4-5.6", chip: "#4066c6" },
+  { t: "Paid campaigns, set up and managed", a: "By targeting the right audience at the right time, social media marketing companies improve ROI efficiently, with continuous optimization to keep improving results.", d: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z", chip: "#f9d230" },
+  { t: "A creative approach", a: "With multiple ideas and expert visualizers, social media agencies bring creative consistency across visual and written content that reinforces brand identity.", d: "M12 3a9 9 0 1 0 0 18c1 0 1.6-.8 1.3-1.7-.5-1.3.4-2.3 1.7-2.3H17a4 4 0 0 0 4-4c0-5.5-4-10-9-10zM8 12h.01M10 7.5h.01M15 7.5h.01", chip: "#4066c6" },
 ];
 
 const BUT_WHY_CARDS = [
-  { t: "Brands of every size", a: "We work with startups, small businesses and established brands.", chip: "#FFBA39" },
-  { t: "Platform-specific expertise", a: "From the Instagram algorithm to LinkedIn's thought-provoking content, we understand which platform works best for your business.", chip: "#7BAAFF" },
-  { t: "Real-time industry insights", a: "We stay ahead of trends and algorithm changes, so your brand keeps up with them.", chip: "#FFBA39" },
-  { t: "Data-driven campaigns", a: "Every post, reel and story is backed by analytics, so decisions are informed by data, not impulse.", chip: "#7BAAFF" },
-  { t: "Creativity that converts", a: "We blend marketing strategy with storytelling to stop the doom-scroll and make your target group see your brand.", chip: "#FFBA39" },
-  { t: "Transparent reporting", a: "Detailed, simplified reports show what's working, and we shape your strategy around them.", chip: "#7BAAFF" },
-  { t: "Cross-industry experience", a: "Our team comes from diverse industries and brings fresh perspectives to every brand we work with.", chip: "#FFBA39" },
-  { t: "Relationship-first approach", a: "Your brand isn't just another account for us, it's a story we're excited to tell.", chip: "#7BAAFF" },
+  { t: "Brands of every size", a: "We work with startups, small businesses and established brands.", chip: "#f9d230" },
+  { t: "Platform-specific expertise", a: "From the Instagram algorithm to LinkedIn's thought-provoking content, we understand which platform works best for your business.", chip: "#4066c6" },
+  { t: "Real-time industry insights", a: "We stay ahead of trends and algorithm changes, so your brand keeps up with them.", chip: "#f9d230" },
+  { t: "Data-driven campaigns", a: "Every post, reel and story is backed by analytics, so decisions are informed by data, not impulse.", chip: "#4066c6" },
+  { t: "Creativity that converts", a: "We blend marketing strategy with storytelling to stop the doom-scroll and make your target group see your brand.", chip: "#f9d230" },
+  { t: "Transparent reporting", a: "Detailed, simplified reports show what's working, and we shape your strategy around them.", chip: "#4066c6" },
+  { t: "Cross-industry experience", a: "Our team comes from diverse industries and brings fresh perspectives to every brand we work with.", chip: "#f9d230" },
+  { t: "Relationship-first approach", a: "Your brand isn't just another account for us, it's a story we're excited to tell.", chip: "#4066c6" },
 ];
 
 const SVC_GROUPS = [
   {
     label: "Organic social media",
     items: [
-      { t: "Social media strategy development", a: "We help you build a clear roadmap, catering to your goals, audience and industry. A well-researched strategy sets the foundation for consistent and impactful brand communication.", dot: "#FFBA39" },
-      { t: "Community management services", a: "Building a community that's loyal to your brand is the need of the hour for businesses. We engage with your audience and hear back from them, which builds trust and long-term relationships.", dot: "#7BAAFF" },
-      { t: "Content creation services", a: "Content covers everything from graphics to captions, tailored to each platform. Our content is designed to reflect your brand voice while driving engagement.", dot: "#FFBA39" },
-      { t: "Social media audits", a: "With regular audits of your social presence, we assess your current content and performance metrics. These audits help us understand the gaps and opportunities for growth.", dot: "#7BAAFF" },
-      { t: "Influencer marketing services", a: "Influencer marketing is one of the proven ways to connect with your audience and get conversions. We connect your business with creators who can promote your brand, enabling authentic outreach and boosting visibility.", dot: "#FFBA39" },
-      { t: "Reputation management services", a: "Spotted a hate comment or a complaint about your business? We've got your back. We closely monitor mentions, reviews and public sentiment to stay on top of customer satisfaction and keep your brand image positive.", dot: "#7BAAFF" },
+      { t: "Social media strategy development", a: "We help you build a clear roadmap, catering to your goals, audience and industry. A well-researched strategy sets the foundation for consistent and impactful brand communication.", dot: "#f9d230" },
+      { t: "Community management services", a: "Building a community that's loyal to your brand is the need of the hour for businesses. We engage with your audience and hear back from them, which builds trust and long-term relationships.", dot: "#4066c6" },
+      { t: "Content creation services", a: "Content covers everything from graphics to captions, tailored to each platform. Our content is designed to reflect your brand voice while driving engagement.", dot: "#f9d230" },
+      { t: "Social media audits", a: "With regular audits of your social presence, we assess your current content and performance metrics. These audits help us understand the gaps and opportunities for growth.", dot: "#4066c6" },
+      { t: "Influencer marketing services", a: "Influencer marketing is one of the proven ways to connect with your audience and get conversions. We connect your business with creators who can promote your brand, enabling authentic outreach and boosting visibility.", dot: "#f9d230" },
+      { t: "Reputation management services", a: "Spotted a hate comment or a complaint about your business? We've got your back. We closely monitor mentions, reviews and public sentiment to stay on top of customer satisfaction and keep your brand image positive.", dot: "#4066c6" },
     ],
   },
   {
     label: "Platform-based",
     items: [
-      { t: "Facebook and Instagram marketing", a: "With content strategy, paid ad campaigns and audience targeting, we get the right balance between paid and organic social media marketing, helping your business reach and engage its target customers.", dot: "#FFBA39" },
-      { t: "LinkedIn marketing services", a: "LinkedIn is the place to connect with business leaders and the right talent, and it positions your brand as a thought leader. Our curated LinkedIn strategy focuses on professional storytelling and B2B engagement.", dot: "#7BAAFF" },
-      { t: "YouTube marketing services", a: "YouTube is one of the biggest platforms for video content. We handle content creation, scripting, YouTube SEO and channel growth strategies that support long-form storytelling and higher engagement.", dot: "#FFBA39" },
-      { t: "X (Twitter) management services", a: "On X, we handle timely updates, trend participation and audience interactions. It's ideal for quick brand communication and builds a strong community connection.", dot: "#7BAAFF" },
-      { t: "Pinterest marketing services", a: "Pinterest is all about aesthetic images. Our Pinterest marketing centres on visual discovery and product promotion, with scroll-stopping pins that inspire action.", dot: "#FFBA39" },
+      { t: "Facebook and Instagram marketing", a: "With content strategy, paid ad campaigns and audience targeting, we get the right balance between paid and organic social media marketing, helping your business reach and engage its target customers.", dot: "#f9d230" },
+      { t: "LinkedIn marketing services", a: "LinkedIn is the place to connect with business leaders and the right talent, and it positions your brand as a thought leader. Our curated LinkedIn strategy focuses on professional storytelling and B2B engagement.", dot: "#4066c6" },
+      { t: "YouTube marketing services", a: "YouTube is one of the biggest platforms for video content. We handle content creation, scripting, YouTube SEO and channel growth strategies that support long-form storytelling and higher engagement.", dot: "#f9d230" },
+      { t: "X (Twitter) management services", a: "On X, we handle timely updates, trend participation and audience interactions. It's ideal for quick brand communication and builds a strong community connection.", dot: "#4066c6" },
+      { t: "Pinterest marketing services", a: "Pinterest is all about aesthetic images. Our Pinterest marketing centres on visual discovery and product promotion, with scroll-stopping pins that inspire action.", dot: "#f9d230" },
     ],
   },
 ];
@@ -481,10 +482,10 @@ export default function SmmLandingPage() {
           transform: none;
         }
         .smm-landing-root .y:hover {
-          background-color: #ffc75e !important;
+          background-color: #fae066 !important;
         }
         .smm-landing-root :focus-visible {
-          outline: 3px solid #7baaff;
+          outline: 3px solid #4066c6;
           outline-offset: 3px;
         }
         .smm-landing-root .fd::placeholder {
@@ -492,8 +493,8 @@ export default function SmmLandingPage() {
         }
         .smm-landing-root .fd:focus {
           outline: none;
-          border-color: #ffba39 !important;
-          box-shadow: 0 0 0 4px rgba(255, 186, 57, 0.3);
+          border-color: #f9d230 !important;
+          box-shadow: 0 0 0 4px rgba(249, 210, 48, 0.3);
         }
         .smm-landing-root .prewrap {
           white-space: pre-line;
@@ -697,8 +698,8 @@ export default function SmmLandingPage() {
 
       {/* ── HERO SECTION */}
       <section id="top" style={{ position: "relative", overflow: "hidden", background: "#FFFFFF" }}>
-        <div aria-hidden="true" style={{ position: "absolute", top: "40px", right: "6%", width: "380px", height: "380px", borderRadius: "50%", background: "#FFBA39", opacity: 0.55, filter: "blur(70px)" }} />
-        <div aria-hidden="true" style={{ position: "absolute", top: "260px", right: "24%", width: "320px", height: "320px", borderRadius: "50%", background: "#7BAAFF", opacity: 0.55, filter: "blur(80px)" }} />
+        <div aria-hidden="true" style={{ position: "absolute", top: "40px", right: "6%", width: "380px", height: "380px", borderRadius: "50%", background: "#f9d230", opacity: 0.55, filter: "blur(70px)" }} />
+        <div aria-hidden="true" style={{ position: "absolute", top: "260px", right: "24%", width: "320px", height: "320px", borderRadius: "50%", background: "#4066c6", opacity: 0.55, filter: "blur(80px)" }} />
 
         <div className="hero-grid" style={{ position: "relative", maxWidth: "1360px", margin: "0 auto", padding: "clamp(92px, 10vw, 120px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 68px)" }}>
           {/* Left Column */}
@@ -729,7 +730,7 @@ export default function SmmLandingPage() {
             {!sent1 ? (
               <form onSubmit={handleSubmit1} style={{ display: "flex", flexDirection: "column", gap: "16px", position: "relative", zIndex: 1 }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#FFBA39", letterSpacing: 0 }}>For your brand</span>
+                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#f9d230", letterSpacing: 0 }}>For your brand</span>
                   <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(1.6rem, 2.4vw, 2rem)", lineHeight: 1.12, letterSpacing: "-0.035em", fontWeight: 700 }}>Get your social media audit</h2>
                   <p style={{ fontSize: "15.5px", color: "#C7C7CC", letterSpacing: 0, margin: 0 }}>A real person from our team reviews your social media and gets back to you.</p>
                 </div>
@@ -769,7 +770,7 @@ export default function SmmLandingPage() {
                   </select>
                 </div>
 
-                <button type="submit" className="press y btn-sheen" style={{ font: "inherit", fontSize: "17px", fontWeight: 650, letterSpacing: "-0.01em", color: "#000000", background: "#FFBA39", border: 0, borderRadius: "999px", minHeight: "54px", cursor: "pointer", marginTop: "4px" }}>
+                <button type="submit" className="press y btn-sheen" style={{ font: "inherit", fontSize: "17px", fontWeight: 650, letterSpacing: "-0.01em", color: "#000000", background: "#f9d230", border: 0, borderRadius: "999px", minHeight: "54px", cursor: "pointer", marginTop: "4px" }}>
                   Get my social media audit
                 </button>
 
@@ -779,7 +780,7 @@ export default function SmmLandingPage() {
               </form>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start", padding: "12px 0", position: "relative", zIndex: 1 }}>
-                <span style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#FFBA39", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#f9d230", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
                 </span>
                 <h3 role="status" className="smm-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}>Audit requested</h3>
@@ -830,7 +831,7 @@ export default function SmmLandingPage() {
             {QUOTES.map((q, idx) => (
               <figure key={idx} style={{ margin: 0, background: "#FFFFFF", border: "1px solid #E5E5EA", borderRadius: "24px", padding: "28px", display: "flex", flexDirection: "column", gap: "20px", justifyContent: "space-between", boxShadow: "0 2px 14px rgba(0, 0, 0, 0.03)" }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                  <span style={{ display: "inline-flex", gap: "3px", color: "#FFBA39" }} aria-label="Rated 5 out of 5">
+                  <span style={{ display: "inline-flex", gap: "3px", color: "#f9d230" }} aria-label="Rated 5 out of 5">
                     {[...Array(5)].map((_, sIdx) => (
                       <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" /></svg>
                     ))}
@@ -841,7 +842,7 @@ export default function SmmLandingPage() {
                 </div>
                 <figcaption style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/LOGO/oneimpact-logo.webp" alt="Client logo" style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 0.7 }} />
+                  <img src="/LOGO/oneimpact-logo.webp" alt="Client logo" style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 1 }} />
                   <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>{q.role}</span>
                 </figcaption>
               </figure>
@@ -887,7 +888,7 @@ export default function SmmLandingPage() {
 
           {/* Tab Switcher */}
           <div role="tablist" aria-label="Why One Impact tabs" style={{ position: "relative", display: "inline-grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", background: "#F2F2F5", border: "1px solid #E5E5EA", borderRadius: "999px", padding: "4px", boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.06)", width: "min(460px, 100%)" }}>
-            <span aria-hidden="true" className="btn-sheen" style={{ position: "absolute", top: "4px", bottom: "4px", left: "4px", width: "calc((100% - 8px) / 2)", transform: `translateX(${whyTab * 100}%)`, transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)", background: "#FFBA39", borderRadius: "999px", boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)" }} />
+            <span aria-hidden="true" className="btn-sheen" style={{ position: "absolute", top: "4px", bottom: "4px", left: "4px", width: "calc((100% - 8px) / 2)", transform: `translateX(${whyTab * 100}%)`, transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)", background: "#f9d230", borderRadius: "999px", boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)" }} />
             {["But why One Impact?", "Why One Impact?"].map((label, i) => (
               <button key={i} type="button" role="tab" aria-selected={whyTab === i} onClick={() => setWhyTab(i)} style={{ position: "relative", zIndex: 1, font: "inherit", fontSize: "14.5px", fontWeight: whyTab === i ? 700 : 500, color: whyTab === i ? "#000000" : "#555558", background: "transparent", border: 0, borderRadius: "999px", minHeight: "42px", padding: "8px 18px", cursor: "pointer", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px", transition: "color 200ms ease", whiteSpace: "nowrap", letterSpacing: "-0.015em" }}>
                 <span>{label}</span>
@@ -905,8 +906,8 @@ export default function SmmLandingPage() {
             {BUT_WHY_CARDS.map((w, idx) => (
               <div key={idx} className="smm-why-card" style={{ background: "#F5F5F7", borderRadius: "22px", padding: "24px 22px", display: "flex", flexDirection: "column", gap: "10px", border: "1px solid rgba(0, 0, 0, 0.03)", boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)", transition: "transform 200ms ease, box-shadow 200ms ease" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span className="why-icon" style={{ width: "36px", height: "36px", borderRadius: "50%", background: w.chip === "#FFBA39" ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)" : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)", display: "flex", alignItems: "center", justifyContent: "center", flex: "none", boxShadow: w.chip === "#FFBA39" ? "0 3px 8px rgba(255, 186, 57, 0.35)" : "0 3px 8px rgba(0, 102, 255, 0.35)" }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={w.chip === "#FFBA39" ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                  <span className="why-icon" style={{ width: "36px", height: "36px", borderRadius: "50%", background: w.chip === "#f9d230" ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)" : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)", display: "flex", alignItems: "center", justifyContent: "center", flex: "none", boxShadow: w.chip === "#f9d230" ? "0 3px 8px rgba(249, 210, 48, 0.35)" : "0 3px 8px rgba(64, 102, 198, 0.35)" }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={w.chip === "#f9d230" ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
                   </span>
                   <h3 className="smm-heading" style={{ margin: 0, fontSize: "18.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#1D1D1F" }}>{w.t}</h3>
                 </div>
@@ -922,7 +923,7 @@ export default function SmmLandingPage() {
             {WHY2_POINTS.map((w, idx) => (
               <div key={idx} className="smm-why-card" style={{ background: "#F5F5F7", borderRadius: "22px", padding: "24px 22px", display: "flex", flexDirection: "column", gap: "10px", border: "1px solid rgba(0, 0, 0, 0.03)", boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)", transition: "transform 200ms ease, box-shadow 200ms ease" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span className="why-icon" style={{ width: "36px", height: "36px", borderRadius: "50%", background: idx % 2 === 0 ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)" : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)", display: "flex", alignItems: "center", justifyContent: "center", flex: "none", boxShadow: idx % 2 === 0 ? "0 3px 8px rgba(255, 186, 57, 0.35)" : "0 3px 8px rgba(0, 102, 255, 0.35)" }}>
+                  <span className="why-icon" style={{ width: "36px", height: "36px", borderRadius: "50%", background: idx % 2 === 0 ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)" : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)", display: "flex", alignItems: "center", justifyContent: "center", flex: "none", boxShadow: idx % 2 === 0 ? "0 3px 8px rgba(249, 210, 48, 0.35)" : "0 3px 8px rgba(64, 102, 198, 0.35)" }}>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={idx % 2 === 0 ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
                   </span>
                   <h3 className="smm-heading" style={{ margin: 0, fontSize: "18.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#1D1D1F" }}>{w.t}</h3>
@@ -940,7 +941,7 @@ export default function SmmLandingPage() {
           <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700, maxWidth: "14ch" }}>Explore our social media services</h2>
 
           <div role="tablist" aria-label="Service groups" style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", background: "#F2F2F5", border: "1px solid #E5E5EA", borderRadius: "999px", padding: "4px", boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)", width: "min(420px, 100%)" }}>
-            <span aria-hidden="true" className="btn-sheen" style={{ position: "absolute", top: "4px", bottom: "4px", left: "4px", width: "calc((100% - 8px) / 2)", transform: `translateX(${svcIdx * 100}%)`, transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)", background: "#FFBA39", borderRadius: "999px", boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)" }} />
+            <span aria-hidden="true" className="btn-sheen" style={{ position: "absolute", top: "4px", bottom: "4px", left: "4px", width: "calc((100% - 8px) / 2)", transform: `translateX(${svcIdx * 100}%)`, transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)", background: "#f9d230", borderRadius: "999px", boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)" }} />
             {SVC_GROUPS.map((grp, i) => (
               <button key={i} type="button" role="tab" className="press" aria-selected={svcIdx === i} onClick={() => setSvcIdx(i)} style={{ position: "relative", zIndex: 1, font: "inherit", fontSize: "15px", fontWeight: svcIdx === i ? 650 : 500, color: svcIdx === i ? "#000000" : "#555558", background: "transparent", border: 0, borderRadius: "999px", minHeight: "44px", padding: "9px 18px", cursor: "pointer", display: "inline-flex", alignItems: "center", justifyContent: "center", whiteSpace: "nowrap", letterSpacing: "-0.015em", transition: "color 200ms ease" }}>
                 {grp.label}
@@ -979,7 +980,7 @@ export default function SmmLandingPage() {
         {/* Topic Pills */}
         <div className="scrollrow" role="tablist" aria-label="Offer topics">
           {OFFER_TOPICS.map((t, i) => (
-            <button key={i} type="button" role="tab" className="press" aria-selected={offerIdx === i} onClick={() => { setOfferIdx(i); setOfferExpanded(false); }} style={{ font: "inherit", fontSize: "15px", fontWeight: offerIdx === i ? 600 : 500, color: "#000000", background: offerIdx === i ? "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)" : "#FFFFFF", border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`, boxShadow: offerIdx === i ? "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)" : "0 1px 2px rgba(0, 0, 0, 0.03)", borderRadius: "999px", minHeight: "44px", padding: "8px 18px", cursor: "pointer", transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)" }}>
+            <button key={i} type="button" role="tab" className="press" aria-selected={offerIdx === i} onClick={() => { setOfferIdx(i); setOfferExpanded(false); }} style={{ font: "inherit", fontSize: "15px", fontWeight: offerIdx === i ? 600 : 500, color: "#000000", background: offerIdx === i ? "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)" : "#FFFFFF", border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`, boxShadow: offerIdx === i ? "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)" : "0 1px 2px rgba(0, 0, 0, 0.03)", borderRadius: "999px", minHeight: "44px", padding: "8px 18px", cursor: "pointer", transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)" }}>
               {t.label}
             </button>
           ))}
@@ -1013,13 +1014,13 @@ export default function SmmLandingPage() {
                   fontSize: "14.5px",
                   fontWeight: 650,
                   color: "#000000",
-                  background: "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)",
+                  background: "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)",
                   border: "1.5px solid #000000",
                   borderRadius: "999px",
                   minHeight: "42px",
                   padding: "8px 22px",
                   cursor: "pointer",
-                  boxShadow: "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
+                  boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
                 }}
               >
                 {offerExpanded ? "Show fewer questions" : `Load more (${activeOffer.qs.length - 5} more questions)`}
@@ -1078,7 +1079,7 @@ export default function SmmLandingPage() {
             <p style={{ fontSize: "18px", color: "#3A3A3C", margin: 0 }}>Mumbai is not only India's financial and entertainment hub, it's a city beaming with opportunities. With its superfast lifestyle, mixed crowd and lucrative industries, Mumbai is &ldquo;THE&rdquo; place for businesses aiming to create an impact, and a social media game that appeals to your target group is no longer optional.</p>
             <p style={{ fontSize: "18px", color: "#3A3A3C", margin: 0 }}>Showing up consistently on Instagram, Facebook, LinkedIn and X can set your business apart. At One Impact, every business we partner with gets a plan built from scratch and tailored to its audience, goals and brand voice, with solutions that bundle creativity and performance marketing, backed by data.</p>
             <p style={{ color: "#000000", fontWeight: 600, fontSize: "18px", margin: 0 }}>We don't just provide a service, we partner with you like a team.</p>
-            <a className="press y btn-sheen" href="#audit" style={{ alignSelf: "flex-start", fontWeight: 650, fontSize: "17px", padding: "14px 24px", minHeight: "52px", background: "#FFBA39", color: "#000000", textDecoration: "none", border: 0, borderRadius: "999px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+            <a className="press y btn-sheen" href="#audit" style={{ alignSelf: "flex-start", fontWeight: 650, fontSize: "17px", padding: "14px 24px", minHeight: "52px", background: "#f9d230", color: "#000000", textDecoration: "none", border: 0, borderRadius: "999px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
               Let's build something that leaves a lasting impression
             </a>
           </div>
@@ -1089,11 +1090,11 @@ export default function SmmLandingPage() {
               <div style={{ position: "absolute", left: "50%", top: "22px", bottom: "-30px", width: "132px", marginLeft: "-66px", borderRadius: "26px", background: "#000000", padding: "8px" }}>
                 <div style={{ height: "100%", borderRadius: "19px", background: "#FFFFFF", padding: "10px", display: "flex", flexDirection: "column", gap: "8px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                    <span style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#FFBA39" }} />
+                    <span style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#f9d230" }} />
                     <span style={{ height: "6px", width: "46px", borderRadius: "4px", background: "#E5E5EA" }} />
                   </div>
                   <div style={{ height: "98px", borderRadius: "10px", background: "#D6E5FF", position: "relative" }}>
-                    <span style={{ position: "absolute", right: "12px", top: "12px", width: "22px", height: "22px", borderRadius: "50%", background: "#FFBA39" }} />
+                    <span style={{ position: "absolute", right: "12px", top: "12px", width: "22px", height: "22px", borderRadius: "50%", background: "#f9d230" }} />
                   </div>
                   <div style={{ display: "flex", gap: "6px", color: "#000000" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></svg>
@@ -1110,7 +1111,7 @@ export default function SmmLandingPage() {
                 { title: "Nearby Competitor", meta: "Sponsored" },
               ].map((r, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px 10px", borderRadius: "16px", ...(i === 0 ? { background: "#FFF4DE" } : {}) }}>
-                  <span style={{ flex: "none", width: "34px", height: "34px", borderRadius: "50%", fontSize: "13px", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", background: i === 0 ? "#FFBA39" : "#E5E5EA" }}>{i + 1}</span>
+                  <span style={{ flex: "none", width: "34px", height: "34px", borderRadius: "50%", fontSize: "13px", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", background: i === 0 ? "#f9d230" : "#E5E5EA" }}>{i + 1}</span>
                   <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
                     <span style={{ fontWeight: 650, fontSize: "16px" }}>{r.title}</span>
                     <span style={{ fontSize: "13.5px", color: "#6E6E73", letterSpacing: 0 }}>{r.meta}</span>
@@ -1122,6 +1123,12 @@ export default function SmmLandingPage() {
         </div>
       </section>
 
+      {/* ── REELS SHOWCASE (IN-WEBSITE) */}
+      <ServiceReelsSection
+        heading="Reels we crafted for brands"
+        subtitle="Click any reel to watch it right here inside the website — no external redirects."
+      />
+
       {/* ── FAQs */}
       <section id="faq" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(24px, 3vw, 36px) clamp(16px, 3vw, 32px) clamp(36px, 4.5vw, 52px)" }}>
         <h2 className="smm-heading" style={{ margin: "0 0 12px", fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700 }}>Questions, answered</h2>
@@ -1132,7 +1139,7 @@ export default function SmmLandingPage() {
         {/* FAQ tab switcher */}
         <div style={{ marginBottom: "24px" }}>
           <div role="tablist" aria-label="FAQ groups" style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${FAQ_GROUPS.length}, minmax(0, 1fr))`, background: "#F2F2F5", border: "1px solid #E5E5EA", borderRadius: "999px", padding: "4px", boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)", width: "min(360px, 100%)" }}>
-            <span aria-hidden="true" className="btn-sheen" style={{ position: "absolute", top: "4px", bottom: "4px", left: "4px", width: `calc((100% - 8px) / ${FAQ_GROUPS.length})`, transform: `translateX(${faqIdx * 100}%)`, transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)", background: "#FFBA39", borderRadius: "999px", boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)" }} />
+            <span aria-hidden="true" className="btn-sheen" style={{ position: "absolute", top: "4px", bottom: "4px", left: "4px", width: `calc((100% - 8px) / ${FAQ_GROUPS.length})`, transform: `translateX(${faqIdx * 100}%)`, transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)", background: "#f9d230", borderRadius: "999px", boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)" }} />
             {FAQ_GROUPS.map((g, i) => (
               <button key={i} type="button" role="tab" className="press" aria-selected={faqIdx === i} onClick={() => { setFaqIdx(i); setFaqExpanded(false); }} style={{ position: "relative", zIndex: 1, font: "inherit", fontSize: "15px", fontWeight: faqIdx === i ? 650 : 500, color: faqIdx === i ? "#000000" : "#555558", background: "transparent", border: 0, borderRadius: "999px", minHeight: "44px", padding: "9px 18px", cursor: "pointer", display: "inline-flex", alignItems: "center", justifyContent: "center", whiteSpace: "nowrap", letterSpacing: "-0.015em", transition: "color 200ms ease" }}>
                 {g.label}
@@ -1156,7 +1163,7 @@ export default function SmmLandingPage() {
         {/* Load More button */}
         {activeFaqGroup.qs.length > 5 && (
           <div style={{ textAlign: "center", marginTop: "24px" }}>
-            <button type="button" className="press y btn-sheen" onClick={() => setFaqExpanded(!faqExpanded)} style={{ font: "inherit", fontSize: "14.5px", fontWeight: 650, color: "#000000", background: "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)", border: "1.5px solid #000000", borderRadius: "999px", minHeight: "42px", padding: "8px 22px", cursor: "pointer", boxShadow: "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)" }}>
+            <button type="button" className="press y btn-sheen" onClick={() => setFaqExpanded(!faqExpanded)} style={{ font: "inherit", fontSize: "14.5px", fontWeight: 650, color: "#000000", background: "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)", border: "1.5px solid #000000", borderRadius: "999px", minHeight: "42px", padding: "8px 22px", cursor: "pointer", boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)" }}>
               {faqExpanded ? "Show fewer" : `Load more (${activeFaqGroup.qs.length - 5} more)`}
             </button>
           </div>
@@ -1166,7 +1173,7 @@ export default function SmmLandingPage() {
       {/* ── FINAL CTA + SECOND FORM */}
       <section id="audit2" style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px) clamp(44px, 6vw, 76px)" }}>
         <div style={{ position: "relative", overflow: "hidden", background: "#F5F5F7", borderRadius: "40px", padding: "clamp(28px, 5vw, 72px)", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: "clamp(28px, 5vw, 64px)", alignItems: "center" }}>
-          <div aria-hidden="true" style={{ position: "absolute", left: "-80px", bottom: "-120px", width: "360px", height: "360px", borderRadius: "50%", background: "#FFBA39", opacity: 0.5, filter: "blur(80px)" }} />
+          <div aria-hidden="true" style={{ position: "absolute", left: "-80px", bottom: "-120px", width: "360px", height: "360px", borderRadius: "50%", background: "#f9d230", opacity: 0.5, filter: "blur(80px)" }} />
 
           <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "18px" }}>
             <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.02, letterSpacing: "-0.05em", fontWeight: 700, maxWidth: "12ch" }}>Stop the scroll.</h2>
@@ -1206,13 +1213,13 @@ export default function SmmLandingPage() {
                   {showHandle2Err && <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>Enter your website or Instagram handle</span>}
                 </div>
 
-                <button type="submit" className="press y btn-sheen" style={{ font: "inherit", fontSize: "17px", fontWeight: 650, letterSpacing: "-0.01em", color: "#000000", background: "#FFBA39", border: 0, borderRadius: "999px", minHeight: "54px", cursor: "pointer", marginTop: "4px" }}>
+                <button type="submit" className="press y btn-sheen" style={{ font: "inherit", fontSize: "17px", fontWeight: 650, letterSpacing: "-0.01em", color: "#000000", background: "#f9d230", border: 0, borderRadius: "999px", minHeight: "54px", cursor: "pointer", marginTop: "4px" }}>
                   Get my social media audit
                 </button>
               </form>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start", padding: "12px 0", position: "relative", zIndex: 1 }}>
-                <span style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#FFBA39", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#f9d230", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
                 </span>
                 <h3 role="status" className="smm-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}>Audit requested</h3>
@@ -1262,7 +1269,7 @@ export default function SmmLandingPage() {
         <a className="press" href="https://wa.me/918369018104" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp us" style={{ flex: "none", width: "52px", height: "52px", borderRadius: "50%", background: "rgba(0,0,0,0.07)", color: "#000000", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" /></svg>
         </a>
-        <a className="press btn-sheen" href="#audit" style={{ flex: 1, background: "#FFBA39", color: "#000000", textDecoration: "none", fontWeight: 650, fontSize: "16.5px", borderRadius: "999px", minHeight: "52px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <a className="press btn-sheen" href="#audit" style={{ flex: 1, background: "#f9d230", color: "#000000", textDecoration: "none", fontWeight: 650, fontSize: "16.5px", borderRadius: "999px", minHeight: "52px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           Get my social media audit
         </a>
       </div>

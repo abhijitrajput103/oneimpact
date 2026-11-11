@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/common/Navbar";
+import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
 const NOTICES = [
   "Free website consultation. Fill the form and our team will get back to you.",
@@ -211,32 +212,32 @@ const SVC_GROUPS = [
       {
         t: "Custom web development",
         a: "Every brand is unique, and so should be its digital presence. Whether it’s a sleek corporate site or a feature-rich portal, we use clean code, robust frameworks and a user-centric approach so your website stands out in both form and function.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "E-commerce web development",
         a: "From product display to secure checkout, we build e-commerce websites optimized for conversions. Whether you need a simple online store or a multi-vendor marketplace, we deliver seamless integrations, mobile responsiveness and user-friendly interfaces.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Responsive web design",
         a: "Today’s users switch between devices constantly, and your website should keep up. We make sure your site looks and functions well across all screen sizes, from desktops to smartphones.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Web application development",
         a: "Need more than a website? We design and develop web applications, from customer portals to booking systems and dashboards, built for speed, scalability and security.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "SEO-friendly web development",
         a: "A great website is useless if it can’t be found online. We build with clean code, fast load times, mobile optimization and search best practices, working closely with our SEO team so your site is built for visibility from day one.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Website maintenance and support",
         a: "Your website shouldn’t be built and forgotten. Routine backups, bug fixes, security updates and performance enhancements keep your site secure, up to date and evolving with your business.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
     ],
   },
@@ -246,32 +247,32 @@ const SVC_GROUPS = [
       {
         t: "CMS development",
         a: "Managing your content shouldn’t be a hassle. We build intuitive, flexible content management systems on WordPress, Drupal, Webflow or a custom build, so you can update your site without technical expertise.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Shopify development",
         a: "End-to-end Shopify services, from store setup and theme customization to app integration. We build fast, mobile-friendly, conversion-ready stores that are easy to manage.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Wix development",
         a: "Clean design, responsive layouts and simple content management on Wix. A good fit for startups, creatives and small businesses that want a site that’s easy to run.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Webflow development",
         a: "Webflow combines visual design with the control of custom code. Our Webflow services cover custom design, interactions, CMS setup and ongoing support.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Magento development",
         a: "Scalable, secure online stores for businesses that need custom functionality, from custom module development to third-party integrations and complex product catalogs.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "WordPress, WooCommerce and Laravel",
         a: "Whether you need a WordPress website, a WooCommerce store or a Laravel-powered web application, we build to take full advantage of your chosen platform’s features, flexibility and performance.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
     ],
   },
@@ -825,10 +826,10 @@ export default function WebDevelopmentPage() {
           transform: none;
         }
         .webdev-landing-root .y:hover {
-          background-color: #ffc75e !important;
+          background-color: #fae066 !important;
         }
         .webdev-landing-root :focus-visible {
-          outline: 3px solid #7baaff;
+          outline: 3px solid #4066c6;
           outline-offset: 3px;
         }
         .webdev-landing-root .fd::placeholder {
@@ -836,8 +837,8 @@ export default function WebDevelopmentPage() {
         }
         .webdev-landing-root .fd:focus {
           outline: none;
-          border-color: #ffba39 !important;
-          box-shadow: 0 0 0 4px rgba(255, 186, 57, 0.3);
+          border-color: #f9d230 !important;
+          box-shadow: 0 0 0 4px rgba(249, 210, 48, 0.3);
         }
         .webdev-landing-root .prewrap {
           white-space: pre-line;
@@ -1042,7 +1043,7 @@ export default function WebDevelopmentPage() {
             width: "380px",
             height: "380px",
             borderRadius: "50%",
-            background: "#FFBA39",
+            background: "#f9d230",
             opacity: 0.55,
             filter: "blur(70px)",
           }}
@@ -1056,7 +1057,7 @@ export default function WebDevelopmentPage() {
             width: "320px",
             height: "320px",
             borderRadius: "50%",
-            background: "#7BAAFF",
+            background: "#4066c6",
             opacity: 0.55,
             filter: "blur(80px)",
           }}
@@ -1221,7 +1222,7 @@ export default function WebDevelopmentPage() {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#FFBA39", letterSpacing: 0 }}>
+                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#f9d230", letterSpacing: 0 }}>
                     Free for your brand
                   </span>
                   <h2
@@ -1379,7 +1380,7 @@ export default function WebDevelopmentPage() {
                     fontWeight: 650,
                     letterSpacing: "-0.01em",
                     color: "#000000",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
                     minHeight: "54px",
@@ -1411,7 +1412,7 @@ export default function WebDevelopmentPage() {
                     width: "56px",
                     height: "56px",
                     borderRadius: "50%",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -1760,7 +1761,7 @@ export default function WebDevelopmentPage() {
                   width: "32px",
                   height: "4px",
                   borderRadius: "999px",
-                  background: "#FFBA39",
+                  background: "#f9d230",
                 }}
                 aria-hidden="true"
               />
@@ -1814,7 +1815,7 @@ export default function WebDevelopmentPage() {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                  <span style={{ display: "inline-flex", gap: "3px", color: "#FFBA39" }} aria-label="Rated 5 out of 5">
+                  <span style={{ display: "inline-flex", gap: "3px", color: "#f9d230" }} aria-label="Rated 5 out of 5">
                     {[...Array(5)].map((_, sIdx) => (
                       <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
@@ -1839,7 +1840,7 @@ export default function WebDevelopmentPage() {
                   <img
                     src="/LOGO/oneimpact-logo.webp"
                     alt="Client logo"
-                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 0.7 }}
+                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 1 }}
                   />
                   <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
                     {q.role}
@@ -1934,7 +1935,7 @@ export default function WebDevelopmentPage() {
       >
         <div
           style={{
-            background: "#FFBA39",
+            background: "#f9d230",
             borderRadius: "36px",
             padding: "clamp(28px, 5vw, 64px)",
           }}
@@ -2055,9 +2056,9 @@ export default function WebDevelopmentPage() {
                 width: `calc((100% - 8px) / ${SVC_GROUPS.length})`,
                 transform: `translateX(${svcIdx * 100}%)`,
                 transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#FFBA39",
+                background: "#f9d230",
                 borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
               }}
             />
             {SVC_GROUPS.map((g, i) => (
@@ -2200,8 +2201,8 @@ export default function WebDevelopmentPage() {
                 fontSize: "15px",
                 fontWeight: offerIdx === i ? 600 : 500,
                 color: offerIdx === i ? "#000000" : "#3A3A3C",
-                background: offerIdx === i ? "#FFBA39" : "#FFFFFF",
-                border: offerIdx === i ? "1.5px solid #FFBA39" : "1.5px solid #D2D2D7",
+                background: offerIdx === i ? "#f9d230" : "#FFFFFF",
+                border: offerIdx === i ? "1.5px solid #f9d230" : "1.5px solid #D2D2D7",
                 borderRadius: "999px",
                 minHeight: "44px",
                 padding: "8px 18px",
@@ -2335,7 +2336,7 @@ export default function WebDevelopmentPage() {
                 fontSize: "17px",
                 padding: "14px 24px",
                 minHeight: "52px",
-                background: "#FFBA39",
+                background: "#f9d230",
                 color: "#000000",
                 textDecoration: "none",
                 border: 0,
@@ -2403,7 +2404,7 @@ export default function WebDevelopmentPage() {
                   height: "36px",
                   borderRadius: "50% 50% 50% 0",
                   transform: "rotate(-45deg)",
-                  background: "#FFBA39",
+                  background: "#f9d230",
                   boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
                 }}
               />
@@ -2432,7 +2433,7 @@ export default function WebDevelopmentPage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      background: i === 0 ? "#FFBA39" : "#E5E5EA",
+                      background: i === 0 ? "#f9d230" : "#E5E5EA",
                     }}
                   >
                     {i + 1}
@@ -2447,6 +2448,12 @@ export default function WebDevelopmentPage() {
           </figure>
         </div>
       </section>
+
+      {/* ── REELS SHOWCASE (IN-WEBSITE) */}
+      <ServiceReelsSection
+        heading="Our work in motion"
+        subtitle="Explore our client reels directly within the page — no external redirects."
+      />
 
       {/* â”€â”€ FAQs */}
       <section
@@ -2505,9 +2512,9 @@ export default function WebDevelopmentPage() {
                 width: `calc((100% - 8px) / ${FAQ_GROUPS.length})`,
                 transform: `translateX(${faqIdx * 100}%)`,
                 transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#FFBA39",
+                background: "#f9d230",
                 borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
               }}
             />
             {FAQ_GROUPS.map((g, i) => (
@@ -2638,7 +2645,7 @@ export default function WebDevelopmentPage() {
               width: "360px",
               height: "360px",
               borderRadius: "50%",
-              background: "#FFBA39",
+              background: "#f9d230",
               opacity: 0.5,
               filter: "blur(80px)",
             }}
@@ -2881,7 +2888,7 @@ export default function WebDevelopmentPage() {
                     fontWeight: 650,
                     letterSpacing: "-0.01em",
                     color: "#000000",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
                     minHeight: "54px",
@@ -2913,7 +2920,7 @@ export default function WebDevelopmentPage() {
                     width: "56px",
                     height: "56px",
                     borderRadius: "50%",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -3017,7 +3024,7 @@ export default function WebDevelopmentPage() {
             <a href="/about" style={{ color: "#6E6E73", textDecoration: "none" }}>
               About OneImpact
             </a>
-            <a href="/#work" style={{ color: "#6E6E73", textDecoration: "none" }}>
+            <a href="/#showreel" style={{ color: "#6E6E73", textDecoration: "none" }}>
               Our work
             </a>
             <a href="/#team" style={{ color: "#6E6E73", textDecoration: "none" }}>
@@ -3109,7 +3116,7 @@ export default function WebDevelopmentPage() {
           className="press y btn-sheen"
           style={{
             flex: 1,
-            background: "#FFBA39",
+            background: "#f9d230",
             color: "#000000",
             fontWeight: 650,
             fontSize: "15px",

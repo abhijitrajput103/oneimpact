@@ -184,7 +184,7 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
 
             {/* Description */}
             <p
-              className="swap-description text-off-white/50 text-xs sm:text-base leading-relaxed font-sans max-w-md"
+              className="swap-description text-white text-sm sm:text-base leading-relaxed font-sans max-w-md font-medium"
               style={{ opacity: 0 }}
             >
               Every project is a canvas where strategy meets artistry. 
@@ -219,18 +219,18 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105 filter brightness-105 contrast-105"
                         loading="lazy"
                         draggable={false}
                       />
 
                       {/* Subtle gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 pointer-events-none z-10" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-10" />
 
                       {/* Service Name Pill at Top Right (Uncovered across all stacked cards!) */}
                       <div className="absolute top-2 sm:top-2.5 right-2 sm:right-3.5 z-30 flex items-center pointer-events-none">
                         <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/25 shadow-lg whitespace-nowrap">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow shadow-[0_0_8px_#DA9F37]" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow shadow-[0_0_8px_#f9d230]" />
                           <span className="text-[8.5px] sm:text-[10px] font-display font-extrabold tracking-wider text-off-white uppercase">
                             <span className="text-accent-yellow mr-1">0{i + 1}</span>
                             {project.category}

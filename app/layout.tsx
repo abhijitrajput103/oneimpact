@@ -49,6 +49,14 @@ export default function RootLayout({
       className={`${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
     >
       <head>
+        {/* Preload hammer cursor image so intro hammer appears instantly */}
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hammer-right-v4.webp"
+          type="image/webp"
+          media="(min-width: 768px)"
+        />
         {/* Preload hero mobile image so scratch-to-reveal loads instantly */}
         <link
           rel="preload"

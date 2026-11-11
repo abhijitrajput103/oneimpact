@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/common/Navbar";
+import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
 const NOTICES = [
   "Free influencer marketing consultation. Fill the form and our team will get back to you.",
@@ -129,37 +130,37 @@ const HELPS_CARDS = [
     t: "Build trust",
     a: "When influencers recommend a product or service, their audience sees it as a trusted suggestion, not a sales pitch. That trust transfers to your brand.",
     d: "M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Expand reach",
     a: "Partnering with influencers gives your brand direct access to their established audience, across demographics, interests and platforms that fit your brand, without starting from scratch.",
     d: "M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21v-1a6 6 0 0 1 12 0v1M16 3.5a4 4 0 0 1 0 7.5M22 21v-1a6 6 0 0 0-4-5.6",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Boost conversions",
     a: "When followers see someone they admire using your product, they are more likely to try it themselves. This organic promotion often lifts engagement and purchase intent.",
     d: "M3 17l6-6 4 4 8-8M15 7h6v6",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Sustainable growth",
     a: "Consistent collaborations build a loyal community and keep your business top-of-mind, contributing to long-term customer growth and retention.",
     d: "M3 17l6-6 4 4 8-8",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Cost-effective marketing",
     a: "From micro to macro influencers, you can choose partnerships that fit your budget. The right mix of creators drives impact without overspending, even for smaller businesses.",
     d: "M6 4h12M6 9h12M9 4c3.3 0 5.5 1.9 5.5 5S12.3 14 9 14H7l8 7",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Measurable results",
     a: "Track engagement rate, reach, clicks and conversions to understand what works, optimise future strategies and make decisions based on real results.",
     d: "M4 20V10M10 20V4M16 20v-7M22 20H2",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
 ];
 
@@ -167,42 +168,42 @@ const BUT_WHY_CARDS = [
   {
     t: "Full-service management",
     a: "From finding creators and outreach to briefs, negotiations and deliverables, we manage the entire process end-to-end.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Content that clicks",
     a: "We help influencers produce content that stops thumbs and starts conversations, while staying brand-aligned.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Budget-friendly campaigns",
     a: "We plan campaigns that fit your financial goals without compromising on reach, creativity or impact.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Streamlined execution",
     a: "We streamline every stage, from influencer onboarding to campaign rollout, without losing focus on quality.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Campaigns across categories",
     a: "We run campaigns across lifestyle, fashion, tech, FMCG and more, in formats like product reviews, giveaways and reels.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Performance-first reporting",
     a: "Our reports go beyond vanity metrics, with clear insights into engagement, impressions, click-throughs and ROI.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Data-driven strategy",
     a: "Every campaign begins with audience research and platform analysis, and is optimized throughout the campaign cycle.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Long-term relationships",
     a: "We build ongoing creator relationships rather than one-off posts, which leads to more authentic collaborations.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
 ];
 
@@ -240,32 +241,32 @@ const SVC_GROUPS = [
       {
         t: "Influencer strategy and planning",
         a: "We begin by understanding your brand objectives, audience profile and campaign goals. Based on this, we develop a tailored influencer strategy that defines the right platforms, content approach, influencer tiers and campaign timelines.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Influencer outreach and collaboration",
         a: "Our team identifies influencers who best match your brand’s voice, values and target audience. We handle the communication, pitch the campaign idea and coordinate collaborations that feel organic and resonate with the influencer’s community.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Performance analytics and reporting",
         a: "Every campaign is monitored through a detailed analytics framework. We track reach, engagement, impressions and content performance to deliver clear insights that help evaluate campaign success.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Contract and compliance management",
         a: "We draft influencer agreements that define deliverables, timelines, content usage rights and disclosure norms. This ensures transparency, legal clarity and alignment between everyone involved.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Campaign creative direction",
         a: "We support influencers with creative direction that keeps content consistent while leaving room for their unique style. From visual aesthetics to messaging tone, our inputs keep content brand-aligned and relevant.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Long-term relationship building",
         a: "We focus on ongoing relationships rather than one-time campaigns. Engaging with influencers consistently builds trust and loyalty, leading to more authentic collaborations and long-term brand advocacy.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
     ],
   },
@@ -275,32 +276,32 @@ const SVC_GROUPS = [
       {
         t: "Instagram influencer marketing",
         a: "We collaborate with niche-relevant Instagram creators in lifestyle, fashion, food, tech and more. From identification and outreach to content planning and analytics, we focus on authentic Reels, Stories and static posts.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "YouTube influencer marketing",
         a: "Our YouTube campaigns create long-form content that educates, entertains and drives meaningful brand conversations, from unboxings and reviews to tutorials and integrated content that reaches the right viewers.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "LinkedIn influencer campaigns",
         a: "We help B2B brands partner with industry experts, thought leaders and niche creators on LinkedIn. Posts, articles and live sessions build credibility and drive high-value engagement from decision-makers.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Facebook influencer promotions",
         a: "We work with creators who have engaged audiences in interest groups and regional communities. Video content, live sessions and collaborative posts spark meaningful interactions in your brand’s voice.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "X (Twitter) campaign management",
         a: "We run sharp, real-time campaigns with voices that influence public opinion on X. From trending hashtag campaigns to branded threads and opinion-led posts, we help your brand stay part of the conversation.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Multi-platform management",
         a: "We plan, execute and monitor campaigns across Instagram, YouTube, LinkedIn, Facebook and X, keeping your messaging consistent while tailoring content to each platform’s audience and format.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
     ],
   },
@@ -735,10 +736,10 @@ export default function InfluencerMarketingPage() {
           transform: none;
         }
         .inf-landing-root .y:hover {
-          background-color: #ffc75e !important;
+          background-color: #fae066 !important;
         }
         .inf-landing-root :focus-visible {
-          outline: 3px solid #7baaff;
+          outline: 3px solid #4066c6;
           outline-offset: 3px;
         }
         .inf-landing-root .fd::placeholder {
@@ -746,8 +747,8 @@ export default function InfluencerMarketingPage() {
         }
         .inf-landing-root .fd:focus {
           outline: none;
-          border-color: #ffba39 !important;
-          box-shadow: 0 0 0 4px rgba(255, 186, 57, 0.3);
+          border-color: #f9d230 !important;
+          box-shadow: 0 0 0 4px rgba(249, 210, 48, 0.3);
         }
         .inf-landing-root .prewrap {
           white-space: pre-line;
@@ -969,7 +970,7 @@ export default function InfluencerMarketingPage() {
             width: "380px",
             height: "380px",
             borderRadius: "50%",
-            background: "#FFBA39",
+            background: "#f9d230",
             opacity: 0.55,
             filter: "blur(70px)",
           }}
@@ -983,7 +984,7 @@ export default function InfluencerMarketingPage() {
             width: "320px",
             height: "320px",
             borderRadius: "50%",
-            background: "#7BAAFF",
+            background: "#4066c6",
             opacity: 0.55,
             filter: "blur(80px)",
           }}
@@ -1150,7 +1151,7 @@ export default function InfluencerMarketingPage() {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#FFBA39", letterSpacing: 0 }}>
+                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#f9d230", letterSpacing: 0 }}>
                     Free for your brand
                   </span>
                   <h2
@@ -1308,7 +1309,7 @@ export default function InfluencerMarketingPage() {
                     fontWeight: 650,
                     letterSpacing: "-0.01em",
                     color: "#000000",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
                     minHeight: "54px",
@@ -1340,7 +1341,7 @@ export default function InfluencerMarketingPage() {
                     width: "56px",
                     height: "56px",
                     borderRadius: "50%",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -1550,7 +1551,7 @@ export default function InfluencerMarketingPage() {
                   width: "32px",
                   height: "4px",
                   borderRadius: "999px",
-                  background: "#FFBA39",
+                  background: "#f9d230",
                 }}
                 aria-hidden="true"
               />
@@ -1604,7 +1605,7 @@ export default function InfluencerMarketingPage() {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                  <span style={{ display: "inline-flex", gap: "3px", color: "#FFBA39" }} aria-label="Rated 5 out of 5">
+                  <span style={{ display: "inline-flex", gap: "3px", color: "#f9d230" }} aria-label="Rated 5 out of 5">
                     {[...Array(5)].map((_, sIdx) => (
                       <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
@@ -1629,7 +1630,7 @@ export default function InfluencerMarketingPage() {
                   <img
                     src="/LOGO/oneimpact-logo.webp"
                     alt="Client logo"
-                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 0.7 }}
+                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 1 }}
                   />
                   <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
                     {q.role}
@@ -1780,9 +1781,9 @@ export default function InfluencerMarketingPage() {
                 width: "calc((100% - 8px) / 2)",
                 transform: `translateX(${whyTab * 100}%)`,
                 transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#FFBA39",
+                background: "#f9d230",
                 borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
               }}
             />
             {["But why OneImpact?", "Why OneImpact?"].map((label, i) => (
@@ -1860,20 +1861,20 @@ export default function InfluencerMarketingPage() {
                       height: "36px",
                       borderRadius: "50%",
                       background:
-                        w.chip === "#FFBA39"
-                          ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)"
-                          : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)",
+                        w.chip === "#f9d230"
+                          ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
+                          : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flex: "none",
                       boxShadow:
-                        w.chip === "#FFBA39"
-                          ? "0 3px 8px rgba(255, 186, 57, 0.35)"
-                          : "0 3px 8px rgba(0, 102, 255, 0.35)",
+                        w.chip === "#f9d230"
+                          ? "0 3px 8px rgba(249, 210, 48, 0.35)"
+                          : "0 3px 8px rgba(64, 102, 198, 0.35)",
                     }}
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={w.chip === "#FFBA39" ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={w.chip === "#f9d230" ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M5 12.5l4.5 4.5L19 7.5" />
                     </svg>
                   </span>
@@ -1915,16 +1916,16 @@ export default function InfluencerMarketingPage() {
                       borderRadius: "50%",
                       background:
                         idx % 2 === 0
-                          ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)"
-                          : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)",
+                          ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
+                          : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flex: "none",
                       boxShadow:
                         idx % 2 === 0
-                          ? "0 3px 8px rgba(255, 186, 57, 0.35)"
-                          : "0 3px 8px rgba(0, 102, 255, 0.35)",
+                          ? "0 3px 8px rgba(249, 210, 48, 0.35)"
+                          : "0 3px 8px rgba(64, 102, 198, 0.35)",
                     }}
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={idx % 2 === 0 ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -2001,9 +2002,9 @@ export default function InfluencerMarketingPage() {
                 width: "calc((100% - 8px) / 2)",
                 transform: `translateX(${svcIdx * 100}%)`,
                 transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#FFBA39",
+                background: "#f9d230",
                 borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
               }}
             />
             {SVC_GROUPS.map((grp, i) => (
@@ -2123,12 +2124,12 @@ export default function InfluencerMarketingPage() {
                 color: "#000000",
                 background:
                   offerIdx === i
-                    ? "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)"
+                    ? "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)"
                     : "#FFFFFF",
                 border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`,
                 boxShadow:
                   offerIdx === i
-                    ? "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
+                    ? "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
                     : "0 1px 2px rgba(0, 0, 0, 0.03)",
                 borderRadius: "999px",
                 minHeight: "44px",
@@ -2196,13 +2197,13 @@ export default function InfluencerMarketingPage() {
                   fontSize: "14.5px",
                   fontWeight: 650,
                   color: "#000000",
-                  background: "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)",
+                  background: "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)",
                   border: "1.5px solid #000000",
                   borderRadius: "999px",
                   minHeight: "42px",
                   padding: "8px 22px",
                   cursor: "pointer",
-                  boxShadow: "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
+                  boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
                 }}
               >
                 {offerExpanded ? "Show fewer questions" : `Load more (${activeOffer.qs.length - 5} more questions)`}
@@ -2400,7 +2401,7 @@ export default function InfluencerMarketingPage() {
                 fontSize: "17px",
                 padding: "14px 24px",
                 minHeight: "52px",
-                background: "#FFBA39",
+                background: "#f9d230",
                 color: "#000000",
                 textDecoration: "none",
                 border: 0,
@@ -2451,7 +2452,7 @@ export default function InfluencerMarketingPage() {
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                    <span style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#FFBA39" }} />
+                    <span style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#f9d230" }} />
                     <span style={{ height: "6px", width: "46px", borderRadius: "4px", background: "#E5E5EA" }} />
                   </div>
                   <div style={{ height: "98px", borderRadius: "10px", background: "#D6E5FF", position: "relative" }}>
@@ -2463,7 +2464,7 @@ export default function InfluencerMarketingPage() {
                         width: "22px",
                         height: "22px",
                         borderRadius: "50%",
-                        background: "#FFBA39",
+                        background: "#f9d230",
                       }}
                     />
                   </div>
@@ -2507,7 +2508,7 @@ export default function InfluencerMarketingPage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      background: i === 0 ? "#FFBA39" : "#E5E5EA",
+                      background: i === 0 ? "#f9d230" : "#E5E5EA",
                     }}
                   >
                     {i + 1}
@@ -2522,6 +2523,12 @@ export default function InfluencerMarketingPage() {
           </figure>
         </div>
       </section>
+
+      {/* ── REELS SHOWCASE (IN-WEBSITE) */}
+      <ServiceReelsSection
+        heading="Creator reels in action"
+        subtitle="Explore creator-led stories and brand films right inside the page."
+      />
 
       {/* ── FAQs */}
       <section
@@ -2580,9 +2587,9 @@ export default function InfluencerMarketingPage() {
                 width: `calc((100% - 8px) / ${FAQ_GROUPS.length})`,
                 transform: `translateX(${faqIdx * 100}%)`,
                 transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#FFBA39",
+                background: "#f9d230",
                 borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
               }}
             />
             {FAQ_GROUPS.map((g, i) => (
@@ -2663,13 +2670,13 @@ export default function InfluencerMarketingPage() {
                 fontSize: "14.5px",
                 fontWeight: 650,
                 color: "#000000",
-                background: "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)",
+                background: "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)",
                 border: "1.5px solid #000000",
                 borderRadius: "999px",
                 minHeight: "42px",
                 padding: "8px 22px",
                 cursor: "pointer",
-                boxShadow: "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
+                boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
               }}
             >
               {faqExpanded ? "Show fewer" : `Load more (${activeFaqGroup.qs.length - 5} more)`}
@@ -2709,7 +2716,7 @@ export default function InfluencerMarketingPage() {
               width: "360px",
               height: "360px",
               borderRadius: "50%",
-              background: "#FFBA39",
+              background: "#f9d230",
               opacity: 0.5,
               filter: "blur(80px)",
             }}
@@ -2907,7 +2914,7 @@ export default function InfluencerMarketingPage() {
                     fontWeight: 650,
                     letterSpacing: "-0.01em",
                     color: "#000000",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
                     minHeight: "54px",
@@ -2935,7 +2942,7 @@ export default function InfluencerMarketingPage() {
                     width: "56px",
                     height: "56px",
                     borderRadius: "50%",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -3066,7 +3073,7 @@ export default function InfluencerMarketingPage() {
           href="#audit"
           style={{
             flex: 1,
-            background: "#FFBA39",
+            background: "#f9d230",
             color: "#000000",
             textDecoration: "none",
             fontWeight: 650,

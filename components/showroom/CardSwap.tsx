@@ -298,7 +298,7 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
         }
         .card-swap-card:hover {
           border-color: rgba(255, 215, 0, 0.4);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(218, 159, 55, 0.15);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(249, 210, 48, 0.15);
         }
         @media (min-width: 1536px) {
           .card-swap-container {

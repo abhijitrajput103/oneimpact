@@ -83,7 +83,7 @@ export function AboutScrollingText() {
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden"
-      style={{ backgroundColor: "#DA9F37" }}
+      style={{ backgroundColor: "#f9d230" }}
     >
       {/* Paper texture */}
       {/* eslint-disable-next-line @next/next/no-img-element */}

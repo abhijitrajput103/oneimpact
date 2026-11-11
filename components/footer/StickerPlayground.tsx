@@ -811,7 +811,7 @@ export function StickerPlayground() {
 
         {/* Click around label */}
         <div className="absolute bottom-3 right-4 sm:bottom-6 sm:right-8 select-none pointer-events-none z-10">
-          <span className="font-display text-off-white/40 text-[10px] sm:text-sm font-bold tracking-wide">
+          <span className="font-display text-white/80 text-[10px] sm:text-sm font-bold tracking-wide">
             Click around.
           </span>
         </div>

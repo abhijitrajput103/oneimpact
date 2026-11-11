@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/common/Navbar";
 import { LiveDashboardPreview } from "@/components/seo/LiveDashboardPreview";
+import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
 const NOTICES = [
   "SEO audit for your website. Fill the form and our team will get back to you.",
@@ -151,37 +152,37 @@ const HELPS_CARDS = [
     t: "Better visibility where it counts",
     a: "We help you rank for keywords your audience is actively searching. That means you show up just when they need your product or service.",
     d: "M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14zM20 20l-4-4",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Traffic that converts",
     a: "Unlike paid ads that reach broad audiences, SEO brings in users with intent: people already looking for what you offer.",
     d: "M3 17l6-6 4 4 8-8M15 7h6v6",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Higher rankings without paying for ads",
     a: "Top organic rankings build trust and click-throughs. People trust what ranks naturally over what’s paid.",
     d: "M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Cost-efficient, long-term strategy",
     a: "No bidding wars or ad spend needed. Your optimized content keeps working for you over time.",
     d: "M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.8 5 3.5 5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "An edge over competitors",
     a: "While others rely solely on ads, your SEO presence makes sure you’re visible in the long run.",
     d: "M5 21V9l7-6 7 6v12M9 21v-6h6v6",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Smarter decisions from real data",
     a: "SEO tools give insight into user behavior and performance, helping you adjust campaigns intelligently.",
     d: "M4 20V10M10 20V4M16 20v-7M22 20H2",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
 ];
 
@@ -189,42 +190,42 @@ const BUT_WHY_CARDS = [
   {
     t: "Proven industry experience",
     a: "We’ve successfully managed SEO for multinational and regional brands alike.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "AI-driven precision",
     a: "Our SEO solutions are enhanced with AI to streamline workflows and improve targeting.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Hyperlocal strategies",
     a: "We specialize in local SEO for businesses targeting specific regions or cities.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Frequent SEO audits",
     a: "Regular performance checks to ensure strategies are still aligned with results.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Authority-boosting backlink building",
     a: "We earn backlinks from high DA and PA domains that improve rankings and credibility.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "Complete website optimization",
     a: "From technical fixes to content structure and UX, we optimize every corner of your site.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
   {
     t: "Trend-responsive SEO",
     a: "We track algorithm updates and audience behavior shifts to adjust quickly.",
-    chip: "#FFBA39",
+    chip: "#f9d230",
   },
   {
     t: "User-centric design focus",
     a: "We make your site easier to navigate and convert by improving the overall experience.",
-    chip: "#7BAAFF",
+    chip: "#4066c6",
   },
 ];
 
@@ -235,32 +236,32 @@ const SVC_GROUPS = [
       {
         t: "SEO services",
         a: "Our SEO services are built to elevate your visibility, generate qualified traffic, and convert leads. Every strategy we develop includes precise on-page SEO, keyword mapping, and content optimization, tailored to meet your business goals.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "CRO services (Conversion Rate Optimization)",
         a: "Make the most of your existing traffic. With CRO, we optimize user journeys to lower bounce rates and increase conversion. It means less spend on new users, and more action from your current visitors.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "ASO services (App Store Optimization)",
         a: "Want your app to show up when someone searches for related tools on the Play Store or App Store? Our ASO services include keyword optimization, localization, content updates, and more to increase installs.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "SEO audit services",
         a: "Our in-depth SEO audit uncovers the issues holding your website back. We review backlinks, content, load speeds, technical setup, and more to build a plan that elevates your SEO.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Enterprise SEO services",
         a: "Have a large website or multiple locations? We create strategies tailored to large-scale businesses, including internal linking, crawl optimization, global content management, and collaboration across teams.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Penalty recovery services",
         a: "If Google hit your site with a penalty, we find the cause, clean it up, and future-proof your website with compliant white-hat strategies that align with algorithm guidelines.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
     ],
   },
@@ -270,32 +271,32 @@ const SVC_GROUPS = [
       {
         t: "E-commerce SEO",
         a: "Get more visibility and sales from your eCommerce store with targeted optimization. We enhance your technical SEO, structure your site for shoppers, and build content that converts.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Local SEO",
         a: "Want to get discovered in your area? Our local SEO solutions help you appear in map results, “near me” searches, and local directories, perfect for businesses with a physical presence.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "Amazon SEO",
         a: "We optimize your Amazon listings using relevant keywords, compelling descriptions, and performance-focused enhancements that boost your product rankings and sales.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "YouTube SEO",
         a: "Struggling to grow your YouTube presence? Our SEO strategies help your videos get found with optimized titles, tags, descriptions, watch-time improvements, and thumbnails that drive clicks.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
       {
         t: "WordPress SEO",
         a: "We optimize WordPress websites with better structure, schema, content enhancements, and site speed improvements to help you rank and retain traffic.",
-        dot: "#FFBA39",
+        dot: "#f9d230",
       },
       {
         t: "Shopify SEO",
         a: "From product titles to meta tags and site architecture, our Shopify SEO experts ensure your store is optimized to attract and convert organic traffic.",
-        dot: "#7BAAFF",
+        dot: "#4066c6",
       },
     ],
   },
@@ -797,7 +798,7 @@ const MAP_ROWS = [
     n: "1",
     name: "Your Business Name",
     meta: "4.9 ★ (120+) · SEO & Digital Marketing · Open now",
-    pin: "#FFBA39",
+    pin: "#f9d230",
     bg: "#FFF9E6",
   },
   {
@@ -1090,10 +1091,10 @@ export default function SeoLandingPage() {
           transform: none;
         }
         .seo-landing-root .y:hover {
-          background-color: #ffc75e !important;
+          background-color: #fae066 !important;
         }
         .seo-landing-root :focus-visible {
-          outline: 3px solid #7baaff;
+          outline: 3px solid #4066c6;
           outline-offset: 3px;
         }
         .seo-landing-root .fd::placeholder {
@@ -1101,8 +1102,8 @@ export default function SeoLandingPage() {
         }
         .seo-landing-root .fd:focus {
           outline: none;
-          border-color: #ffba39 !important;
-          box-shadow: 0 0 0 4px rgba(255, 186, 57, 0.3);
+          border-color: #f9d230 !important;
+          box-shadow: 0 0 0 4px rgba(249, 210, 48, 0.3);
         }
         .seo-landing-root .prewrap {
           white-space: pre-line;
@@ -1264,7 +1265,7 @@ export default function SeoLandingPage() {
             width: "380px",
             height: "380px",
             borderRadius: "50%",
-            background: "#FFBA39",
+            background: "#f9d230",
             opacity: 0.55,
             filter: "blur(70px)",
           }}
@@ -1278,7 +1279,7 @@ export default function SeoLandingPage() {
             width: "320px",
             height: "320px",
             borderRadius: "50%",
-            background: "#7BAAFF",
+            background: "#4066c6",
             opacity: 0.55,
             filter: "blur(80px)",
           }}
@@ -1583,7 +1584,7 @@ export default function SeoLandingPage() {
                     fontWeight: 650,
                     letterSpacing: "-0.01em",
                     color: "#000000",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
                     minHeight: "54px",
@@ -1615,7 +1616,7 @@ export default function SeoLandingPage() {
                     width: "56px",
                     height: "56px",
                     borderRadius: "50%",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -1791,7 +1792,7 @@ export default function SeoLandingPage() {
               lineHeight: 1.35,
               fontWeight: 600,
               letterSpacing: "-0.02em",
-              color: "#0066FF",
+              color: "#4066c6",
               maxWidth: "34ch",
             }}
           >
@@ -1861,7 +1862,7 @@ export default function SeoLandingPage() {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                  <span style={{ display: "inline-flex", gap: "3px", color: "#FFBA39" }} aria-label="Rated 5 out of 5">
+                  <span style={{ display: "inline-flex", gap: "3px", color: "#f9d230" }} aria-label="Rated 5 out of 5">
                     {[...Array(5)].map((_, sIdx) => (
                       <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
@@ -1886,7 +1887,7 @@ export default function SeoLandingPage() {
                   <img
                     src="/LOGO/oneimpact-logo.webp"
                     alt="Client logo"
-                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 0.7 }}
+                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 1 }}
                   />
                   <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
                     {q.role}
@@ -1964,7 +1965,7 @@ export default function SeoLandingPage() {
               </span>
               <span
                 aria-hidden="true"
-                style={{ width: "32px", height: "4px", borderRadius: "999px", background: "#FFBA39" }}
+                style={{ width: "32px", height: "4px", borderRadius: "999px", background: "#f9d230" }}
               />
               <h4
                 className="seo-heading"
@@ -2034,7 +2035,7 @@ export default function SeoLandingPage() {
               width: "min(460px, 100%)",
             }}
           >
-            {/* Sliding shiny theme-yellow indicator pill with button's #FFBA39 and btn-sheen */}
+            {/* Sliding shiny theme-yellow indicator pill with button's #f9d230 and btn-sheen */}
             <span
               aria-hidden="true"
               className="btn-sheen"
@@ -2046,9 +2047,9 @@ export default function SeoLandingPage() {
                 width: "calc((100% - 8px) / 2)",
                 transform: `translateX(${whyTab * 100}%)`,
                 transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#FFBA39",
+                background: "#f9d230",
                 borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
               }}
             />
 
@@ -2171,15 +2172,15 @@ export default function SeoLandingPage() {
                     width: "36px",
                     height: "36px",
                     borderRadius: "50%",
-                    background: w.chip === "#FFBA39"
-                      ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)"
-                      : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)",
+                    background: w.chip === "#f9d230"
+                      ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
+                      : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    boxShadow: w.chip === "#FFBA39"
-                      ? "0 3px 8px rgba(255, 186, 57, 0.35)"
-                      : "0 3px 8px rgba(0, 102, 255, 0.35)",
+                    boxShadow: w.chip === "#f9d230"
+                      ? "0 3px 8px rgba(249, 210, 48, 0.35)"
+                      : "0 3px 8px rgba(64, 102, 198, 0.35)",
                   }}
                 >
                   <svg
@@ -2187,7 +2188,7 @@ export default function SeoLandingPage() {
                     height="15"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke={w.chip === "#FFBA39" ? "#1D1D1F" : "#FFFFFF"}
+                    stroke={w.chip === "#f9d230" ? "#1D1D1F" : "#FFFFFF"}
                     strokeWidth="2.8"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -2245,14 +2246,14 @@ export default function SeoLandingPage() {
                     height: "36px",
                     borderRadius: "50%",
                     background: idx % 2 === 0
-                      ? "linear-gradient(135deg, #FFBA39 0%, #FFA800 100%)"
-                      : "linear-gradient(135deg, #0066FF 0%, #0052CC 100%)",
+                      ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
+                      : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     boxShadow: idx % 2 === 0
-                      ? "0 3px 8px rgba(255, 186, 57, 0.35)"
-                      : "0 3px 8px rgba(0, 102, 255, 0.35)",
+                      ? "0 3px 8px rgba(249, 210, 48, 0.35)"
+                      : "0 3px 8px rgba(64, 102, 198, 0.35)",
                   }}
                 >
                   <svg
@@ -2349,9 +2350,9 @@ export default function SeoLandingPage() {
               width: "calc((100% - 8px) / 2)",
               transform: `translateX(${svcIdx * 100}%)`,
               transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-              background: "#FFBA39",
+              background: "#f9d230",
               borderRadius: "999px",
-              boxShadow: "0 3px 12px rgba(255, 186, 57, 0.45)",
+              boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
             }}
           />
           {SVC_GROUPS.map((grp, i) => (
@@ -2482,11 +2483,11 @@ export default function SeoLandingPage() {
               fontWeight: offerIdx === i ? 600 : 500,
               color: "#000000",
               background: offerIdx === i
-                ? "linear-gradient(180deg, #FFC759 0%, #FFBA39 50%, #FFA800 100%)"
+                ? "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)"
                 : "#FFFFFF",
               border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`,
               boxShadow: offerIdx === i
-                ? "0 4px 14px rgba(255, 186, 57, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
+                ? "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
                 : "0 1px 2px rgba(0, 0, 0, 0.03)",
               borderRadius: "999px",
               minHeight: "44px",
@@ -2911,7 +2912,7 @@ export default function SeoLandingPage() {
               href="#audit"
               style={{
                 alignSelf: "flex-start",
-                background: "#FFBA39",
+                background: "#f9d230",
                 color: "#000000",
                 textDecoration: "none",
                 fontWeight: 650,
@@ -2980,7 +2981,7 @@ export default function SeoLandingPage() {
                   height: "36px",
                   borderRadius: "50% 50% 50% 0",
                   transform: "rotate(-45deg)",
-                  background: "#FFBA39",
+                  background: "#f9d230",
                   boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
                 }}
               />
@@ -3024,6 +3025,12 @@ export default function SeoLandingPage() {
           </figure>
         </div>
       </section>
+
+      {/* ── REELS SHOWCASE (IN-WEBSITE) */}
+      <ServiceReelsSection
+        heading="Stories that build brand search"
+        subtitle="Click any reel to watch our creative work without leaving the website."
+      />
 
       {/* ── SECTION 12: QUESTIONS, ANSWERED (FAQS) ─────────────────────────── */}
       <section
@@ -3244,7 +3251,7 @@ export default function SeoLandingPage() {
               width: "360px",
               height: "360px",
               borderRadius: "50%",
-              background: "#FFBA39",
+              background: "#f9d230",
               opacity: 0.5,
               filter: "blur(80px)",
             }}
@@ -3452,7 +3459,7 @@ export default function SeoLandingPage() {
                     fontSize: "17px",
                     fontWeight: 650,
                     color: "#000000",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
                     minHeight: "54px",
@@ -3480,7 +3487,7 @@ export default function SeoLandingPage() {
                     width: "52px",
                     height: "52px",
                     borderRadius: "50%",
-                    background: "#FFBA39",
+                    background: "#f9d230",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -3648,7 +3655,7 @@ export default function SeoLandingPage() {
           href="#audit"
           style={{
             flex: 1,
-            background: "#FFBA39",
+            background: "#f9d230",
             color: "#000000",
             textDecoration: "none",
             fontWeight: 650,

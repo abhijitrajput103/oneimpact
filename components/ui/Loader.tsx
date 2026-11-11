@@ -97,16 +97,16 @@ export function Loader({ onComplete }: LoaderProps) {
       {/* Top row */}
       <div className="flex justify-between items-start font-display text-[8px] sm:text-[9px] md:text-xs font-bold tracking-widest uppercase">
         <div className="overflow-hidden">
-          <span className="loader-word block text-[#DA9F37]">{"// ONE IMPACT"}</span>
+          <span className="loader-word block text-[#f9d230]">{"// ONE IMPACT"}</span>
         </div>
         <div className="overflow-hidden">
-          <span className="loader-word block text-off-white/40">CREATIVE STUDIO</span>
+          <span className="loader-word block text-white/80">CREATIVE STUDIO</span>
         </div>
       </div>
 
       {/* Center banner */}
       <div ref={textRef} className="my-auto overflow-hidden py-4 sm:py-6 md:py-8">
-        <h1 className="font-display text-2xl sm:text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight text-off-white leading-[1.25]">
+        <h1 className="font-display text-2xl sm:text-4xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.25]">
           <span className="inline-block loader-word pb-3 sm:pb-6">Impacting The Digital Era</span>
         </h1>
       </div>
@@ -114,7 +114,7 @@ export function Loader({ onComplete }: LoaderProps) {
       {/* Bottom row */}
       <div className="flex justify-between items-end">
         <div className="overflow-hidden font-display text-[8px] sm:text-[9px] md:text-xs font-bold tracking-widest uppercase">
-          <span className="loader-word block text-off-white/40">INITIALIZING MODULES...</span>
+          <span className="loader-word block text-white/80">INITIALIZING MODULES...</span>
         </div>
         <div
           ref={percentRef}

@@ -106,11 +106,11 @@ export const CrackCanvas = forwardRef<CrackCanvasHandle>((_, ref) => {
         }
       }
 
-      // 3. Tween the crack animation progress from 0 to 1
+      // 3. Tween the crack animation progress from 0 to 1 with instant snap
       gsap.to(animationRef.current, {
         progress: 1,
-        duration: 0.5,
-        ease: "power2.out",
+        duration: 0.08,
+        ease: "power3.out",
         onUpdate: () => {
           draw(animationRef.current.progress);
         },

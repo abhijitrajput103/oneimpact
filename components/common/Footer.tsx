@@ -7,7 +7,7 @@ import { FooterBottom } from "@/components/footer/FooterBottom";
 export function Footer() {
   return (
     <footer className="bg-black pt-2 pb-6 md:pt-6 md:pb-12 mt-auto select-none">
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+      <div className="px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28">
        
         {/* Large display headline */}
         <FooterHeadline />

@@ -1,11 +1,18 @@
 @import "tailwindcss";
 
+:root {
+  --y: #f9d230;
+  --b: #4066c6;
+  --color-accent-yellow: #f9d230;
+  --color-accent-blue: #4066c6;
+}
+
 @theme {
   --color-black: #050505;
   --color-off-white: #F5F5F7;
   --color-warm-white: #FAF9F6;
-  --color-accent-blue: #0066FF;
-  --color-accent-yellow: #FFD700;
+  --color-accent-blue: #4066c6;
+  --color-accent-yellow: #f9d230;
 
   --font-display: var(--font-display), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-sans), Manrope, system-ui, sans-serif;
@@ -93,4 +100,13 @@ html.lenis body {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

@@ -42,7 +42,7 @@ const RANKING_KEYWORDS: KeywordRow[] = [
 ];
 
 const ATTRIBUTIONS: AttributionRow[] = [
-  { source: "Google Organic Search", share: 62, leads: "9,230", pipeline: "$768,000", trend: "+28%", color: "#0066FF" },
+  { source: "Google Organic Search", share: 62, leads: "9,230", pipeline: "$768,000", trend: "+28%", color: "#4066c6" },
   { source: "ChatGPT Search (SearchGPT)", share: 19, leads: "2,830", pipeline: "$242,000", trend: "+140%", color: "#10A37F" },
   { source: "Perplexity AI Citations", share: 13, leads: "1,935", pipeline: "$164,000", trend: "+94%", color: "#20808D" },
   { source: "Gemini & Copilot Referral", share: 6, leads: "895", pipeline: "$66,000", trend: "+62%", color: "#7C3AED" },
@@ -267,7 +267,7 @@ export function LiveDashboardPreview() {
                   <div style={{ fontSize: "11px", color: "#86868B", fontWeight: 500, marginBottom: "4px" }}>Average Position</div>
                   <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
                     <span style={{ fontSize: "21px", fontWeight: 700, color: "#1D1D1F", letterSpacing: "-0.03em" }}>3.2</span>
-                    <span style={{ fontSize: "11px", fontWeight: 600, color: "#0066FF" }}>Top 3</span>
+                    <span style={{ fontSize: "11px", fontWeight: 600, color: "#4066c6" }}>Top 3</span>
                   </div>
                 </div>
               </>
@@ -300,7 +300,7 @@ export function LiveDashboardPreview() {
                   <div style={{ fontSize: "11px", color: "#86868B", fontWeight: 500, marginBottom: "4px" }}>SERP Features Held</div>
                   <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
                     <span style={{ fontSize: "21px", fontWeight: 700, color: "#1D1D1F", letterSpacing: "-0.03em" }}>89</span>
-                    <span style={{ fontSize: "11px", fontWeight: 600, color: "#0066FF" }}>Snippets</span>
+                    <span style={{ fontSize: "11px", fontWeight: 600, color: "#4066c6" }}>Snippets</span>
                   </div>
                 </div>
               </>
@@ -359,7 +359,7 @@ export function LiveDashboardPreview() {
                     <span style={{ fontSize: "12px", fontWeight: 600, color: "#1D1D1F" }}>
                       Daily Organic Click Trend (Last 28 Days)
                     </span>
-                    <span style={{ fontSize: "11px", color: "#0066FF", fontWeight: 600 }}>
+                    <span style={{ fontSize: "11px", color: "#4066c6", fontWeight: 600 }}>
                       ● Continuous 7-Day Moving Avg
                     </span>
                   </div>
@@ -368,8 +368,8 @@ export function LiveDashboardPreview() {
                     <svg viewBox="0 0 800 140" style={{ width: "100%", height: "100%", overflow: "visible" }}>
                       <defs>
                         <linearGradient id="clickGradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#0066FF" stopOpacity="0.22" />
-                          <stop offset="100%" stopColor="#0066FF" stopOpacity="0.0" />
+                          <stop offset="0%" stopColor="#4066c6" stopOpacity="0.22" />
+                          <stop offset="100%" stopColor="#4066c6" stopOpacity="0.0" />
                         </linearGradient>
                       </defs>
 
@@ -388,17 +388,17 @@ export function LiveDashboardPreview() {
                       <path
                         d="M 0,110 Q 100,105 180,90 T 360,72 T 540,48 T 720,28 L 800,20"
                         fill="none"
-                        stroke="#0066FF"
+                        stroke="#4066c6"
                         strokeWidth="2.5"
                         strokeLinecap="round"
                       />
 
                       {/* Data markers */}
-                      <circle cx="180" cy="90" r="3.5" fill="#0066FF" />
-                      <circle cx="360" cy="72" r="3.5" fill="#0066FF" />
-                      <circle cx="540" cy="48" r="3.5" fill="#0066FF" />
-                      <circle cx="720" cy="28" r="3.5" fill="#0066FF" />
-                      <circle cx="800" cy="20" r="4.5" fill="#0066FF" stroke="#FFFFFF" strokeWidth="2" />
+                      <circle cx="180" cy="90" r="3.5" fill="#4066c6" />
+                      <circle cx="360" cy="72" r="3.5" fill="#4066c6" />
+                      <circle cx="540" cy="48" r="3.5" fill="#4066c6" />
+                      <circle cx="720" cy="28" r="3.5" fill="#4066c6" />
+                      <circle cx="800" cy="20" r="4.5" fill="#4066c6" stroke="#FFFFFF" strokeWidth="2" />
                     </svg>
                   </div>
 
@@ -506,7 +506,7 @@ export function LiveDashboardPreview() {
                     }}
                   >
                     <div style={{ width: "38%", backgroundColor: "#34C759" }} title="Pos 1-3: 38%" />
-                    <div style={{ width: "36%", backgroundColor: "#0066FF" }} title="Pos 4-10: 36%" />
+                    <div style={{ width: "36%", backgroundColor: "#4066c6" }} title="Pos 4-10: 36%" />
                     <div style={{ width: "18%", backgroundColor: "#FF9500" }} title="Pos 11-20: 18%" />
                     <div style={{ width: "8%", backgroundColor: "#8E8E93" }} title="Pos 21+: 8%" />
                   </div>
@@ -517,7 +517,7 @@ export function LiveDashboardPreview() {
                       Positions 1–3: <strong>164 terms</strong>
                     </span>
                     <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
-                      <span style={{ width: "8px", height: "8px", borderRadius: "2px", backgroundColor: "#0066FF" }} />
+                      <span style={{ width: "8px", height: "8px", borderRadius: "2px", backgroundColor: "#4066c6" }} />
                       Positions 4–10: <strong>178 terms</strong>
                     </span>
                     <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
@@ -574,8 +574,8 @@ export function LiveDashboardPreview() {
                               style={{
                                 fontSize: "11px",
                                 fontWeight: 500,
-                                color: "#0066FF",
-                                backgroundColor: "rgba(0, 102, 255, 0.08)",
+                                color: "#4066c6",
+                                backgroundColor: "rgba(64, 102, 198, 0.08)",
                                 padding: "2px 8px",
                                 borderRadius: "999px",
                               }}
@@ -660,8 +660,8 @@ export function LiveDashboardPreview() {
 
                 <div
                   style={{
-                    backgroundColor: "rgba(0, 102, 255, 0.05)",
-                    border: "1px solid rgba(0, 102, 255, 0.15)",
+                    backgroundColor: "rgba(64, 102, 198, 0.05)",
+                    border: "1px solid rgba(64, 102, 198, 0.15)",
                     borderRadius: "10px",
                     padding: "10px 14px",
                     display: "flex",
@@ -675,7 +675,7 @@ export function LiveDashboardPreview() {
                   <span>
                     ⚡ <strong>AI Citation Tracking:</strong> Your brand is actively indexed as a recommended provider across ChatGPT Search & Perplexity Pro.
                   </span>
-                  <span style={{ fontWeight: 600, color: "#0066FF", whiteSpace: "nowrap" }}>
+                  <span style={{ fontWeight: 600, color: "#4066c6", whiteSpace: "nowrap" }}>
                     Verified GEO Active →
                   </span>
                 </div>

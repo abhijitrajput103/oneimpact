@@ -155,7 +155,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
                 href="#about"
                 className="inline-flex items-center justify-center w-[260px] sm:w-[320px] md:w-[380px] lg:w-[420px] py-4 sm:py-4.5 rounded-full font-display text-sm sm:text-base md:text-lg font-black tracking-[0.18em] uppercase transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl active:scale-95 text-center"
                 style={{
-                  backgroundColor: "#FFD700",
+                  backgroundColor: "#f9d230",
                   color: "#1A1A2E",
                   boxShadow: "0 6px 30px rgba(255, 215, 0, 0.45)",
                 }}
@@ -197,7 +197,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  className="h-12 sm:h-16 md:h-20 lg:h-22 w-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] object-contain hover:scale-110 transition-transform duration-300"
+                  className="h-12 sm:h-16 md:h-20 lg:h-22 w-auto max-w-[160px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[280px] object-contain hover:scale-110 transition-transform duration-300 filter brightness-105 contrast-105"
                   draggable={false}
                   loading="lazy"
                 />

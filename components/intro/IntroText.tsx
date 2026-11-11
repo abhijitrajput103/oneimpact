@@ -48,9 +48,9 @@ export function IntroText({ isClicked, className }: IntroTextProps) {
       // Slow breathing pulsation animation on subtitle
       gsap.fromTo(
         ".intro-prompt",
-        { opacity: 0.3, scale: 0.97 },
+        { opacity: 0.5, scale: 0.97 },
         {
-          opacity: 0.7,
+          opacity: 1,
           scale: 1.03,
           duration: 2.0,
           repeat: -1,
@@ -76,10 +76,10 @@ export function IntroText({ isClicked, className }: IntroTextProps) {
           <span className="intro-word inline-block opacity-0 text-white">Break The</span>
         </div>
         <div className="overflow-hidden py-1">
-          <span className="intro-word inline-block text-[#DA9F37] opacity-0">Glass</span>
+          <span className="intro-word inline-block text-[#f9d230] opacity-0">Glass</span>
         </div>
       </h1>
-      <p className="intro-prompt font-display text-[9px] md:text-xs font-bold tracking-widest text-[#DA9F37]/80 uppercase mt-4 opacity-0">
+      <p className="intro-prompt font-display text-[10px] md:text-sm font-bold tracking-[0.25em] text-white uppercase mt-6 opacity-0 drop-shadow-[0_0_12px_rgba(249,210,48,0.4)]">
         [ Click anywhere to enter One Impact ]
       </p>
     </div>

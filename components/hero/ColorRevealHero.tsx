@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useSyncExternalStore } from "react";
 
 /**
  * ColorRevealHero
@@ -19,6 +19,15 @@ interface ColorRevealHeroProps {
   className?: string;
 }
 
+function subscribeResize(callback: () => void) {
+  window.addEventListener("resize", callback, { passive: true });
+  return () => window.removeEventListener("resize", callback);
+}
+
+function getIsMobileSnapshot(): boolean {
+  return window.innerWidth < 768 || (isTouchDevice() && window.innerWidth < 1024);
+}
+
 /** Detect touch-primary devices */
 function isTouchDevice(): boolean {
   if (typeof window === "undefined") return false;
@@ -30,10 +39,15 @@ function isTouchDevice(): boolean {
 }
 
 /** Mobile Canvas Scratch-to-Reveal */
-function MobileScratchView() {
+function MobileScratchView({
+  onRevealed,
+}: {
+  onRevealed?: () => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [hasScratched, setHasScratched] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
+  const isDrawingRef = useRef(false);
   const lastPointRef = useRef<{ x: number; y: number } | null>(null);
   const strokeCountRef = useRef(0);
 
@@ -56,7 +70,7 @@ function MobileScratchView() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const w = rect.width;
       const h = rect.height;
@@ -69,16 +83,14 @@ function MobileScratchView() {
 
       if (canvasRatio > imgRatio) {
         renderH = w / imgRatio;
-        offsetY = (h - renderH) / 2;
+        offsetY = h - renderH;
       } else {
         renderW = h * imgRatio;
         offsetX = (w - renderW) / 2;
       }
 
-      ctx.save();
-      ctx.filter = "grayscale(100%) contrast(1.15) brightness(0.85)";
+      ctx.clearRect(0, 0, w, h);
       ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
-      ctx.restore();
     };
 
     if (img.complete && img.naturalWidth > 0) {
@@ -110,7 +122,7 @@ function MobileScratchView() {
 
     ctx.save();
     ctx.globalCompositeOperation = "destination-out";
-    ctx.lineWidth = 64;
+    ctx.lineWidth = 72;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
 
@@ -121,7 +133,7 @@ function MobileScratchView() {
       ctx.stroke();
     } else {
       ctx.beginPath();
-      ctx.arc(x, y, 32, 0, Math.PI * 2);
+      ctx.arc(x, y, 36, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
@@ -130,8 +142,9 @@ function MobileScratchView() {
     strokeCountRef.current += 1;
 
     if (!hasScratched) setHasScratched(true);
-    if (strokeCountRef.current > 16 && !isRevealed) {
+    if (strokeCountRef.current > 14 && !isRevealed) {
       setIsRevealed(true);
+      onRevealed?.();
     }
   };
 
@@ -143,39 +156,39 @@ function MobileScratchView() {
         <img
           src="/images/One_impact _illustration_Mobile.webp"
           alt="One Impact Hero Illustration"
-          className="w-full h-full object-cover object-center select-none pointer-events-none"
+          className="w-full h-full object-cover object-bottom select-none pointer-events-none"
           draggable={false}
           loading="eager"
         />
       </div>
 
-      {/* Layer 2: Scratchable Grayscale Canvas (Hardware Accelerated, 60fps) */}
+      {/* Layer 2: Scratchable Grayscale Canvas (Hardware Accelerated, CSS grayscale works on iOS + Android) */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full z-10"
         style={{
           touchAction: "pan-y",
+          filter: "grayscale(100%) contrast(1.05)",
           opacity: isRevealed ? 0 : 1,
           transition: "opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1)",
           pointerEvents: isRevealed ? "none" : "auto",
         }}
-        onTouchStart={(e) => {
-          const t = e.touches[0];
-          if (t) {
-            lastPointRef.current = null;
-            scratchAt(t.clientX, t.clientY);
-          }
+        onPointerDown={(e) => {
+          if (!e.isPrimary) return;
+          isDrawingRef.current = true;
+          lastPointRef.current = null;
+          scratchAt(e.clientX, e.clientY);
         }}
-        onTouchMove={(e) => {
-          const t = e.touches[0];
-          if (t) {
-            scratchAt(t.clientX, t.clientY);
-          }
+        onPointerMove={(e) => {
+          if (!e.isPrimary || !isDrawingRef.current) return;
+          scratchAt(e.clientX, e.clientY);
         }}
-        onTouchEnd={() => {
+        onPointerUp={() => {
+          isDrawingRef.current = false;
           lastPointRef.current = null;
         }}
-        onTouchCancel={() => {
+        onPointerCancel={() => {
+          isDrawingRef.current = false;
           lastPointRef.current = null;
         }}
       />
@@ -209,18 +222,17 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
   const radiusRef = useRef(RADIUS_DESKTOP);
   const isMobileRef = useRef(false);
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Check if mobile on mount
-  useEffect(() => {
-    const mobile = isTouchDevice() || window.innerWidth < 768;
-    setIsMobile(mobile);
-    isMobileRef.current = mobile;
-  }, []);
+  const isMobile = useSyncExternalStore(
+    subscribeResize,
+    getIsMobileSnapshot,
+    () => false
+  );
+  const [mobileRevealed, setMobileRevealed] = useState(false);
 
   // ─── DESKTOP MOUSE REVEAL ─────────────────────────────────────────
   useEffect(() => {
-    if (isMobileRef.current) return;
+    isMobileRef.current = isMobile;
+    if (isMobile) return;
 
     const container = containerRef.current;
     const grayscale = grayscaleRef.current;
@@ -346,7 +358,13 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
   return (
     <div
       ref={containerRef}
-      className={`absolute inset-0 z-0 overflow-hidden ${isMobile ? "pointer-events-auto" : "pointer-events-none md:pointer-events-auto"} ${className ?? ""}`}
+      className={`absolute inset-0 overflow-hidden ${
+        isMobile
+          ? mobileRevealed
+            ? "z-0 pointer-events-none"
+            : "z-[8] pointer-events-auto"
+          : "z-0 pointer-events-none md:pointer-events-auto"
+      } ${className ?? ""}`}
     >
       {/* ------------------------------------------------------------------- */}
       {/* DESKTOP MEDIA LAYERS (md and up)                                   */}
@@ -355,7 +373,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
         <>
           {/* Layer 1: Colorful desktop video (always visible underneath) */}
           <video
-            className="hidden md:block absolute inset-0 w-full h-full min-w-full min-h-full object-cover select-none pointer-events-none"
+            className="hidden md:block absolute inset-0 w-full h-full min-w-full min-h-full object-cover object-bottom select-none pointer-events-none"
             src="/videos/sample.mp4"
             autoPlay
             muted
@@ -376,14 +394,14 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
             }}
           >
             <video
-              className="absolute inset-0 w-full h-full min-w-full min-h-full object-cover select-none pointer-events-none"
+              className="absolute inset-0 w-full h-full min-w-full min-h-full object-cover object-bottom select-none pointer-events-none"
               src="/videos/sample.mp4"
               autoPlay
               muted
               loop
               playsInline
               style={{
-                filter: "grayscale(100%) contrast(1.15) brightness(0.85)",
+                filter: "brightness(1.05) contrast(1.05) saturate(1.15)",
               }}
             />
           </div>
@@ -398,7 +416,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
               borderRadius: "50%",
               border: "1.5px solid rgba(255, 255, 255, 0.18)",
               boxShadow:
-                "0 0 50px rgba(0, 102, 255, 0.12), inset 0 0 30px rgba(255, 255, 255, 0.04)",
+                "0 0 50px rgba(64, 102, 198, 0.12), inset 0 0 30px rgba(255, 255, 255, 0.04)",
               opacity: 0,
               transition: "opacity 0.3s ease",
               willChange: "transform",
@@ -412,7 +430,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
       {/* ------------------------------------------------------------------- */}
       {/* MOBILE MEDIA LAYERS (<md) — High-Performance Canvas Scratch         */}
       {/* ------------------------------------------------------------------- */}
-      {isMobile && <MobileScratchView />}
+      {isMobile && <MobileScratchView onRevealed={() => setMobileRevealed(true)} />}
 
       {/* Breathing animation for desktop cursor */}
       <style jsx>{`
@@ -420,12 +438,12 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
           0%,
           100% {
             box-shadow:
-              0 0 50px rgba(0, 102, 255, 0.12),
+              0 0 50px rgba(64, 102, 198, 0.12),
               inset 0 0 30px rgba(255, 255, 255, 0.04);
           }
           50% {
             box-shadow:
-              0 0 75px rgba(0, 102, 255, 0.22),
+              0 0 75px rgba(64, 102, 198, 0.22),
               inset 0 0 40px rgba(255, 255, 255, 0.08);
           }
         }

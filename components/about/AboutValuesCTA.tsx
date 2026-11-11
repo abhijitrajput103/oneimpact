@@ -72,7 +72,7 @@ export function AboutValuesCTA() {
   return (
     <section ref={sectionRef} className="relative w-full overflow-hidden">
       {/* Scrolling marquee strip — gold bg like Sweet Tape's scrolling text */}
-      <div className="marquee-wrap w-full overflow-hidden py-5 sm:py-6" style={{ backgroundColor: "#DA9F37", opacity: 0 }}>
+      <div className="marquee-wrap w-full overflow-hidden py-5 sm:py-6" style={{ backgroundColor: "#f9d230", opacity: 0 }}>
         <style>{`
           @keyframes valuesMarquee2 {
             from { transform: translateX(0); }
@@ -110,18 +110,18 @@ export function AboutValuesCTA() {
             className="cta-headline font-display font-black uppercase leading-[1.05] tracking-tight mb-10 sm:mb-14"
             style={{ fontSize: "clamp(2rem, 7vw, 5.5rem)", color: "#FAF9F6", opacity: 0 }}
           >
-            MORE <span style={{ color: "#DA9F37" }}>CREATIVITY</span>,
+            MORE <span style={{ color: "#f9d230" }}>CREATIVITY</span>,
             <br />
-            MORE <span style={{ color: "#DA9F37" }}>HEART</span>, AND
+            MORE <span style={{ color: "#f9d230" }}>HEART</span>, AND
             <br />
-            YES — <span style={{ color: "#DA9F37" }}>BETTER BRANDS</span>.
+            YES — <span style={{ color: "#f9d230" }}>BETTER BRANDS</span>.
           </h2>
 
           <div className="cta-btn" style={{ opacity: 0 }}>
             <a
               href="/#showreel"
               className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-display text-sm sm:text-base font-black tracking-[0.18em] uppercase transition-all duration-300 hover:scale-[1.04] active:scale-95"
-              style={{ backgroundColor: "#DA9F37", color: "#1A1A1A", boxShadow: "0 8px 36px rgba(218,159,55,0.35)" }}
+              style={{ backgroundColor: "#f9d230", color: "#1A1A1A", boxShadow: "0 8px 36px rgba(249, 210, 48,0.35)" }}
             >
               <span>EXPLORE OUR WORK</span>
               <span className="text-lg">→</span>

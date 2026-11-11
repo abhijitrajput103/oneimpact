@@ -10,13 +10,83 @@ import { GlassShards, type GlassShardsHandle } from "./GlassShards";
 import { ParticleSystem, type ParticleSystemHandle } from "./ParticleSystem";
 import { IntroText } from "./IntroText";
 
-// Audio player stubs
-const playImpactSound = () => {
-  console.log("[Audio] Hammer impact played.");
-};
+/**
+ * Procedural glass shatter sound via Web Audio API.
+ * No external audio files needed — generates a realistic
+ * crack + tinkle effect using noise bursts and filtered sweeps.
+ */
+const playGlassShatterSound = () => {
+  try {
+    const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    if (!AudioCtx) return;
 
-const playBreakSound = () => {
-  console.log("[Audio] Glass break played.");
+    const ctx = new AudioCtx();
+
+    // ── 1. Initial crack/impact — short noise burst ──
+    const impactDuration = 0.08;
+    const impactBuffer = ctx.createBuffer(1, ctx.sampleRate * impactDuration, ctx.sampleRate);
+    const impactData = impactBuffer.getChannelData(0);
+    for (let i = 0; i < impactData.length; i++) {
+      const t = i / impactData.length;
+      impactData[i] = (Math.random() * 2 - 1) * (1 - t) * 0.7;
+    }
+    const impactSrc = ctx.createBufferSource();
+    impactSrc.buffer = impactBuffer;
+    const impactFilter = ctx.createBiquadFilter();
+    impactFilter.type = "highpass";
+    impactFilter.frequency.value = 800;
+    const impactGain = ctx.createGain();
+    impactGain.gain.setValueAtTime(0.5, ctx.currentTime);
+    impactGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + impactDuration);
+    impactSrc.connect(impactFilter).connect(impactGain).connect(ctx.destination);
+    impactSrc.start(ctx.currentTime);
+
+    // ── 2. Glass tinkle — high-frequency shimmer ──
+    const tinkleDuration = 0.5;
+    const tinkleBuffer = ctx.createBuffer(1, ctx.sampleRate * tinkleDuration, ctx.sampleRate);
+    const tinkleData = tinkleBuffer.getChannelData(0);
+    for (let i = 0; i < tinkleData.length; i++) {
+      const t = i / tinkleData.length;
+      tinkleData[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 3) * 0.35;
+    }
+    const tinkleSrc = ctx.createBufferSource();
+    tinkleSrc.buffer = tinkleBuffer;
+    const tinkleFilter = ctx.createBiquadFilter();
+    tinkleFilter.type = "bandpass";
+    tinkleFilter.frequency.value = 4500;
+    tinkleFilter.Q.value = 2;
+    const tinkleGain = ctx.createGain();
+    tinkleGain.gain.setValueAtTime(0.35, ctx.currentTime);
+    tinkleGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + tinkleDuration);
+    tinkleSrc.connect(tinkleFilter).connect(tinkleGain).connect(ctx.destination);
+    tinkleSrc.start(ctx.currentTime + 0.02);
+
+    // ── 3. Falling shards — low resonant crunch ──
+    const crunchDuration = 0.3;
+    const crunchBuffer = ctx.createBuffer(1, ctx.sampleRate * crunchDuration, ctx.sampleRate);
+    const crunchData = crunchBuffer.getChannelData(0);
+    for (let i = 0; i < crunchData.length; i++) {
+      const t = i / crunchData.length;
+      crunchData[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 2) * 0.4;
+    }
+    const crunchSrc = ctx.createBufferSource();
+    crunchSrc.buffer = crunchBuffer;
+    const crunchFilter = ctx.createBiquadFilter();
+    crunchFilter.type = "lowpass";
+    crunchFilter.frequency.value = 1200;
+    const crunchGain = ctx.createGain();
+    crunchGain.gain.setValueAtTime(0.3, ctx.currentTime);
+    crunchGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + crunchDuration);
+    crunchSrc.connect(crunchFilter).connect(crunchGain).connect(ctx.destination);
+    crunchSrc.start(ctx.currentTime + 0.03);
+
+    // Auto-close the context after sounds finish
+    setTimeout(() => {
+      ctx.close().catch(() => {});
+    }, 1200);
+  } catch {
+    // Silently fail — sound is not critical
+  }
 };
 
 /** Detect touch-primary devices (smartphones / tablets) */
@@ -143,8 +213,7 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
 
     // Accessibility check: Skip full timeline if user prefers reduced motion
     if (prefersReducedMotion) {
-      playImpactSound();
-      playBreakSound();
+      playGlassShatterSound();
 
       const skipTl = gsap.timeline({
         onComplete: () => {
@@ -161,41 +230,49 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     }
 
     // Master GSAP Timeline Execution
-    // 1. Hammer Swing
+    // 1. Instant Hammer Swing (40ms impact)
     hammerRef.current?.triggerSwing(() => {
-      // 2. On Impact: Shake screen, Play sound stubs
-      playImpactSound();
+      // 2. On Impact: Shake screen, Play sounds
+      playGlassShatterSound();
 
       const shakeTimeline = gsap.timeline();
       shakeTimeline
         .to(containerRef.current, {
-          x: () => (Math.random() - 0.5) * 10,
-          y: () => (Math.random() - 0.5) * 10,
-          duration: 0.04,
-          repeat: 4,
+          x: () => (Math.random() - 0.5) * 12,
+          y: () => (Math.random() - 0.5) * 12,
+          duration: 0.03,
+          repeat: 3,
           yoyo: true,
           ease: "power1.inOut",
         })
         .set(containerRef.current, { x: 0, y: 0 });
 
-      // 3. Draw cracks radiating outward
-      crackRef.current?.generateCrack(cx, cy, () => {
-        playBreakSound();
+      // 3. Draw cracks radiating outward instantly
+      crackRef.current?.generateCrack(cx, cy, () => {});
 
-        // 4. Spawn falling glass shards & dust particles
-        particlesRef.current?.spawnParticles(cx, cy);
-        shardsRef.current?.spawnShards(cx, cy);
+      // 4. Spawn falling glass shards & dust particles immediately on impact
+      particlesRef.current?.spawnParticles(cx, cy);
+      shardsRef.current?.spawnShards(cx, cy);
 
-        // 5. Remove the frosted glass, blur, and crack lines
-        crackRef.current?.clearCanvas();
+      // 5. Instantly fade out the frosted glass, blur, and solid background
+      gsap.to([glassRef.current, blurRef.current], {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.out",
+        onComplete: () => {
+          crackRef.current?.clearCanvas();
+        },
+      });
 
-        gsap.set(glassRef.current, { opacity: 0, pointerEvents: "none" });
-        gsap.set(blurRef.current, { opacity: 0, pointerEvents: "none" });
+      gsap.to(containerRef.current, {
+        backgroundColor: "transparent",
+        duration: 0.25,
+        ease: "power2.out",
+      });
 
-        // 6. Complete intro after shards have fallen off screen
-        gsap.delayedCall(2.2, () => {
-          completeIntro();
-        });
+      // 6. Complete intro after shards have dispersed
+      gsap.delayedCall(1.6, () => {
+        completeIntro();
       });
     });
   };
@@ -232,10 +309,10 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
       className="fixed inset-0 w-screen h-screen z-[9999] overflow-hidden custom-cursor-active select-none cursor-none"
       style={{ cursor: "none" }}
     >
-      {/* Layer 2: Website Blur Overlay */}
+      {/* Layer 2: Website Blur Overlay with dark blackout backdrop */}
       <div
         ref={blurRef}
-        className="absolute inset-0 z-0 bg-transparent backdrop-blur-[14px] pointer-events-none transition-all duration-300"
+        className="absolute inset-0 z-0 bg-black/40 backdrop-blur-[18px] pointer-events-none"
       />
 
       {/* Glass overlay & text graphics */}

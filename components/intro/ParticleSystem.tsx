@@ -45,7 +45,7 @@ export const ParticleSystem = forwardRef<ParticleSystemHandle>((_, ref) => {
   useImperativeHandle(ref, () => ({
     spawnParticles(x: number, y: number) {
       const pCount = 50 + Math.floor(Math.random() * 30); // 50 to 80 particles
-      const colors = ["#F5F5F7", "#E2E8F0", "#0066FF", "#38BDF8", "#FFFFFF"];
+      const colors = ["#F5F5F7", "#E2E8F0", "#4066c6", "#38BDF8", "#FFFFFF"];
 
       for (let i = 0; i < pCount; i++) {
         const angle = Math.random() * Math.PI * 2;

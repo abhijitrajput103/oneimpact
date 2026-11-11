@@ -141,7 +141,7 @@ export function AboutOriginStory() {
             </span>
             <span
               className="block flex flex-wrap gap-x-[0.2em]"
-              style={{ fontSize: "clamp(3rem, 12vw, 10rem)", color: "#DA9F37" }}
+              style={{ fontSize: "clamp(3rem, 12vw, 10rem)", color: "#f9d230" }}
             >
               {"ONE BELIEF".split(" ").map((word, i) => (
                 <span key={`b-${i}`} className="relative inline-block overflow-hidden py-1">
@@ -160,8 +160,8 @@ export function AboutOriginStory() {
           >
             We started One Impact in 2020 with a bold, simple idea — brands
             deserve more than just templates and trends. They deserve{" "}
-            <span className="font-semibold" style={{ color: "#DA9F37" }}>identity</span>,{" "}
-            <span className="font-semibold" style={{ color: "#DA9F37" }}>soul</span>, and
+            <span className="font-semibold" style={{ color: "#f9d230" }}>identity</span>,{" "}
+            <span className="font-semibold" style={{ color: "#f9d230" }}>soul</span>, and
             stories that stick.
           </p>
 
@@ -184,7 +184,7 @@ export function AboutOriginStory() {
             { number: "200+", label: "Campaigns Delivered" },
           ].map((stat) => (
             <div key={stat.label} className="stat-item" style={{ opacity: 0 }}>
-              <div className="font-display text-3xl sm:text-4xl md:text-5xl font-black" style={{ color: "#DA9F37" }}>
+              <div className="font-display text-3xl sm:text-4xl md:text-5xl font-black" style={{ color: "#f9d230" }}>
                 {stat.number}
               </div>
               <div className="font-sans text-xs sm:text-sm uppercase tracking-widest mt-1" style={{ color: "rgba(250,249,246,0.4)" }}>
