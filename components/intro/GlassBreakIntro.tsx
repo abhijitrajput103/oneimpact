@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useSyncExternalStore } from "react";
 import { gsap } from "@/gsap";
+
+const emptySubscribe = () => () => {};
 import { useLenis } from "@/hooks/useLenis";
 import { GlassOverlay } from "./GlassOverlay";
 import { HammerCursor, type HammerCursorHandle } from "./HammerCursor";
@@ -107,7 +109,11 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
   const [isClicked, setIsClicked] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useSyncExternalStore(
+    emptySubscribe,
+    () => isTouchDevice(),
+    () => false
+  );
 
   const containerRef = useRef<HTMLDivElement>(null);
   const blurRef = useRef<HTMLDivElement>(null);
@@ -117,8 +123,41 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
   const crackRef = useRef<CrackCanvasHandle>(null);
   const shardsRef = useRef<GlassShardsHandle>(null);
   const particlesRef = useRef<ParticleSystemHandle>(null);
+  const shatterAudioRef = useRef<HTMLAudioElement | null>(null);
+  const audioErrorRef = useRef(false);
 
   const lenis = useLenis();
+
+  // Preload custom glass-break audio file from /audio/glass-break.mp3
+  useEffect(() => {
+    const audio = new Audio("/audio/glass-break.mp3");
+    audio.preload = "auto";
+    audio.volume = 0.85;
+
+    const handleError = () => {
+      audioErrorRef.current = true;
+    };
+
+    audio.addEventListener("error", handleError, { once: true });
+    audio.load();
+    shatterAudioRef.current = audio;
+
+    return () => {
+      audio.removeEventListener("error", handleError);
+    };
+  }, []);
+
+  const triggerShatterSound = useCallback(() => {
+    const audio = shatterAudioRef.current;
+    if (audio && !audioErrorRef.current) {
+      audio.currentTime = 0;
+      audio.play().catch(() => {
+        playGlassShatterSound();
+      });
+      return;
+    }
+    playGlassShatterSound();
+  }, []);
 
   const completeIntro = useCallback(() => {
     setIsActive(false);
@@ -146,7 +185,6 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
   // Detect mobile & stop scrolling on mount; always restore on unmount
   useEffect(() => {
     const mobile = isTouchDevice();
-    setIsMobile(mobile);
 
     if (!mobile) {
       document.body.classList.add("custom-cursor-active");
@@ -213,7 +251,7 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
 
     // Accessibility check: Skip full timeline if user prefers reduced motion
     if (prefersReducedMotion) {
-      playGlassShatterSound();
+      triggerShatterSound();
 
       const skipTl = gsap.timeline({
         onComplete: () => {
@@ -233,7 +271,7 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     // 1. Instant Hammer Swing (40ms impact)
     hammerRef.current?.triggerSwing(() => {
       // 2. On Impact: Shake screen, Play sounds
-      playGlassShatterSound();
+      triggerShatterSound();
 
       const shakeTimeline = gsap.timeline();
       shakeTimeline
