@@ -996,7 +996,7 @@ export default function SeoLandingPage() {
   const scrollCarousel = (dir: "prev" | "next") => {
     if (!trackRef.current) return;
     const cardWidth = 336; // 320px + 16px gap
-    const newIdx = dir === "next" 
+    const newIdx = dir === "next"
       ? Math.min(USP_CARDS.length - 1, carIdx + 1)
       : Math.max(0, carIdx - 1);
     setCarIdx(newIdx);
@@ -1132,8 +1132,8 @@ export default function SeoLandingPage() {
         }
         .seo-landing-root .hero-grid {
           display: grid;
-          grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-          gap: clamp(32px, 5vw, 80px);
+          grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+          gap: clamp(24px, 4vw, 56px);
           align-items: center;
         }
         .seo-landing-root .scrollrow {
@@ -1227,8 +1227,44 @@ export default function SeoLandingPage() {
           pointer-events: none;
         }
         @media (max-width: 980px) {
-          .seo-landing-root .hero-grid {
+          .seo-landing-root .hero-grid,
+          .seo-landing-root .reality-grid {
             grid-template-columns: minmax(0, 1fr) !important;
+          }
+        }
+        .seo-landing-root .reality-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+          gap: clamp(32px, 5vw, 72px);
+          align-items: center;
+        }
+        .seo-landing-root .note-paper-card {
+          position: relative;
+          width: 100%;
+          max-width: 720px;
+          margin: 0 auto;
+          padding: 96px 12% 76px;
+        }
+        .seo-landing-root .note-paper-img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -52%);
+          width: 138%;
+          height: auto;
+          max-width: none;
+          pointer-events: none;
+          user-select: none;
+          z-index: 0;
+        }
+        @media (max-width: 640px) {
+          .seo-landing-root .note-paper-card {
+            padding: 88px 10% 68px;
+          }
+          .seo-landing-root .note-paper-img {
+            width: auto;
+            height: 146%;
+            min-width: 138%;
           }
         }
         @media (max-width: 900px) {
@@ -1254,101 +1290,76 @@ export default function SeoLandingPage() {
       <Navbar />
 
       {/* ── HERO SECTION ──────────── */}
-      <section id="top" style={{ position: "relative", overflow: "hidden", background: "#FFFFFF" }}>
-        {/* Glow ambient blurs */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: "40px",
-            right: "6%",
-            width: "380px",
-            height: "380px",
-            borderRadius: "50%",
-            background: "#f9d230",
-            opacity: 0.55,
-            filter: "blur(70px)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: "260px",
-            right: "24%",
-            width: "320px",
-            height: "320px",
-            borderRadius: "50%",
-            background: "#4066c6",
-            opacity: 0.55,
-            filter: "blur(80px)",
-          }}
-        />
-
+      <section id="top" style={{ position: "relative", overflow: "hidden", background: "#000000", color: "#FFFFFF" }}>
         <div
           className="hero-grid"
           style={{
             position: "relative",
             maxWidth: "1360px",
             margin: "0 auto",
-            padding: "clamp(100px, 11vw, 136px) clamp(16px, 3vw, 32px) clamp(56px, 8vw, 112px)",
+            padding: "clamp(100px, 10vw, 128px) clamp(16px, 3vw, 32px) clamp(56px, 7vw, 96px)",
           }}
         >
           {/* Left Column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
-            <span style={{ fontSize: "17px", fontWeight: 600, color: "#6E6E73", letterSpacing: "-0.01em" }}>
-              SEO services by One Impact
-            </span>
-
+          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             <h1
-              className="seo-heading"
               style={{
                 margin: 0,
-                fontSize: "clamp(2.6rem, 5.2vw, 4.8rem)",
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.6rem, 5.2vw, 4.6rem)",
                 lineHeight: 1.05,
-                letterSpacing: "-0.04em",
+                letterSpacing: "-0.025em",
                 fontWeight: 700,
-                maxWidth: "18ch",
+                maxWidth: "15ch",
+                color: "#FFFFFF",
               }}
             >
-              Your Next Customer is searching for you!
+              Your <span style={{ color: "#4066c6" }}>Next</span>{" "}
+              <br />
+              Customer is{" "}
+              <span style={{ color: "#f9d230" }}>searching for you!</span>
             </h1>
 
             <p
               style={{
                 margin: 0,
-                fontSize: "clamp(1.2rem, 1.9vw, 1.55rem)",
-                lineHeight: 1.3,
+                fontSize: "clamp(1.15rem, 1.8vw, 1.45rem)",
+                lineHeight: 1.35,
                 fontWeight: 600,
-                letterSpacing: "-0.02em",
+                letterSpacing: "-0.015em",
+                color: "#FFFFFF",
+                maxWidth: "34ch",
               }}
             >
-              Rank Higher. Beat the Competition. Grow Organically with Us.
+              Rank Higher. Beat the Competition.
+              <br />
+              Grow Organically with Us.
             </p>
 
-            <p style={{ margin: 0, fontSize: "19px", lineHeight: 1.5, color: "#3A3A3C", maxWidth: "50ch" }}>
+            <p style={{ margin: 0, fontSize: "17px", lineHeight: 1.5, color: "rgba(255,255,255,0.72)", maxWidth: "46ch" }}>
               We will make sure they find you
             </p>
 
             {/* CTAs */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", paddingTop: "4px" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", paddingTop: "6px" }}>
               <a
                 className="press"
                 href="https://wa.me/918369018104"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  color: "#000000",
+                  color: "#FFFFFF",
                   textDecoration: "none",
                   fontWeight: 600,
-                  fontSize: "17px",
-                  padding: "13px 22px",
+                  fontSize: "16px",
+                  padding: "12px 22px",
                   borderRadius: "999px",
-                  minHeight: "50px",
+                  minHeight: "48px",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  background: "rgba(0,0,0,0.06)",
+                  background: "rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(255,255,255,0.16)",
                 }}
               >
                 <svg
@@ -1370,12 +1381,12 @@ export default function SeoLandingPage() {
               <a
                 href="#usps"
                 style={{
-                  color: "#000000",
+                  color: "#f9d230",
                   fontWeight: 600,
-                  fontSize: "17px",
+                  fontSize: "16px",
                   textDecoration: "none",
-                  padding: "13px 4px",
-                  minHeight: "50px",
+                  padding: "12px 4px",
+                  minHeight: "48px",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "4px",
@@ -1399,53 +1410,51 @@ export default function SeoLandingPage() {
             </div>
           </div>
 
-          {/* Right Column: Hero Audit Card Form */}
-          <div
-            id="audit"
-            className="form-card"
-            style={{
-              background: "rgba(0,0,0,0.9)",
-              backdropFilter: "blur(30px) saturate(160%)",
-              WebkitBackdropFilter: "blur(30px) saturate(160%)",
-              color: "#FFFFFF",
-              borderRadius: "32px",
-              padding: "clamp(24px, 3.2vw, 36px)",
-              boxShadow:
-                "0 1px 0 rgba(255,255,255,0.12) inset, 0 50px 100px -40px rgba(0,0,0,0.55), 0 20px 40px -24px rgba(0,0,0,0.35)",
-            }}
-          >
+          {/* Right Column: Hero Audit Form on Note_paper.png */}
+          <div id="audit" className="note-paper-card" style={{ color: "#111111" }}>
+            {/* Note paper background image */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/Note_paper.png"
+              alt=""
+              aria-hidden="true"
+              draggable={false}
+              className="note-paper-img"
+            />
+
             {!sent1 ? (
               <form
                 onSubmit={handleSubmit1}
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "16px",
+                  gap: "12px",
                   position: "relative",
                   zIndex: 1,
                 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                   <h2
                     className="seo-heading"
                     style={{
                       margin: 0,
-                      fontSize: "clamp(1.6rem, 2.4vw, 2rem)",
+                      fontSize: "clamp(1.45rem, 2.2vw, 1.85rem)",
                       lineHeight: 1.12,
                       letterSpacing: "-0.035em",
                       fontWeight: 700,
+                      color: "#111111",
                     }}
                   >
                     Get your SEO audit
                   </h2>
-                  <p style={{ margin: 0, fontSize: "15.5px", color: "#C7C7CC", letterSpacing: 0 }}>
+                  <p style={{ margin: 0, fontSize: "14px", color: "#555558", letterSpacing: 0 }}>
                     A real person from our team reviews your website and gets back to you.
                   </p>
                 </div>
 
                 {/* Name */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-name" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="hero-name" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
                     Your name
                   </label>
                   <input
@@ -1459,26 +1468,26 @@ export default function SeoLandingPage() {
                     onBlur={() => setTouched1((t) => ({ ...t, name: true }))}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showName1Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 14px",
+                      borderRadius: "12px",
+                      border: `1.5px solid ${showName1Err ? "#DC2626" : "#D2D2D7"}`,
+                      background: "#FFFFFF",
+                      color: "#111111",
                       width: "100%",
                     }}
                   />
                   {showName1Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
+                    <span role="alert" style={{ fontSize: "12.5px", color: "#DC2626" }}>
                       Enter your name so we know who to reply to
                     </span>
                   )}
                 </div>
 
                 {/* Phone */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="hero-phone" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
                     Phone or WhatsApp number
                   </label>
                   <input
@@ -1493,26 +1502,26 @@ export default function SeoLandingPage() {
                     onBlur={() => setTouched1((t) => ({ ...t, phone: true }))}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showPhone1Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 14px",
+                      borderRadius: "12px",
+                      border: `1.5px solid ${showPhone1Err ? "#DC2626" : "#D2D2D7"}`,
+                      background: "#FFFFFF",
+                      color: "#111111",
                       width: "100%",
                     }}
                   />
                   {showPhone1Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
+                    <span role="alert" style={{ fontSize: "12.5px", color: "#DC2626" }}>
                       Enter a 10-digit mobile number
                     </span>
                   )}
                 </div>
 
                 {/* Website address */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-url" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="hero-url" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
                     Website address
                   </label>
                   <input
@@ -1525,27 +1534,27 @@ export default function SeoLandingPage() {
                     onBlur={() => setTouched1((t) => ({ ...t, url: true }))}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showUrl1Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 14px",
+                      borderRadius: "12px",
+                      border: `1.5px solid ${showUrl1Err ? "#DC2626" : "#D2D2D7"}`,
+                      background: "#FFFFFF",
+                      color: "#111111",
                       width: "100%",
                     }}
                   />
                   {showUrl1Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
+                    <span role="alert" style={{ fontSize: "12.5px", color: "#DC2626" }}>
                       Enter your website address, like yourbrand.com
                     </span>
                   )}
                 </div>
 
                 {/* Need dropdown */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-need" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
-                    What do you need? <span style={{ color: "#8E8E93" }}>(optional)</span>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="hero-need" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
+                    What do you need? <span style={{ color: "#6E6E73", fontWeight: 500 }}>(optional)</span>
                   </label>
                   <select
                     id="hero-need"
@@ -1554,13 +1563,13 @@ export default function SeoLandingPage() {
                     onChange={(e) => setNeed1(e.target.value)}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 14px",
-                      borderRadius: "14px",
-                      border: "1.5px solid #3A3A3C",
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 12px",
+                      borderRadius: "12px",
+                      border: "1.5px solid #D2D2D7",
+                      background: "#FFFFFF",
+                      color: "#111111",
                       width: "100%",
                     }}
                   >
@@ -1580,14 +1589,14 @@ export default function SeoLandingPage() {
                   className="press y btn-sheen"
                   style={{
                     font: "inherit",
-                    fontSize: "17px",
+                    fontSize: "16px",
                     fontWeight: 650,
                     letterSpacing: "-0.01em",
                     color: "#000000",
                     background: "#f9d230",
-                    border: 0,
+                    border: "1.5px solid #000000",
                     borderRadius: "999px",
-                    minHeight: "54px",
+                    minHeight: "48px",
                     cursor: "pointer",
                     marginTop: "4px",
                   }}
@@ -1595,7 +1604,7 @@ export default function SeoLandingPage() {
                   Get my SEO audit
                 </button>
 
-                <span style={{ fontSize: "13px", color: "#8E8E93", textAlign: "center", letterSpacing: 0 }}>
+                <span style={{ fontSize: "12px", color: "#6E6E73", textAlign: "center", letterSpacing: 0 }}>
                   No spam, no sales scripts. We’ll reply on WhatsApp or call.
                 </span>
               </form>
@@ -1639,11 +1648,11 @@ export default function SeoLandingPage() {
                 <h3
                   role="status"
                   className="seo-heading"
-                  style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}
+                  style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700, color: "#111111" }}
                 >
                   Audit requested
                 </h3>
-                <p style={{ margin: 0, color: "#C7C7CC" }}>
+                <p style={{ margin: 0, color: "#3A3A3C" }}>
                   Thanks, {name1}. We’ll review {url1} and get in touch on {phone1}.
                 </p>
                 <button
@@ -1661,7 +1670,7 @@ export default function SeoLandingPage() {
                     fontSize: "15px",
                     fontWeight: 600,
                     color: "#FFFFFF",
-                    background: "rgba(255,255,255,0.12)",
+                    background: "#111111",
                     border: 0,
                     borderRadius: "999px",
                     minHeight: "44px",
@@ -1681,16 +1690,80 @@ export default function SeoLandingPage() {
       <section
         aria-label="Brands we work with"
         style={{
-          padding: "clamp(44px, 5.5vw, 64px) 0 clamp(48px, 6vw, 72px)",
-          backgroundColor: "#FAFAFC",
-          borderTop: "1px solid #E5E5EA",
-          borderBottom: "1px solid #E5E5EA",
+          padding: "clamp(64px, 7.5vw, 92px) 0 clamp(64px, 7.5vw, 92px)",
+          backgroundColor: "#FFFFFF",
           position: "relative",
+          overflow: "hidden",
           zIndex: 10,
         }}
       >
+        {/* Top black torn-paper border */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "clamp(18px, 2.6vw, 42px)",
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/first-banner-black-paper-cut.svg"
+            alt=""
+            draggable={false}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 0,
+              transform: "translate(-50%, -64.2%)",
+              width: "152%",
+              maxWidth: "none",
+              height: "auto",
+              userSelect: "none",
+            }}
+          />
+        </div>
+
+        {/* Bottom black torn-paper border */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "clamp(18px, 2.6vw, 42px)",
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/first-banner-black-paper-cut.svg"
+            alt=""
+            draggable={false}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 0,
+              transform: "translate(-50%, -78.4%)",
+              width: "152%",
+              maxWidth: "none",
+              height: "auto",
+              userSelect: "none",
+            }}
+          />
+        </div>
         <p
           style={{
+            position: "relative",
+            zIndex: 1,
             margin: "0 0 clamp(22px, 3vw, 32px)",
             fontSize: "14.5px",
             fontWeight: 500,
@@ -1704,6 +1777,8 @@ export default function SeoLandingPage() {
         <div
           className="marqwrap"
           style={{
+            position: "relative",
+            zIndex: 1,
             overflow: "hidden",
             width: "100%",
             WebkitMaskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
@@ -1755,76 +1830,137 @@ export default function SeoLandingPage() {
       {/* ── REALITY STATEMENT SECTION ────────────────────────────────────────── */}
       <section
         style={{
-          backgroundColor: "#FFFFFF",
-          padding: "clamp(80px, 10vw, 132px) clamp(20px, 4vw, 36px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(64px, 8vw, 112px) clamp(16px, 3vw, 32px)",
           position: "relative",
         }}
       >
         <div
+          className="reality-grid"
           style={{
-            maxWidth: "980px",
+            maxWidth: "1360px",
             margin: "0 auto",
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
           }}
         >
-          <h2
-            className="seo-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(2.4rem, 4.6vw, 3.8rem)",
-              lineHeight: 1.15,
-              letterSpacing: "-0.04em",
-              fontWeight: 700,
-              color: "#000000",
-              maxWidth: "24ch",
-            }}
-          >
-            Having a website or posting on social media won’t cut it anymore.
-          </h2>
+          {/* Left Column: Illustration */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/illustration.png"
+              alt="SEO visibility illustration"
+              draggable={false}
+              style={{
+                width: "100%",
+                maxWidth: "720px",
+                height: "auto",
+                display: "block",
+              }}
+            />
+          </div>
 
-          <p
+          {/* Right Column: Copy */}
+          <div
             style={{
-              margin: "clamp(18px, 2.5vw, 26px) 0 clamp(26px, 3.5vw, 38px)",
-              fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)",
-              lineHeight: 1.35,
-              fontWeight: 600,
-              letterSpacing: "-0.02em",
-              color: "#4066c6",
-              maxWidth: "34ch",
+              display: "flex",
+              flexDirection: "column",
+              gap: "18px",
+              textAlign: "left",
             }}
           >
-            How will people find it if it is not SEO optimised?
-          </p>
+            <h2
+              style={{
+                margin: 0,
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.2rem, 4.2vw, 3.6rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.02em",
+                fontWeight: 700,
+                color: "#FFFFFF",
+                maxWidth: "18ch",
+              }}
+            >
+              Having a <span style={{ color: "#4066c6" }}>website</span> or{" "}
+              <span style={{ color: "#f9d230" }}>posting</span> on{" "}
+              <span style={{ color: "#f9d230" }}>social media</span> won’t cut it anymore.
+            </h2>
 
-          <p
-            style={{
-              margin: "0 0 18px",
-              fontSize: "clamp(1.1rem, 1.5vw, 1.28rem)",
-              lineHeight: 1.55,
-              fontWeight: 500,
-              color: "#1D1D1F",
-              maxWidth: "64ch",
-            }}
-          >
-            Today’s digital success depends on having a precise SEO strategy that makes your brand visible when and where it matters.
-          </p>
+            <p
+              style={{
+                margin: "6px 0 4px",
+                fontSize: "clamp(1.15rem, 1.8vw, 1.45rem)",
+                lineHeight: 1.35,
+                fontWeight: 600,
+                letterSpacing: "-0.015em",
+                color: "#FFFFFF",
+              }}
+            >
+              How will people find it if it is not SEO optimised?
+            </p>
 
-          <p
-            style={{
-              margin: 0,
-              fontSize: "clamp(1rem, 1.35vw, 1.12rem)",
-              lineHeight: 1.65,
-              color: "#6E6E73",
-              maxWidth: "74ch",
-            }}
-          >
-            At One Impact, our mission is to create meaningful and lasting change for our clients. As a search engine optimization agency, we focus on building custom strategies that grow organic traffic, improve search visibility, and bring in qualified leads using intent-based keyword targeting.
-          </p>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "clamp(0.98rem, 1.25vw, 1.08rem)",
+                lineHeight: 1.6,
+                color: "rgba(255, 255, 255, 0.72)",
+                maxWidth: "56ch",
+              }}
+            >
+              Today’s digital success depends on having a precise SEO strategy that makes your brand visible when and where it matters.
+            </p>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: "clamp(0.98rem, 1.25vw, 1.08rem)",
+                lineHeight: 1.6,
+                color: "rgba(255, 255, 255, 0.72)",
+                maxWidth: "56ch",
+              }}
+            >
+              At One Impact, our mission is to create meaningful and lasting change for our clients. As a search engine optimization agency, we focus on building custom strategies that grow organic traffic, improve search visibility, and bring in qualified leads using intent-based keyword targeting.
+            </p>
+          </div>
         </div>
       </section>
+
+      {/* ── ORGANIC WAVE DIVIDER ─────────────────────────────────────────────── */}
+      <div
+        aria-hidden="true"
+        style={{
+          width: "100%",
+          height: "64px",
+          backgroundColor: "#000000",
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        <svg
+          viewBox="23 18 711 30"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+            overflow: "visible",
+          }}
+        >
+          <path
+            d="M23 28.2 L26 29 L29 29.2 L32 28.7 L35 30.3 L38 30.5 L41 30.2 L44 30.2 L47 31 L50 30.3 L53 29.8 L56 30.5 L59 29.7 L62 28.5 L65 27.8 L68 27.8 L71 27 L74 29.5 L77 30.3 L80 32.3 L83 32.7 L86 31.8 L89 33 L92 33.8 L95 35 L98 36.3 L101 36.7 L104 37.3 L107 36.5 L110 37.5 L113 38.5 L116 38.5 L119 37.3 L122 36.5 L125 35.8 L128 35.5 L131 34.7 L134 36 L137 37.5 L140 37.5 L143 36.8 L146 37.5 L149 36.5 L152 36.7 L155 38.3 L158 37.8 L161 37.5 L164 36.2 L167 35.5 L170 35.5 L173 35.7 L176 35.3 L179 34 L182 34.8 L185 34.7 L188 34.5 L191 33.7 L194 32.7 L197 32.7 L200 32.7 L203 32.8 L206 33.5 L209 34.2 L212 34.5 L215 35 L218 34.5 L221 34.7 L224 35.7 L227 35.7 L230 35.3 L233 36.3 L236 37.2 L239 37.7 L242 38.5 L245 37.2 L248 36.5 L251 37.3 L254 37 L257 37.5 L260 37.7 L263 36.3 L266 34.8 L269 35.3 L272 35.5 L275 36.5 L278 36.8 L281 38.5 L284 38.5 L287 37.8 L290 36.7 L293 37.3 L296 36.8 L299 36.5 L302 35.3 L305 34.2 L308 33.2 L311 32 L314 32.5 L317 32.5 L320 31.2 L323 30.5 L326 27.3 L329 27.2 L332 27.8 L335 28.2 L338 29.7 L341 30.2 L344 30 L347 30.2 L350 31.2 L353 30.5 L356 29.8 L359 30.5 L362 30.5 L365 28.8 L368 29.2 L371 28.8 L374 28.2 L377 29.2 L380 28.5 L383 29 L386 29 L389 28.7 L392 30.5 L395 30.5 L398 29.8 L401 30.5 L404 31.2 L407 30.2 L410 30 L413 30.3 L416 29.7 L419 28.3 L422 27.8 L425 27.3 L428 27.3 L431 30.3 L434 31 L437 32.5 L440 32.5 L443 32.2 L446 33 L449 34.2 L452 35.3 L455 36.5 L458 36.7 L461 37.3 L464 36.7 L467 37.8 L470 38.5 L473 38.5 L476 36.8 L479 36.5 L482 35.5 L485 35.2 L488 34.8 L491 36.3 L494 37.7 L497 37.5 L500 36.8 L503 37.5 L506 36.5 L509 37 L512 38.5 L515 37.7 L518 37.2 L521 36.2 L524 35.5 L527 35.7 L530 35.5 L533 34.7 L536 34.3 L539 35.2 L542 34.5 L545 34.2 L548 33.3 L551 32.8 L554 32.7 L557 32.7 L560 32.7 L563 33.5 L566 34.3 L569 34.7 L572 35 L575 34.2 L578 34.8 L581 35.7 L584 35.7 L587 35.5 L590 36.3 L593 37.3 L596 37.8 L599 38.2 L602 36.8 L605 36.5 L608 37.7 L611 36.8 L614 37.5 L617 37.5 L620 36 L623 34.7 L626 35.3 L629 35.7 L632 36.5 L635 37.2 L638 38.5 L641 38.5 L644 37.7 L647 36.7 L650 37.3 L653 36.7 L656 36.3 L659 35 L662 34 L665 33 L668 32 L671 32.5 L674 32.5 L677 30.5 L680 29.8 L683 27 L686 27.7 L689 27.8 L692 28.7 L695 29.7 L698 30.5 L701 29.7 L704 30.3 L707 31 L710 30.2 L713 30.2 L716 30.5 L719 30.3 L722 28.7 L725 28.8 L728 29 L731 28.2 L734 29"
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+      </div>
 
       {/* ── LIVE ANALYTICS & CLIENT DASHBOARD PREVIEW ─────────────────────── */}
       <LiveDashboardPreview />
@@ -1833,8 +1969,8 @@ export default function SeoLandingPage() {
       <section
         id="reviews"
         style={{
-          backgroundColor: "#FFFFFF",
-          padding: "0 clamp(16px, 3vw, 32px) clamp(56px, 7vw, 84px)",
+          backgroundColor: "#000000",
+          padding: "clamp(16px, 2.5vw, 28px) clamp(16px, 3vw, 32px) clamp(64px, 8vw, 96px)",
         }}
       >
         <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
@@ -1842,7 +1978,7 @@ export default function SeoLandingPage() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
-              gap: "16px",
+              gap: "20px",
             }}
           >
             {QUOTES.map((q, idx) => (
@@ -1850,19 +1986,18 @@ export default function SeoLandingPage() {
                 key={idx}
                 style={{
                   margin: 0,
-                  background: "#FFFFFF",
-                  border: "1px solid #E5E5EA",
-                  borderRadius: "24px",
+                  background: "#000000",
+                  border: "1px solid rgba(249, 210, 48, 0.65)",
+                  borderRadius: "16px",
                   padding: "28px",
                   display: "flex",
                   flexDirection: "column",
                   gap: "20px",
                   justifyContent: "space-between",
-                  boxShadow: "0 2px 14px rgba(0, 0, 0, 0.03)",
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                  <span style={{ display: "inline-flex", gap: "3px", color: "#f9d230" }} aria-label="Rated 5 out of 5">
+                  <span style={{ display: "inline-flex", gap: "4px", color: "#4066c6" }} aria-label="Rated 5 out of 5">
                     {[...Array(5)].map((_, sIdx) => (
                       <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
@@ -1872,11 +2007,11 @@ export default function SeoLandingPage() {
                   <blockquote
                     style={{
                       margin: 0,
-                      fontSize: "18px",
-                      lineHeight: 1.45,
-                      fontWeight: 600,
-                      letterSpacing: "-0.02em",
-                      color: "#1D1D1F",
+                      fontSize: "16px",
+                      lineHeight: 1.5,
+                      fontWeight: 400,
+                      letterSpacing: "-0.01em",
+                      color: "rgba(255, 255, 255, 0.84)",
                     }}
                   >
                     “{q.text}”
@@ -1887,9 +2022,17 @@ export default function SeoLandingPage() {
                   <img
                     src="/LOGO/oneimpact-logo.webp"
                     alt="Client logo"
-                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 1 }}
+                    style={{
+                      display: "block",
+                      height: "20px",
+                      width: "auto",
+                      maxWidth: "65px",
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                      opacity: 0.85,
+                    }}
                   />
-                  <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
+                  <span style={{ fontSize: "14px", color: "rgba(255, 255, 255, 0.56)", lineHeight: 1.3, letterSpacing: 0 }}>
                     {q.role}
                   </span>
                 </figcaption>
@@ -1903,79 +2046,159 @@ export default function SeoLandingPage() {
       <section
         id="proof"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(16px, 2.5vw, 32px) clamp(16px, 3vw, 32px) clamp(32px, 4vw, 48px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(56px, 7vw, 96px) clamp(16px, 3vw, 32px)",
         }}
       >
-        {/* E-E-A-T Header */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-            textAlign: "center",
-          }}
-        >
-          <h2
-            className="seo-heading"
-            style={{ margin: 0, fontSize: "clamp(2rem, 3.6vw, 2.8rem)", letterSpacing: "-0.035em", fontWeight: 700 }}
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+          {/* E-E-A-T Header */}
+          <div
+            style={{
+              textAlign: "center",
+              marginBottom: "clamp(36px, 4.5vw, 52px)",
+            }}
           >
-            At One Impact, we follow the E-E-A-T framework
-          </h2>
-          <p style={{ margin: "0 0 28px", color: "#6E6E73", fontSize: "17px" }}>
-            Experience, Expertise, Authoritativeness, Trustworthiness
-          </p>
-        </div>
-
-        {/* E-E-A-T Cards Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
-            gap: "16px",
-            maxWidth: "1040px",
-            margin: "0 auto",
-          }}
-        >
-          {EEAT_CARDS.map((e, idx) => (
-            <div
-              key={idx}
+            <h2
               style={{
-                background: "#F5F5F7",
-                borderRadius: "28px",
-                padding: "28px 26px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
+                margin: 0,
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.1rem, 4vw, 3.3rem)",
+                lineHeight: 1.12,
+                letterSpacing: "-0.02em",
+                fontWeight: 700,
+                color: "#FFFFFF",
               }}
             >
-              <span
-                aria-hidden="true"
-                className="seo-heading"
+              At <span style={{ color: "#4066c6" }}>One Impact,</span>
+              <br />
+              we follow the <span style={{ color: "#f9d230" }}>E-E-A-T</span> framework
+            </h2>
+          </div>
+
+          {/* E-E-A-T Cards Grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
+              gap: "18px",
+            }}
+          >
+            {EEAT_CARDS.map((e, idx) => (
+              <div
+                key={idx}
                 style={{
-                  fontSize: "88px",
-                  lineHeight: 0.9,
-                  fontWeight: 700,
-                  letterSpacing: "-0.06em",
-                  color: "#000000",
+                  background: "#FFFFFF",
+                  color: "#111111",
+                  borderRadius: "20px",
+                  padding: "24px 22px 28px",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                {e.k}
-              </span>
-              <span
-                aria-hidden="true"
-                style={{ width: "32px", height: "4px", borderRadius: "999px", background: "#f9d230" }}
-              />
-              <h4
-                className="seo-heading"
-                style={{ margin: "6px 0 0", fontSize: "21px", letterSpacing: "-0.025em", fontWeight: 700 }}
-              >
-                {e.t}
-              </h4>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px" }}>{e.a}</p>
-            </div>
-          ))}
+                {/* Icon + Vertical Divider + Title */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "14px",
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#f9d230",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {idx === 0 && (
+                      <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M8 40h32" />
+                        <path d="M12 40v-8h6v8" />
+                        <path d="M22 40V26h6v14" />
+                        <path d="M32 40V18h6v22" />
+                        <circle cx="15" cy="12" r="3" />
+                        <path d="M11 22l4-6 4 4 5-5" />
+                        <path d="M12 29l26-19" />
+                        <path d="M32 10h6v6" />
+                      </svg>
+                    )}
+                    {idx === 1 && (
+                      <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M24 8a11 11 0 0 0-6 20.1V32h12v-3.9A11 11 0 0 0 24 8z" />
+                        <path d="M19 36h10" />
+                        <path d="M21 40h6" />
+                        <path d="M24 14v6" />
+                        <path d="M21 17h6" />
+                      </svg>
+                    )}
+                    {idx === 2 && (
+                      <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="24" cy="19" r="10" />
+                        <path d="M18 27.5L15 41l9-4 9 4-3-13.5" />
+                        <path d="M24 14l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" />
+                      </svg>
+                    )}
+                    {idx === 3 && (
+                      <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M24 7l14 5v10c0 9.5-5.8 16.2-14 19-8.2-2.8-14-9.5-14-19V12l14-5z" />
+                        <path d="M18 24l4 4 8-8" />
+                      </svg>
+                    )}
+                  </span>
+
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      width: "1px",
+                      height: "42px",
+                      backgroundColor: "#D2D2D7",
+                      flexShrink: 0,
+                    }}
+                  />
+
+                  <h4
+                    style={{
+                      margin: 0,
+                      fontFamily: "var(--font-display), Georgia, serif",
+                      fontSize: "clamp(1.05rem, 1.35vw, 1.3rem)",
+                      lineHeight: 1.15,
+                      letterSpacing: "-0.02em",
+                      fontWeight: 700,
+                      color: "#111111",
+                    }}
+                  >
+                    <span style={{ color: "#4066c6", fontSize: "1.2em" }}>{e.t.charAt(0)}</span>
+                    {e.t.slice(1)}
+                  </h4>
+                </div>
+
+                {/* Horizontal Divider */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    height: "1px",
+                    backgroundColor: "#D2D2D7",
+                    margin: "16px 0",
+                  }}
+                />
+
+                <p
+                  style={{
+                    margin: 0,
+                    color: "#3A3A3C",
+                    fontSize: "14.5px",
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {e.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -2297,209 +2520,209 @@ export default function SeoLandingPage() {
           maxWidth: "1360px",
           margin: "0 auto",
           padding: "clamp(24px, 3vw, 40px) clamp(16px, 3vw, 32px) clamp(24px, 3.5vw, 36px)",
-      }}
-    >
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            gap: "24px",
+            marginBottom: "12px",
+          }}
+        >
+          <h2
+            className="seo-heading"
+            style={{
+              margin: 0,
+              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.045em",
+              fontWeight: 700,
+              maxWidth: "14ch",
+            }}
+          >
+            Explore our SEO services
+          </h2>
+
+          {/* Segmented Switcher for Services */}
+          <div
+            role="tablist"
+            aria-label="Service groups"
+            style={{
+              position: "relative",
+              display: "grid",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              background: "#F2F2F5",
+              border: "1px solid #E5E5EA",
+              borderRadius: "999px",
+              padding: "4px",
+              boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)",
+              width: "min(420px, 100%)",
+            }}
+          >
+            <span
+              aria-hidden="true"
+              className="btn-sheen"
+              style={{
+                position: "absolute",
+                top: "4px",
+                bottom: "4px",
+                left: "4px",
+                width: "calc((100% - 8px) / 2)",
+                transform: `translateX(${svcIdx * 100}%)`,
+                transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
+                background: "#f9d230",
+                borderRadius: "999px",
+                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
+              }}
+            />
+            {SVC_GROUPS.map((grp, i) => (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                className="press"
+                aria-selected={svcIdx === i}
+                onClick={() => setSvcIdx(i)}
+                style={{
+                  position: "relative",
+                  zIndex: 1,
+                  font: "inherit",
+                  fontSize: "15px",
+                  fontWeight: svcIdx === i ? 650 : 500,
+                  color: svcIdx === i ? "#000000" : "#555558",
+                  background: "transparent",
+                  border: 0,
+                  borderRadius: "999px",
+                  minHeight: "44px",
+                  padding: "9px 18px",
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  whiteSpace: "nowrap",
+                  letterSpacing: "-0.015em",
+                  transition: "color 200ms ease",
+                }}
+              >
+                {grp.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <p style={{ margin: "0 0 32px", fontSize: "19px", color: "#6E6E73", maxWidth: "56ch" }}>
+          Curious about what else we bring to the table? Here’s a deeper look at our SEO offerings.
+        </p>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+            gap: "14px",
+          }}
+        >
+          {activeServices.items.map((s, i) => (
+            <div
+              key={i}
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid #E5E5EA",
+                borderRadius: "24px",
+                padding: "28px 26px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+                boxShadow: "0 20px 40px -32px rgba(0,0,0,0.3)",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{ width: "10px", height: "10px", borderRadius: "50%", background: s.dot }}
+              />
+              <h3
+                className="seo-heading"
+                style={{ margin: 0, fontSize: "21px", letterSpacing: "-0.03em", fontWeight: 700 }}
+              >
+                {s.t}
+              </h3>
+              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px" }}>{s.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Section Separator */}
       <div
         style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          alignItems: "flex-end",
-          gap: "24px",
-          marginBottom: "12px",
+          maxWidth: "1360px",
+          margin: "0 auto",
+          padding: "0 clamp(16px, 3vw, 32px)",
+        }}
+      >
+        <div style={{ height: "1px", background: "rgba(0, 0, 0, 0.08)" }} />
+      </div>
+
+      {/* ── SECTION 10: WHAT WE OFFER (ACCORDIONS) ─────────────────────────── */}
+      <section
+        id="offer"
+        style={{
+          maxWidth: "1360px",
+          margin: "0 auto",
+          padding: "clamp(24px, 3.5vw, 40px) clamp(16px, 3vw, 32px) clamp(56px, 7vw, 80px)",
         }}
       >
         <h2
           className="seo-heading"
           style={{
-            margin: 0,
+            margin: "0 0 12px",
             fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
             lineHeight: 1.05,
             letterSpacing: "-0.045em",
             fontWeight: 700,
-            maxWidth: "14ch",
           }}
         >
-          Explore our SEO services
+          What we offer
         </h2>
+        <p style={{ margin: "0 0 28px", fontSize: "19px", color: "#6E6E73" }}>
+          Pick a topic to see exactly how we approach it.
+        </p>
 
-        {/* Segmented Switcher for Services */}
-        <div
-          role="tablist"
-          aria-label="Service groups"
-          style={{
-            position: "relative",
-            display: "grid",
-            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-            background: "#F2F2F5",
-            border: "1px solid #E5E5EA",
-            borderRadius: "999px",
-            padding: "4px",
-            boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)",
-            width: "min(420px, 100%)",
-          }}
-        >
-          <span
-            aria-hidden="true"
-            className="btn-sheen"
-            style={{
-              position: "absolute",
-              top: "4px",
-              bottom: "4px",
-              left: "4px",
-              width: "calc((100% - 8px) / 2)",
-              transform: `translateX(${svcIdx * 100}%)`,
-              transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-              background: "#f9d230",
-              borderRadius: "999px",
-              boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
-            }}
-          />
-          {SVC_GROUPS.map((grp, i) => (
+        {/* Horizontal Topic Pill Row */}
+        <div className="scrollrow" role="tablist" aria-label="Offer topics">
+          {OFFER_TOPICS.map((t, i) => (
             <button
               key={i}
               type="button"
               role="tab"
               className="press"
-              aria-selected={svcIdx === i}
-              onClick={() => setSvcIdx(i)}
+              aria-selected={offerIdx === i}
+              onClick={() => setOfferIdx(i)}
               style={{
-                position: "relative",
-                zIndex: 1,
                 font: "inherit",
                 fontSize: "15px",
-                fontWeight: svcIdx === i ? 650 : 500,
-                color: svcIdx === i ? "#000000" : "#555558",
-                background: "transparent",
-                border: 0,
+                fontWeight: offerIdx === i ? 600 : 500,
+                color: "#000000",
+                background: offerIdx === i
+                  ? "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)"
+                  : "#FFFFFF",
+                border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`,
+                boxShadow: offerIdx === i
+                  ? "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
+                  : "0 1px 2px rgba(0, 0, 0, 0.03)",
                 borderRadius: "999px",
                 minHeight: "44px",
-                padding: "9px 18px",
+                padding: "8px 18px",
                 cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                whiteSpace: "nowrap",
-                letterSpacing: "-0.015em",
-                transition: "color 200ms ease",
+                transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)",
               }}
             >
-              {grp.label}
+              {t.label}
             </button>
           ))}
         </div>
-      </div>
-
-      <p style={{ margin: "0 0 32px", fontSize: "19px", color: "#6E6E73", maxWidth: "56ch" }}>
-        Curious about what else we bring to the table? Here’s a deeper look at our SEO offerings.
-      </p>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
-          gap: "14px",
-        }}
-      >
-        {activeServices.items.map((s, i) => (
-          <div
-            key={i}
-            style={{
-              background: "#FFFFFF",
-              border: "1px solid #E5E5EA",
-              borderRadius: "24px",
-              padding: "28px 26px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
-              boxShadow: "0 20px 40px -32px rgba(0,0,0,0.3)",
-            }}
-          >
-            <span
-              aria-hidden="true"
-              style={{ width: "10px", height: "10px", borderRadius: "50%", background: s.dot }}
-            />
-            <h3
-              className="seo-heading"
-              style={{ margin: 0, fontSize: "21px", letterSpacing: "-0.03em", fontWeight: 700 }}
-            >
-              {s.t}
-            </h3>
-            <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px" }}>{s.a}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    {/* Section Separator */}
-    <div
-      style={{
-        maxWidth: "1360px",
-        margin: "0 auto",
-        padding: "0 clamp(16px, 3vw, 32px)",
-      }}
-    >
-      <div style={{ height: "1px", background: "rgba(0, 0, 0, 0.08)" }} />
-    </div>
-
-    {/* ── SECTION 10: WHAT WE OFFER (ACCORDIONS) ─────────────────────────── */}
-    <section
-      id="offer"
-      style={{
-        maxWidth: "1360px",
-        margin: "0 auto",
-        padding: "clamp(24px, 3.5vw, 40px) clamp(16px, 3vw, 32px) clamp(56px, 7vw, 80px)",
-      }}
-    >
-      <h2
-        className="seo-heading"
-        style={{
-          margin: "0 0 12px",
-          fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-          lineHeight: 1.05,
-          letterSpacing: "-0.045em",
-          fontWeight: 700,
-        }}
-      >
-        What we offer
-      </h2>
-      <p style={{ margin: "0 0 28px", fontSize: "19px", color: "#6E6E73" }}>
-        Pick a topic to see exactly how we approach it.
-      </p>
-
-      {/* Horizontal Topic Pill Row */}
-      <div className="scrollrow" role="tablist" aria-label="Offer topics">
-        {OFFER_TOPICS.map((t, i) => (
-          <button
-            key={i}
-            type="button"
-            role="tab"
-            className="press"
-            aria-selected={offerIdx === i}
-            onClick={() => setOfferIdx(i)}
-            style={{
-              font: "inherit",
-              fontSize: "15px",
-              fontWeight: offerIdx === i ? 600 : 500,
-              color: "#000000",
-              background: offerIdx === i
-                ? "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)"
-                : "#FFFFFF",
-              border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`,
-              boxShadow: offerIdx === i
-                ? "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
-                : "0 1px 2px rgba(0, 0, 0, 0.03)",
-              borderRadius: "999px",
-              minHeight: "44px",
-              padding: "8px 18px",
-              cursor: "pointer",
-              transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)",
-            }}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
 
         {/* Offer Accordions Tabpanel */}
         <div

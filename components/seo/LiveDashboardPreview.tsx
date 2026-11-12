@@ -55,61 +55,36 @@ export function LiveDashboardPreview() {
     <section
       id="analytics-dashboard"
       style={{
-        backgroundColor: "#FFFFFF",
-        padding: "clamp(44px, 6vw, 68px) clamp(16px, 3vw, 28px) clamp(28px, 4vw, 40px)",
-        borderTop: "1px solid #F0F0F2",
+        backgroundColor: "#000000",
+        color: "#FFFFFF",
+        padding: "clamp(48px, 6.5vw, 80px) clamp(16px, 3vw, 32px) clamp(32px, 4vw, 48px)",
       }}
     >
-      <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
         {/* Section Header */}
-        <div style={{ textAlign: "center", marginBottom: "clamp(24px, 3.5vw, 36px)" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "6px",
-              padding: "4px 12px",
-              borderRadius: "999px",
-              backgroundColor: "#F5F5F7",
-              border: "1px solid #E5E5EA",
-              fontSize: "12px",
-              fontWeight: 600,
-              color: "#1D1D1F",
-              marginBottom: "12px",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            <span
-              style={{
-                width: "7px",
-                height: "7px",
-                borderRadius: "50%",
-                backgroundColor: "#34C759",
-                boxShadow: "0 0 6px rgba(52, 199, 89, 0.6)",
-              }}
-            />
-            Live Client Dashboard
-          </div>
-
+        <div style={{ textAlign: "center", marginBottom: "clamp(28px, 4vw, 44px)" }}>
           <h2
-            className="seo-heading"
             style={{
-              margin: "0 0 10px",
-              fontSize: "clamp(1.6rem, 2.8vw, 2.2rem)",
-              lineHeight: 1.15,
-              letterSpacing: "-0.035em",
+              margin: "0 0 14px",
+              fontFamily: "var(--font-display), Georgia, serif",
+              fontSize: "clamp(2.1rem, 4vw, 3.3rem)",
+              lineHeight: 1.08,
+              letterSpacing: "-0.02em",
               fontWeight: 700,
-              color: "#1D1D1F",
+              color: "#FFFFFF",
             }}
           >
-            Real metrics. Live rankings. Zero vanity numbers.
+            <span style={{ color: "#f9d230" }}>Real metrics.</span>{" "}
+            <span style={{ color: "#4066c6" }}>Live rankings.</span>
+            <br />
+            Zero vanity numbers.
           </h2>
           <p
             style={{
               margin: 0,
-              fontSize: "clamp(0.92rem, 1.2vw, 1.02rem)",
-              color: "#6E6E73",
-              maxWidth: "54ch",
+              fontSize: "clamp(0.95rem, 1.25vw, 1.05rem)",
+              color: "rgba(255, 255, 255, 0.72)",
+              maxWidth: "56ch",
               marginLeft: "auto",
               marginRight: "auto",
               lineHeight: 1.5,
@@ -124,8 +99,8 @@ export function LiveDashboardPreview() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: "6px",
-            marginBottom: "18px",
+            gap: "8px",
+            marginBottom: "22px",
             flexWrap: "wrap",
           }}
         >
@@ -146,10 +121,9 @@ export function LiveDashboardPreview() {
                   fontWeight: active ? 600 : 500,
                   cursor: "pointer",
                   transition: "all 180ms ease",
-                  border: active ? "1.5px solid #1D1D1F" : "1px solid #E5E5EA",
-                  backgroundColor: active ? "#1D1D1F" : "#FFFFFF",
-                  color: active ? "#FFFFFF" : "#48484A",
-                  boxShadow: active ? "0 2px 8px rgba(0,0,0,0.12)" : "none",
+                  border: active ? "1px solid #f9d230" : "1px solid rgba(255, 255, 255, 0.16)",
+                  backgroundColor: active ? "#f9d230" : "rgba(255, 255, 255, 0.06)",
+                  color: active ? "#111111" : "#FFFFFF",
                 }}
               >
                 <span style={{ fontSize: "14px" }}>{tab.icon}</span>
@@ -159,14 +133,24 @@ export function LiveDashboardPreview() {
           })}
         </div>
 
+        {/* Outer Gold Frame */}
+        <div
+          style={{
+            padding: "clamp(10px, 1.5vw, 16px)",
+            borderRadius: "24px",
+            border: "1px solid rgba(249, 210, 48, 0.65)",
+            backgroundColor: "#000000",
+          }}
+        >
         {/* Main Dashboard Window Card */}
         <div
           style={{
             backgroundColor: "#FFFFFF",
             borderRadius: "16px",
             border: "1px solid #E5E5EA",
-            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03)",
+            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.25)",
             overflow: "hidden",
+            color: "#1D1D1F",
           }}
         >
           {/* Window Chrome Header */}
@@ -682,6 +666,7 @@ export function LiveDashboardPreview() {
               </div>
             )}
           </div>
+        </div>
         </div>
       </div>
     </section>

@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/utils/cn";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { useCursor } from "@/hooks/useCursor";
+import { useLenis } from "@/hooks/useLenis";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 
 const SERVICE_LINKS = [
@@ -16,12 +18,15 @@ const SERVICE_LINKS = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
+  const lenis = useLenis();
   const scrollDirection = useScrollDirection();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(true);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const servicesContainerRef = useRef<HTMLDivElement>(null);
   const { setCursorType, resetCursor } = useCursor();
 
   const handleServicesEnter = () => {
@@ -35,6 +40,27 @@ export function Navbar() {
     }, 180);
   };
 
+  const handleHashNav = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
+    setIsMenuOpen(false);
+    setIsServicesOpen(false);
+
+    if (pathname === "/") {
+      e.preventDefault();
+      const el = document.getElementById(targetId);
+      if (el) {
+        if (lenis) {
+          lenis.start();
+          lenis.scrollTo(el, { offset: -20 });
+        } else {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     const checkScroll = () => {
       setIsScrolled(window.scrollY > 40);
@@ -45,6 +71,33 @@ export function Navbar() {
 
     return () => window.removeEventListener("scroll", checkScroll);
   }, []);
+
+  // Close Services dropdown on outside click or Escape
+  useEffect(() => {
+    if (!isServicesOpen) return;
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        servicesContainerRef.current &&
+        !servicesContainerRef.current.contains(e.target as Node)
+      ) {
+        setIsServicesOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsServicesOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isServicesOpen]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -69,8 +122,10 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 w-full z-40 transition-all duration-500 ease-main",
-          scrollDirection === "down" && isScrolled && !isMenuOpen ? "-translate-y-full" : "translate-y-0",
+          "fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-main",
+          scrollDirection === "down" && isScrolled && !isMenuOpen && !isServicesOpen
+            ? "-translate-y-full"
+            : "translate-y-0",
           isScrolled ? "py-2 px-4 md:px-6" : "py-3.5 px-5 md:px-8 lg:px-12"
         )}
       >
@@ -84,7 +139,7 @@ export function Navbar() {
           <MagneticButton strength={0.2} textStrength={0.1}>
             <Link
               href="/"
-              className="select-none cursor-none block py-0.5 group text-black"
+              className="select-none cursor-pointer block py-0.5 group text-black"
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={resetCursor}
             >
@@ -99,36 +154,39 @@ export function Navbar() {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-5 sm:gap-7 md:gap-8">
-            <a
+            <Link
               href="/#showreel"
-              className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative py-1 group"
+              onClick={(e) => handleHashNav(e, "showreel")}
+              className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-pointer relative py-1 group"
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={resetCursor}
             >
               <span>Work</span>
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-125" />
-            </a>
+            </Link>
 
-            <a
+            <Link
               href="/#card-swap"
-              className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative py-1 group"
+              onClick={(e) => handleHashNav(e, "card-swap")}
+              className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-pointer relative py-1 group"
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={resetCursor}
             >
               <span>Showroom</span>
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-125" />
-            </a>
+            </Link>
 
             {/* Services with Clean Matching Submenu */}
             <div
+              ref={servicesContainerRef}
               className="relative py-1"
               onMouseEnter={handleServicesEnter}
               onMouseLeave={handleServicesLeave}
             >
               <button
                 type="button"
-                onClick={() => setIsServicesOpen(!isServicesOpen)}
-                className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative inline-flex items-center gap-1.5 py-1"
+                onClick={() => setIsServicesOpen((prev) => !prev)}
+                className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-pointer relative inline-flex items-center gap-1.5 py-1"
                 onMouseEnter={() => setCursorType("hover")}
                 onMouseLeave={resetCursor}
                 aria-expanded={isServicesOpen}
@@ -155,13 +213,14 @@ export function Navbar() {
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-125" />
               </button>
 
-              {/* Submenu Dropdown Panel */}
+              {/* Submenu Dropdown Panel (pt-2 bridges hover gap seamlessly) */}
               <div
                 style={{
                   position: "absolute",
                   top: "100%",
                   left: "50%",
-                  transform: `translateX(-50%) translateY(${isServicesOpen ? "8px" : "-4px"})`,
+                  paddingTop: "8px",
+                  transform: `translateX(-50%) translateY(${isServicesOpen ? "0px" : "-6px"})`,
                   opacity: isServicesOpen ? 1 : 0,
                   pointerEvents: isServicesOpen ? "auto" : "none",
                   transition: "opacity 220ms ease, transform 220ms ease",
@@ -186,7 +245,7 @@ export function Navbar() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsServicesOpen(false)}
-                      className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/90 hover:text-[#f9d230] hover:bg-black uppercase transition-all duration-200 cursor-none px-4 py-2.5 rounded-xl block text-center whitespace-nowrap"
+                      className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/90 hover:text-[#f9d230] hover:bg-black uppercase transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-xl block text-center whitespace-nowrap"
                       onMouseEnter={() => setCursorType("hover")}
                       onMouseLeave={resetCursor}
                     >
@@ -199,7 +258,7 @@ export function Navbar() {
 
             <Link
               href="/about"
-              className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-none relative py-1 group"
+              className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/85 hover:text-black uppercase transition-all duration-300 cursor-pointer relative py-1 group"
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={resetCursor}
             >
@@ -211,22 +270,23 @@ export function Navbar() {
           {/* Right Area: CTA & Mobile Hamburger */}
           <div className="flex items-center gap-2 sm:gap-3">
             {/* CTA Button */}
-            <a
+            <Link
               href="/#contact"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-display text-[10px] sm:text-xs font-black tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 text-[#f9d230] !text-[#f9d230] bg-black hover:bg-black/85"
+              onClick={(e) => handleHashNav(e, "contact")}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-display text-[10px] sm:text-xs font-black tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 text-[#f9d230] !text-[#f9d230] bg-black hover:bg-black/85 cursor-pointer"
               style={{ color: "#f9d230" }}
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={resetCursor}
             >
               <span style={{ color: "#f9d230" }}>CONTACT</span>
               <span className="text-xs transition-transform duration-300 group-hover:translate-x-1" style={{ color: "#f9d230" }}>→</span>
-            </a>
+            </Link>
 
             {/* Mobile Hamburger Toggle Button */}
             <button
               type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden relative z-50 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/10 hover:bg-black/20 text-black flex flex-col items-center justify-center gap-1 transition-all duration-300 active:scale-90"
+              className="md:hidden relative z-50 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/10 hover:bg-black/20 text-black flex flex-col items-center justify-center gap-1 transition-all duration-300 active:scale-90 cursor-pointer"
               aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
             >
               <span
@@ -255,7 +315,7 @@ export function Navbar() {
       {/* Mobile Navigation Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-30 md:hidden bg-[#f9d230]/95 backdrop-blur-2xl flex flex-col justify-center items-center transition-all duration-500 ease-in-out px-6",
+          "fixed inset-0 z-40 md:hidden bg-[#f9d230]/95 backdrop-blur-2xl flex flex-col justify-center items-center transition-all duration-500 ease-in-out px-6",
           isMenuOpen
             ? "opacity-100 pointer-events-auto scale-100"
             : "opacity-0 pointer-events-none scale-95"
@@ -266,28 +326,28 @@ export function Navbar() {
             Navigation
           </span>
 
-          <a
+          <Link
             href="/#showreel"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => handleHashNav(e, "showreel")}
             className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1"
           >
             Work
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/#card-swap"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => handleHashNav(e, "card-swap")}
             className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1"
           >
             Showroom
-          </a>
+          </Link>
 
           {/* Services on Mobile */}
           <div className="w-full flex flex-col items-center py-1">
             <button
               type="button"
               onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-              className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 inline-flex items-center gap-2"
+              className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 inline-flex items-center gap-2 cursor-pointer"
             >
               <span>Services</span>
               <svg
@@ -340,14 +400,14 @@ export function Navbar() {
 
           <div className="w-16 h-[2px] bg-black/20 my-2" />
 
-          <a
+          <Link
             href="/#contact"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => handleHashNav(e, "contact")}
             className="w-full py-4 rounded-full font-display text-sm font-black tracking-wider uppercase text-[#f9d230] !text-[#f9d230] bg-black hover:bg-black/85 transition-transform active:scale-95 text-center shadow-lg"
             style={{ color: "#f9d230" }}
           >
             GET IN TOUCH →
-          </a>
+          </Link>
         </div>
       </div>
     </>

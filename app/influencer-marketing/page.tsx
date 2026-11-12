@@ -872,9 +872,16 @@ export default function InfluencerMarketingPage() {
           pointer-events: none;
         }
         @media (max-width: 980px) {
-          .inf-landing-root .hero-grid {
+          .inf-landing-root .hero-grid,
+          .inf-landing-root .inf-intro-grid {
             grid-template-columns: minmax(0, 1fr) !important;
           }
+        }
+        .inf-landing-root .inf-intro-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+          gap: clamp(32px, 5vw, 64px);
+          align-items: center;
         }
         @media (max-width: 900px) {
           .inf-landing-root .navlinks {
@@ -960,36 +967,7 @@ export default function InfluencerMarketingPage() {
       <Navbar />
 
       {/* ── HERO SECTION */}
-      <section id="top" style={{ position: "relative", overflow: "hidden", background: "#FFFFFF" }}>
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: "40px",
-            right: "6%",
-            width: "380px",
-            height: "380px",
-            borderRadius: "50%",
-            background: "#f9d230",
-            opacity: 0.55,
-            filter: "blur(70px)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: "260px",
-            right: "24%",
-            width: "320px",
-            height: "320px",
-            borderRadius: "50%",
-            background: "#4066c6",
-            opacity: 0.55,
-            filter: "blur(80px)",
-          }}
-        />
-
+      <section id="top" style={{ position: "relative", overflow: "hidden", background: "#000000", color: "#FFFFFF" }}>
         <div
           className="hero-grid"
           style={{
@@ -997,54 +975,67 @@ export default function InfluencerMarketingPage() {
             maxWidth: "1360px",
             margin: "0 auto",
             padding:
-              "clamp(92px, 10vw, 120px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 68px)",
+              "clamp(100px, 10vw, 128px) clamp(16px, 3vw, 32px) clamp(56px, 7vw, 88px)",
           }}
         >
           {/* Left Column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
-            <span
-              style={{
-                fontSize: "17px",
-                fontWeight: 600,
-                color: "#6E6E73",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Influencer marketing services by OneImpact
-            </span>
+          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              <span
+                style={{
+                  fontSize: "16px",
+                  fontWeight: 500,
+                  color: "rgba(255,255,255,0.72)",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                Influencer marketing services by OneImpact
+              </span>
+              <span
+                aria-hidden="true"
+                style={{
+                  display: "block",
+                  width: "min(280px, 70%)",
+                  height: "1.5px",
+                  background: "linear-gradient(90deg, #6B8CE5 0%, rgba(107, 140, 229, 0) 100%)",
+                }}
+              />
+            </div>
 
             <h1
-              className="inf-heading"
               style={{
                 margin: 0,
-                fontSize: "clamp(2.6rem, 5.2vw, 4.8rem)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.04em",
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.5rem, 4.8vw, 4.3rem)",
+                lineHeight: 1.06,
+                letterSpacing: "-0.02em",
                 fontWeight: 700,
                 maxWidth: "16ch",
+                color: "#FFFFFF",
               }}
             >
-              Influencer Marketing Agency in Mumbai for Impactful Collaborations
+              Influencer Marketing Agency in Mumbai for{" "}
+              <span style={{ color: "#f9d230" }}>Impactful Collaborations</span>
             </h1>
 
             <p
               style={{
                 margin: 0,
-                fontSize: "clamp(1.2rem, 1.9vw, 1.55rem)",
-                lineHeight: 1.3,
-                fontWeight: 600,
-                letterSpacing: "-0.02em",
-                color: "#000000",
+                fontSize: "clamp(1.05rem, 1.5vw, 1.25rem)",
+                lineHeight: 1.35,
+                fontWeight: 700,
+                letterSpacing: "-0.015em",
+                color: "#FFFFFF",
               }}
             >
               Creators that connect. Campaigns that convert.
             </p>
 
-            <p style={{ margin: 0, fontSize: "19px", lineHeight: 1.5, color: "#3A3A3C", maxWidth: "50ch" }}>
+            <p style={{ margin: 0, fontSize: "16.5px", lineHeight: 1.55, color: "rgba(255,255,255,0.74)", maxWidth: "52ch" }}>
               From creator discovery to campaign execution, we handle every step thoughtfully, connecting brands and influencers in a seamless, strategic and genuinely effective way.
             </p>
 
-            <p style={{ margin: 0, fontSize: "19px", lineHeight: 1.5, color: "#3A3A3C", maxWidth: "50ch" }}>
+            <p style={{ margin: 0, fontSize: "16.5px", lineHeight: 1.55, color: "rgba(255,255,255,0.74)", maxWidth: "52ch" }}>
               We help brands connect with relevant influencers to create purposeful collaborations, so every campaign aligns with your goals and audience, and delivers measurable value.
             </p>
 
@@ -1053,9 +1044,9 @@ export default function InfluencerMarketingPage() {
               style={{
                 display: "flex",
                 flexWrap: "wrap",
-                gap: "14px",
+                gap: "20px",
                 alignItems: "center",
-                paddingTop: "4px",
+                paddingTop: "8px",
               }}
             >
               <a
@@ -1064,26 +1055,26 @@ export default function InfluencerMarketingPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  color: "#000000",
+                  color: "#FFFFFF",
                   textDecoration: "none",
-                  fontWeight: 600,
-                  fontSize: "17px",
-                  padding: "13px 22px",
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  padding: "12px 22px",
                   borderRadius: "999px",
-                  minHeight: "50px",
+                  minHeight: "48px",
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(0,0,0,0.06)",
+                  gap: "10px",
+                  background: "#6B8CE5",
                 }}
               >
                 <svg
-                  width="18"
-                  height="18"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
+                  stroke="#111111"
+                  strokeWidth="1.9"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"
@@ -1095,12 +1086,12 @@ export default function InfluencerMarketingPage() {
               <a
                 href="#usps"
                 style={{
-                  color: "#000000",
-                  fontWeight: 600,
-                  fontSize: "17px",
+                  color: "#FFFFFF",
+                  fontWeight: 500,
+                  fontSize: "16px",
                   textDecoration: "none",
-                  padding: "13px 4px",
-                  minHeight: "50px",
+                  padding: "12px 4px",
+                  minHeight: "48px",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "4px",
@@ -1127,16 +1118,12 @@ export default function InfluencerMarketingPage() {
           {/* Hero Form Card */}
           <div
             id="audit"
-            className="form-card"
             style={{
-              background: "rgba(0,0,0,0.9)",
-              backdropFilter: "blur(30px) saturate(160%)",
-              WebkitBackdropFilter: "blur(30px) saturate(160%)",
-              borderRadius: "32px",
-              padding: "clamp(24px, 3.2vw, 36px)",
+              background: "#000000",
+              border: "1px solid #6B8CE5",
+              borderRadius: "28px",
+              padding: "clamp(26px, 3.2vw, 36px)",
               color: "#FFFFFF",
-              boxShadow:
-                "0 1px 0 rgba(255,255,255,0.12) inset, 0 50px 100px -40px rgba(0,0,0,0.55), 0 20px 40px -24px rgba(0,0,0,0.35)",
             }}
           >
             {!sent1 ? (
@@ -1145,35 +1132,36 @@ export default function InfluencerMarketingPage() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "16px",
+                  gap: "14px",
                   position: "relative",
                   zIndex: 1,
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#f9d230", letterSpacing: 0 }}>
+                  <span style={{ fontSize: "15px", fontWeight: 400, color: "rgba(255,255,255,0.78)", letterSpacing: 0 }}>
                     Free for your brand
                   </span>
                   <h2
-                    className="inf-heading"
                     style={{
                       margin: 0,
-                      fontSize: "clamp(1.6rem, 2.4vw, 2rem)",
+                      fontFamily: "var(--font-display), Georgia, serif",
+                      fontSize: "clamp(1.65rem, 2.5vw, 2.05rem)",
                       lineHeight: 1.12,
-                      letterSpacing: "-0.035em",
+                      letterSpacing: "-0.02em",
                       fontWeight: 700,
+                      color: "#FFFFFF",
                     }}
                   >
                     Get your free influencer consultation
                   </h2>
-                  <p style={{ fontSize: "15.5px", color: "#C7C7CC", letterSpacing: 0, margin: 0 }}>
+                  <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.65)", letterSpacing: 0, margin: 0 }}>
                     A real person from our team looks at your brand and gets back to you.
                   </p>
                 </div>
 
                 {/* Name */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-name" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                  <label htmlFor="hero-name" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
                     Your name
                   </label>
                   <input
@@ -1186,26 +1174,26 @@ export default function InfluencerMarketingPage() {
                     onBlur={() => setTouched1((t) => ({ ...t, name: true }))}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showName1Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 14px",
+                      borderRadius: "10px",
+                      border: `1px solid ${showName1Err ? "#FF9F95" : "rgba(255,255,255,0.08)"}`,
+                      background: "#121620",
                       color: "#FFFFFF",
                       width: "100%",
                     }}
                   />
                   {showName1Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
+                    <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>
                       Enter your name so we know who to reply to
                     </span>
                   )}
                 </div>
 
                 {/* Phone */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                  <label htmlFor="hero-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
                     Phone or WhatsApp number
                   </label>
                   <input
@@ -1219,26 +1207,26 @@ export default function InfluencerMarketingPage() {
                     onBlur={() => setTouched1((t) => ({ ...t, phone: true }))}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showPhone1Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 14px",
+                      borderRadius: "10px",
+                      border: `1px solid ${showPhone1Err ? "#FF9F95" : "rgba(255,255,255,0.08)"}`,
+                      background: "#121620",
                       color: "#FFFFFF",
                       width: "100%",
                     }}
                   />
                   {showPhone1Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
+                    <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>
                       Enter a 10-digit mobile number
                     </span>
                   )}
                 </div>
 
                 {/* Website or Instagram handle */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-handle" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                  <label htmlFor="hero-handle" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
                     Website or Instagram handle
                   </label>
                   <input
@@ -1251,27 +1239,27 @@ export default function InfluencerMarketingPage() {
                     onBlur={() => setTouched1((t) => ({ ...t, handle: true }))}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showHandle1Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 14px",
+                      borderRadius: "10px",
+                      border: `1px solid ${showHandle1Err ? "#FF9F95" : "rgba(255,255,255,0.08)"}`,
+                      background: "#121620",
                       color: "#FFFFFF",
                       width: "100%",
                     }}
                   />
                   {showHandle1Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
+                    <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>
                       Enter your website or Instagram handle
                     </span>
                   )}
                 </div>
 
                 {/* Need dropdown */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-need" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
-                    What do you need? <span style={{ color: "#8E8E93" }}>(optional)</span>
+                <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                  <label htmlFor="hero-need" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                    What do you need? <span style={{ color: "#f9d230", fontWeight: 400 }}>(optional)</span>
                   </label>
                   <select
                     id="hero-need"
@@ -1280,12 +1268,12 @@ export default function InfluencerMarketingPage() {
                     onChange={(e) => setNeed1(e.target.value)}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 14px",
-                      borderRadius: "14px",
-                      border: "1.5px solid #3A3A3C",
-                      background: "#1C1C1E",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 12px",
+                      borderRadius: "10px",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      background: "#121620",
                       color: "#FFFFFF",
                       width: "100%",
                     }}
@@ -1302,25 +1290,27 @@ export default function InfluencerMarketingPage() {
 
                 <button
                   type="submit"
-                  className="press y btn-sheen"
+                  className="press btn-sheen"
                   style={{
-                    font: "inherit",
+                    fontFamily: "var(--font-display), Georgia, serif",
                     fontSize: "17px",
-                    fontWeight: 650,
+                    fontWeight: 700,
                     letterSpacing: "-0.01em",
-                    color: "#000000",
-                    background: "#f9d230",
+                    color: "#FFFFFF",
+                    background: "#6B8CE5",
                     border: 0,
                     borderRadius: "999px",
-                    minHeight: "54px",
+                    minHeight: "56px",
+                    padding: "0 36px",
+                    alignSelf: "center",
                     cursor: "pointer",
-                    marginTop: "4px",
+                    marginTop: "8px",
                   }}
                 >
                   Book my free consultation
                 </button>
 
-                <span style={{ fontSize: "13px", color: "#8E8E93", textAlign: "center", letterSpacing: 0 }}>
+                <span style={{ fontSize: "12.5px", color: "rgba(255,255,255,0.6)", textAlign: "center", letterSpacing: 0, marginTop: "4px" }}>
                   No spam, no sales scripts. We’ll reply on WhatsApp or call.
                 </span>
               </form>
@@ -1392,16 +1382,81 @@ export default function InfluencerMarketingPage() {
       <section
         aria-label="Brands we work with"
         style={{
-          padding: "clamp(32px, 4vw, 44px) 0 clamp(36px, 4.5vw, 48px)",
-          backgroundColor: "#FAFAFC",
-          borderTop: "1px solid #E5E5EA",
-          borderBottom: "1px solid #E5E5EA",
+          padding: "clamp(64px, 7.5vw, 92px) 0 clamp(64px, 7.5vw, 92px)",
+          backgroundColor: "#FFFFFF",
           position: "relative",
+          overflow: "hidden",
           zIndex: 10,
         }}
       >
+        {/* Top black torn-paper border */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "clamp(18px, 2.6vw, 42px)",
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/first-banner-black-paper-cut.svg"
+            alt=""
+            draggable={false}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 0,
+              transform: "translate(-50%, -64.2%)",
+              width: "152%",
+              maxWidth: "none",
+              height: "auto",
+              userSelect: "none",
+            }}
+          />
+        </div>
+
+        {/* Bottom black torn-paper border */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "clamp(18px, 2.6vw, 42px)",
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/first-banner-black-paper-cut.svg"
+            alt=""
+            draggable={false}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 0,
+              transform: "translate(-50%, -78.4%)",
+              width: "152%",
+              maxWidth: "none",
+              height: "auto",
+              userSelect: "none",
+            }}
+          />
+        </div>
+
         <p
           style={{
+            position: "relative",
+            zIndex: 1,
             margin: "0 0 clamp(20px, 2.5vw, 28px)",
             fontSize: "14.5px",
             fontWeight: 500,
@@ -1415,6 +1470,8 @@ export default function InfluencerMarketingPage() {
         <div
           className="marqwrap"
           style={{
+            position: "relative",
+            zIndex: 1,
             overflow: "hidden",
             width: "100%",
             WebkitMaskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
@@ -1455,7 +1512,142 @@ export default function InfluencerMarketingPage() {
         </div>
       </section>
 
-      {/* ── PROOF SECTION: PRINCIPLES (A-R-P-T) & INTRO */}
+      {/* ── REALITY STATEMENT SECTION */}
+      <section
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(64px, 8vw, 108px) clamp(16px, 3vw, 32px) clamp(48px, 6vw, 72px)",
+          position: "relative",
+        }}
+      >
+        <div
+          className="inf-intro-grid"
+          style={{
+            maxWidth: "1360px",
+            margin: "0 auto",
+          }}
+        >
+          {/* Left Column: Copy */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "18px", textAlign: "left" }}>
+            <h2
+              style={{
+                margin: 0,
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.2rem, 4.2vw, 3.6rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.02em",
+                fontWeight: 700,
+                color: "#f9d230",
+                maxWidth: "18ch",
+              }}
+            >
+              Follower counts alone won’t move your audience anymore.
+            </h2>
+
+            <span
+              aria-hidden="true"
+              style={{
+                display: "block",
+                width: "min(280px, 70%)",
+                height: "1.5px",
+                background: "linear-gradient(90deg, #6B8CE5 0%, rgba(107, 140, 229, 0) 100%)",
+              }}
+            />
+
+            <p
+              style={{
+                margin: "4px 0 2px",
+                fontSize: "clamp(1.05rem, 1.5vw, 1.25rem)",
+                lineHeight: 1.4,
+                fontWeight: 700,
+                color: "#FFFFFF",
+              }}
+            >
+              People act on recommendations from creators they already trust.
+            </p>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: "16.5px",
+                lineHeight: 1.55,
+                color: "rgba(255, 255, 255, 0.74)",
+                maxWidth: "54ch",
+              }}
+            >
+              At OneImpact, we help brands unlock that trust through influencer marketing that feels real, relevant and results-driven.
+            </p>
+
+            <p
+              style={{
+                margin: 0,
+                fontSize: "16.5px",
+                lineHeight: 1.55,
+                color: "rgba(255, 255, 255, 0.74)",
+                maxWidth: "54ch",
+              }}
+            >
+              We go beyond follower counts and vanity metrics, and focus on creators whose content, tone and audience truly align with your brand values.
+            </p>
+          </div>
+
+          {/* Right Column: Illustration */}
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/inflluencer-marketing-follower-section.png"
+              alt="Influencer collaboration and creator trust illustration"
+              draggable={false}
+              style={{
+                width: "100%",
+                maxWidth: "520px",
+                height: "auto",
+                display: "block",
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── ORGANIC WAVE BORDER ──────────────────────────────────────────────── */}
+      <div
+        aria-hidden="true"
+        style={{
+          width: "100%",
+          height: "56px",
+          backgroundColor: "#000000",
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        <svg
+          viewBox="23 18 711 30"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+            overflow: "visible",
+          }}
+        >
+          <path
+            d="M23 28.2 L26 29 L29 29.2 L32 28.7 L35 30.3 L38 30.5 L41 30.2 L44 30.2 L47 31 L50 30.3 L53 29.8 L56 30.5 L59 29.7 L62 28.5 L65 27.8 L68 27.8 L71 27 L74 29.5 L77 30.3 L80 32.3 L83 32.7 L86 31.8 L89 33 L92 33.8 L95 35 L98 36.3 L101 36.7 L104 37.3 L107 36.5 L110 37.5 L113 38.5 L116 38.5 L119 37.3 L122 36.5 L125 35.8 L128 35.5 L131 34.7 L134 36 L137 37.5 L140 37.5 L143 36.8 L146 37.5 L149 36.5 L152 36.7 L155 38.3 L158 37.8 L161 37.5 L164 36.2 L167 35.5 L170 35.5 L173 35.7 L176 35.3 L179 34 L182 34.8 L185 34.7 L188 34.5 L191 33.7 L194 32.7 L197 32.7 L200 32.7 L203 32.8 L206 33.5 L209 34.2 L212 34.5 L215 35 L218 34.5 L221 34.7 L224 35.7 L227 35.7 L230 35.3 L233 36.3 L236 37.2 L239 37.7 L242 38.5 L245 37.2 L248 36.5 L251 37.3 L254 37 L257 37.5 L260 37.7 L263 36.3 L266 34.8 L269 35.3 L272 35.5 L275 36.5 L278 36.8 L281 38.5 L284 38.5 L287 37.8 L290 36.7 L293 37.3 L296 36.8 L299 36.5 L302 35.3 L305 34.2 L308 33.2 L311 32 L314 32.5 L317 32.5 L320 31.2 L323 30.5 L326 27.3 L329 27.2 L332 27.8 L335 28.2 L338 29.7 L341 30.2 L344 30 L347 30.2 L350 31.2 L353 30.5 L356 29.8 L359 30.5 L362 30.5 L365 28.8 L368 29.2 L371 28.8 L374 28.2 L377 29.2 L380 28.5 L383 29 L386 29 L389 28.7 L392 30.5 L395 30.5 L398 29.8 L401 30.5 L404 31.2 L407 30.2 L410 30 L413 30.3 L416 29.7 L419 28.3 L422 27.8 L425 27.3 L428 27.3 L431 30.3 L434 31 L437 32.5 L440 32.5 L443 32.2 L446 33 L449 34.2 L452 35.3 L455 36.5 L458 36.7 L461 37.3 L464 36.7 L467 37.8 L470 38.5 L473 38.5 L476 36.8 L479 36.5 L482 35.5 L485 35.2 L488 34.8 L491 36.3 L494 37.7 L497 37.5 L500 36.8 L503 37.5 L506 36.5 L509 37 L512 38.5 L515 37.7 L518 37.2 L521 36.2 L524 35.5 L527 35.7 L530 35.5 L533 34.7 L536 34.3 L539 35.2 L542 34.5 L545 34.2 L548 33.3 L551 32.8 L554 32.7 L557 32.7 L560 32.7 L563 33.5 L566 34.3 L569 34.7 L572 35 L575 34.2 L578 34.8 L581 35.7 L584 35.7 L587 35.5 L590 36.3 L593 37.3 L596 37.8 L599 38.2 L602 36.8 L605 36.5 L608 37.7 L611 36.8 L614 37.5 L617 37.5 L620 36 L623 34.7 L626 35.3 L629 35.7 L632 36.5 L635 37.2 L638 38.5 L641 38.5 L644 37.7 L647 36.7 L650 37.3 L653 36.7 L656 36.3 L659 35 L662 34 L665 33 L668 32 L671 32.5 L674 32.5 L677 30.5 L680 29.8 L683 27 L686 27.7 L689 27.8 L692 28.7 L695 29.7 L698 30.5 L701 29.7 L704 30.3 L707 31 L710 30.2 L713 30.2 L716 30.5 L719 30.3 L722 28.7 L725 28.8 L728 29 L731 28.2 L734 29 L734 50 L23 50 Z"
+            fill="#FFFFFF"
+            stroke="#FFFFFF"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+      </div>
+
+      {/* ── PROOF SECTION: PRINCIPLES (A-R-P-T) */}
       <section
         id="proof"
         style={{
@@ -1464,39 +1656,8 @@ export default function InfluencerMarketingPage() {
           padding: "clamp(48px, 6vw, 72px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
         }}
       >
-        <div
-          style={{
-            maxWidth: "1040px",
-            margin: "0 auto",
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            alignItems: "center",
-          }}
-        >
-          <h2
-            className="inf-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-            }}
-          >
-            Follower counts alone won’t move your audience anymore.
-          </h2>
-          <p style={{ fontSize: "21px", lineHeight: 1.45, color: "#3A3A3C", margin: 0 }}>
-            People act on recommendations from creators they already trust.
-          </p>
-          <p style={{ fontSize: "18px", lineHeight: 1.5, color: "#6E6E73", margin: 0 }}>
-            At OneImpact, we help brands unlock that trust through influencer marketing that feels real, relevant and results-driven. We go beyond follower counts and vanity metrics, and focus on creators whose content, tone and audience truly align with your brand values.
-          </p>
-        </div>
-
         {/* Pillars Head & Grid */}
-        <div style={{ marginTop: "clamp(48px, 6vw, 72px)", display: "flex", flexDirection: "column", gap: "8px", textAlign: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "center" }}>
           <h3
             className="inf-heading"
             style={{
