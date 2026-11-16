@@ -24,7 +24,7 @@ export function Button({
   const buttonContent = (
     <button
       className={cn(
-        "relative overflow-hidden group px-8 py-4 font-display text-xs font-bold tracking-widest uppercase rounded-full flex items-center justify-center gap-2 cursor-none select-none transition-colors duration-300",
+        "relative overflow-hidden group px-8 py-4 font-display text-xs font-bold tracking-widest uppercase rounded-full flex items-center justify-center gap-2 cursor-pointer select-none transition-colors duration-300",
         // Primary: Solid White background, bold black text, strong drop shadow
         variant === "primary" &&
           "bg-white text-black font-black border border-white shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:bg-black hover:text-white hover:border-accent-blue",

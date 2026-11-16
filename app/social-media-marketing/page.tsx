@@ -4,14 +4,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/common/Navbar";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
-const NOTICES = [
-  "Get a social media audit for your brand. Fill the form and our team will get back to you.",
-  "AI-driven insights for smarter social media campaigns.",
-  "Instagram, Facebook, LinkedIn, YouTube, X and Pinterest, planned for how each platform works.",
-  "Meaningful metrics over vanity numbers. No shortcuts, no fluff.",
-  "WhatsApp us on +91 83690 18104 for a quick reply.",
-];
-
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
   { name: "SnapDeal", src: "/LOGO/transparent/sanpdealbrandlogo_2.webp" },
@@ -137,7 +129,7 @@ const OFFER_TOPICS: { label: string; intro?: string; qs: { q: string; a: string 
       { q: "What is the role of high-engagement content in social media marketing?", a: "High-engagement content adds value for users, encouraging them to like, comment, share and save it. Social media algorithms count all of these as engagement, which amplifies your social handles and reaches more people. Highly engaging content also boosts brand loyalty and keeps your target audience involved with your handles. Formats like reels, carousels and infographics tend to drive high engagement." },
       { q: "How do targeted social media campaigns work?", a: "Targeted campaigns show your ads to people who are interested in products or services like yours, and convert them into paying customers. They're based on factors like age, location, interests and behavior, which ensures your ads reach the right people and improves conversions.\nThese ads can be tweaked at any time during the campaign to optimize the ad budget and get the most out of it." },
       { q: "What is a customized social media strategy?", a: "A customized social media strategy is an online marketing plan designed around your brand's goals. It outlines what type of content to create, which platforms to focus on, and how often to post to achieve measurable results. A tailored strategy ensures consistency and purpose behind every post, helping brands cut through the noise and connect with their audience more effectively." },
-      { q: "How can social media consultation help improve my brand's online presence?", a: "Social media consultation provides expert guidance on brand positioning, improving engagement and refining content strategies across platforms. Consultants assess current efforts, identify gaps and recommend data-backed improvements to boost visibility and performance. For businesses investing in social media marketing, this can lead to stronger branding, better content alignment and more meaningful audience interactions." },
+      { q: "How can social media consultation help improve my brand&apos;s online presence?", a: "Social media consultation provides expert guidance on brand positioning, improving engagement and refining content strategies across platforms. Consultants assess current efforts, identify gaps and recommend data-backed improvements to boost visibility and performance. For businesses investing in social media marketing, this can lead to stronger branding, better content alignment and more meaningful audience interactions." },
       { q: "Why is social media consultation important for small businesses?", a: "For small businesses, resources are often limited, so it's critical to get the most out of every effort. Social media consultation offers a cost-effective way to gain expert insights without trial-and-error spending. It helps small brands build a solid social media marketing foundation, make smarter platform choices and craft messages that resonate with their audience, driving growth while keeping efforts efficient and strategic." },
     ],
   },
@@ -306,7 +298,7 @@ const FAQ_GROUPS = [
     label: "Why One Impact",
     qs: [
       { q: "How does One Impact tailor social media strategies to maximize ROI?", a: "We start by understanding your business goals, target audience and industry landscape. Based on this, our team crafts data-driven, goal-oriented social media marketing strategies. Each campaign is continuously monitored and refined to improve performance and returns on investment." },
-      { q: "How will One Impact enhance my brand's online presence and customer interaction?", a: "Through consistent branding, engaging content and active community management, we help create a strong digital footprint. Our social media marketing approach focuses on building authentic connections and encouraging two-way communication to boost engagement. This fosters trust and loyalty among your audience." },
+      { q: "How will One Impact enhance my brand&apos;s online presence and customer interaction?", a: "Through consistent branding, engaging content and active community management, we help create a strong digital footprint. Our social media marketing approach focuses on building authentic connections and encouraging two-way communication to boost engagement. This fosters trust and loyalty among your audience." },
       { q: "How does One Impact balance social media optimization and user experience to drive conversions?", a: "We blend visually appealing content with strategic placements and clear calls to action across platforms. Our team optimizes each post for relevance, timing and performance, creating a seamless, value-driven user experience that supports your business objectives." },
       { q: "What measurable results can I expect from One Impact's conversion-focused social media marketing?", a: "We work towards higher engagement rates, more website traffic and more lead conversions. We provide clear performance reports that track KPIs tied directly to your goals." },
       { q: "How does One Impact attract high-converting social media traffic?", a: "By using audience insights, trends and targeted content strategies, we attract users who are most likely to engage and convert. Our social media marketing campaigns focus on quality over quantity, so your brand reaches the right people at the right time." },
@@ -413,9 +405,7 @@ export default function SmmLandingPage() {
   // Ensure normal system cursor
   useEffect(() => {
     document.body.classList.remove("custom-cursor-active");
-    return () => {
-      document.body.classList.add("custom-cursor-active");
-    };
+    document.body.style.cursor = "auto";
   }, []);
 
   return (
@@ -775,7 +765,7 @@ export default function SmmLandingPage() {
                 </button>
 
                 <span style={{ fontSize: "13px", color: "#8E8E93", textAlign: "center", letterSpacing: 0 }}>
-                  No spam, no sales scripts. We'll reply on WhatsApp or call.
+                  No spam, no sales scripts. We&apos;ll reply on WhatsApp or call.
                 </span>
               </form>
             ) : (
@@ -784,7 +774,7 @@ export default function SmmLandingPage() {
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
                 </span>
                 <h3 role="status" className="smm-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}>Audit requested</h3>
-                <p style={{ margin: 0, color: "#C7C7CC" }}>Thanks, {name1}. We'll review {handle1} and get in touch on {phone1}.</p>
+                <p style={{ margin: 0, color: "#C7C7CC" }}>Thanks, {name1}. We&apos;ll review {handle1} and get in touch on {phone1}.</p>
                 <button type="button" className="press" onClick={() => { setSent1(false); setName1(""); setPhone1(""); setHandle1(""); setTouched1({}); }} style={{ font: "inherit", fontSize: "15px", fontWeight: 600, color: "#FFFFFF", background: "rgba(255,255,255,0.12)", border: 0, borderRadius: "999px", minHeight: "44px", padding: "8px 18px", cursor: "pointer" }}>
                   Request another audit
                 </button>
@@ -813,13 +803,13 @@ export default function SmmLandingPage() {
       <section id="proof" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(40px, 5vw, 56px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)" }}>
         <div style={{ maxWidth: "1040px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}>
           <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700 }}>
-            Trust and credibility matter when choosing the right partner for your brand's online presence.
+            Trust and credibility matter when choosing the right partner for your brand&apos;s online presence.
           </h2>
           <p style={{ fontSize: "20px", lineHeight: 1.45, color: "#3A3A3C", margin: 0 }}>
             At One Impact, they guide everything we do, so your brand is not just seen, but remembered and respected online.
           </p>
           <p style={{ fontSize: "18px", lineHeight: 1.5, color: "#6E6E73", margin: 0 }}>
-            We're not just into engagements and gathering likes and shares; we're focused on helping you create meaningful connections with your target audience. Our team stays ahead of social trends, algorithm shifts and tools to harness social media's full potential.
+            We&apos;re not just into engagements and gathering likes and shares; we&apos;re focused on helping you create meaningful connections with your target audience. Our team stays ahead of social trends, algorithm shifts and tools to harness social media&apos;s full potential.
           </p>
         </div>
       </section>
@@ -855,7 +845,7 @@ export default function SmmLandingPage() {
       <section id="why" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(32px, 4vw, 48px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
           <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700 }}>How social media marketing companies can help</h2>
-          <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73" }}>Here's what a social media marketing partner does for your brand:</p>
+          <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73" }}>Here&apos;s what a social media marketing partner does for your brand:</p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "14px" }}>
           {HELPS_CARDS.map((b, i) => (
@@ -1076,11 +1066,11 @@ export default function SmmLandingPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(32px, 6vw, 88px)", alignItems: "center" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700, maxWidth: "13ch" }}>Social Media Marketing in Mumbai</h2>
-            <p style={{ fontSize: "18px", color: "#3A3A3C", margin: 0 }}>Mumbai is not only India's financial and entertainment hub, it's a city beaming with opportunities. With its superfast lifestyle, mixed crowd and lucrative industries, Mumbai is &ldquo;THE&rdquo; place for businesses aiming to create an impact, and a social media game that appeals to your target group is no longer optional.</p>
+            <p style={{ fontSize: "18px", color: "#3A3A3C", margin: 0 }}>Mumbai is not only India&apos;s financial and entertainment hub, it&apos;s a city beaming with opportunities. With its superfast lifestyle, mixed crowd and lucrative industries, Mumbai is &ldquo;THE&rdquo; place for businesses aiming to create an impact, and a social media game that appeals to your target group is no longer optional.</p>
             <p style={{ fontSize: "18px", color: "#3A3A3C", margin: 0 }}>Showing up consistently on Instagram, Facebook, LinkedIn and X can set your business apart. At One Impact, every business we partner with gets a plan built from scratch and tailored to its audience, goals and brand voice, with solutions that bundle creativity and performance marketing, backed by data.</p>
-            <p style={{ color: "#000000", fontWeight: 600, fontSize: "18px", margin: 0 }}>We don't just provide a service, we partner with you like a team.</p>
+            <p style={{ color: "#000000", fontWeight: 600, fontSize: "18px", margin: 0 }}>We don&apos;t just provide a service, we partner with you like a team.</p>
             <a className="press y btn-sheen" href="#audit" style={{ alignSelf: "flex-start", fontWeight: 650, fontSize: "17px", padding: "14px 24px", minHeight: "52px", background: "#f9d230", color: "#000000", textDecoration: "none", border: 0, borderRadius: "999px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
-              Let's build something that leaves a lasting impression
+              Let&apos;s build something that leaves a lasting impression
             </a>
           </div>
 
@@ -1177,7 +1167,7 @@ export default function SmmLandingPage() {
 
           <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "18px" }}>
             <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.02, letterSpacing: "-0.05em", fontWeight: 700, maxWidth: "12ch" }}>Stop the scroll.</h2>
-            <p style={{ fontSize: "19px", color: "#3A3A3C", maxWidth: "44ch", margin: 0 }}>Get a social media audit and see what's holding your brand back. No obligation.</p>
+            <p style={{ fontSize: "19px", color: "#3A3A3C", maxWidth: "44ch", margin: 0 }}>Get a social media audit and see what&apos;s holding your brand back. No obligation.</p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
               <a className="press" href="https://wa.me/918369018104" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px", minHeight: "46px", padding: "10px 18px", borderRadius: "999px", background: "#000000", color: "#FFFFFF", textDecoration: "none", fontWeight: 600, fontSize: "15.5px" }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" /></svg>
@@ -1223,7 +1213,7 @@ export default function SmmLandingPage() {
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
                 </span>
                 <h3 role="status" className="smm-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}>Audit requested</h3>
-                <p style={{ margin: 0, color: "#C7C7CC" }}>Thanks, {name2}. We'll review {handle2} and get in touch on {phone2}.</p>
+                <p style={{ margin: 0, color: "#C7C7CC" }}>Thanks, {name2}. We&apos;ll review {handle2} and get in touch on {phone2}.</p>
               </div>
             )}
           </div>

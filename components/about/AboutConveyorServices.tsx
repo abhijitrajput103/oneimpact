@@ -68,7 +68,7 @@ function Track1Items() {
               01 BRANDING
             </span>
             <span className="font-mono text-[9px] sm:text-[11px] text-neutral-400 uppercase tracking-widest hidden sm:inline whitespace-nowrap">
-              // POSITIONING • ART DIRECTION • IDENTITY
+              {"// POSITIONING • ART DIRECTION • IDENTITY"}
             </span>
           </div>
         </div>
@@ -153,7 +153,7 @@ function Track2Items() {
               03 SEO SERVICES
             </span>
             <span className="font-mono text-[9px] sm:text-[11px] text-neutral-400 uppercase tracking-widest hidden sm:inline whitespace-nowrap">
-              // NEXT.JS • GSAP • ORGANIC DOMINATION
+              {"// NEXT.JS • GSAP • ORGANIC DOMINATION"}
             </span>
           </div>
         </div>
@@ -309,14 +309,12 @@ export function AboutConveyorServices() {
       const t3 = track3Ref.current;
       if (!container || !t1 || !t2 || !t3) return;
 
-      // 1. Pinned ScrollTrigger for user scroll scrub
+      // 1. Unpinned ScrollTrigger: natural page scroll with scroll-scrubbed acceleration
       const st = ScrollTrigger.create({
         trigger: container,
-        start: "top top",
-        end: "+=220%",
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 0.8,
       });
 
       // 2. Continuous slow auto-scroll ticker combined with scroll scrub
@@ -327,11 +325,11 @@ export function AboutConveyorServices() {
       const baseSpeed = 0.55; // slow, elegant, smooth drift
 
       const onTick = () => {
-        // Scroll offset driven by page scroll position
+        // Scroll offset driven by page scroll position as section traverses viewport
         const scrollProg = st ? st.progress : 0;
-        const scrollDelta1 = scrollProg * -750;
-        const scrollDelta2 = scrollProg * 750;
-        const scrollDelta3 = scrollProg * -650;
+        const scrollDelta1 = scrollProg * -600;
+        const scrollDelta2 = scrollProg * 600;
+        const scrollDelta3 = scrollProg * -550;
 
         // Auto-scroll drift increments
         autoX1 -= baseSpeed;
@@ -372,7 +370,7 @@ export function AboutConveyorServices() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden flex flex-col justify-center select-none"
+      className="relative w-full min-h-[85vh] sm:min-h-screen py-16 sm:py-20 md:py-24 overflow-hidden flex flex-col justify-center select-none"
       style={{ backgroundColor: "#07080A" }}
     >
       {/* Dark textured paper overlay matching Sweet Tape dark conveyor */}

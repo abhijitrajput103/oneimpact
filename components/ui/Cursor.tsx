@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import { gsap } from "@/gsap";
-import { useCursor } from "@/hooks/useCursor";
+import { useEffect } from "react";
 
 export function Cursor() {
+  useEffect(() => {
+    document.body.classList.remove("custom-cursor-active");
+    document.body.style.cursor = "auto";
+  }, []);
+
   return null;
 }
 

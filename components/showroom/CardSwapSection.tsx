@@ -5,8 +5,8 @@ import { gsap } from "@/gsap";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/utils/cn";
 import CardSwap, { Card, CardSwapRef } from "./CardSwap";
-
-/* ─── Showcase project data for the swapping cards ─── */
+import { WaveDivider, WAVE_PATH } from "@/components/common/WaveDivider";
+export { WAVE_PATH };
 const PROJECTS = [
   {
     title: "Brand Strategy & Visual Design",
@@ -58,6 +58,8 @@ const PROJECTS = [
     image: "/images/service-social-media.webp",
   },
 ];
+
+
 
 interface CardSwapSectionProps {
   className?: string;
@@ -148,6 +150,13 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
         className
       )}
     >
+      {/* Top Organic Wave / Zig Zag Divider */}
+      <WaveDivider
+        fillAbove="#FFFFFF"
+        fillBelow="#000000"
+        strokeColor="#4066c6"
+        strokeWidth={12}
+      />
       {/* Background noise texture */}
       <div
         className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
@@ -187,8 +196,8 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
               className="swap-description text-white text-sm sm:text-base leading-relaxed font-sans max-w-md font-medium"
               style={{ opacity: 0 }}
             >
-              Every project is a canvas where strategy meets artistry. 
-              We don&apos;t just design — we engineer experiences that 
+              Every project is a canvas where strategy meets artistry.
+              We don&apos;t just design — we engineer experiences that
               resonate, convert, and leave lasting impressions.
             </p>
 

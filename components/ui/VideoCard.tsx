@@ -81,7 +81,7 @@ export function VideoCard({
       onMouseLeave={handleMouseLeave}
       onClick={togglePlay}
       className={cn(
-        "relative overflow-hidden rounded-2xl bg-[#080808] border border-white/5 cursor-none group aspect-video select-none",
+        "relative overflow-hidden rounded-2xl bg-[#080808] border border-white/5 cursor-pointer group aspect-video select-none",
         className
       )}
       {...props}

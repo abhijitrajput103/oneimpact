@@ -4,14 +4,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/common/Navbar";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
-const NOTICES = [
-  "Free branding consultation. Fill the form and our team will get back to you.",
-  "Brand messaging that stays consistent across your website, social media and AI search.",
-  "Brand strategy, identity, naming, packaging and guidelines under one roof.",
-  "Research-led branding. No templates, no guesswork.",
-  "WhatsApp us on +91 83690 18104 for a quick reply.",
-];
-
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
   { name: "SnapDeal", src: "/LOGO/transparent/sanpdealbrandlogo_2.webp" },
@@ -652,9 +644,7 @@ export default function BrandingServicesPage() {
   // Ensure normal system cursor
   useEffect(() => {
     document.body.classList.remove("custom-cursor-active");
-    return () => {
-      document.body.classList.add("custom-cursor-active");
-    };
+    document.body.style.cursor = "auto";
   }, []);
 
   return (

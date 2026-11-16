@@ -4,14 +4,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/common/Navbar";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
-const NOTICES = [
-  "Free influencer marketing consultation. Fill the form and our team will get back to you.",
-  "Turn influence into IMPACT with creators your audience already trusts.",
-  "Power your brand story through credible, content-first influencer partnerships.",
-  "Creators that connect. Campaigns that convert.",
-  "WhatsApp us on +91 83690 18104 for a quick reply.",
-];
-
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
   { name: "SnapDeal", src: "/LOGO/transparent/sanpdealbrandlogo_2.webp" },
@@ -125,6 +117,70 @@ const QUOTES = [
   },
 ];
 
+function renderHelpIcon(index: number) {
+  switch (index) {
+    case 0:
+      // Build trust: Handshake
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="m11 17 2 2a1 1 0 0 0 1.4 0l4.3-4.3a1 1 0 0 0 0-1.4l-2.6-2.6a1 1 0 0 0-1.4 0L13 12" />
+          <path d="m13 12 1.4-1.4a1 1 0 0 0 0-1.4L11.8 6.6a1 1 0 0 0-1.4 0L6.1 11a1 1 0 0 0 0 1.4l4.3 4.3a1 1 0 0 0 1.4 0L13 15.5" />
+          <path d="m18 11 3-3" />
+          <path d="m3 14 3-3" />
+        </svg>
+      );
+    case 1:
+      // Expand reach: Plant seedling / sprout
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M7 20h10" />
+          <path d="M12 20v-8" />
+          <path d="M12 12a5 5 0 0 1 5-5h1v1a5 5 0 0 1-5 5h-1z" />
+          <path d="M12 14a5 5 0 0 0-5-5H6v1a5 5 0 0 0 5 5h1z" />
+        </svg>
+      );
+    case 2:
+      // Boost conversions: Arrow up-right
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M7 17L17 7" />
+          <path d="M7 7h10v10" />
+        </svg>
+      );
+    case 3:
+      // Sustainable growth: Target with dart/arrow
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <circle cx="12" cy="12" r="6" />
+          <circle cx="12" cy="12" r="2" />
+          <path d="m19 5-4.5 4.5" />
+        </svg>
+      );
+    case 4:
+      // Cost-effective marketing: Rupee symbol
+      return (
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M6 3h12" />
+          <path d="M6 8h12" />
+          <path d="M6 13l8.5 8" />
+          <path d="M6 13h3a4 4 0 0 0 0-8" />
+        </svg>
+      );
+    case 5:
+      // Measurable results: Bar chart
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M18 20V4" />
+          <path d="M12 20V10" />
+          <path d="M6 20v-5" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 const HELPS_CARDS = [
   {
     t: "Build trust",
@@ -236,7 +292,7 @@ const WHY_HIGHLIGHT_CARDS = [
 
 const SVC_GROUPS = [
   {
-    label: "Core services",
+    label: "Core Services",
     items: [
       {
         t: "Influencer strategy and planning",
@@ -271,7 +327,7 @@ const SVC_GROUPS = [
     ],
   },
   {
-    label: "By platform",
+    label: "By Platform",
     items: [
       {
         t: "Instagram influencer marketing",
@@ -666,9 +722,7 @@ export default function InfluencerMarketingPage() {
   // Ensure normal system cursor
   useEffect(() => {
     document.body.classList.remove("custom-cursor-active");
-    return () => {
-      document.body.classList.add("custom-cursor-active");
-    };
+    document.body.style.cursor = "auto";
   }, []);
 
   return (
@@ -1615,7 +1669,7 @@ export default function InfluencerMarketingPage() {
         aria-hidden="true"
         style={{
           width: "100%",
-          height: "56px",
+          height: "48px",
           backgroundColor: "#000000",
           display: "flex",
           alignItems: "center",
@@ -1636,10 +1690,10 @@ export default function InfluencerMarketingPage() {
           }}
         >
           <path
-            d="M23 28.2 L26 29 L29 29.2 L32 28.7 L35 30.3 L38 30.5 L41 30.2 L44 30.2 L47 31 L50 30.3 L53 29.8 L56 30.5 L59 29.7 L62 28.5 L65 27.8 L68 27.8 L71 27 L74 29.5 L77 30.3 L80 32.3 L83 32.7 L86 31.8 L89 33 L92 33.8 L95 35 L98 36.3 L101 36.7 L104 37.3 L107 36.5 L110 37.5 L113 38.5 L116 38.5 L119 37.3 L122 36.5 L125 35.8 L128 35.5 L131 34.7 L134 36 L137 37.5 L140 37.5 L143 36.8 L146 37.5 L149 36.5 L152 36.7 L155 38.3 L158 37.8 L161 37.5 L164 36.2 L167 35.5 L170 35.5 L173 35.7 L176 35.3 L179 34 L182 34.8 L185 34.7 L188 34.5 L191 33.7 L194 32.7 L197 32.7 L200 32.7 L203 32.8 L206 33.5 L209 34.2 L212 34.5 L215 35 L218 34.5 L221 34.7 L224 35.7 L227 35.7 L230 35.3 L233 36.3 L236 37.2 L239 37.7 L242 38.5 L245 37.2 L248 36.5 L251 37.3 L254 37 L257 37.5 L260 37.7 L263 36.3 L266 34.8 L269 35.3 L272 35.5 L275 36.5 L278 36.8 L281 38.5 L284 38.5 L287 37.8 L290 36.7 L293 37.3 L296 36.8 L299 36.5 L302 35.3 L305 34.2 L308 33.2 L311 32 L314 32.5 L317 32.5 L320 31.2 L323 30.5 L326 27.3 L329 27.2 L332 27.8 L335 28.2 L338 29.7 L341 30.2 L344 30 L347 30.2 L350 31.2 L353 30.5 L356 29.8 L359 30.5 L362 30.5 L365 28.8 L368 29.2 L371 28.8 L374 28.2 L377 29.2 L380 28.5 L383 29 L386 29 L389 28.7 L392 30.5 L395 30.5 L398 29.8 L401 30.5 L404 31.2 L407 30.2 L410 30 L413 30.3 L416 29.7 L419 28.3 L422 27.8 L425 27.3 L428 27.3 L431 30.3 L434 31 L437 32.5 L440 32.5 L443 32.2 L446 33 L449 34.2 L452 35.3 L455 36.5 L458 36.7 L461 37.3 L464 36.7 L467 37.8 L470 38.5 L473 38.5 L476 36.8 L479 36.5 L482 35.5 L485 35.2 L488 34.8 L491 36.3 L494 37.7 L497 37.5 L500 36.8 L503 37.5 L506 36.5 L509 37 L512 38.5 L515 37.7 L518 37.2 L521 36.2 L524 35.5 L527 35.7 L530 35.5 L533 34.7 L536 34.3 L539 35.2 L542 34.5 L545 34.2 L548 33.3 L551 32.8 L554 32.7 L557 32.7 L560 32.7 L563 33.5 L566 34.3 L569 34.7 L572 35 L575 34.2 L578 34.8 L581 35.7 L584 35.7 L587 35.5 L590 36.3 L593 37.3 L596 37.8 L599 38.2 L602 36.8 L605 36.5 L608 37.7 L611 36.8 L614 37.5 L617 37.5 L620 36 L623 34.7 L626 35.3 L629 35.7 L632 36.5 L635 37.2 L638 38.5 L641 38.5 L644 37.7 L647 36.7 L650 37.3 L653 36.7 L656 36.3 L659 35 L662 34 L665 33 L668 32 L671 32.5 L674 32.5 L677 30.5 L680 29.8 L683 27 L686 27.7 L689 27.8 L692 28.7 L695 29.7 L698 30.5 L701 29.7 L704 30.3 L707 31 L710 30.2 L713 30.2 L716 30.5 L719 30.3 L722 28.7 L725 28.8 L728 29 L731 28.2 L734 29 L734 50 L23 50 Z"
-            fill="#FFFFFF"
+            d="M23 28.2 L26 29 L29 29.2 L32 28.7 L35 30.3 L38 30.5 L41 30.2 L44 30.2 L47 31 L50 30.3 L53 29.8 L56 30.5 L59 29.7 L62 28.5 L65 27.8 L68 27.8 L71 27 L74 29.5 L77 30.3 L80 32.3 L83 32.7 L86 31.8 L89 33 L92 33.8 L95 35 L98 36.3 L101 36.7 L104 37.3 L107 36.5 L110 37.5 L113 38.5 L116 38.5 L119 37.3 L122 36.5 L125 35.8 L128 35.5 L131 34.7 L134 36 L137 37.5 L140 37.5 L143 36.8 L146 37.5 L149 36.5 L152 36.7 L155 38.3 L158 37.8 L161 37.5 L164 36.2 L167 35.5 L170 35.5 L173 35.7 L176 35.3 L179 34 L182 34.8 L185 34.7 L188 34.5 L191 33.7 L194 32.7 L197 32.7 L200 32.7 L203 32.8 L206 33.5 L209 34.2 L212 34.5 L215 35 L218 34.5 L221 34.7 L224 35.7 L227 35.7 L230 35.3 L233 36.3 L236 37.2 L239 37.7 L242 38.5 L245 37.2 L248 36.5 L251 37.3 L254 37 L257 37.5 L260 37.7 L263 36.3 L266 34.8 L269 35.3 L272 35.5 L275 36.5 L278 36.8 L281 38.5 L284 38.5 L287 37.8 L290 36.7 L293 37.3 L296 36.8 L299 36.5 L302 35.3 L305 34.2 L308 33.2 L311 32 L314 32.5 L317 32.5 L320 31.2 L323 30.5 L326 27.3 L329 27.2 L332 27.8 L335 28.2 L338 29.7 L341 30.2 L344 30 L347 30.2 L350 31.2 L353 30.5 L356 29.8 L359 30.5 L362 30.5 L365 28.8 L368 29.2 L371 28.8 L374 28.2 L377 29.2 L380 28.5 L383 29 L386 29 L389 28.7 L392 30.5 L395 30.5 L398 29.8 L401 30.5 L404 31.2 L407 30.2 L410 30 L413 30.3 L416 29.7 L419 28.3 L422 27.8 L425 27.3 L428 27.3 L431 30.3 L434 31 L437 32.5 L440 32.5 L443 32.2 L446 33 L449 34.2 L452 35.3 L455 36.5 L458 36.7 L461 37.3 L464 36.7 L467 37.8 L470 38.5 L473 38.5 L476 36.8 L479 36.5 L482 35.5 L485 35.2 L488 34.8 L491 36.3 L494 37.7 L497 37.5 L500 36.8 L503 37.5 L506 36.5 L509 37 L512 38.5 L515 37.7 L518 37.2 L521 36.2 L524 35.5 L527 35.7 L530 35.5 L533 34.7 L536 34.3 L539 35.2 L542 34.5 L545 34.2 L548 33.3 L551 32.8 L554 32.7 L557 32.7 L560 32.7 L563 33.5 L566 34.3 L569 34.7 L572 35 L575 34.2 L578 34.8 L581 35.7 L584 35.7 L587 35.5 L590 36.3 L593 37.3 L596 37.8 L599 38.2 L602 36.8 L605 36.5 L608 37.7 L611 36.8 L614 37.5 L617 37.5 L620 36 L623 34.7 L626 35.3 L629 35.7 L632 36.5 L635 37.2 L638 38.5 L641 38.5 L644 37.7 L647 36.7 L650 37.3 L653 36.7 L656 36.3 L659 35 L662 34 L665 33 L668 32 L671 32.5 L674 32.5 L677 30.5 L680 29.8 L683 27 L686 27.7 L689 27.8 L692 28.7 L695 29.7 L698 30.5 L701 29.7 L704 30.3 L707 31 L710 30.2 L713 30.2 L716 30.5 L719 30.3 L722 28.7 L725 28.8 L728 29 L731 28.2 L734 29"
+            fill="none"
             stroke="#FFFFFF"
-            strokeWidth="2"
+            strokeWidth="12"
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
@@ -1651,85 +1705,135 @@ export default function InfluencerMarketingPage() {
       <section
         id="proof"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(48px, 6vw, 72px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(48px, 6vw, 80px) clamp(16px, 3vw, 32px) clamp(16px, 2.5vw, 32px)",
+          position: "relative",
         }}
       >
-        {/* Pillars Head & Grid */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px", textAlign: "center" }}>
-          <h3
-            className="inf-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(1.5rem, 2.4vw, 2rem)",
-              letterSpacing: "-0.035em",
-              fontWeight: 700,
-            }}
-          >
-            At OneImpact, every collaboration follows four principles
-          </h3>
-          <p style={{ margin: "0 0 28px", color: "#6E6E73", fontSize: "17px" }}>
-            Authenticity, Research, Platform fit, Transparency
-          </p>
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
-            gap: "16px",
-            maxWidth: "1040px",
-            margin: "0 auto",
-          }}
-        >
-          {PILLARS.map((p, idx) => (
-            <div
-              key={idx}
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+          {/* Section Header */}
+          <div style={{ textAlign: "left", marginBottom: "clamp(36px, 4.5vw, 52px)" }}>
+            <h2
               style={{
-                background: "#F5F5F7",
-                borderRadius: "28px",
-                padding: "28px 26px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
+                margin: 0,
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.4rem, 4.6vw, 3.8rem)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.02em",
+                fontWeight: 700,
+                color: "#f9d230",
+                maxWidth: "20ch",
               }}
             >
-              <span
+              At OneImpact, every collaboration follows four principles
+            </h2>
+            <p
+              style={{
+                margin: "14px 0 0",
+                fontSize: "16px",
+                color: "rgba(255, 255, 255, 0.72)",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Authenticity, Research, Platform fit, Transparency
+            </p>
+          </div>
+
+          {/* Cards Grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
+              gap: "20px",
+            }}
+          >
+            {PILLARS.map((p, idx) => (
+              <div
+                key={idx}
                 style={{
-                  fontSize: "88px",
-                  lineHeight: 0.9,
-                  fontWeight: 700,
-                  letterSpacing: "-0.06em",
-                  color: "#000000",
+                  background: "#000000",
+                  border: "1px solid #4066c6",
+                  borderRadius: "22px",
+                  padding: "26px 22px 30px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-start",
                 }}
-                aria-hidden="true"
               >
-                {p.letter}
-              </span>
-              <span
-                style={{
-                  width: "32px",
-                  height: "4px",
-                  borderRadius: "999px",
-                  background: "#f9d230",
-                }}
-                aria-hidden="true"
-              />
-              <h4
-                className="inf-heading"
-                style={{
-                  margin: "6px 0 0",
-                  fontSize: "21px",
-                  letterSpacing: "-0.025em",
-                  fontWeight: 700,
-                }}
-              >
-                {p.title}
-              </h4>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px", lineHeight: 1.5 }}>{p.text}</p>
-            </div>
-          ))}
+                {/* Header row: Title + blue accent bar on left, white box on right */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: "12px",
+                    marginBottom: "22px",
+                  }}
+                >
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                    <h3
+                      style={{
+                        margin: 0,
+                        fontSize: "18px",
+                        lineHeight: 1.25,
+                        letterSpacing: "-0.02em",
+                        fontWeight: 700,
+                        color: "#f9d230",
+                        maxWidth: "14ch",
+                      }}
+                    >
+                      {p.title}
+                    </h3>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: "20px",
+                        height: "2.5px",
+                        borderRadius: "999px",
+                        backgroundColor: "#4066c6",
+                      }}
+                    />
+                  </div>
+
+                  <div
+                    aria-hidden="true"
+                    style={{
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "14px",
+                      backgroundColor: "#FFFFFF",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#000000",
+                      fontFamily:
+                        '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif',
+                      fontSize: "28px",
+                      fontWeight: 800,
+                      lineHeight: 1,
+                      flexShrink: 0,
+                      userSelect: "none",
+                    }}
+                  >
+                    {p.letter}
+                  </div>
+                </div>
+
+                <p
+                  style={{
+                    margin: 0,
+                    color: "rgba(255, 255, 255, 0.78)",
+                    fontSize: "14px",
+                    lineHeight: 1.6,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {p.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1737,16 +1841,44 @@ export default function InfluencerMarketingPage() {
       <section
         id="reviews"
         style={{
-          backgroundColor: "#FFFFFF",
-          padding: "0 clamp(16px, 3vw, 32px) clamp(36px, 4.5vw, 52px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(8px, 1.5vw, 20px) clamp(16px, 3vw, 32px) clamp(48px, 6vw, 72px)",
+          position: "relative",
         }}
       >
-        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
+          {/* Team collaboration illustration */}
+          <div
+            style={{
+              maxWidth: "960px",
+              margin: "0 auto clamp(24px, 3vw, 36px)",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/influencer-reviews-team.png"
+              alt="OneImpact influencer marketing team collaboration"
+              style={{
+                display: "block",
+                width: "100%",
+                height: "auto",
+                borderRadius: "24px",
+                objectFit: "contain",
+              }}
+            />
+          </div>
+
+          {/* Review cards */}
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
-              gap: "16px",
+              gap: "18px",
+              maxWidth: "1080px",
+              margin: "0 auto",
             }}
           >
             {QUOTES.map((q, idx) => (
@@ -1754,21 +1886,20 @@ export default function InfluencerMarketingPage() {
                 key={idx}
                 style={{
                   margin: 0,
-                  background: "#FFFFFF",
-                  border: "1px solid #E5E5EA",
-                  borderRadius: "24px",
-                  padding: "28px",
+                  background: "#000000",
+                  border: "1.5px solid rgba(255, 255, 255, 0.38)",
+                  borderRadius: "14px",
+                  padding: "22px 20px 24px",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "20px",
                   justifyContent: "space-between",
-                  boxShadow: "0 2px 14px rgba(0, 0, 0, 0.03)",
+                  gap: "18px",
                 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                   <span style={{ display: "inline-flex", gap: "3px", color: "#f9d230" }} aria-label="Rated 5 out of 5">
                     {[...Array(5)].map((_, sIdx) => (
-                      <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <svg key={sIdx} width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
                       </svg>
                     ))}
@@ -1776,24 +1907,31 @@ export default function InfluencerMarketingPage() {
                   <blockquote
                     style={{
                       margin: 0,
-                      fontSize: "18px",
-                      lineHeight: 1.45,
-                      fontWeight: 600,
-                      letterSpacing: "-0.02em",
-                      color: "#1D1D1F",
+                      fontSize: "14px",
+                      lineHeight: 1.55,
+                      fontWeight: 400,
+                      letterSpacing: "-0.01em",
+                      color: "rgba(255, 255, 255, 0.9)",
                     }}
                   >
                     &ldquo;{q.text}&rdquo;
                   </blockquote>
                 </div>
-                <figcaption style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <figcaption style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "auto" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/LOGO/oneimpact-logo.webp"
-                    alt="Client logo"
-                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 1 }}
+                    alt="OneImpact logo"
+                    style={{
+                      display: "block",
+                      height: "18px",
+                      width: "auto",
+                      maxWidth: "58px",
+                      objectFit: "contain",
+                      filter: "invert(50%) sepia(85%) saturate(800%) hue-rotate(190deg) brightness(105%) contrast(95%)",
+                    }}
                   />
-                  <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
+                  <span style={{ fontSize: "13px", color: "rgba(255, 255, 255, 0.68)", lineHeight: 1.35, letterSpacing: 0 }}>
                     {q.role}
                   </span>
                 </figcaption>
@@ -1803,441 +1941,655 @@ export default function InfluencerMarketingPage() {
         </div>
       </section>
 
+      {/* Organic Wave Divider */}
+      <div
+        style={{
+          width: "100%",
+          height: "48px",
+          backgroundColor: "#000000",
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        <svg
+          viewBox="23 18 711 30"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+            overflow: "visible",
+          }}
+        >
+          <path
+            d="M23 28.2 L26 29 L29 29.2 L32 28.7 L35 30.3 L38 30.5 L41 30.2 L44 30.2 L47 31 L50 30.3 L53 29.8 L56 30.5 L59 29.7 L62 28.5 L65 27.8 L68 27.8 L71 27 L74 29.5 L77 30.3 L80 32.3 L83 32.7 L86 31.8 L89 33 L92 33.8 L95 35 L98 36.3 L101 36.7 L104 37.3 L107 36.5 L110 37.5 L113 38.5 L116 38.5 L119 37.3 L122 36.5 L125 35.8 L128 35.5 L131 34.7 L134 36 L137 37.5 L140 37.5 L143 36.8 L146 37.5 L149 36.5 L152 36.7 L155 38.3 L158 37.8 L161 37.5 L164 36.2 L167 35.5 L170 35.5 L173 35.7 L176 35.3 L179 34 L182 34.8 L185 34.7 L188 34.5 L191 33.7 L194 32.7 L197 32.7 L200 32.7 L203 32.8 L206 33.5 L209 34.2 L212 34.5 L215 35 L218 34.5 L221 34.7 L224 35.7 L227 35.7 L230 35.3 L233 36.3 L236 37.2 L239 37.7 L242 38.5 L245 37.2 L248 36.5 L251 37.3 L254 37 L257 37.5 L260 37.7 L263 36.3 L266 34.8 L269 35.3 L272 35.5 L275 36.5 L278 36.8 L281 38.5 L284 38.5 L287 37.8 L290 36.7 L293 37.3 L296 36.8 L299 36.5 L302 35.3 L305 34.2 L308 33.2 L311 32 L314 32.5 L317 32.5 L320 31.2 L323 30.5 L326 27.3 L329 27.2 L332 27.8 L335 28.2 L338 29.7 L341 30.2 L344 30 L347 30.2 L350 31.2 L353 30.5 L356 29.8 L359 30.5 L362 30.5 L365 28.8 L368 29.2 L371 28.8 L374 28.2 L377 29.2 L380 28.5 L383 29 L386 29 L389 28.7 L392 30.5 L395 30.5 L398 29.8 L401 30.5 L404 31.2 L407 30.2 L410 30 L413 30.3 L416 29.7 L419 28.3 L422 27.8 L425 27.3 L428 27.3 L431 30.3 L434 31 L437 32.5 L440 32.5 L443 32.2 L446 33 L449 34.2 L452 35.3 L455 36.5 L458 36.7 L461 37.3 L464 36.7 L467 37.8 L470 38.5 L473 38.5 L476 36.8 L479 36.5 L482 35.5 L485 35.2 L488 34.8 L491 36.3 L494 37.7 L497 37.5 L500 36.8 L503 37.5 L506 36.5 L509 37 L512 38.5 L515 37.7 L518 37.2 L521 36.2 L524 35.5 L527 35.7 L530 35.5 L533 34.7 L536 34.3 L539 35.2 L542 34.5 L545 34.2 L548 33.3 L551 32.8 L554 32.7 L557 32.7 L560 32.7 L563 33.5 L566 34.3 L569 34.7 L572 35 L575 34.2 L578 34.8 L581 35.7 L584 35.7 L587 35.5 L590 36.3 L593 37.3 L596 37.8 L599 38.2 L602 36.8 L605 36.5 L608 37.7 L611 36.8 L614 37.5 L617 37.5 L620 36 L623 34.7 L626 35.3 L629 35.7 L632 36.5 L635 37.2 L638 38.5 L641 38.5 L644 37.7 L647 36.7 L650 37.3 L653 36.7 L656 36.3 L659 35 L662 34 L665 33 L668 32 L671 32.5 L674 32.5 L677 30.5 L680 29.8 L683 27 L686 27.7 L689 27.8 L692 28.7 L695 29.7 L698 30.5 L701 29.7 L704 30.3 L707 31 L710 30.2 L713 30.2 L716 30.5 L719 30.3 L722 28.7 L725 28.8 L728 29 L731 28.2 L734 29"
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth="12"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+      </div>
+
       {/* ── BENEFITS: HOW INFLUENCER MARKETING HELPS */}
       <section
         id="why"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(32px, 4vw, 48px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 64px)",
+          position: "relative",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
-          <h2
-            className="inf-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-            }}
-          >
-            How influencer marketing helps
-          </h2>
-          <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73" }}>
-            Influencer marketing has become a powerful way for brands to connect with their audience authentically. Here’s how it can benefit your business:
-          </p>
-        </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
-            gap: "14px",
-          }}
-        >
-          {HELPS_CARDS.map((b, i) => (
-            <div
-              key={i}
+        <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
+          <div style={{ textAlign: "left", marginBottom: "clamp(32px, 4vw, 44px)" }}>
+            <h2
               style={{
-                background: "#F5F5F7",
-                borderRadius: "22px",
-                padding: "24px 22px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
+                margin: 0,
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.4rem, 4.4vw, 3.8rem)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.02em",
+                fontWeight: 700,
+                color: "#f9d230",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                <span
+              How influencer marketing helps
+            </h2>
+            <p
+              style={{
+                margin: "12px 0 0",
+                fontSize: "16px",
+                color: "rgba(255, 255, 255, 0.72)",
+                lineHeight: 1.5,
+                maxWidth: "85ch",
+              }}
+            >
+              Influencer marketing has become a powerful way for brands to connect with their audience authentically. Here’s how it can benefit your business:
+            </p>
+          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+              gap: "18px",
+            }}
+          >
+            {HELPS_CARDS.map((b, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "#000000",
+                  border: "1.5px solid rgba(255, 255, 255, 0.28)",
+                  borderRadius: "20px",
+                  padding: "24px 22px 28px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div
                   style={{
-                    width: "42px",
-                    height: "42px",
-                    borderRadius: "12px",
-                    background: b.chip,
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flex: "none",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: "12px",
+                    marginBottom: "18px",
                   }}
                 >
-                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d={b.d} />
-                  </svg>
-                </span>
-                <h3 className="inf-heading" style={{ margin: 0, fontSize: "19.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25 }}>
-                  {b.t}
-                </h3>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                    <h3
+                      style={{
+                        margin: 0,
+                        fontSize: "17.5px",
+                        lineHeight: 1.25,
+                        letterSpacing: "-0.015em",
+                        fontWeight: 700,
+                        color: "#f9d230",
+                      }}
+                    >
+                      {b.t}
+                    </h3>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: "22px",
+                        height: "2.5px",
+                        borderRadius: "999px",
+                        backgroundColor: "#4066c6",
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "14px",
+                      backgroundColor: "#2F6FE4",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flex: "none",
+                    }}
+                  >
+                    {renderHelpIcon(i)}
+                  </div>
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    color: "rgba(255, 255, 255, 0.78)",
+                    fontSize: "13.5px",
+                    lineHeight: 1.55,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {b.a}
+                </p>
               </div>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "15px", lineHeight: 1.5 }}>{b.a}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* Organic Wave Divider */}
+      <div
+        style={{
+          width: "100%",
+          height: "48px",
+          backgroundColor: "#000000",
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        <svg
+          viewBox="23 18 711 30"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+            overflow: "visible",
+          }}
+        >
+          <path
+            d="M23 28.2 L26 29 L29 29.2 L32 28.7 L35 30.3 L38 30.5 L41 30.2 L44 30.2 L47 31 L50 30.3 L53 29.8 L56 30.5 L59 29.7 L62 28.5 L65 27.8 L68 27.8 L71 27 L74 29.5 L77 30.3 L80 32.3 L83 32.7 L86 31.8 L89 33 L92 33.8 L95 35 L98 36.3 L101 36.7 L104 37.3 L107 36.5 L110 37.5 L113 38.5 L116 38.5 L119 37.3 L122 36.5 L125 35.8 L128 35.5 L131 34.7 L134 36 L137 37.5 L140 37.5 L143 36.8 L146 37.5 L149 36.5 L152 36.7 L155 38.3 L158 37.8 L161 37.5 L164 36.2 L167 35.5 L170 35.5 L173 35.7 L176 35.3 L179 34 L182 34.8 L185 34.7 L188 34.5 L191 33.7 L194 32.7 L197 32.7 L200 32.7 L203 32.8 L206 33.5 L209 34.2 L212 34.5 L215 35 L218 34.5 L221 34.7 L224 35.7 L227 35.7 L230 35.3 L233 36.3 L236 37.2 L239 37.7 L242 38.5 L245 37.2 L248 36.5 L251 37.3 L254 37 L257 37.5 L260 37.7 L263 36.3 L266 34.8 L269 35.3 L272 35.5 L275 36.5 L278 36.8 L281 38.5 L284 38.5 L287 37.8 L290 36.7 L293 37.3 L296 36.8 L299 36.5 L302 35.3 L305 34.2 L308 33.2 L311 32 L314 32.5 L317 32.5 L320 31.2 L323 30.5 L326 27.3 L329 27.2 L332 27.8 L335 28.2 L338 29.7 L341 30.2 L344 30 L347 30.2 L350 31.2 L353 30.5 L356 29.8 L359 30.5 L362 30.5 L365 28.8 L368 29.2 L371 28.8 L374 28.2 L377 29.2 L380 28.5 L383 29 L386 29 L389 28.7 L392 30.5 L395 30.5 L398 29.8 L401 30.5 L404 31.2 L407 30.2 L410 30 L413 30.3 L416 29.7 L419 28.3 L422 27.8 L425 27.3 L428 27.3 L431 30.3 L434 31 L437 32.5 L440 32.5 L443 32.2 L446 33 L449 34.2 L452 35.3 L455 36.5 L458 36.7 L461 37.3 L464 36.7 L467 37.8 L470 38.5 L473 38.5 L476 36.8 L479 36.5 L482 35.5 L485 35.2 L488 34.8 L491 36.3 L494 37.7 L497 37.5 L500 36.8 L503 37.5 L506 36.5 L509 37 L512 38.5 L515 37.7 L518 37.2 L521 36.2 L524 35.5 L527 35.7 L530 35.5 L533 34.7 L536 34.3 L539 35.2 L542 34.5 L545 34.2 L548 33.3 L551 32.8 L554 32.7 L557 32.7 L560 32.7 L563 33.5 L566 34.3 L569 34.7 L572 35 L575 34.2 L578 34.8 L581 35.7 L584 35.7 L587 35.5 L590 36.3 L593 37.3 L596 37.8 L599 38.2 L602 36.8 L605 36.5 L608 37.7 L611 36.8 L614 37.5 L617 37.5 L620 36 L623 34.7 L626 35.3 L629 35.7 L632 36.5 L635 37.2 L638 38.5 L641 38.5 L644 37.7 L647 36.7 L650 37.3 L653 36.7 L656 36.3 L659 35 L662 34 L665 33 L668 32 L671 32.5 L674 32.5 L677 30.5 L680 29.8 L683 27 L686 27.7 L689 27.8 L692 28.7 L695 29.7 L698 30.5 L701 29.7 L704 30.3 L707 31 L710 30.2 L713 30.2 L716 30.5 L719 30.3 L722 28.7 L725 28.8 L728 29 L731 28.2 L734 29"
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth="12"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+      </div>
 
       {/* ── BUT WHY ONEIMPACT? / WHY ONEIMPACT? TABS */}
       <section
         id="why-oneimpact"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(32px, 4vw, 48px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)",
-          borderTop: "1px solid #EBEBED",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 64px)",
+          position: "relative",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: "24px",
-            marginBottom: "32px",
-          }}
-        >
-          <div>
-            <h2
-              className="inf-heading"
-              style={{
-                margin: "0 0 10px",
-                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.045em",
-                fontWeight: 700,
-              }}
-            >
-              {whyTab === 0 ? "But why OneImpact?" : "Why OneImpact?"}
-            </h2>
-            <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73", maxWidth: "52ch" }}>
-              {whyTab === 0
-                ? "Here's what makes us the right influencer marketing agency for your brand."
-                : "Tailored strategies, data-driven creator selection and transparent campaign reporting."}
-            </p>
-          </div>
-
-          {/* Tab Switcher */}
+        <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
           <div
-            role="tablist"
-            aria-label="Why OneImpact tabs"
             style={{
-              position: "relative",
-              display: "inline-grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              background: "#F2F2F5",
-              border: "1px solid #E5E5EA",
-              borderRadius: "999px",
-              padding: "4px",
-              boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.06)",
-              width: "min(460px, 100%)",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: "24px",
+              marginBottom: "clamp(32px, 4vw, 44px)",
             }}
           >
-            <span
-              aria-hidden="true"
-              className="btn-sheen"
-              style={{
-                position: "absolute",
-                top: "4px",
-                bottom: "4px",
-                left: "4px",
-                width: "calc((100% - 8px) / 2)",
-                transform: `translateX(${whyTab * 100}%)`,
-                transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#f9d230",
-                borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
-              }}
-            />
-            {["But why OneImpact?", "Why OneImpact?"].map((label, i) => (
-              <button
-                key={i}
-                type="button"
-                role="tab"
-                aria-selected={whyTab === i}
-                onClick={() => setWhyTab(i)}
+            <div>
+              <h2
                 style={{
-                  position: "relative",
-                  zIndex: 1,
-                  font: "inherit",
-                  fontSize: "14.5px",
-                  fontWeight: whyTab === i ? 700 : 500,
-                  color: whyTab === i ? "#000000" : "#555558",
-                  background: "transparent",
-                  border: 0,
-                  borderRadius: "999px",
-                  minHeight: "42px",
-                  padding: "8px 18px",
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "8px",
-                  transition: "color 200ms ease",
-                  whiteSpace: "nowrap",
-                  letterSpacing: "-0.015em",
+                  margin: "0 0 10px",
+                  fontFamily: "var(--font-display), Georgia, serif",
+                  fontSize: "clamp(2.4rem, 4.4vw, 3.8rem)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.02em",
+                  fontWeight: 700,
+                  color: "#f9d230",
                 }}
               >
-                <span>{label}</span>
-                <span
+                {whyTab === 0 ? "But why OneImpact?" : "Why OneImpact?"}
+              </h2>
+              <p style={{ margin: 0, fontSize: "16px", color: "rgba(255, 255, 255, 0.72)", maxWidth: "56ch", lineHeight: 1.5 }}>
+                {whyTab === 0
+                  ? "Here's what makes us the right influencer marketing agency for your brand."
+                  : "Tailored strategies, data-driven creator selection and transparent campaign reporting."}
+              </p>
+            </div>
+
+            {/* Tab Switcher */}
+            <div
+              role="tablist"
+              aria-label="Why OneImpact tabs"
+              style={{
+                position: "relative",
+                display: "inline-grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                background: "#1C1C1E",
+                border: "1px solid rgba(255, 255, 255, 0.25)",
+                borderRadius: "999px",
+                padding: "4px",
+                width: "min(460px, 100%)",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: "4px",
+                  bottom: "4px",
+                  left: "4px",
+                  width: "calc((100% - 8px) / 2)",
+                  transform: `translateX(${whyTab * 100}%)`,
+                  transition: "transform 320ms cubic-bezier(0.32, 0.72, 0, 1)",
+                  background: "#f9d230",
+                  borderRadius: "999px",
+                  boxShadow: "0 3px 12px rgba(249, 210, 48, 0.35)",
+                }}
+              />
+              {["But why OneImpact?", "Why OneImpact?"].map((label, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  aria-selected={whyTab === i}
+                  onClick={() => setWhyTab(i)}
                   style={{
-                    fontSize: "11px",
-                    fontWeight: 700,
-                    padding: "1px 7px",
+                    position: "relative",
+                    zIndex: 1,
+                    font: "inherit",
+                    fontSize: "14px",
+                    fontWeight: whyTab === i ? 700 : 500,
+                    color: whyTab === i ? "#000000" : "rgba(255, 255, 255, 0.7)",
+                    background: "transparent",
+                    border: 0,
                     borderRadius: "999px",
-                    background: whyTab === i ? "rgba(0, 0, 0, 0.12)" : "rgba(0, 0, 0, 0.05)",
-                    color: whyTab === i ? "#000000" : "#8E8E93",
-                    transition: "all 200ms ease",
+                    minHeight: "42px",
+                    padding: "8px 16px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    transition: "color 200ms ease",
+                    whiteSpace: "nowrap",
+                    letterSpacing: "-0.01em",
                   }}
                 >
-                  {i === 0 ? BUT_WHY_CARDS.length : WHY_HIGHLIGHT_CARDS.length}
-                </span>
-              </button>
+                  <span>{label}</span>
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      width: "22px",
+                      height: "22px",
+                      borderRadius: "999px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: whyTab === i ? "#000000" : "transparent",
+                      border: whyTab === i ? "none" : "1px solid rgba(255, 255, 255, 0.3)",
+                      color: whyTab === i ? "#FFFFFF" : "rgba(255, 255, 255, 0.7)",
+                      transition: "all 200ms ease",
+                    }}
+                  >
+                    {i === 0 ? BUT_WHY_CARDS.length : WHY_HIGHLIGHT_CARDS.length}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Cards Grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+              gap: "18px",
+            }}
+          >
+            {(whyTab === 0 ? BUT_WHY_CARDS : WHY_HIGHLIGHT_CARDS).map((w, idx) => (
+              <div
+                key={idx}
+                style={{
+                  background: "#000000",
+                  border: "1.5px solid rgba(255, 255, 255, 0.28)",
+                  borderRadius: "20px",
+                  padding: "24px 22px 28px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: "12px",
+                    marginBottom: "18px",
+                  }}
+                >
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                    <h3
+                      style={{
+                        margin: 0,
+                        fontSize: "17.5px",
+                        lineHeight: 1.25,
+                        letterSpacing: "-0.015em",
+                        fontWeight: 700,
+                        color: "#f9d230",
+                      }}
+                    >
+                      {w.t}
+                    </h3>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: "22px",
+                        height: "2.5px",
+                        borderRadius: "999px",
+                        backgroundColor: "#4066c6",
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "14px",
+                      backgroundColor: "#2F6FE4",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flex: "none",
+                    }}
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </div>
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    color: "rgba(255, 255, 255, 0.78)",
+                    fontSize: "13.5px",
+                    lineHeight: 1.55,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {w.a}
+                </p>
+              </div>
             ))}
           </div>
         </div>
-
-        {/* Tab 0: But why OneImpact? */}
-        {whyTab === 0 && (
-          <div className="inf-why-grid">
-            {BUT_WHY_CARDS.map((w, idx) => (
-              <div
-                key={idx}
-                className="inf-why-card"
-                style={{
-                  background: "#F5F5F7",
-                  borderRadius: "22px",
-                  padding: "24px 22px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                  border: "1px solid rgba(0, 0, 0, 0.03)",
-                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)",
-                  transition: "transform 200ms ease, box-shadow 200ms ease",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span
-                    className="why-icon"
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "50%",
-                      background:
-                        w.chip === "#f9d230"
-                          ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
-                          : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flex: "none",
-                      boxShadow:
-                        w.chip === "#f9d230"
-                          ? "0 3px 8px rgba(249, 210, 48, 0.35)"
-                          : "0 3px 8px rgba(64, 102, 198, 0.35)",
-                    }}
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={w.chip === "#f9d230" ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M5 12.5l4.5 4.5L19 7.5" />
-                    </svg>
-                  </span>
-                  <h3 className="inf-heading" style={{ margin: 0, fontSize: "18.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#1D1D1F" }}>
-                    {w.t}
-                  </h3>
-                </div>
-                <p style={{ margin: 0, color: "#6E6E73", fontSize: "14.5px", lineHeight: 1.5 }}>{w.a}</p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Tab 1: Why OneImpact? */}
-        {whyTab === 1 && (
-          <div className="inf-why-grid">
-            {WHY_HIGHLIGHT_CARDS.map((w, idx) => (
-              <div
-                key={idx}
-                className="inf-why-card"
-                style={{
-                  background: "#F5F5F7",
-                  borderRadius: "22px",
-                  padding: "24px 22px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                  border: "1px solid rgba(0, 0, 0, 0.03)",
-                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)",
-                  transition: "transform 200ms ease, box-shadow 200ms ease",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span
-                    className="why-icon"
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      borderRadius: "50%",
-                      background:
-                        idx % 2 === 0
-                          ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
-                          : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flex: "none",
-                      boxShadow:
-                        idx % 2 === 0
-                          ? "0 3px 8px rgba(249, 210, 48, 0.35)"
-                          : "0 3px 8px rgba(64, 102, 198, 0.35)",
-                    }}
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={idx % 2 === 0 ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M5 12.5l4.5 4.5L19 7.5" />
-                    </svg>
-                  </span>
-                  <h3 className="inf-heading" style={{ margin: 0, fontSize: "18.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#1D1D1F" }}>
-                    {w.t}
-                  </h3>
-                </div>
-                <p style={{ margin: 0, color: "#6E6E73", fontSize: "14.5px", lineHeight: 1.5 }}>{w.a}</p>
-              </div>
-            ))}
-          </div>
-        )}
       </section>
+
+      {/* Organic Wave Divider */}
+      <div
+        style={{
+          width: "100%",
+          height: "48px",
+          backgroundColor: "#000000",
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        <svg
+          viewBox="23 18 711 30"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+            overflow: "visible",
+          }}
+        >
+          <path
+            d="M23 28.2 L26 29 L29 29.2 L32 28.7 L35 30.3 L38 30.5 L41 30.2 L44 30.2 L47 31 L50 30.3 L53 29.8 L56 30.5 L59 29.7 L62 28.5 L65 27.8 L68 27.8 L71 27 L74 29.5 L77 30.3 L80 32.3 L83 32.7 L86 31.8 L89 33 L92 33.8 L95 35 L98 36.3 L101 36.7 L104 37.3 L107 36.5 L110 37.5 L113 38.5 L116 38.5 L119 37.3 L122 36.5 L125 35.8 L128 35.5 L131 34.7 L134 36 L137 37.5 L140 37.5 L143 36.8 L146 37.5 L149 36.5 L152 36.7 L155 38.3 L158 37.8 L161 37.5 L164 36.2 L167 35.5 L170 35.5 L173 35.7 L176 35.3 L179 34 L182 34.8 L185 34.7 L188 34.5 L191 33.7 L194 32.7 L197 32.7 L200 32.7 L203 32.8 L206 33.5 L209 34.2 L212 34.5 L215 35 L218 34.5 L221 34.7 L224 35.7 L227 35.7 L230 35.3 L233 36.3 L236 37.2 L239 37.7 L242 38.5 L245 37.2 L248 36.5 L251 37.3 L254 37 L257 37.5 L260 37.7 L263 36.3 L266 34.8 L269 35.3 L272 35.5 L275 36.5 L278 36.8 L281 38.5 L284 38.5 L287 37.8 L290 36.7 L293 37.3 L296 36.8 L299 36.5 L302 35.3 L305 34.2 L308 33.2 L311 32 L314 32.5 L317 32.5 L320 31.2 L323 30.5 L326 27.3 L329 27.2 L332 27.8 L335 28.2 L338 29.7 L341 30.2 L344 30 L347 30.2 L350 31.2 L353 30.5 L356 29.8 L359 30.5 L362 30.5 L365 28.8 L368 29.2 L371 28.8 L374 28.2 L377 29.2 L380 28.5 L383 29 L386 29 L389 28.7 L392 30.5 L395 30.5 L398 29.8 L401 30.5 L404 31.2 L407 30.2 L410 30 L413 30.3 L416 29.7 L419 28.3 L422 27.8 L425 27.3 L428 27.3 L431 30.3 L434 31 L437 32.5 L440 32.5 L443 32.2 L446 33 L449 34.2 L452 35.3 L455 36.5 L458 36.7 L461 37.3 L464 36.7 L467 37.8 L470 38.5 L473 38.5 L476 36.8 L479 36.5 L482 35.5 L485 35.2 L488 34.8 L491 36.3 L494 37.7 L497 37.5 L500 36.8 L503 37.5 L506 36.5 L509 37 L512 38.5 L515 37.7 L518 37.2 L521 36.2 L524 35.5 L527 35.7 L530 35.5 L533 34.7 L536 34.3 L539 35.2 L542 34.5 L545 34.2 L548 33.3 L551 32.8 L554 32.7 L557 32.7 L560 32.7 L563 33.5 L566 34.3 L569 34.7 L572 35 L575 34.2 L578 34.8 L581 35.7 L584 35.7 L587 35.5 L590 36.3 L593 37.3 L596 37.8 L599 38.2 L602 36.8 L605 36.5 L608 37.7 L611 36.8 L614 37.5 L617 37.5 L620 36 L623 34.7 L626 35.3 L629 35.7 L632 36.5 L635 37.2 L638 38.5 L641 38.5 L644 37.7 L647 36.7 L650 37.3 L653 36.7 L656 36.3 L659 35 L662 34 L665 33 L668 32 L671 32.5 L674 32.5 L677 30.5 L680 29.8 L683 27 L686 27.7 L689 27.8 L692 28.7 L695 29.7 L698 30.5 L701 29.7 L704 30.3 L707 31 L710 30.2 L713 30.2 L716 30.5 L719 30.3 L722 28.7 L725 28.8 L728 29 L731 28.2 L734 29"
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth="12"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+      </div>
 
       {/* ── EXPLORE OUR INFLUENCER MARKETING SERVICES */}
       <section
         id="services"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(24px, 3vw, 36px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 64px)",
+          position: "relative",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: "24px",
-            marginBottom: "12px",
-          }}
-        >
-          <h2
-            className="inf-heading"
+        <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
+          <div
             style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-              maxWidth: "14ch",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: "24px",
+              marginBottom: "16px",
             }}
           >
-            Explore our influencer marketing services
-          </h2>
+            <h2
+              style={{
+                margin: 0,
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.4rem, 4.4vw, 3.8rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.035em",
+                fontWeight: 700,
+                color: "#f9d230",
+                maxWidth: "14ch",
+              }}
+            >
+              Explore our influencer marketing services
+            </h2>
+
+            <div
+              role="tablist"
+              aria-label="Service groups"
+              style={{
+                position: "relative",
+                display: "grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                background: "#1C1C1E",
+                border: "1px solid rgba(255, 255, 255, 0.25)",
+                borderRadius: "999px",
+                padding: "4px",
+                width: "min(340px, 100%)",
+                boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.35)",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: "4px",
+                  bottom: "4px",
+                  left: "4px",
+                  width: "calc((100% - 8px) / 2)",
+                  transform: `translateX(${svcIdx * 100}%)`,
+                  transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
+                  background: "#f9d230",
+                  borderRadius: "999px",
+                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.35)",
+                }}
+              />
+              {SVC_GROUPS.map((grp, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  className="press"
+                  aria-selected={svcIdx === i}
+                  onClick={() => setSvcIdx(i)}
+                  style={{
+                    position: "relative",
+                    zIndex: 1,
+                    font: "inherit",
+                    fontSize: "14.5px",
+                    fontWeight: svcIdx === i ? 700 : 500,
+                    color: svcIdx === i ? "#000000" : "rgba(255, 255, 255, 0.72)",
+                    background: "transparent",
+                    border: 0,
+                    borderRadius: "999px",
+                    minHeight: "42px",
+                    padding: "8px 16px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    whiteSpace: "nowrap",
+                    letterSpacing: "-0.015em",
+                    transition: "color 200ms ease",
+                  }}
+                >
+                  {grp.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <p
+            style={{
+              margin: "0 0 32px",
+              fontSize: "clamp(15px, 1.3vw, 17px)",
+              color: "rgba(255, 255, 255, 0.72)",
+              maxWidth: "68ch",
+              lineHeight: 1.5,
+            }}
+          >
+            Influencer solutions that are based on insights, tailored for each platform and built to drive measurable results.
+          </p>
 
           <div
-            role="tablist"
-            aria-label="Service groups"
             style={{
-              position: "relative",
               display: "grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              background: "#F2F2F5",
-              border: "1px solid #E5E5EA",
-              borderRadius: "999px",
-              padding: "4px",
-              boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)",
-              width: "min(420px, 100%)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))",
+              gap: "16px",
             }}
           >
-            <span
-              aria-hidden="true"
-              className="btn-sheen"
-              style={{
-                position: "absolute",
-                top: "4px",
-                bottom: "4px",
-                left: "4px",
-                width: "calc((100% - 8px) / 2)",
-                transform: `translateX(${svcIdx * 100}%)`,
-                transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#f9d230",
-                borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
-              }}
-            />
-            {SVC_GROUPS.map((grp, i) => (
-              <button
+            {activeServices.items.map((s, i) => (
+              <div
                 key={i}
-                type="button"
-                role="tab"
-                className="press"
-                aria-selected={svcIdx === i}
-                onClick={() => setSvcIdx(i)}
                 style={{
-                  position: "relative",
-                  zIndex: 1,
-                  font: "inherit",
-                  fontSize: "15px",
-                  fontWeight: svcIdx === i ? 650 : 500,
-                  color: svcIdx === i ? "#000000" : "#555558",
-                  background: "transparent",
-                  border: 0,
-                  borderRadius: "999px",
-                  minHeight: "44px",
-                  padding: "9px 18px",
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  whiteSpace: "nowrap",
-                  letterSpacing: "-0.015em",
-                  transition: "color 200ms ease",
+                  background: "#000000",
+                  border: "1.5px solid rgba(255, 255, 255, 0.28)",
+                  borderRadius: "20px",
+                  padding: "26px 22px 28px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  boxShadow: "0 16px 36px -28px rgba(0,0,0,0.5)",
                 }}
               >
-                {grp.label}
-              </button>
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <h3
+                    style={{
+                      margin: 0,
+                      fontSize: "17.5px",
+                      lineHeight: 1.25,
+                      letterSpacing: "-0.015em",
+                      fontWeight: 700,
+                      color: "#f9d230",
+                    }}
+                  >
+                    {s.t}
+                  </h3>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      width: "22px",
+                      height: "2.5px",
+                      borderRadius: "999px",
+                      backgroundColor: "#4066c6",
+                    }}
+                  />
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    color: "rgba(255, 255, 255, 0.78)",
+                    fontSize: "13.5px",
+                    lineHeight: 1.55,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {s.a}
+                </p>
+              </div>
             ))}
           </div>
         </div>
-
-        <p style={{ margin: "0 0 28px", fontSize: "19px", color: "#6E6E73", maxWidth: "56ch" }}>
-          Influencer solutions that are based on insights, tailored for each platform and built to drive measurable results.
-        </p>
-
-        <div className="inf-services-grid">
-          {activeServices.items.map((s, i) => (
-            <div
-              key={i}
-              className="inf-service-card"
-              style={{
-                background: "#FFFFFF",
-                border: "1px solid #E5E5EA",
-                borderRadius: "22px",
-                padding: "24px 22px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                boxShadow: "0 16px 36px -28px rgba(0,0,0,0.25)",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <span aria-hidden="true" style={{ width: "10px", height: "10px", borderRadius: "50%", background: s.dot, flex: "none" }} />
-                <h3 className="inf-heading" style={{ margin: 0, fontSize: "19.5px", letterSpacing: "-0.025em", fontWeight: 700 }}>
-                  {s.t}
-                </h3>
-              </div>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "15px", lineHeight: 1.5 }}>{s.a}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
-      {/* Section Separator */}
-      <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px)" }}>
-        <div style={{ height: "1px", background: "rgba(0, 0, 0, 0.08)" }} />
+      {/* Organic Wave Divider */}
+      <div
+        style={{
+          width: "100%",
+          height: "48px",
+          backgroundColor: "#000000",
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        <svg
+          viewBox="23 18 711 30"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            display: "block",
+            width: "100%",
+            height: "100%",
+            overflow: "visible",
+          }}
+        >
+          <path
+            d="M23 28.2 L26 29 L29 29.2 L32 28.7 L35 30.3 L38 30.5 L41 30.2 L44 30.2 L47 31 L50 30.3 L53 29.8 L56 30.5 L59 29.7 L62 28.5 L65 27.8 L68 27.8 L71 27 L74 29.5 L77 30.3 L80 32.3 L83 32.7 L86 31.8 L89 33 L92 33.8 L95 35 L98 36.3 L101 36.7 L104 37.3 L107 36.5 L110 37.5 L113 38.5 L116 38.5 L119 37.3 L122 36.5 L125 35.8 L128 35.5 L131 34.7 L134 36 L137 37.5 L140 37.5 L143 36.8 L146 37.5 L149 36.5 L152 36.7 L155 38.3 L158 37.8 L161 37.5 L164 36.2 L167 35.5 L170 35.5 L173 35.7 L176 35.3 L179 34 L182 34.8 L185 34.7 L188 34.5 L191 33.7 L194 32.7 L197 32.7 L200 32.7 L203 32.8 L206 33.5 L209 34.2 L212 34.5 L215 35 L218 34.5 L221 34.7 L224 35.7 L227 35.7 L230 35.3 L233 36.3 L236 37.2 L239 37.7 L242 38.5 L245 37.2 L248 36.5 L251 37.3 L254 37 L257 37.5 L260 37.7 L263 36.3 L266 34.8 L269 35.3 L272 35.5 L275 36.5 L278 36.8 L281 38.5 L284 38.5 L287 37.8 L290 36.7 L293 37.3 L296 36.8 L299 36.5 L302 35.3 L305 34.2 L308 33.2 L311 32 L314 32.5 L317 32.5 L320 31.2 L323 30.5 L326 27.3 L329 27.2 L332 27.8 L335 28.2 L338 29.7 L341 30.2 L344 30 L347 30.2 L350 31.2 L353 30.5 L356 29.8 L359 30.5 L362 30.5 L365 28.8 L368 29.2 L371 28.8 L374 28.2 L377 29.2 L380 28.5 L383 29 L386 29 L389 28.7 L392 30.5 L395 30.5 L398 29.8 L401 30.5 L404 31.2 L407 30.2 L410 30 L413 30.3 L416 29.7 L419 28.3 L422 27.8 L425 27.3 L428 27.3 L431 30.3 L434 31 L437 32.5 L440 32.5 L443 32.2 L446 33 L449 34.2 L452 35.3 L455 36.5 L458 36.7 L461 37.3 L464 36.7 L467 37.8 L470 38.5 L473 38.5 L476 36.8 L479 36.5 L482 35.5 L485 35.2 L488 34.8 L491 36.3 L494 37.7 L497 37.5 L500 36.8 L503 37.5 L506 36.5 L509 37 L512 38.5 L515 37.7 L518 37.2 L521 36.2 L524 35.5 L527 35.7 L530 35.5 L533 34.7 L536 34.3 L539 35.2 L542 34.5 L545 34.2 L548 33.3 L551 32.8 L554 32.7 L557 32.7 L560 32.7 L563 33.5 L566 34.3 L569 34.7 L572 35 L575 34.2 L578 34.8 L581 35.7 L584 35.7 L587 35.5 L590 36.3 L593 37.3 L596 37.8 L599 38.2 L602 36.8 L605 36.5 L608 37.7 L611 36.8 L614 37.5 L617 37.5 L620 36 L623 34.7 L626 35.3 L629 35.7 L632 36.5 L635 37.2 L638 38.5 L641 38.5 L644 37.7 L647 36.7 L650 37.3 L653 36.7 L656 36.3 L659 35 L662 34 L665 33 L668 32 L671 32.5 L674 32.5 L677 30.5 L680 29.8 L683 27 L686 27.7 L689 27.8 L692 28.7 L695 29.7 L698 30.5 L701 29.7 L704 30.3 L707 31 L710 30.2 L713 30.2 L716 30.5 L719 30.3 L722 28.7 L725 28.8 L728 29 L731 28.2 L734 29"
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth="12"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
       </div>
 
       {/* ── WHAT WE OFFER (ACCORDIONS) */}

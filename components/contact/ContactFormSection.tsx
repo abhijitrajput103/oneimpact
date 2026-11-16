@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import { gsap } from "@/gsap";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/utils/cn";
+import { WaveDivider } from "@/components/common/WaveDivider";
 
 const SERVICES_OPTIONS = [
   "Website Development",
@@ -125,19 +126,29 @@ export function ContactFormSection() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative z-10 w-full py-12 sm:py-16 md:py-20 overflow-hidden border-t border-[#E6E1D8] font-sans"
+      className="relative z-10 w-full py-0 overflow-hidden font-sans"
     >
       {/* Background Image: contact-us-bg */}
       <picture className="absolute inset-0 w-full h-full -z-10 pointer-events-none select-none">
         <source srcSet="/images/contact-us-bg.webp" type="image/webp" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/contact-us-bg.png"
+          src="/images/contact-us-bg.webp"
           alt="Contact background"
           className="w-full h-full object-cover object-center"
           draggable={false}
         />
       </picture>
+
+      {/* Top Organic Wave / Zig Zag Divider */}
+      <WaveDivider
+        fillAbove="#000000"
+        strokeColor="#FFFFFF"
+        strokeWidth={12}
+        containerStyle={{
+          position: "relative",
+          zIndex: 10,
+        }}
+      />
 
       <style jsx>{`
         .project-highlight {
@@ -174,7 +185,7 @@ export function ContactFormSection() {
         }
       `}</style>
 
-      <div className="relative z-10 px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28">
+      <div className="relative z-10 px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28 pt-8 sm:pt-10 md:pt-12 pb-10 sm:pb-14 md:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* ========================================================= */}
@@ -185,7 +196,7 @@ export function ContactFormSection() {
             {/* Top Label */}
             <div className="contact-reveal inline-flex items-center gap-2.5 border border-[#D8D3C9] rounded-full px-4 py-1.5 text-[10px] sm:text-[11px] font-extrabold tracking-[2px] text-[#161616] mb-4 sm:mb-5 w-fit bg-white/70 backdrop-blur-sm shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#f9d230]" />
-              // START A PROJECT
+              {"// START A PROJECT"}
             </div>
 
             {/* Main Heading with Highlight & Spark rays */}
@@ -551,6 +562,17 @@ export function ContactFormSection() {
 
         </div>
       </div>
+
+      {/* Bottom Organic Wave / Zig Zag Divider to Footer */}
+      <WaveDivider
+        fillBelow="#000000"
+        strokeColor="#FFFFFF"
+        strokeWidth={12}
+        containerStyle={{
+          position: "relative",
+          zIndex: 10,
+        }}
+      />
     </section>
   );
 }

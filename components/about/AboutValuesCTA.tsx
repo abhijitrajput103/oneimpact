@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Link from "next/link";
 import { gsap } from "@/gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -118,14 +119,14 @@ export function AboutValuesCTA() {
           </h2>
 
           <div className="cta-btn" style={{ opacity: 0 }}>
-            <a
+            <Link
               href="/#showreel"
               className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-full font-display text-sm sm:text-base font-black tracking-[0.18em] uppercase transition-all duration-300 hover:scale-[1.04] active:scale-95"
               style={{ backgroundColor: "#f9d230", color: "#1A1A1A", boxShadow: "0 8px 36px rgba(249, 210, 48,0.35)" }}
             >
               <span>EXPLORE OUR WORK</span>
               <span className="text-lg">→</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

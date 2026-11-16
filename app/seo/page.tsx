@@ -6,14 +6,6 @@ import { Navbar } from "@/components/common/Navbar";
 import { LiveDashboardPreview } from "@/components/seo/LiveDashboardPreview";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
-const NOTICES = [
-  "SEO audit for your website. Fill the form and our team will get back to you.",
-  "Now optimising for AI search: ChatGPT, Gemini and Perplexity.",
-  "Local SEO for your city, from Google Business Profile to citations.",
-  "White-hat SEO only. No shortcuts, no gimmicks.",
-  "WhatsApp us on +91 83690 18104 for a quick reply.",
-];
-
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
   { name: "SnapDeal", src: "/LOGO/transparent/sanpdealbrandlogo_2.webp" },
@@ -1021,9 +1013,7 @@ export default function SeoLandingPage() {
   // Ensure normal system cursor on SEO page
   useEffect(() => {
     document.body.classList.remove("custom-cursor-active");
-    return () => {
-      document.body.classList.add("custom-cursor-active");
-    };
+    document.body.style.cursor = "auto";
   }, []);
 
   return (

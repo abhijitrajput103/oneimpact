@@ -4,12 +4,17 @@ import React from "react";
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { AboutHero } from "@/components/about/AboutHero";
-import { AboutConveyorServices } from "@/components/about/AboutConveyorServices";
-import { AboutOriginStory } from "@/components/about/AboutOriginStory";
-import { AboutMission } from "@/components/about/AboutMission";
+import { AboutManifesto } from "@/components/about/AboutManifesto";
+import { ImpactChronicle } from "@/components/about/ImpactChronicle";
+import { AboutDisciplines } from "@/components/about/AboutDisciplines";
 import { AboutValuesCTA } from "@/components/about/AboutValuesCTA";
 
 export default function AboutPage() {
+  React.useEffect(() => {
+    document.body.classList.remove("custom-cursor-active");
+    document.body.style.cursor = "auto";
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -18,14 +23,14 @@ export default function AboutPage() {
         {/* 1. Hero — Tilted headline, gold paper texture, center computer with scroll popup */}
         <AboutHero />
 
-        {/* 2. Conveyor — Horizontal scrolling tracks presenting the 3 major service categories */}
-        <AboutConveyorServices />
+        {/* 2. Section 02: The Manifesto — Editorial philosophy, typography & motion */}
+        <AboutManifesto />
 
-        {/* 3. Origin story — "ONE BELIEF" + stats */}
-        <AboutOriginStory />
+        {/* 3. Section 03: The Impact Chronicle — Interactive editorial timeline */}
+        <ImpactChronicle />
 
-        {/* 4. Mission — "THAT'S WHY ONE IMPACT EXISTS" + services + founder quote */}
-        <AboutMission />
+        {/* 4. Section 04: Seven Disciplines — 3D isometric fanned card engine */}
+        <AboutDisciplines />
 
         {/* 5. Values marquee + CTA with parallax */}
         <AboutValuesCTA />

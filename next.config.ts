@@ -110,12 +110,15 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Compression
+  // Compression & Security
   compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
 
-  // Performance: bundle optimization
+  // Performance: bundle optimization & tree-shaking
   experimental: {
     optimizeCss: true,
+    optimizePackageImports: ["lucide-react", "gsap", "@gsap/react", "lenis"],
   },
 };
 

@@ -29,6 +29,7 @@
     background-color: #050505;
     color: #F5F5F7;
     overflow-x: hidden;
+    cursor: auto !important;
   }
 
   body {
@@ -38,6 +39,17 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    cursor: auto !important;
+  }
+
+  /* Interactive elements show pointer cursor */
+  a, button, [role="button"], input[type="submit"], input[type="button"], select, .cursor-pointer {
+    cursor: pointer !important;
+  }
+
+  /* Form inputs show text cursor */
+  input[type="text"], input[type="email"], input[type="password"], input[type="search"], textarea {
+    cursor: text !important;
   }
 
   /* Custom text selection */
@@ -46,11 +58,9 @@
     color: var(--color-off-white);
   }
 
-  /* Standard cursor restored; hide native cursor when custom intro hammer is active */
-  body.custom-cursor-active,
-  body.custom-cursor-active *,
-  .custom-cursor-active,
-  .custom-cursor-active * {
+  /* Intro overlay only: hide cursor within the hammer canvas overlay */
+  .intro-cursor-hidden,
+  .intro-cursor-hidden * {
     cursor: none !important;
   }
 }

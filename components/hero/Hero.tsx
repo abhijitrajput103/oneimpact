@@ -8,6 +8,7 @@ import { ColorRevealHero } from "./ColorRevealHero";
 import { HeroTitle } from "./HeroTitle";
 import { ScrollIndicator } from "./ScrollIndicator";
 import { IconBubblePop } from "./IconBubblePop";
+import { WaveDivider } from "@/components/common/WaveDivider";
 
 
 interface HeroProps {
@@ -85,6 +86,19 @@ export function Hero({ className }: HeroProps) {
 
       {/* Looping indicator */}
       <ScrollIndicator className="hero-scroll-indicator" />
+
+      {/* Bottom Organic Wave / Zig Zag Divider */}
+      <WaveDivider
+        fillBelow="#000000"
+        strokeColor="#FFFFFF"
+        strokeWidth={12}
+        containerStyle={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          zIndex: 30,
+        }}
+      />
     </section>
   );
 }

@@ -169,7 +169,7 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     particlesRef.current?.clear();
 
     document.body.classList.remove("custom-cursor-active");
-    document.body.style.cursor = "";
+    document.body.style.cursor = "auto";
 
     if (lenis) {
       lenis.start();
@@ -184,12 +184,8 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
 
   // Detect mobile & stop scrolling on mount; always restore on unmount
   useEffect(() => {
-    const mobile = isTouchDevice();
-
-    if (!mobile) {
-      document.body.classList.add("custom-cursor-active");
-      document.body.style.cursor = "none";
-    }
+    document.body.classList.remove("custom-cursor-active");
+    document.body.style.cursor = "auto";
 
     if (lenis) {
       lenis.stop();
@@ -207,7 +203,7 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     // Safety: ensure scrolling & cursor are ALWAYS restored on unmount
     return () => {
       document.body.classList.remove("custom-cursor-active");
-      document.body.style.cursor = "";
+      document.body.style.cursor = "auto";
       if (lenis) {
         lenis.start();
       } else {
@@ -344,7 +340,7 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     <div
       ref={containerRef}
       onClick={handleGlassClick}
-      className="fixed inset-0 w-screen h-screen z-[9999] overflow-hidden custom-cursor-active select-none cursor-none"
+      className="fixed inset-0 w-screen h-screen z-[9999] overflow-hidden intro-cursor-hidden select-none cursor-none"
       style={{ cursor: "none" }}
     >
       {/* Layer 2: Website Blur Overlay with dark blackout backdrop */}

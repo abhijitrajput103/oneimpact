@@ -1,16 +1,9 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { Navbar } from "@/components/common/Navbar";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
-
-const NOTICES = [
-  "Free website consultation. Fill the form and our team will get back to you.",
-  "Every site is built SEO-ready: clean code, fast pages and structured content.",
-  "Custom websites, e-commerce stores and web apps, built around your goals.",
-  "No one-size-fits-all templates. Every website is built for your brand.",
-  "WhatsApp us on +91 83690 18104 for a quick reply.",
-];
 
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
@@ -756,9 +749,7 @@ export default function WebDevelopmentPage() {
   // Ensure normal system cursor
   useEffect(() => {
     document.body.classList.remove("custom-cursor-active");
-    return () => {
-      document.body.classList.add("custom-cursor-active");
-    };
+    document.body.style.cursor = "auto";
   }, []);
 
   return (
@@ -1695,13 +1686,13 @@ export default function WebDevelopmentPage() {
               fontWeight: 700,
             }}
           >
-            Building a website isn't just about code and design.
+            Building a website isn&apos;t just about code and design.
           </h2>
           <p style={{ fontSize: "21px", lineHeight: 1.45, color: "#3A3A3C", margin: 0 }}>
-            It's about creating a digital experience that mirrors your brand and moves your business forward.
+            It&apos;s about creating a digital experience that mirrors your brand and moves your business forward.
           </p>
           <p style={{ fontSize: "18px", lineHeight: 1.5, color: "#6E6E73", margin: 0 }}>
-            At OneImpact, we don't offer one-size-fits-all solutions. We listen, ask the right questions and dive deep into what makes your business tick, so we can build websites that feel right, work flawlessly and scale effortlessly.
+            At OneImpact, we don&apos;t offer one-size-fits-all solutions. We listen, ask the right questions and dive deep into what makes your business tick, so we can build websites that feel right, work flawlessly and scale effortlessly.
           </p>
         </div>
 
@@ -1875,7 +1866,7 @@ export default function WebDevelopmentPage() {
             How web development boosts your business
           </h2>
           <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73" }}>
-            Here's what a well-built website does for your business:
+            Here&apos;s what a well-built website does for your business:
           </p>
         </div>
         <div
@@ -2110,7 +2101,7 @@ export default function WebDevelopmentPage() {
         </div>
 
         <p style={{ margin: "0 0 32px", fontSize: "19px", color: "#6E6E73", maxWidth: "56ch" }}>
-          Curious about what else we bring to the table? Here's a deeper look at our web development offerings.
+          Curious about what else we bring to the table? Here&apos;s a deeper look at our web development offerings.
         </p>
 
         {/* Services Cards Grid */}
@@ -3024,15 +3015,15 @@ export default function WebDevelopmentPage() {
             <a href="/about" style={{ color: "#6E6E73", textDecoration: "none" }}>
               About OneImpact
             </a>
-            <a href="/#showreel" style={{ color: "#6E6E73", textDecoration: "none" }}>
+            <Link href="/#showreel" style={{ color: "#6E6E73", textDecoration: "none" }}>
               Our work
-            </a>
-            <a href="/#team" style={{ color: "#6E6E73", textDecoration: "none" }}>
+            </Link>
+            <Link href="/#team" style={{ color: "#6E6E73", textDecoration: "none" }}>
               Team
-            </a>
-            <a href="/#contact" style={{ color: "#6E6E73", textDecoration: "none" }}>
+            </Link>
+            <Link href="/#contact" style={{ color: "#6E6E73", textDecoration: "none" }}>
               Contact
-            </a>
+            </Link>
           </div>
 
           {/* Contact Column */}

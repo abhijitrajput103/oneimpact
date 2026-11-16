@@ -34,7 +34,7 @@ export function FooterBottom() {
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-display text-[9px] sm:text-[10px] font-bold tracking-widest text-off-white/75 hover:text-[#f9d230] uppercase transition-colors duration-300 cursor-none"
+            className="font-display text-[9px] sm:text-[10px] font-bold tracking-widest text-off-white/75 hover:text-[#f9d230] uppercase transition-colors duration-300 cursor-pointer"
             onMouseEnter={() => setCursorType("hover")}
             onMouseLeave={resetCursor}
           >

@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useRef } from "react";
-import { gsap } from "@/gsap";
+import { gsap, ScrollTrigger } from "@/gsap";
 import { useGSAP } from "@gsap/react";
+import { WaveDivider } from "@/components/common/WaveDivider";
 
 /**
  * About Hero — Exact Sweet Tape replication:
@@ -26,6 +27,12 @@ export function AboutHero() {
   const screenRef = useRef<HTMLDivElement>(null);
   const leftPaperRef = useRef<HTMLDivElement>(null);
   const rightPaperRef = useRef<HTMLDivElement>(null);
+
+  const handleUnlockClick = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 450, behavior: "smooth" });
+    }
+  };
 
   useGSAP(
     () => {
@@ -109,8 +116,9 @@ export function AboutHero() {
           scrollTrigger: {
             trigger: section,
             start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
+            end: "+=450",
+            scrub: 0.6,
+            invalidateOnRefresh: true,
           },
         });
 
@@ -150,6 +158,13 @@ export function AboutHero() {
         if (rightPaperRef.current) {
           scrollTl.to(rightPaperRef.current, { y: -80, rotate: 5.5, ease: "none" }, 0);
         }
+
+        // Delay refresh slightly so layout and fonts settle before calculating positions
+        const timer = setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 150);
+
+        return () => clearTimeout(timer);
       }
     },
     { scope: sectionRef }
@@ -158,7 +173,7 @@ export function AboutHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-[105vh] sm:min-h-[110vh] md:min-h-[115vh] overflow-hidden flex flex-col items-center justify-between pt-24 sm:pt-28 md:pt-32 pb-6 sm:pb-8 md:pb-10"
+      className="relative w-full min-h-screen lg:h-[95vh] lg:max-h-[960px] overflow-hidden flex flex-col items-center justify-between pt-16 sm:pt-20 md:pt-22 pb-2 sm:pb-4"
       style={{ backgroundColor: "#f9d230" }}
     >
       {/* 1. Full-bleed crumpled gold paper texture overlay */}
@@ -186,10 +201,10 @@ export function AboutHero() {
       {/* 2. Top Header Container */}
       <div className="relative z-20 w-full max-w-[1400px] mx-auto px-2 sm:px-6 md:px-8 flex flex-col items-center text-center">
         {/* Top small label / ticker — like Sweet Tape */}
-        <div className="hero-top-badge mb-3 sm:mb-5 flex items-center justify-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#1A1A1A]/30 bg-[#f9d230]/40 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-[#1A1A1A] animate-pulse" />
-            <span className="font-sans text-[10px] sm:text-xs font-black tracking-[0.25em] text-[#1A1A1A] uppercase">
+        <div className="hero-top-badge mb-2 sm:mb-3 flex items-center justify-center">
+          <div className="inline-flex items-center gap-2 px-3 py-0.5 sm:px-3.5 sm:py-1 rounded-full border border-[#1A1A1A]/30 bg-[#f9d230]/40 backdrop-blur-sm">
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#1A1A1A] animate-pulse" />
+            <span className="font-sans text-[9px] sm:text-xs font-black tracking-[0.25em] text-[#1A1A1A] uppercase">
               STICK WITH YOU THROUGH THREE GENERATIONS
             </span>
           </div>
@@ -200,7 +215,7 @@ export function AboutHero() {
             Uses mathematical arc-drop and arc-tilt per letter matching sweet-tape.com
            ========================================================================= */}
         <div
-          className="warped-title-container relative select-none w-full my-1 sm:my-2 overflow-visible"
+          className="warped-title-container relative select-none w-full my-0 sm:my-1 overflow-visible"
           style={{
             transform: "rotate(-2deg)",
             transformOrigin: "center center",
@@ -209,7 +224,7 @@ export function AboutHero() {
           <h1
             className="warped-heading font-sans font-black uppercase text-[#0A0A0A] text-center flex flex-col items-center"
             style={{
-              fontSize: "clamp(4.8rem, 18vw, 16.5rem)",
+              fontSize: "clamp(3.4rem, 12.5vw, 10.8rem)",
               lineHeight: 0.88,
               letterSpacing: "-0.02em",
               margin: 0,
@@ -228,7 +243,7 @@ export function AboutHero() {
             >
               {"ONE".split("").map((char, i) => {
                 const u = (2 * i) / (3 - 1) - 1; // -1, 0, 1
-                const arcDrop = 1.2; // vw
+                const arcDrop = 0.8; // vw
                 const arcTilt = 5.5; // deg
                 const dy = -1 * arcDrop * (1 - u * u);
                 const rot = arcTilt * u;
@@ -262,7 +277,7 @@ export function AboutHero() {
             >
               {"IMPACT".split("").map((char, i) => {
                 const u = (2 * i) / (6 - 1) - 1; // -1, -0.6, -0.2, 0.2, 0.6, 1
-                const arcDrop = 3.2; // vw
+                const arcDrop = 2.2; // vw
                 const arcTilt = 9.5; // deg
                 const dy = -1 * arcDrop * (1 - u * u);
                 const rot = arcTilt * u;
@@ -329,8 +344,8 @@ export function AboutHero() {
       </div>
 
       {/* 3. CENTERPIECE WORKSTATION + NEWSPAPER CUTOUTS WITH PHYSICAL NEWSPRINT PAPER BACKGROUND */}
-      <div className="relative z-20 w-full max-w-[1400px] mx-auto px-2 sm:px-4 md:px-8 mt-1 sm:mt-4 mb-2 sm:mb-4 flex flex-col items-center">
-        <div className="relative w-full flex items-center justify-center min-h-[360px] sm:min-h-[420px] md:min-h-[460px]">
+      <div className="relative z-20 w-full max-w-[1300px] mx-auto px-2 sm:px-4 md:px-8 mt-0 mb-1 flex flex-col items-center">
+        <div className="relative w-full flex items-center justify-center min-h-[240px] sm:min-h-[290px] md:min-h-[330px] lg:min-h-[360px]">
 
           {/* =========================================================================
               LEFT NEWSPAPER CUT (WITH PHYSICAL NEWSPRINT PAPER BACKGROUND INTACT)
@@ -338,7 +353,7 @@ export function AboutHero() {
              ========================================================================= */}
           <div
             ref={leftPaperRef}
-            className="absolute left-1 xs:left-2 sm:left-4 md:left-6 lg:left-10 top-2 sm:top-6 z-10 w-[160px] xs:w-[200px] sm:w-[260px] md:w-[300px] lg:w-[330px] pointer-events-none select-none"
+            className="absolute left-1 xs:left-2 sm:left-4 md:left-6 lg:left-10 top-0 sm:top-2 z-10 w-[140px] xs:w-[170px] sm:w-[210px] md:w-[245px] lg:w-[275px] pointer-events-none select-none"
             style={{
               transform: "rotate(-4.5deg)",
             }}
@@ -422,7 +437,7 @@ export function AboutHero() {
              ========================================================================= */}
           <div
             ref={laptopRef}
-            className="relative z-20 w-full max-w-[310px] xs:max-w-[380px] sm:max-w-[500px] md:max-w-[620px] lg:max-w-[700px] flex flex-col items-center select-none"
+            className="relative z-20 w-full max-w-[280px] xs:max-w-[340px] sm:max-w-[440px] md:max-w-[540px] lg:max-w-[600px] flex flex-col items-center select-none"
             style={{ perspective: "1200px" }}
           >
             {/* Contact shadow on gold paper */}
@@ -519,7 +534,13 @@ export function AboutHero() {
                   {/* Bottom metrics bar in screen */}
                   <div className="relative z-0 flex items-center justify-between text-[7px] sm:text-[9px] font-mono text-[#777] border-t border-[#1F2026] pt-1 sm:pt-1.5">
                     <span>STATUS: SCALING CLIENTS</span>
-                    <span className="text-[#f9d230] font-bold">SCROLL TO UNLOCK</span>
+                    <button
+                      type="button"
+                      onClick={handleUnlockClick}
+                      className="text-[#f9d230] font-bold hover:underline cursor-pointer transition-colors"
+                    >
+                      SCROLL TO UNLOCK ↓
+                    </button>
                   </div>
 
                   {/* =========================================================================
@@ -605,7 +626,7 @@ export function AboutHero() {
              ========================================================================= */}
           <div
             ref={rightPaperRef}
-            className="absolute right-1 xs:right-2 sm:right-4 md:right-6 lg:right-10 bottom-2 sm:bottom-6 z-10 w-[160px] xs:w-[200px] sm:w-[260px] md:w-[300px] lg:w-[330px] pointer-events-none select-none"
+            className="absolute right-1 xs:right-2 sm:right-4 md:right-6 lg:right-10 bottom-1 sm:bottom-3 z-10 w-[140px] xs:w-[170px] sm:w-[210px] md:w-[245px] lg:w-[275px] pointer-events-none select-none"
             style={{
               transform: "rotate(3.5deg)",
             }}
@@ -687,21 +708,19 @@ export function AboutHero() {
         </div>
       </div>
 
-      {/* 4. Torn zigzag paper edge at bottom — exact Sweet Tape transition to dark section */}
-      <div className="absolute bottom-0 left-0 w-full z-30 pointer-events-none">
-        <svg
-          viewBox="0 0 1440 40"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full block"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0 40V20L30 10L60 25L90 8L120 22L150 5L180 20L210 12L240 28L270 6L300 18L330 30L360 10L390 24L420 6L450 20L480 14L510 26L540 8L570 22L600 4L630 18L660 28L690 10L720 20L750 6L780 24L810 12L840 26L870 4L900 20L930 14L960 28L990 8L1020 22L1050 6L1080 18L1110 26L1140 10L1170 24L1200 8L1230 20L1260 14L1290 28L1320 6L1350 22L1380 12L1410 24L1440 8V40Z"
-            fill="#050505"
-          />
-        </svg>
-      </div>
+      {/* Signature organic torn paper curve divider with white stroke */}
+      <WaveDivider
+        fillBelow="#070707"
+        strokeColor="#FFFFFF"
+        strokeWidth={12}
+        containerStyle={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          zIndex: 30,
+          pointerEvents: "none",
+        }}
+      />
     </section>
   );
 }

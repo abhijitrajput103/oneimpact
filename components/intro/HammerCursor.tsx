@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import { gsap } from "@/gsap";
-import Image from "next/image";
 import { useCursor } from "@/hooks/useCursor";
 
 interface HammerCursorProps {
