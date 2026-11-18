@@ -129,26 +129,20 @@ export function ContactFormSection() {
       className="relative z-10 w-full py-0 overflow-hidden font-sans"
     >
       {/* Background Image: contact-us-bg */}
-      <picture className="absolute inset-0 w-full h-full -z-10 pointer-events-none select-none">
+      <picture
+        className="absolute inset-0 w-full h-full -z-10 pointer-events-none select-none"
+        style={{ transform: "translateZ(0)" }}
+      >
         <source srcSet="/images/contact-us-bg.webp" type="image/webp" />
         <img
           src="/images/contact-us-bg.webp"
           alt="Contact background"
           className="w-full h-full object-cover object-center"
           draggable={false}
+          loading="lazy"
+          decoding="async"
         />
       </picture>
-
-      {/* Top Organic Wave / Zig Zag Divider */}
-      <WaveDivider
-        fillAbove="#000000"
-        strokeColor="#FFFFFF"
-        strokeWidth={12}
-        containerStyle={{
-          position: "relative",
-          zIndex: 10,
-        }}
-      />
 
       <style jsx>{`
         .project-highlight {
@@ -194,7 +188,7 @@ export function ContactFormSection() {
           <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center">
             
             {/* Top Label */}
-            <div className="contact-reveal inline-flex items-center gap-2.5 border border-[#D8D3C9] rounded-full px-4 py-1.5 text-[10px] sm:text-[11px] font-extrabold tracking-[2px] text-[#161616] mb-4 sm:mb-5 w-fit bg-white/70 backdrop-blur-sm shadow-sm">
+            <div className="contact-reveal inline-flex items-center gap-2.5 border border-[#D8D3C9] rounded-full px-4 py-1.5 text-[10px] sm:text-[11px] font-extrabold tracking-[2px] text-[#161616] mb-4 sm:mb-5 w-fit bg-white/90 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#f9d230]" />
               {"// START A PROJECT"}
             </div>
@@ -230,7 +224,7 @@ export function ContactFormSection() {
             <div className="contact-reveal flex flex-col gap-2.5 sm:gap-3 max-w-[500px]">
               
               {/* Direct Email Card */}
-              <div className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/90 border border-[#E6E1D8] rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl shadow-md backdrop-blur-md">
+              <div className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/95 border border-[#E6E1D8] rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl shadow-md">
                 <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center rounded-xl bg-[#FFF0B5] text-[#171717]">
                   <svg
                     className="w-5 h-5 sm:w-6 sm:h-6"
@@ -288,7 +282,7 @@ export function ContactFormSection() {
                 href="https://wa.me/919999999999"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/90 border border-[#E6E1D8] rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl shadow-md backdrop-blur-md no-underline text-inherit"
+                className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/95 border border-[#E6E1D8] rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl shadow-md no-underline text-inherit"
               >
                 <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center rounded-xl bg-[#E3EBFF] text-[#4066c6]">
                   <svg
@@ -369,7 +363,7 @@ export function ContactFormSection() {
           {/* RIGHT COLUMN: Elevated Crisp Form Card                    */}
           {/* ========================================================= */}
           <div className="lg:col-span-6 xl:col-span-7 w-full">
-            <div className="contact-reveal relative rounded-3xl bg-white/95 text-[#161616] p-5 sm:p-7 md:p-8 shadow-2xl border border-[#E6E1D8] backdrop-blur-xl overflow-hidden">
+            <div className="contact-reveal relative rounded-3xl bg-white/98 text-[#161616] p-5 sm:p-7 md:p-8 shadow-2xl border border-[#E6E1D8] overflow-hidden">
               
               {/* Subtle top golden accent */}
               <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#f9d230]/40 via-[#f9d230] to-[#f9d230]/40" />

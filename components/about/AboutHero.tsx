@@ -3,7 +3,6 @@
 import React, { useRef } from "react";
 import { gsap, ScrollTrigger } from "@/gsap";
 import { useGSAP } from "@gsap/react";
-import { WaveDivider } from "@/components/common/WaveDivider";
 
 /**
  * About Hero — Exact Sweet Tape replication:
@@ -575,13 +574,12 @@ export function AboutHero() {
                           "0 25px 50px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.3), 0 0 35px rgba(249, 210, 48,0.5)",
                       }}
                     >
-                      {/* Official One Impact Logo Image — inverted to pure bright white for maximum contrast */}
+                      {/* Official One Impact Logo Image */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src="/LOGO/oneimpact-logo.webp"
+                        src="/images/logo-white.webp"
                         alt="One Impact"
                         className="h-6 xs:h-7 sm:h-9 md:h-11 w-auto object-contain drop-shadow-lg"
-                        style={{ filter: "brightness(0) invert(1)" }}
                       />
 
                       {/* Gold Badge Ribbon Text */}
@@ -707,20 +705,6 @@ export function AboutHero() {
 
         </div>
       </div>
-
-      {/* Signature organic torn paper curve divider with white stroke */}
-      <WaveDivider
-        fillBelow="#070707"
-        strokeColor="#FFFFFF"
-        strokeWidth={12}
-        containerStyle={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          zIndex: 30,
-          pointerEvents: "none",
-        }}
-      />
     </section>
   );
 }

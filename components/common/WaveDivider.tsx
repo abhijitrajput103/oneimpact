@@ -29,6 +29,9 @@ export function WaveDivider({
         overflow: "hidden",
         padding: 0,
         margin: 0,
+        transform: "translateZ(0)",
+        backfaceVisibility: "hidden",
+        contain: "paint layout",
         ...containerStyle,
       }}
     >
@@ -40,7 +43,7 @@ export function WaveDivider({
           display: "block",
           width: "100%",
           height: "100%",
-          overflow: "visible",
+          overflow: "hidden",
         }}
       >
         {fillAbove && (
@@ -49,15 +52,15 @@ export function WaveDivider({
         {fillBelow && (
           <path d={`${WAVE_PATH} L734 48 L23 48 Z`} fill={fillBelow} />
         )}
-        <path
-          d={WAVE_PATH}
-          fill="none"
-          stroke={strokeColor}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
+        {strokeWidth && strokeWidth !== 0 ? (
+          <path
+            d={WAVE_PATH}
+            fill="none"
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+            strokeLinejoin="round"
+          />
+        ) : null}
       </svg>
     </div>
   );

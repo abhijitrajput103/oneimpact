@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { gsap } from "@/gsap";
 
 export interface StickerPhysicsState {
@@ -54,6 +54,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
   });
   const rafRef = useRef<number | null>(null);
   const isSimulatingRef = useRef(false);
+  const isIntersectingRef = useRef(false);
 
   const getContainerBounds = useCallback(() => {
     if (!containerRef.current) return { width: 0, height: 0 };
@@ -97,6 +98,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
 
   const resetStickers = useCallback(() => {
     stickersRef.current.clear();
+    elCacheRef.current.clear();
   }, []);
 
   // Resolve circle-circle collisions between stickers
@@ -164,23 +166,59 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
     }
   }, []);
 
+  // Cache DOM element references to avoid querySelector on every frame
+  const elCacheRef = useRef<Map<string, Element>>(new Map());
+
+  const getElement = useCallback((id: string): Element | null => {
+    let el = elCacheRef.current.get(id);
+    if (el && el.isConnected) return el;
+    el = containerRef.current?.querySelector(`[data-sticker-id="${id}"]`) ?? undefined;
+    if (el) elCacheRef.current.set(id, el);
+    return el ?? null;
+  }, [containerRef]);
+
   const startSimulation = useCallback(() => {
     if (isSimulatingRef.current) return;
     isSimulatingRef.current = true;
 
+    // Pre-cache bounds — only re-read on the first frame and on resize
+    let cachedBounds = { width: 0, height: 0 };
+    let framesSinceResize = 0;
+
     const tick = () => {
-      const bounds = getContainerBounds();
-      if (bounds.width === 0) {
+      // Re-read bounds every ~30 frames (~0.5s) instead of every frame
+      if (framesSinceResize === 0 || framesSinceResize > 30) {
+        const container = containerRef.current;
+        if (container) {
+          cachedBounds = { width: container.offsetWidth, height: container.offsetHeight };
+        }
+        framesSinceResize = 1;
+      } else {
+        framesSinceResize++;
+      }
+
+      if (cachedBounds.width === 0) {
         rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      // Pause simulation when off-screen and not being dragged
+      if (!isIntersectingRef.current && !dragRef.current.active) {
+        isSimulatingRef.current = false;
+        rafRef.current = null;
         return;
       }
 
       resolveCollisions();
 
+      let allAtRest = true;
+      const bounds = cachedBounds;
+
       stickersRef.current.forEach((state, id) => {
         // Skip sticker being dragged
         if (dragRef.current.active && dragRef.current.stickerId === id) {
-          const el = containerRef.current?.querySelector(`[data-sticker-id="${id}"]`);
+          allAtRest = false;
+          const el = getElement(id);
           if (el) {
             gsap.set(el, { x: state.x, y: state.y, rotation: state.rotation });
           }
@@ -201,18 +239,12 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
         state.rotation += state.vr;
 
         // --- Boundary collisions using rotation-aware AABB ---
-        // When rotated, the axis-aligned bounding box expands.
-        // AABB width  = |w·cos θ| + |h·sin θ|
-        // AABB height = |w·sin θ| + |h·cos θ|
         const rad = (state.rotation * Math.PI) / 180;
         const cosA = Math.abs(Math.cos(rad));
         const sinA = Math.abs(Math.sin(rad));
         const aabbW = state.w * cosA + state.h * sinA;
         const aabbH = state.w * sinA + state.h * cosA;
 
-        // The transform origin is top-left, so when rotated the visual
-        // bounding box shifts. We offset x/y by half the AABB expansion
-        // to keep the sticker visually inside.
         const expandX = (aabbW - state.w) / 2;
         const expandY = (aabbH - state.h) / 2;
 
@@ -254,8 +286,14 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
           state.vr += (Math.random() - 0.5) * 2;
         }
 
+        // Check if this sticker is still moving
+        const speed = Math.abs(state.vx) + Math.abs(state.vy) + Math.abs(state.vr);
+        if (speed > 0.15) {
+          allAtRest = false;
+        }
+
         // --- Render via GSAP ---
-        const el = containerRef.current?.querySelector(`[data-sticker-id="${id}"]`);
+        const el = getElement(id);
         if (el) {
           gsap.set(el, {
             x: state.x,
@@ -265,11 +303,18 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
         }
       });
 
+      // If all stickers are at rest and nobody is dragging, stop the loop
+      if (allAtRest && !dragRef.current.active) {
+        isSimulatingRef.current = false;
+        rafRef.current = null;
+        return;
+      }
+
       rafRef.current = requestAnimationFrame(tick);
     };
 
     rafRef.current = requestAnimationFrame(tick);
-  }, [getContainerBounds, containerRef, resolveCollisions]);
+  }, [getContainerBounds, containerRef, resolveCollisions, getElement]);
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent, stickerId: string) => {
@@ -280,7 +325,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
       if (!container) return;
       const containerRect = container.getBoundingClientRect();
 
-      const el = container.querySelector(`[data-sticker-id="${stickerId}"]`) as HTMLElement;
+      const el = getElement(stickerId) as HTMLElement;
       if (!el) return;
 
       el.setPointerCapture(e.pointerId);
@@ -345,7 +390,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
       state.y = pointerY - drag.offsetY;
       state.rotation += drag.velocityX * 0.15;
 
-      const el = container.querySelector(`[data-sticker-id="${stickerId}"]`);
+      const el = getElement(stickerId);
       if (el) {
         gsap.set(el, {
           x: state.x,
@@ -354,7 +399,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
         });
       }
     },
-    [containerRef]
+    [containerRef, getElement]
   );
 
   const handlePointerUp = useCallback(
@@ -372,7 +417,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
       drag.active = false;
       drag.stickerId = null;
 
-      const el = containerRef.current?.querySelector(`[data-sticker-id="${stickerId}"]`);
+      const el = getElement(stickerId) as HTMLElement;
       if (el) {
         el.releasePointerCapture(e.pointerId);
         gsap.to(el, {
@@ -384,7 +429,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
 
       startSimulation();
     },
-    [containerRef, startSimulation]
+    [containerRef, startSimulation, getElement]
   );
 
   const cleanup = useCallback(() => {
@@ -393,6 +438,35 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
     }
     isSimulatingRef.current = false;
   }, []);
+
+  // Use IntersectionObserver to pause the physics engine when off-screen
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      isIntersectingRef.current = true;
+      return;
+    }
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isIntersectingRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          startSimulation();
+        } else {
+          if (rafRef.current) {
+            cancelAnimationFrame(rafRef.current);
+            rafRef.current = null;
+          }
+          isSimulatingRef.current = false;
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [containerRef, startSimulation]);
 
   return {
     registerSticker,

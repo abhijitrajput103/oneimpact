@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/common/Navbar";
+import { Footer } from "@/components/common/Footer";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
 const CLIENT_LOGOS = [
@@ -664,10 +665,12 @@ export default function WebDevelopmentPage() {
   // State for Offer tabs
   const [offerIdx, setOfferIdx] = useState(0);
   const [offerExpanded, setOfferExpanded] = useState(false);
+  const [openOfferQ, setOpenOfferQ] = useState<number | null>(null);
 
   // State for FAQ tabs
   const [faqIdx, setFaqIdx] = useState(0);
   const [faqExpanded, setFaqExpanded] = useState(false);
+  const [openFaqQ, setOpenFaqQ] = useState<number | null>(null);
 
   // Carousel track state
   const [carIdx, setCarIdx] = useState(0);
@@ -756,8 +759,8 @@ export default function WebDevelopmentPage() {
     <div
       className="webdev-landing-root"
       style={{
-        background: "#FFFFFF",
-        color: "#000000",
+        background: "#000000",
+        color: "#FFFFFF",
         fontFamily:
           "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif",
         fontSize: "17px",
@@ -834,40 +837,51 @@ export default function WebDevelopmentPage() {
         .webdev-landing-root .prewrap {
           white-space: pre-line;
         }
-        .webdev-landing-root details summary {
-          list-style: none;
-          cursor: pointer;
-        }
-        .webdev-landing-root details summary::-webkit-details-marker {
-          display: none;
-        }
-        .webdev-landing-root .chev {
-          transition: transform 250ms cubic-bezier(0.32, 0.72, 0, 1);
-        }
-        .webdev-landing-root details[open] .chev {
-          transform: rotate(45deg);
-        }
-        .webdev-landing-root .navlinks {
-          display: flex;
-          gap: 30px;
-          align-items: center;
-        }
-        .webdev-landing-root .mbar {
-          display: none;
-          gap: 10px;
-        }
         .webdev-landing-root .hero-grid {
           display: grid;
-          grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-          gap: clamp(32px, 5vw, 80px);
+          grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+          gap: clamp(32px, 5vw, 72px);
           align-items: center;
+        }
+        .webdev-landing-root .note-paper-card {
+          position: relative;
+          width: 100%;
+          max-width: 680px;
+          margin: 0 auto;
+          padding: 96px 12% 76px;
+        }
+        .webdev-landing-root .note-paper-img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -52%);
+          width: 138%;
+          height: auto;
+          max-width: none;
+          pointer-events: none;
+          user-select: none;
+          z-index: 0;
+        }
+        @media (max-width: 640px) {
+          .webdev-landing-root .note-paper-card {
+            padding: 88px 10% 68px;
+          }
+          .webdev-landing-root .note-paper-img {
+            width: auto;
+            height: 146%;
+            min-width: 138%;
+          }
         }
         .webdev-landing-root .scrollrow {
           display: flex;
           gap: 8px;
           overflow-x: auto;
           padding: 2px 2px 8px;
-          scrollbar-width: thin;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .webdev-landing-root .scrollrow::-webkit-scrollbar {
+          display: none;
         }
         .webdev-landing-root .scrollrow button {
           flex: none;
@@ -1024,33 +1038,30 @@ export default function WebDevelopmentPage() {
       <Navbar />
 
       {/* ── HERO SECTION */}
-      <section id="top" style={{ position: "relative", overflow: "hidden", background: "#FFFFFF" }}>
+      <section
+        id="top"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          background: "#000000",
+          color: "#FFFFFF",
+          paddingTop: "clamp(40px, 6vw, 64px)",
+        }}
+      >
+        {/* Ambient Top Glow */}
         <div
           aria-hidden="true"
           style={{
             position: "absolute",
-            top: "40px",
-            right: "6%",
-            width: "380px",
-            height: "380px",
-            borderRadius: "50%",
-            background: "#f9d230",
-            opacity: 0.55,
-            filter: "blur(70px)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: "260px",
-            right: "24%",
-            width: "320px",
-            height: "320px",
-            borderRadius: "50%",
-            background: "#4066c6",
-            opacity: 0.55,
-            filter: "blur(80px)",
+            top: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "min(1200px, 100%)",
+            height: "480px",
+            background:
+              "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(37, 99, 235, 0.18) 0%, rgba(249, 210, 48, 0.1) 45%, transparent 75%)",
+            pointerEvents: "none",
+            zIndex: 0,
           }}
         />
 
@@ -1061,21 +1072,32 @@ export default function WebDevelopmentPage() {
             maxWidth: "1360px",
             margin: "0 auto",
             padding:
-              "clamp(92px, 10vw, 120px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 68px)",
+              "clamp(72px, 8vw, 96px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 68px)",
           }}
         >
           {/* Left Column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
-            <span
-              style={{
-                fontSize: "17px",
-                fontWeight: 600,
-                color: "#6E6E73",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              Web development services by OneImpact
-            </span>
+          <div style={{ display: "flex", flexDirection: "column", gap: "22px", position: "relative", zIndex: 1 }}>
+            <div style={{ display: "inline-flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}>
+              <span
+                style={{
+                  fontSize: "17px",
+                  fontWeight: 600,
+                  color: "rgba(255, 255, 255, 0.65)",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                Web development services by OneImpact
+              </span>
+              <span
+                aria-hidden="true"
+                style={{
+                  display: "block",
+                  width: "min(280px, 70%)",
+                  height: "1.5px",
+                  background: "linear-gradient(90deg, #6B8CE5 0%, rgba(107, 140, 229, 0) 100%)",
+                }}
+              />
+            </div>
 
             <h1
               className="webdev-heading"
@@ -1085,10 +1107,12 @@ export default function WebDevelopmentPage() {
                 lineHeight: 1.05,
                 letterSpacing: "-0.04em",
                 fontWeight: 700,
-                maxWidth: "14ch",
+                maxWidth: "15ch",
+                color: "#FFFFFF",
               }}
             >
-              Websites That Look Sharp, Load Fast and Convert
+              Websites That Look Sharp, Load Fast and{" "}
+              <span style={{ color: "#f9d230" }}>Convert.</span>
             </h1>
 
             <p
@@ -1098,26 +1122,28 @@ export default function WebDevelopmentPage() {
                 lineHeight: 1.3,
                 fontWeight: 600,
                 letterSpacing: "-0.02em",
-                color: "#000000",
+                color: "#FFFFFF",
               }}
             >
-              Custom, SEO-ready web development for growing brands.
+              Web development that tells your story, drives engagement, and scales your business.
             </p>
 
-            <p style={{ margin: 0, fontSize: "19px", lineHeight: 1.5, color: "#3A3A3C", maxWidth: "50ch" }}>
-              At OneImpact, we donâ€™t just build websites. We craft digital experiences that help your brand grow, bringing together strategy, design and development in web development services tailored to your business goals.
-            </p>
-            <p style={{ margin: 0, fontSize: "19px", lineHeight: 1.5, color: "#3A3A3C", maxWidth: "50ch" }}>
-              Your website should do more than exist. It should perform, impress and grow with you. Thatâ€™s what we deliver.
+            <p style={{ margin: 0, fontSize: "17.5px", lineHeight: 1.55, color: "rgba(255, 255, 255, 0.72)", maxWidth: "50ch" }}>
+              A website is more than just code. It’s the digital home of your brand, where trust is built and decisions are made. At OneImpact, we create websites with clean architecture, high speed, and intuitive user experiences.
             </p>
 
+            <p style={{ margin: 0, fontSize: "17.5px", lineHeight: 1.55, color: "rgba(255, 255, 255, 0.72)", maxWidth: "50ch" }}>
+              Choosing us for your web development means partnering with a team focused on clarity, performance, and long-term scalability. We guide you from wireframing to launch and beyond.
+            </p>
+
+            {/* CTAs */}
             <div
               style={{
                 display: "flex",
                 flexWrap: "wrap",
-                gap: "14px",
+                gap: "20px",
                 alignItems: "center",
-                paddingTop: "4px",
+                paddingTop: "8px",
               }}
             >
               <a
@@ -1126,26 +1152,26 @@ export default function WebDevelopmentPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  color: "#000000",
+                  color: "#FFFFFF",
                   textDecoration: "none",
-                  fontWeight: 600,
-                  fontSize: "17px",
-                  padding: "13px 22px",
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  padding: "12px 22px",
                   borderRadius: "999px",
-                  minHeight: "50px",
+                  minHeight: "48px",
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(0,0,0,0.06)",
+                  gap: "10px",
+                  background: "#6B8CE5",
                 }}
               >
                 <svg
-                  width="18"
-                  height="18"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
+                  stroke="#111111"
+                  strokeWidth="1.9"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"
@@ -1157,12 +1183,12 @@ export default function WebDevelopmentPage() {
               <a
                 href="#usps"
                 style={{
-                  color: "#000000",
-                  fontWeight: 600,
-                  fontSize: "17px",
+                  color: "#FFFFFF",
+                  fontWeight: 500,
+                  fontSize: "16px",
                   textDecoration: "none",
-                  padding: "13px 4px",
-                  minHeight: "50px",
+                  padding: "12px 4px",
+                  minHeight: "48px",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "4px",
@@ -1186,60 +1212,62 @@ export default function WebDevelopmentPage() {
             </div>
           </div>
 
-          {/* Hero Form Card */}
+          {/* Right Column: Hero Form Card on Note_paper.png (Diary) */}
           <div
             id="audit"
-            className="form-card"
-            style={{
-              background: "rgba(0,0,0,0.9)",
-              backdropFilter: "blur(30px) saturate(160%)",
-              WebkitBackdropFilter: "blur(30px) saturate(160%)",
-              borderRadius: "32px",
-              padding: "clamp(24px, 3.2vw, 36px)",
-              color: "#FFFFFF",
-              boxShadow:
-                "0 1px 0 rgba(255,255,255,0.12) inset, 0 50px 100px -40px rgba(0,0,0,0.55), 0 20px 40px -24px rgba(0,0,0,0.35)",
-            }}
+            className="note-paper-card"
+            style={{ color: "#111111" }}
           >
+            {/* Note paper background image */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/Note_paper.png"
+              alt=""
+              aria-hidden="true"
+              draggable={false}
+              className="note-paper-img"
+            />
+
             {!sent1 ? (
               <form
                 onSubmit={handleSubmit1}
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "16px",
                   position: "relative",
                   zIndex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
                 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#f9d230", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+                  <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.08em", color: "#6E6E73", textTransform: "uppercase" }}>
                     Free for your brand
                   </span>
-                  <h2
+                  <h3
                     className="webdev-heading"
                     style={{
                       margin: 0,
-                      fontSize: "clamp(1.6rem, 2.4vw, 2rem)",
-                      lineHeight: 1.12,
-                      letterSpacing: "-0.035em",
+                      fontSize: "22px",
+                      lineHeight: 1.15,
+                      letterSpacing: "-0.03em",
                       fontWeight: 700,
+                      color: "#111111",
                     }}
                   >
                     Get your free website consultation
-                  </h2>
-                  <p style={{ fontSize: "15.5px", color: "#C7C7CC", letterSpacing: 0, margin: 0 }}>
-                    A real person from our team looks at what you need and gets back to you.
-                  </p>
+                  </h3>
+                  <span style={{ fontSize: "12.5px", color: "#555558" }}>
+                    A real person from our team reviews your website and gets back to you.
+                  </span>
                 </div>
 
                 {/* Name */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-name" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="top-name" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
                     Your name
                   </label>
                   <input
-                    id="hero-name"
+                    id="top-name"
                     className="fd"
                     type="text"
                     placeholder="First and last name"
@@ -1248,30 +1276,30 @@ export default function WebDevelopmentPage() {
                     onBlur={() => setTouched1((t) => ({ ...t, name: true }))}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showName1Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
+                      fontSize: "14.5px",
+                      height: "44px",
+                      padding: "0 12px",
+                      borderRadius: "12px",
+                      border: `1.5px solid ${showName1Err ? "#DC2626" : "#D2D2D7"}`,
+                      background: "#FFFFFF",
+                      color: "#111111",
                       width: "100%",
                     }}
                   />
                   {showName1Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
+                    <span role="alert" style={{ fontSize: "12.5px", color: "#DC2626" }}>
                       Enter your name so we know who to reply to
                     </span>
                   )}
                 </div>
 
                 {/* Phone */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="top-phone" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
                     Phone or WhatsApp number
                   </label>
                   <input
-                    id="hero-phone"
+                    id="top-phone"
                     className="fd"
                     type="tel"
                     inputMode="tel"
@@ -1281,30 +1309,30 @@ export default function WebDevelopmentPage() {
                     onBlur={() => setTouched1((t) => ({ ...t, phone: true }))}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showPhone1Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
+                      fontSize: "14.5px",
+                      height: "44px",
+                      padding: "0 12px",
+                      borderRadius: "12px",
+                      border: `1.5px solid ${showPhone1Err ? "#DC2626" : "#D2D2D7"}`,
+                      background: "#FFFFFF",
+                      color: "#111111",
                       width: "100%",
                     }}
                   />
                   {showPhone1Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
+                    <span role="alert" style={{ fontSize: "12.5px", color: "#DC2626" }}>
                       Enter a 10-digit mobile number
                     </span>
                   )}
                 </div>
 
                 {/* Website or Business Name */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-handle" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="top-handle" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
                     Current website or business name
                   </label>
                   <input
-                    id="hero-handle"
+                    id="top-handle"
                     className="fd"
                     type="text"
                     placeholder="yourbrand.com or Your Brand"
@@ -1313,42 +1341,41 @@ export default function WebDevelopmentPage() {
                     onBlur={() => setTouched1((t) => ({ ...t, handle: true }))}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showHandle1Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
+                      fontSize: "14.5px",
+                      height: "44px",
+                      padding: "0 12px",
+                      borderRadius: "12px",
+                      border: `1.5px solid ${showHandle1Err ? "#DC2626" : "#D2D2D7"}`,
+                      background: "#FFFFFF",
+                      color: "#111111",
                       width: "100%",
                     }}
                   />
                   {showHandle1Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
+                    <span role="alert" style={{ fontSize: "12.5px", color: "#DC2626" }}>
                       Enter your website or business name
                     </span>
                   )}
                 </div>
 
-                {/* Need dropdown */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-need" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
-                    What do you need? <span style={{ color: "#8E8E93" }}>(optional)</span>
+                {/* What do you need? */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="top-need" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
+                    What do you need? <span style={{ fontWeight: 400, color: "#666" }}>(optional)</span>
                   </label>
                   <select
-                    id="hero-need"
-                    className="fd"
+                    id="top-need"
                     value={need1}
                     onChange={(e) => setNeed1(e.target.value)}
                     style={{
                       font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 14px",
-                      borderRadius: "14px",
-                      border: "1.5px solid #3A3A3C",
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
+                      fontSize: "14.5px",
+                      height: "44px",
+                      padding: "0 12px",
+                      borderRadius: "12px",
+                      border: "1.5px solid #D2D2D7",
+                      background: "#FFFFFF",
+                      color: "#111111",
                       width: "100%",
                     }}
                   >
@@ -1367,35 +1394,35 @@ export default function WebDevelopmentPage() {
                   className="press y btn-sheen"
                   style={{
                     font: "inherit",
-                    fontSize: "17px",
-                    fontWeight: 650,
+                    fontSize: "16.5px",
+                    fontWeight: 700,
                     letterSpacing: "-0.01em",
                     color: "#000000",
                     background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
-                    minHeight: "54px",
+                    minHeight: "52px",
                     cursor: "pointer",
-                    marginTop: "4px",
+                    marginTop: "6px",
+                    boxShadow: "0 4px 14px rgba(249, 210, 48, 0.45)",
                   }}
                 >
                   Get my free website consultation
                 </button>
-
-                <span style={{ fontSize: "13px", color: "#8E8E93", textAlign: "center", letterSpacing: 0 }}>
-                  No spam, no sales scripts. Weâ€™ll reply on WhatsApp or call.
-                </span>
+                <p style={{ margin: "2px 0 0", fontSize: "12px", color: "#6E6E73", textAlign: "center" }}>
+                  No spam, no sales scripts. We&apos;ll reply on WhatsApp or call.
+                </p>
               </form>
             ) : (
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "16px",
-                  alignItems: "flex-start",
-                  padding: "12px 0",
                   position: "relative",
                   zIndex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "14px",
+                  alignItems: "flex-start",
+                  padding: "16px 0",
                 }}
               >
                 <span
@@ -1413,57 +1440,97 @@ export default function WebDevelopmentPage() {
                     <path d="M5 12.5l4.5 4.5L19 7.5" />
                   </svg>
                 </span>
-                <h3 role="status" className="webdev-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}>
+                <h3 className="webdev-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700, color: "#111111" }}>
                   Request received
                 </h3>
-                <p style={{ margin: 0, color: "#C7C7CC" }}>
-                  Thanks, {name1}. Weâ€™ll look at {handle1} and get in touch on {phone1}.
+                <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px", lineHeight: 1.5 }}>
+                  Thanks, {name1}. We&apos;ll look at {handle1} and get in touch on {phone1}.
                 </p>
-                <button
-                  type="button"
-                  className="press"
-                  onClick={() => {
-                    setSent1(false);
-                    setName1("");
-                    setPhone1("");
-                    setHandle1("");
-                    setTouched1({});
-                  }}
-                  style={{
-                    font: "inherit",
-                    fontSize: "15px",
-                    fontWeight: 600,
-                    color: "#FFFFFF",
-                    background: "rgba(255,255,255,0.12)",
-                    border: 0,
-                    borderRadius: "999px",
-                    minHeight: "44px",
-                    padding: "8px 18px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Send another request
-                </button>
               </div>
             )}
           </div>
         </div>
       </section>
 
-      {/* â”€â”€ CLIENTS / BRANDS WE WORK WITH MARQUEE */}
+      {/* ── BRANDS WE WORK WITH MARQUEE */}
       <section
         aria-label="Brands we work with"
         style={{
-          padding: "clamp(32px, 4vw, 44px) 0 clamp(36px, 4.5vw, 48px)",
-          backgroundColor: "#FAFAFC",
-          borderTop: "1px solid #E5E5EA",
-          borderBottom: "1px solid #E5E5EA",
+          padding: "clamp(64px, 7.5vw, 92px) 0 clamp(64px, 7.5vw, 92px)",
+          backgroundColor: "#FFFFFF",
           position: "relative",
+          overflow: "hidden",
           zIndex: 10,
         }}
       >
+        {/* Top black torn-paper border */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "clamp(18px, 2.6vw, 42px)",
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/first-banner-black-paper-cut.svg"
+            alt=""
+            draggable={false}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 0,
+              transform: "translate(-50%, -64.2%)",
+              width: "152%",
+              maxWidth: "none",
+              height: "auto",
+              userSelect: "none",
+            }}
+          />
+        </div>
+
+        {/* Bottom black torn-paper border */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "clamp(18px, 2.6vw, 42px)",
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/first-banner-black-paper-cut.svg"
+            alt=""
+            draggable={false}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 0,
+              transform: "translate(-50%, -78.4%)",
+              width: "152%",
+              maxWidth: "none",
+              height: "auto",
+              userSelect: "none",
+            }}
+          />
+        </div>
+
         <p
           style={{
+            position: "relative",
+            zIndex: 1,
             margin: "0 0 clamp(20px, 2.5vw, 28px)",
             fontSize: "14.5px",
             fontWeight: 500,
@@ -1472,11 +1539,13 @@ export default function WebDevelopmentPage() {
             letterSpacing: "-0.01em",
           }}
         >
-          Trusted by growing brands across India
+          Brands we work with
         </p>
         <div
           className="marqwrap"
           style={{
+            position: "relative",
+            zIndex: 1,
             overflow: "hidden",
             width: "100%",
             WebkitMaskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
@@ -1517,8 +1586,8 @@ export default function WebDevelopmentPage() {
         </div>
       </section>
 
-      {/* â”€â”€ USP CAROUSEL */}
-      <section id="usps" style={{ background: "#F5F5F7", padding: "clamp(36px, 4.5vw, 56px) 0" }}>
+      {/* ── USP CAROUSEL */}
+      <section id="usps" style={{ background: "#000000", color: "#FFFFFF", padding: "clamp(36px, 4.5vw, 56px) 0" }}>
         <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px)" }}>
           <div
             style={{
@@ -1536,180 +1605,163 @@ export default function WebDevelopmentPage() {
                 style={{
                   margin: 0,
                   fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-                  lineHeight: 1.05,
-                  letterSpacing: "-0.045em",
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.03em",
                   fontWeight: 700,
-                  maxWidth: "16ch",
+                  color: "#FFFFFF",
                 }}
               >
-                Web development that fits your business. Not a template.
+                Built for performance, designed to <span style={{ color: "#f9d230" }}>scale.</span>
               </h2>
-              <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73", maxWidth: "50ch" }}>
-                Swipe through what you get with OneImpact as your web development provider.
+              <p style={{ margin: 0, fontSize: "18px", color: "rgba(255, 255, 255, 0.72)" }}>
+                Key principles behind our web development process:
               </p>
             </div>
-            <div style={{ display: "flex", gap: "10px" }}>
+
+            {/* Arrows */}
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
               <button
                 type="button"
                 className="press"
-                aria-label="Previous"
                 onClick={() => scrollCarousel("prev")}
                 disabled={carIdx === 0}
+                aria-label="Previous slide"
                 style={{
                   width: "44px",
                   height: "44px",
                   borderRadius: "50%",
-                  border: 0,
-                  background: "rgba(0,0,0,0.08)",
-                  color: "#000000",
-                  cursor: "pointer",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                  background: "rgba(255, 255, 255, 0.08)",
+                  color: "#FFFFFF",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  cursor: "pointer",
                 }}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M15 6l-6 6 6 6" />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
               <button
                 type="button"
                 className="press"
-                aria-label="Next"
                 onClick={() => scrollCarousel("next")}
-                disabled={carIdx >= USP_CARDS.length - 1}
+                disabled={carIdx === USP_CARDS.length - 1}
+                aria-label="Next slide"
                 style={{
                   width: "44px",
                   height: "44px",
                   borderRadius: "50%",
-                  border: 0,
-                  background: "rgba(0,0,0,0.08)",
-                  color: "#000000",
-                  cursor: "pointer",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
+                  background: "rgba(255, 255, 255, 0.08)",
+                  color: "#FFFFFF",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  cursor: "pointer",
                 }}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M9 6l6 6-6 6" />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M9 18l6-6-6-6" />
                 </svg>
               </button>
             </div>
           </div>
 
-          <div ref={trackRef} className="car-view" onScroll={handleTrackScroll} aria-roledescription="carousel">
+          <div className="car-view" ref={trackRef} onScroll={handleTrackScroll}>
             <div className="car-track">
-              {USP_CARDS.map((u, i) => (
+              {USP_CARDS.map((card, idx) => (
                 <div
-                  key={i}
+                  key={idx}
                   className="car-card"
                   style={{
-                    background: "#FFFFFF",
-                    borderRadius: "28px",
-                    padding: "28px 26px",
+                    background: "#08080a",
+                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    borderRadius: "24px",
+                    padding: "28px 24px",
                     display: "flex",
-                    gap: "16px",
-                    alignItems: "flex-start",
-                    boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    minHeight: "230px",
                   }}
                 >
                   <span
                     style={{
-                      width: "52px",
-                      height: "52px",
-                      borderRadius: "16px",
-                      background: u.chip,
+                      width: "44px",
+                      height: "44px",
+                      borderRadius: "14px",
+                      background: "rgba(249, 210, 48, 0.15)",
+                      border: "1px solid rgba(249, 210, 48, 0.35)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      flex: "none",
+                      color: "#f9d230",
                     }}
                   >
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d={u.d} />
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d={card.d} />
                     </svg>
                   </span>
-                  <div>
-                    <h3 className="webdev-heading" style={{ margin: 0, fontSize: "28px", letterSpacing: "-0.04em", fontWeight: 700, lineHeight: 1.1 }}>
-                      {u.head}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "24px" }}>
+                    <h3
+                      className="webdev-heading"
+                      style={{
+                        margin: 0,
+                        fontSize: "21px",
+                        letterSpacing: "-0.025em",
+                        fontWeight: 700,
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      {card.head}
                     </h3>
-                    <p style={{ fontSize: "17px", color: "#3A3A3C", marginTop: "8px" }}>{u.text}</p>
+                    <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.72)", fontSize: "15px", lineHeight: 1.5 }}>{card.text}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Progress bar */}
-          <div style={{ marginTop: "24px", height: "4px", borderRadius: "999px", background: "rgba(0,0,0,0.08)", maxWidth: "240px", overflow: "hidden" }}>
-            <div
-              style={{
-                height: "100%",
-                width: `${Math.round(((carIdx + 1) / USP_CARDS.length) * 100)}%`,
-                background: "#000000",
-                borderRadius: "999px",
-                transition: "width 400ms cubic-bezier(0.32, 0.72, 0, 1)",
-              }}
-            />
-          </div>
         </div>
       </section>
 
-      {/* â”€â”€ PROOF SECTION: 4 STAGES (PLAN, DESIGN, BUILD, SUPPORT) & INTRO */}
+      {/* ── FOUR-STEP PROCESS (#proof) */}
       <section
         id="proof"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(48px, 6vw, 72px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(32px, 4vw, 48px)",
         }}
       >
-        <div
-          style={{
-            maxWidth: "1040px",
-            margin: "0 auto",
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            alignItems: "center",
-          }}
-        >
+        <div style={{ maxWidth: "1360px", margin: "0 auto", textAlign: "center" }}>
           <h2
             className="webdev-heading"
             style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
+              margin: "0 0 14px",
+              fontSize: "clamp(2rem, 3.8vw, 3.1rem)",
+              lineHeight: 1.12,
+              letterSpacing: "-0.035em",
               fontWeight: 700,
+              color: "#f9d230",
             }}
           >
-            Building a website isn&apos;t just about code and design.
+            Trust and credibility matter when choosing the right partner for your brand&apos;s online presence.
           </h2>
-          <p style={{ fontSize: "21px", lineHeight: 1.45, color: "#3A3A3C", margin: 0 }}>
-            It&apos;s about creating a digital experience that mirrors your brand and moves your business forward.
-          </p>
-          <p style={{ fontSize: "18px", lineHeight: 1.5, color: "#6E6E73", margin: 0 }}>
-            At OneImpact, we don&apos;t offer one-size-fits-all solutions. We listen, ask the right questions and dive deep into what makes your business tick, so we can build websites that feel right, work flawlessly and scale effortlessly.
-          </p>
-        </div>
-
-        {/* Pillars Head & Grid */}
-        <div style={{ marginTop: "clamp(48px, 6vw, 72px)", display: "flex", flexDirection: "column", gap: "8px", textAlign: "center" }}>
           <h3
             className="webdev-heading"
             style={{
-              margin: 0,
-              fontSize: "clamp(1.5rem, 2.4vw, 2rem)",
-              letterSpacing: "-0.035em",
+              margin: "0 0 8px",
+              fontSize: "clamp(1.5rem, 2.6vw, 2.2rem)",
+              lineHeight: 1.2,
+              letterSpacing: "-0.025em",
               fontWeight: 700,
+              color: "#FFFFFF",
             }}
           >
-            At OneImpact, every website goes through four stages
+            At OneImpact, we follow a four-step <span style={{ color: "#f9d230" }}>development process</span>
           </h3>
-          <p style={{ margin: "0 0 28px", color: "#6E6E73", fontSize: "17px" }}>
+          <p style={{ margin: "0 0 28px", color: "rgba(255, 255, 255, 0.65)", fontSize: "17px" }}>
             Plan, Design, Build, Support
           </p>
         </div>
@@ -1727,9 +1779,10 @@ export default function WebDevelopmentPage() {
             <div
               key={idx}
               style={{
-                background: "#F5F5F7",
-                borderRadius: "28px",
-                padding: "28px 26px",
+                background: "#08080a",
+                border: "1px solid rgba(255, 255, 255, 0.12)",
+                borderRadius: "24px",
+                padding: "28px 24px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "12px",
@@ -1737,11 +1790,11 @@ export default function WebDevelopmentPage() {
             >
               <span
                 style={{
-                  fontSize: "88px",
+                  fontSize: "76px",
                   lineHeight: 0.9,
                   fontWeight: 700,
                   letterSpacing: "-0.06em",
-                  color: "#000000",
+                  color: "rgba(255, 255, 255, 0.78)",
                 }}
                 aria-hidden="true"
               >
@@ -1760,25 +1813,27 @@ export default function WebDevelopmentPage() {
                 className="webdev-heading"
                 style={{
                   margin: "6px 0 0",
-                  fontSize: "21px",
+                  fontSize: "20px",
                   letterSpacing: "-0.025em",
                   fontWeight: 700,
+                  color: "#FFFFFF",
                 }}
               >
                 {p.title}
               </h4>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px", lineHeight: 1.5 }}>{p.text}</p>
+              <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.72)", fontSize: "15px", lineHeight: 1.55 }}>{p.text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* â”€â”€ CLIENT REVIEWS */}
+      {/* ── CLIENT REVIEWS */}
       <section
         id="reviews"
         style={{
-          backgroundColor: "#FFFFFF",
-          padding: "0 clamp(16px, 3vw, 32px) clamp(36px, 4.5vw, 52px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(12px, 2vw, 24px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 68px)",
         }}
       >
         <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
@@ -1786,7 +1841,9 @@ export default function WebDevelopmentPage() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
-              gap: "16px",
+              gap: "18px",
+              maxWidth: "1080px",
+              margin: "0 auto",
             }}
           >
             {QUOTES.map((q, idx) => (
@@ -1794,21 +1851,20 @@ export default function WebDevelopmentPage() {
                 key={idx}
                 style={{
                   margin: 0,
-                  background: "#FFFFFF",
-                  border: "1px solid #E5E5EA",
-                  borderRadius: "24px",
-                  padding: "28px",
+                  background: "#000000",
+                  border: "1.5px solid rgba(255, 255, 255, 0.38)",
+                  borderRadius: "14px",
+                  padding: "22px 20px 24px",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "20px",
                   justifyContent: "space-between",
-                  boxShadow: "0 2px 14px rgba(0, 0, 0, 0.03)",
+                  gap: "18px",
                 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                   <span style={{ display: "inline-flex", gap: "3px", color: "#f9d230" }} aria-label="Rated 5 out of 5">
                     {[...Array(5)].map((_, sIdx) => (
-                      <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <svg key={sIdx} width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
                       </svg>
                     ))}
@@ -1816,24 +1872,31 @@ export default function WebDevelopmentPage() {
                   <blockquote
                     style={{
                       margin: 0,
-                      fontSize: "18px",
-                      lineHeight: 1.45,
-                      fontWeight: 600,
-                      letterSpacing: "-0.02em",
-                      color: "#1D1D1F",
+                      fontSize: "14px",
+                      lineHeight: 1.55,
+                      fontWeight: 400,
+                      letterSpacing: "-0.01em",
+                      color: "rgba(255, 255, 255, 0.9)",
                     }}
                   >
                     &ldquo;{q.text}&rdquo;
                   </blockquote>
                 </div>
-                <figcaption style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <figcaption style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "auto" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/LOGO/oneimpact-logo.webp"
-                    alt="Client logo"
-                    style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 1 }}
+                    alt="OneImpact logo"
+                    style={{
+                      display: "block",
+                      height: "18px",
+                      width: "auto",
+                      maxWidth: "58px",
+                      objectFit: "contain",
+                      filter: "invert(50%) sepia(85%) saturate(800%) hue-rotate(190deg) brightness(105%) contrast(95%)",
+                    }}
                   />
-                  <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>
+                  <span style={{ fontSize: "13px", color: "rgba(255, 255, 255, 0.68)", lineHeight: 1.35, letterSpacing: 0 }}>
                     {q.role}
                   </span>
                 </figcaption>
@@ -1843,114 +1906,119 @@ export default function WebDevelopmentPage() {
         </div>
       </section>
 
-      {/* â”€â”€ BENEFITS: HOW WEB DEVELOPMENT BOOSTS YOUR BUSINESS */}
+      {/* ── BENEFITS: HOW WEB DEVELOPMENT BOOSTS YOUR BUSINESS */}
       <section
         id="why"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(32px, 4vw, 48px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
-          <h2
-            className="webdev-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-            }}
-          >
-            How web development boosts your business
-          </h2>
-          <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73" }}>
-            Here&apos;s what a well-built website does for your business:
-          </p>
-        </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
-            gap: "14px",
-          }}
-        >
-          {HELPS_CARDS.map((b, i) => (
-            <div
-              key={i}
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
+            <h2
+              className="webdev-heading"
               style={{
-                background: "#F5F5F7",
-                borderRadius: "22px",
-                padding: "24px 22px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
+                margin: 0,
+                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+                color: "#FFFFFF",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                <span
-                  style={{
-                    width: "42px",
-                    height: "42px",
-                    borderRadius: "12px",
-                    background: b.chip,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flex: "none",
-                  }}
-                >
-                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d={b.d} />
-                  </svg>
-                </span>
-                <h3 className="webdev-heading" style={{ margin: 0, fontSize: "19.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25 }}>
-                  {b.title}
-                </h3>
+              How web development boosts your <span style={{ color: "#f9d230" }}>business</span>
+            </h2>
+            <p style={{ margin: 0, fontSize: "18px", color: "rgba(255, 255, 255, 0.72)" }}>
+              Here&apos;s what a well-built website does for your business:
+            </p>
+          </div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+              gap: "16px",
+            }}
+          >
+            {HELPS_CARDS.map((b, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "#08080a",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                  borderRadius: "20px",
+                  padding: "24px 22px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                  <span
+                    style={{
+                      width: "42px",
+                      height: "42px",
+                      borderRadius: "12px",
+                      background: "rgba(37, 99, 235, 0.18)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flex: "none",
+                      color: "#60a5fa",
+                    }}
+                  >
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d={b.d} />
+                    </svg>
+                  </span>
+                  <h3 className="webdev-heading" style={{ margin: 0, fontSize: "19px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#FFFFFF" }}>
+                    {b.title}
+                  </h3>
+                </div>
+                <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.72)", fontSize: "14.5px", lineHeight: 1.55 }}>{b.text}</p>
               </div>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "15px", lineHeight: 1.5 }}>{b.text}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* â”€â”€ HIGHLIGHT: WHY ONEIMPACT? (YELLOW CONTAINER) */}
+      {/* ── HIGHLIGHT: WHY ONEIMPACT? */}
       <section
         id="why-oneimpact"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(32px, 4vw, 48px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
-        <div
-          style={{
-            background: "#f9d230",
-            borderRadius: "36px",
-            padding: "clamp(28px, 5vw, 64px)",
-          }}
-        >
-          <h2
-            className="webdev-heading"
-            style={{
-              margin: "0 0 36px",
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-              color: "#000000",
-            }}
-          >
-            Why OneImpact?
-          </h2>
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
+            <h2
+              className="webdev-heading"
+              style={{
+                margin: 0,
+                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+                color: "#FFFFFF",
+              }}
+            >
+              Why <span style={{ color: "#f9d230" }}>OneImpact?</span>
+            </h2>
+            <p style={{ margin: 0, fontSize: "18px", color: "rgba(255, 255, 255, 0.72)" }}>
+              A partner built for technical execution and tangible business outcomes.
+            </p>
+          </div>
 
           <div
             className="webdev-why-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 270px), 1fr))",
-              gap: "12px",
+              gap: "16px",
             }}
           >
             {WHY_HIGHLIGHT_CARDS.map((w, idx) => (
@@ -1958,338 +2026,457 @@ export default function WebDevelopmentPage() {
                 key={idx}
                 className="webdev-why-card"
                 style={{
-                  background: "#FFFFFF",
-                  borderRadius: "22px",
+                  background: "#08080a",
+                  borderRadius: "20px",
                   padding: "24px 22px",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "8px",
-                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.04)",
+                  gap: "10px",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
                 }}
               >
-                <h3
-                  className="webdev-heading"
-                  style={{
-                    margin: 0,
-                    fontSize: "18.5px",
-                    letterSpacing: "-0.025em",
-                    fontWeight: 700,
-                    lineHeight: 1.25,
-                    color: "#000000",
-                  }}
-                >
-                  {w.t}
-                </h3>
-                <p style={{ margin: 0, color: "#3A3A3C", fontSize: "15.5px", lineHeight: 1.5 }}>{w.a}</p>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <span
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      borderRadius: "50%",
+                      background: "rgba(249, 210, 48, 0.15)",
+                      border: "1px solid rgba(249, 210, 48, 0.35)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flex: "none",
+                      color: "#f9d230",
+                    }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                  </span>
+                  <h3
+                    className="webdev-heading"
+                    style={{
+                      margin: 0,
+                      fontSize: "18.5px",
+                      letterSpacing: "-0.025em",
+                      fontWeight: 700,
+                      lineHeight: 1.25,
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    {w.t}
+                  </h3>
+                </div>
+                <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.72)", fontSize: "14.5px", lineHeight: 1.55 }}>{w.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* â”€â”€ SERVICES SECTION WITH SEGMENTED CONTROL */}
+      {/* ── EXPLORE OUR WEB DEVELOPMENT SERVICES */}
       <section
         id="services"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(40px, 5vw, 64px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: "24px",
-            marginBottom: "12px",
-          }}
-        >
-          <h2
-            className="webdev-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-              maxWidth: "14ch",
-            }}
-          >
-            Explore our web development services
-          </h2>
-
-          {/* Segmented Control */}
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
           <div
-            role="tablist"
-            aria-label="Web development service groups"
             style={{
-              position: "relative",
-              display: "inline-grid",
-              gridTemplateColumns: `repeat(${SVC_GROUPS.length}, minmax(0, 1fr))`,
-              background: "#F2F2F5",
-              border: "1px solid #E5E5EA",
-              borderRadius: "999px",
-              padding: "4px",
-              boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.06)",
-              width: "min(400px, 100%)",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: "24px",
+              marginBottom: "12px",
             }}
           >
-            <span
-              aria-hidden="true"
-              className="btn-sheen"
+            <h2
+              className="webdev-heading"
               style={{
-                position: "absolute",
-                top: "4px",
-                bottom: "4px",
-                left: "4px",
-                width: `calc((100% - 8px) / ${SVC_GROUPS.length})`,
-                transform: `translateX(${svcIdx * 100}%)`,
-                transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#f9d230",
-                borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
+                margin: 0,
+                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+                maxWidth: "14ch",
+                color: "#FFFFFF",
               }}
-            />
-            {SVC_GROUPS.map((g, i) => (
+            >
+              Explore our <span style={{ color: "#f9d230" }}>web development services</span>
+            </h2>
+
+            {/* Segmented Control */}
+            <div
+              role="tablist"
+              aria-label="Web development service groups"
+              style={{
+                position: "relative",
+                display: "inline-grid",
+                gridTemplateColumns: `repeat(${SVC_GROUPS.length}, minmax(0, 1fr))`,
+                background: "#1C1C1E",
+                border: "1px solid rgba(255, 255, 255, 0.25)",
+                borderRadius: "999px",
+                padding: "4px",
+                width: "min(400px, 100%)",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: "4px",
+                  bottom: "4px",
+                  left: "4px",
+                  width: `calc((100% - 8px) / ${SVC_GROUPS.length})`,
+                  transform: `translateX(${svcIdx * 100}%)`,
+                  transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
+                  background: "#f9d230",
+                  borderRadius: "999px",
+                  boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
+                }}
+              />
+              {SVC_GROUPS.map((g, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  className="press"
+                  aria-selected={svcIdx === i}
+                  onClick={() => setSvcIdx(i)}
+                  style={{
+                    position: "relative",
+                    zIndex: 1,
+                    font: "inherit",
+                    fontSize: "14.5px",
+                    fontWeight: svcIdx === i ? 700 : 500,
+                    color: svcIdx === i ? "#000000" : "rgba(255, 255, 255, 0.75)",
+                    background: "transparent",
+                    border: 0,
+                    borderRadius: "999px",
+                    minHeight: "42px",
+                    padding: "8px 18px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    transition: "color 200ms ease",
+                    whiteSpace: "nowrap",
+                    letterSpacing: "-0.015em",
+                  }}
+                >
+                  <span>{g.label}</span>
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      padding: "1px 7px",
+                      borderRadius: "999px",
+                      background: svcIdx === i ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.12)",
+                      color: svcIdx === i ? "#000000" : "rgba(255, 255, 255, 0.75)",
+                      transition: "all 200ms ease",
+                    }}
+                  >
+                    {g.items.length}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <p style={{ margin: "0 0 28px", fontSize: "18px", color: "rgba(255, 255, 255, 0.72)", maxWidth: "56ch" }}>
+            Curious about what else we bring to the table? Here&apos;s a deeper look at our web development offerings.
+          </p>
+
+          {/* Services Cards Grid */}
+          <div className="webdev-services-grid">
+            {activeServices.items.map((s, idx) => (
+              <div
+                key={idx}
+                className="webdev-service-card"
+                style={{
+                  background: "#08080a",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                  borderRadius: "20px",
+                  padding: "24px 22px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                  boxShadow: "0 16px 36px -28px rgba(0,0,0,0.5)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <span
+                    style={{
+                      width: "10px",
+                      height: "10px",
+                      borderRadius: "50%",
+                      background: s.dot,
+                      flex: "none",
+                    }}
+                    aria-hidden="true"
+                  />
+                  <h3
+                    className="webdev-heading"
+                    style={{
+                      margin: 0,
+                      fontSize: "19px",
+                      letterSpacing: "-0.025em",
+                      fontWeight: 700,
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    {s.t}
+                  </h3>
+                </div>
+                <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.72)", fontSize: "14.5px", lineHeight: 1.55 }}>{s.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Breaker Divider ── */}
+      <div className="w-full overflow-hidden select-none pointer-events-none -mb-1 bg-[#000000]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/Breaker.svg"
+          alt=""
+          className="w-full h-auto block select-none pointer-events-none"
+        />
+      </div>
+
+      {/* ── WHAT WE OFFER: TOPIC PILLS & ACCORDIONS */}
+      <section
+        id="offer"
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(24px, 3vw, 44px) clamp(16px, 3vw, 32px) 0",
+        }}
+      >
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: "32px" }}>
+            <h2
+              className="webdev-heading"
+              style={{
+                margin: "0 0 12px",
+                fontSize: "clamp(2.4rem, 5vw, 4.2rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.04em",
+                fontWeight: 700,
+                color: "#FFFFFF",
+              }}
+            >
+              What we <span style={{ color: "#f9d230" }}>offer</span>
+            </h2>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "clamp(16px, 1.4vw, 19px)",
+                color: "rgba(255, 255, 255, 0.72)",
+              }}
+            >
+              Pick a topic to see exactly how we approach it.
+            </p>
+          </div>
+
+          {/* Scrollable pill buttons */}
+          <div
+            className="scrollrow"
+            role="tablist"
+            aria-label="What we offer topics"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              overflowX: "auto",
+              paddingBottom: "10px",
+              justifyContent: "flex-start",
+              scrollbarWidth: "none",
+            }}
+          >
+            {OFFER_TOPICS.map((o, i) => (
               <button
                 key={i}
                 type="button"
                 role="tab"
-                aria-selected={svcIdx === i}
-                onClick={() => setSvcIdx(i)}
+                className="press"
+                aria-selected={offerIdx === i}
+                onClick={() => {
+                  setOfferIdx(i);
+                  setOfferExpanded(false);
+                  setOpenOfferQ(null);
+                }}
                 style={{
-                  position: "relative",
-                  zIndex: 1,
                   font: "inherit",
                   fontSize: "14.5px",
-                  fontWeight: svcIdx === i ? 700 : 500,
-                  color: svcIdx === i ? "#000000" : "#555558",
-                  background: "transparent",
-                  border: 0,
+                  fontWeight: offerIdx === i ? 650 : 500,
+                  color: offerIdx === i ? "#000000" : "rgba(255, 255, 255, 0.8)",
+                  background: offerIdx === i ? "#f9d230" : "#1C1C1E",
+                  border: offerIdx === i ? "1px solid #f9d230" : "1px solid rgba(255, 255, 255, 0.15)",
+                  boxShadow: offerIdx === i ? "0 4px 14px rgba(249, 210, 48, 0.35)" : "none",
                   borderRadius: "999px",
                   minHeight: "42px",
-                  padding: "8px 18px",
+                  padding: "8px 20px",
                   cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "8px",
-                  transition: "color 200ms ease",
+                  transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)",
                   whiteSpace: "nowrap",
-                  letterSpacing: "-0.015em",
                 }}
               >
-                <span>{g.label}</span>
-                <span
+                {o.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Blue line accent under tabs */}
+          <div
+            aria-hidden="true"
+            style={{
+              width: "120px",
+              height: "2px",
+              background: "linear-gradient(90deg, #2563eb 0%, rgba(37, 99, 235, 0) 100%)",
+              margin: "6px auto 28px",
+            }}
+          />
+
+          {/* Frosted Dark Box with Gold Dividers */}
+          <div
+            role="tabpanel"
+            style={{
+              background: "rgba(10, 10, 12, 0.85)",
+              border: "1px solid rgba(255, 255, 255, 0.12)",
+              borderRadius: "28px",
+              padding: "clamp(24px, 4vw, 44px)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+            }}
+          >
+            {activeOffer.intro && (
+              <p className="prewrap" style={{ margin: "0 0 24px", fontSize: "17.5px", color: "rgba(255, 255, 255, 0.8)", maxWidth: "75ch", lineHeight: 1.6 }}>
+                {activeOffer.intro}
+              </p>
+            )}
+
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {visibleOfferQs.map((f, qIdx) => {
+                const isOpen = openOfferQ === qIdx;
+                return (
+                  <div
+                    key={qIdx}
+                    style={{
+                      borderBottom: "1px solid rgba(249, 210, 48, 0.55)",
+                      padding: "20px 0",
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenOfferQ(isOpen ? null : qIdx)}
+                      aria-expanded={isOpen}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: "16px",
+                        background: "none",
+                        border: "none",
+                        padding: 0,
+                        cursor: "pointer",
+                        textAlign: "left",
+                        color: "#FFFFFF",
+                        font: "inherit",
+                        fontSize: "17.5px",
+                        fontWeight: 600,
+                        letterSpacing: "-0.015em",
+                      }}
+                    >
+                      <span>{f.q}</span>
+                      <span
+                        aria-hidden="true"
+                        style={{
+                          flex: "none",
+                          fontSize: "24px",
+                          lineHeight: 1,
+                          fontWeight: 400,
+                          color: "#f9d230",
+                          width: "24px",
+                          textAlign: "center",
+                          userSelect: "none",
+                        }}
+                      >
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <p
+                        className="prewrap"
+                        style={{
+                          margin: "14px 0 4px",
+                          color: "rgba(255, 255, 255, 0.72)",
+                          fontSize: "15.5px",
+                          lineHeight: 1.65,
+                          maxWidth: "80ch",
+                        }}
+                      >
+                        {f.a}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {activeOffer.qs.length > 5 && (
+              <div style={{ marginTop: "28px", textAlign: "center" }}>
+                <button
+                  type="button"
+                  className="press y btn-sheen"
+                  onClick={() => setOfferExpanded(!offerExpanded)}
                   style={{
-                    fontSize: "11px",
+                    font: "inherit",
+                    fontSize: "15px",
                     fontWeight: 700,
-                    padding: "1px 7px",
+                    letterSpacing: "-0.01em",
+                    color: "#000000",
+                    background: "#f9d230",
+                    border: 0,
                     borderRadius: "999px",
-                    background: svcIdx === i ? "rgba(0, 0, 0, 0.12)" : "rgba(0, 0, 0, 0.05)",
-                    color: svcIdx === i ? "#000000" : "#8E8E93",
-                    transition: "all 200ms ease",
-                  }}
-                >
-                  {g.items.length}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <p style={{ margin: "0 0 32px", fontSize: "19px", color: "#6E6E73", maxWidth: "56ch" }}>
-          Curious about what else we bring to the table? Here&apos;s a deeper look at our web development offerings.
-        </p>
-
-        {/* Services Cards Grid */}
-        <div className="webdev-services-grid">
-          {activeServices.items.map((s, idx) => (
-            <div
-              key={idx}
-              className="webdev-service-card"
-              style={{
-                background: "#FFFFFF",
-                border: "1px solid #E5E5EA",
-                borderRadius: "24px",
-                padding: "28px 26px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-                boxShadow: "0 20px 40px -32px rgba(0,0,0,0.3)",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <span
-                  style={{
-                    width: "10px",
-                    height: "10px",
-                    borderRadius: "50%",
-                    background: s.dot,
-                  }}
-                  aria-hidden="true"
-                />
-                <h3
-                  className="webdev-heading"
-                  style={{
-                    margin: 0,
-                    fontSize: "21px",
-                    letterSpacing: "-0.03em",
-                    fontWeight: 700,
-                  }}
-                >
-                  {s.t}
-                </h3>
-              </div>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px", lineHeight: 1.5 }}>{s.a}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* â”€â”€ WHAT WE OFFER: TOPIC PILLS & ACCORDIONS */}
-      <section
-        id="offer"
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(36px, 4.5vw, 56px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
-        }}
-      >
-        <h2
-          className="webdev-heading"
-          style={{
-            margin: "0 0 12px",
-            fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.045em",
-            fontWeight: 700,
-          }}
-        >
-          What we offer
-        </h2>
-        <p style={{ margin: "0 0 28px", fontSize: "19px", color: "#6E6E73" }}>
-          Pick a topic to see exactly how we approach it.
-        </p>
-
-        {/* Scrollable pill buttons */}
-        <div className="scrollrow" role="tablist" aria-label="What we offer topics">
-          {OFFER_TOPICS.map((o, i) => (
-            <button
-              key={i}
-              type="button"
-              role="tab"
-              className="press"
-              aria-selected={offerIdx === i}
-              onClick={() => {
-                setOfferIdx(i);
-                setOfferExpanded(false);
-              }}
-              style={{
-                font: "inherit",
-                fontSize: "15px",
-                fontWeight: offerIdx === i ? 600 : 500,
-                color: offerIdx === i ? "#000000" : "#3A3A3C",
-                background: offerIdx === i ? "#f9d230" : "#FFFFFF",
-                border: offerIdx === i ? "1.5px solid #f9d230" : "1.5px solid #D2D2D7",
-                borderRadius: "999px",
-                minHeight: "44px",
-                padding: "8px 18px",
-                cursor: "pointer",
-              }}
-            >
-              {o.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Active topic panel */}
-        <div
-          style={{
-            marginTop: "20px",
-            background: "#F5F5F7",
-            borderRadius: "28px",
-            padding: "clamp(20px, 4vw, 44px)",
-          }}
-        >
-          {activeOffer.intro && (
-            <p className="prewrap" style={{ margin: "0 0 20px", fontSize: "17.5px", color: "#3A3A3C", maxWidth: "75ch" }}>
-              {activeOffer.intro}
-            </p>
-          )}
-
-          <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #D2D2D7" }}>
-            {visibleOfferQs.map((qa, i) => (
-              <details
-                key={i}
-                style={{
-                  borderTop: "1px solid #D2D2D7",
-                }}
-              >
-                <summary
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: "16px",
-                    padding: "18px 0",
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    letterSpacing: "-0.02em",
+                    padding: "10px 24px",
                     minHeight: "44px",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 14px rgba(249, 210, 48, 0.35)",
                   }}
                 >
-                  <span>{qa.q}</span>
-                  <svg className="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                </summary>
-                <p className="prewrap" style={{ margin: "0 0 18px", color: "#3A3A3C", maxWidth: "75ch", fontSize: "16px", lineHeight: 1.55 }}>
-                  {qa.a}
-                </p>
-              </details>
-            ))}
+                  {offerExpanded ? "Show fewer questions" : `Load more (${activeOffer.qs.length - 5} more questions)`}
+                </button>
+              </div>
+            )}
           </div>
-
-          {activeOffer.qs.length > 5 && (
-            <div style={{ marginTop: "20px" }}>
-              <button
-                type="button"
-                className="press"
-                onClick={() => setOfferExpanded(!offerExpanded)}
-                style={{
-                  font: "inherit",
-                  fontSize: "15px",
-                  fontWeight: 600,
-                  color: "#000000",
-                  background: "#FFFFFF",
-                  border: "1.5px solid #D2D2D7",
-                  borderRadius: "999px",
-                  padding: "8px 18px",
-                  minHeight: "40px",
-                  cursor: "pointer",
-                }}
-              >
-                {offerExpanded ? "Show fewer" : `Show all ${activeOffer.qs.length} questions`}
-              </button>
-            </div>
-          )}
         </div>
       </section>
 
-      {/* â”€â”€ SPOTLIGHT: WEBSITES BUILT FOR MUMBAI'S LOCAL SEARCH */}
+      {/* ── SPOTLIGHT: WEBSITES BUILT FOR MUMBAI'S LOCAL SEARCH */}
       <section
         id="local"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(36px, 4.5vw, 56px) clamp(16px, 3vw, 32px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px)",
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
         <div
           style={{
+            maxWidth: "1360px",
+            margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))",
             gap: "clamp(32px, 6vw, 88px)",
@@ -2302,20 +2489,21 @@ export default function WebDevelopmentPage() {
               style={{
                 margin: 0,
                 fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.045em",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
                 fontWeight: 700,
                 maxWidth: "14ch",
+                color: "#FFFFFF",
               }}
             >
-              {SPOTLIGHT.title}
+              Websites Built for <span style={{ color: "#f9d230" }}>Mumbai’s</span> Local Search
             </h2>
             {SPOTLIGHT.paragraphs.map((p, i) => (
-              <p key={i} style={{ fontSize: "18px", color: "#3A3A3C", margin: 0 }}>
+              <p key={i} style={{ fontSize: "17.5px", color: "rgba(255, 255, 255, 0.72)", margin: 0, lineHeight: 1.6 }}>
                 {p}
               </p>
             ))}
-            <p style={{ color: "#000000", fontWeight: 600, fontSize: "18px", margin: 0 }}>
+            <p style={{ color: "#FFFFFF", fontWeight: 600, fontSize: "18px", margin: 0 }}>
               {SPOTLIGHT.closing}
             </p>
             <a
@@ -2323,10 +2511,10 @@ export default function WebDevelopmentPage() {
               href="#audit"
               style={{
                 alignSelf: "flex-start",
-                fontWeight: 650,
-                fontSize: "17px",
-                padding: "14px 24px",
-                minHeight: "52px",
+                fontWeight: 700,
+                fontSize: "16px",
+                padding: "13px 26px",
+                minHeight: "50px",
                 background: "#f9d230",
                 color: "#000000",
                 textDecoration: "none",
@@ -2335,20 +2523,22 @@ export default function WebDevelopmentPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
+                boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4)",
               }}
             >
               {SPOTLIGHT.cta}
             </a>
           </div>
 
-          {/* Visual: Map mockup */}
+          {/* Visual: Map mockup in Dark Mode */}
           <figure
             style={{
               margin: 0,
-              borderRadius: "32px",
+              borderRadius: "28px",
               overflow: "hidden",
-              background: "#FFFFFF",
-              boxShadow: "0 0 0 1px rgba(0,0,0,0.06), 0 40px 80px -40px rgba(0,0,0,0.35)",
+              background: "#08080a",
+              border: "1px solid rgba(255, 255, 255, 0.12)",
+              boxShadow: "0 24px 60px -20px rgba(0,0,0,0.6)",
             }}
             aria-label={SPOTLIGHT.visual.label}
           >
@@ -2356,9 +2546,9 @@ export default function WebDevelopmentPage() {
               style={{
                 position: "relative",
                 height: "230px",
-                background: "#E8F0FF",
+                background: "#0F172A",
                 backgroundImage:
-                  "linear-gradient(115deg,transparent 46%,#FFFFFF 46%,#FFFFFF 50%,transparent 50%),linear-gradient(25deg,transparent 58%,#FFFFFF 58%,#FFFFFF 61%,transparent 61%),linear-gradient(0deg,transparent 30%,#D6E5FF 30%,#D6E5FF 44%,transparent 44%)",
+                  "linear-gradient(115deg,transparent 46%,rgba(255,255,255,0.06) 46%,rgba(255,255,255,0.06) 50%,transparent 50%),linear-gradient(25deg,transparent 58%,rgba(255,255,255,0.06) 58%,rgba(255,255,255,0.06) 61%,transparent 61%),linear-gradient(0deg,transparent 30%,rgba(37,99,235,0.15) 30%,rgba(37,99,235,0.15) 44%,transparent 44%)",
                 overflow: "hidden",
               }}
             >
@@ -2371,7 +2561,7 @@ export default function WebDevelopmentPage() {
                   height: "22px",
                   borderRadius: "50% 50% 50% 0",
                   transform: "rotate(-45deg)",
-                  background: "#AEAEB2",
+                  background: "#475569",
                 }}
               />
               <span
@@ -2383,7 +2573,7 @@ export default function WebDevelopmentPage() {
                   height: "22px",
                   borderRadius: "50% 50% 50% 0",
                   transform: "rotate(-45deg)",
-                  background: "#AEAEB2",
+                  background: "#475569",
                 }}
               />
               <span
@@ -2396,11 +2586,11 @@ export default function WebDevelopmentPage() {
                   borderRadius: "50% 50% 50% 0",
                   transform: "rotate(-45deg)",
                   background: "#f9d230",
-                  boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
+                  boxShadow: "0 8px 18px rgba(0,0,0,0.5)",
                 }}
               />
             </div>
-            <div style={{ padding: "10px 14px 14px", display: "flex", flexDirection: "column" }}>
+            <div style={{ padding: "12px 16px 16px", display: "flex", flexDirection: "column", gap: "8px" }}>
               {SPOTLIGHT.visual.rows.map((r, i) => (
                 <div
                   key={i}
@@ -2408,9 +2598,10 @@ export default function WebDevelopmentPage() {
                     display: "flex",
                     alignItems: "center",
                     gap: "12px",
-                    padding: "12px 10px",
+                    padding: "12px 14px",
                     borderRadius: "16px",
-                    ...(i === 0 ? { background: "#FFF4DE" } : {}),
+                    background: i === 0 ? "rgba(249, 210, 48, 0.12)" : "rgba(255, 255, 255, 0.04)",
+                    border: i === 0 ? "1px solid rgba(249, 210, 48, 0.35)" : "1px solid rgba(255, 255, 255, 0.06)",
                   }}
                 >
                   <span
@@ -2424,14 +2615,15 @@ export default function WebDevelopmentPage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      background: i === 0 ? "#f9d230" : "#E5E5EA",
+                      background: i === 0 ? "#f9d230" : "rgba(255, 255, 255, 0.12)",
+                      color: i === 0 ? "#000000" : "#FFFFFF",
                     }}
                   >
                     {i + 1}
                   </span>
                   <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                    <span style={{ fontWeight: 650, fontSize: "16px" }}>{r.title}</span>
-                    <span style={{ fontSize: "13.5px", color: "#6E6E73", letterSpacing: 0 }}>{r.meta}</span>
+                    <span style={{ fontWeight: 650, fontSize: "15.5px", color: "#FFFFFF" }}>{r.title}</span>
+                    <span style={{ fontSize: "13px", color: "rgba(255, 255, 255, 0.65)", letterSpacing: 0 }}>{r.meta}</span>
                   </div>
                 </div>
               ))}
@@ -2446,68 +2638,72 @@ export default function WebDevelopmentPage() {
         subtitle="Explore our client reels directly within the page — no external redirects."
       />
 
-      {/* â”€â”€ FAQs */}
+      {/* ── FAQs */}
       <section
         id="faq"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(24px, 3vw, 36px) clamp(16px, 3vw, 32px) clamp(36px, 4.5vw, 52px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 68px)",
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
-        <h2
-          className="webdev-heading"
-          style={{
-            margin: "0 0 12px",
-            fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.045em",
-            fontWeight: 700,
-          }}
-        >
-          Questions, answered
-        </h2>
-        <p style={{ margin: "0 0 24px", fontSize: "19px", color: "#6E6E73" }}>
-          Anything else?{" "}
-          <a href="https://wa.me/918369018104" target="_blank" rel="noopener noreferrer" style={{ fontWeight: 600 }}>
-            Message us on WhatsApp
-          </a>
-          .
-        </p>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: "32px" }}>
+            <h2
+              className="webdev-heading"
+              style={{
+                margin: "0 0 12px",
+                fontSize: "clamp(2.4rem, 5vw, 4.2rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.04em",
+                fontWeight: 700,
+                color: "#FFFFFF",
+              }}
+            >
+              Questions, <span style={{ color: "#f9d230" }}>answered</span>
+            </h2>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "clamp(15px, 1.3vw, 18px)",
+                color: "rgba(255, 255, 255, 0.72)",
+              }}
+            >
+              Anything else?{" "}
+              <a
+                href="https://wa.me/918369018104"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "#f9d230",
+                  fontWeight: 600,
+                  textDecoration: "underline",
+                  textUnderlineOffset: "3px",
+                }}
+              >
+                Message us on WhatsApp
+              </a>
+              .
+            </p>
+          </div>
 
-        {/* FAQ tab switcher */}
-        <div style={{ marginBottom: "24px" }}>
+          {/* FAQ tab switcher */}
           <div
+            className="scrollrow"
             role="tablist"
             aria-label="FAQ groups"
             style={{
-              position: "relative",
-              display: "grid",
-              gridTemplateColumns: `repeat(${FAQ_GROUPS.length}, minmax(0, 1fr))`,
-              background: "#F2F2F5",
-              border: "1px solid #E5E5EA",
-              borderRadius: "999px",
-              padding: "4px",
-              boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)",
-              width: "min(440px, 100%)",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              overflowX: "auto",
+              paddingBottom: "10px",
+              justifyContent: "flex-start",
+              scrollbarWidth: "none",
             }}
           >
-            <span
-              aria-hidden="true"
-              className="btn-sheen"
-              style={{
-                position: "absolute",
-                top: "4px",
-                bottom: "4px",
-                left: "4px",
-                width: `calc((100% - 8px) / ${FAQ_GROUPS.length})`,
-                transform: `translateX(${faqIdx * 100}%)`,
-                transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#f9d230",
-                borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
-              }}
-            />
             {FAQ_GROUPS.map((g, i) => (
               <button
                 key={i}
@@ -2518,439 +2714,143 @@ export default function WebDevelopmentPage() {
                 onClick={() => {
                   setFaqIdx(i);
                   setFaqExpanded(false);
+                  setOpenFaqQ(null);
                 }}
                 style={{
-                  position: "relative",
-                  zIndex: 1,
                   font: "inherit",
                   fontSize: "14.5px",
                   fontWeight: faqIdx === i ? 650 : 500,
-                  color: faqIdx === i ? "#000000" : "#555558",
-                  background: "transparent",
-                  border: 0,
+                  color: faqIdx === i ? "#000000" : "rgba(255, 255, 255, 0.8)",
+                  background: faqIdx === i ? "#f9d230" : "#1C1C1E",
+                  border: faqIdx === i ? "1px solid #f9d230" : "1px solid rgba(255, 255, 255, 0.15)",
+                  boxShadow: faqIdx === i ? "0 4px 14px rgba(249, 210, 48, 0.35)" : "none",
                   borderRadius: "999px",
-                  minHeight: "44px",
-                  padding: "9px 14px",
+                  minHeight: "42px",
+                  padding: "8px 20px",
                   cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)",
                   whiteSpace: "nowrap",
-                  letterSpacing: "-0.015em",
-                  transition: "color 200ms ease",
                 }}
               >
                 {g.label}
               </button>
             ))}
           </div>
-        </div>
 
-        {/* FAQ list */}
-        <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #E5E5EA" }}>
-          {visibleFaqs.map((qa, i) => (
-            <details
-              key={i}
-              style={{
-                borderTop: "1px solid #E5E5EA",
-              }}
-            >
-              <summary
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  gap: "16px",
-                  padding: "18px 0",
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  letterSpacing: "-0.02em",
-                  minHeight: "44px",
-                }}
-              >
-                <span>{qa.q}</span>
-                <svg className="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-              </summary>
-              <p className="prewrap" style={{ margin: "0 0 20px", color: "#3A3A3C", maxWidth: "75ch", fontSize: "16px", lineHeight: 1.55 }}>
-                {qa.a}
-              </p>
-            </details>
-          ))}
-        </div>
-
-        {activeFaqGroup.qs.length > 5 && (
-          <div style={{ marginTop: "24px" }}>
-            <button
-              type="button"
-              className="press"
-              onClick={() => setFaqExpanded(!faqExpanded)}
-              style={{
-                font: "inherit",
-                fontSize: "15px",
-                fontWeight: 600,
-                color: "#000000",
-                background: "#F5F5F7",
-                border: "1.5px solid #E5E5EA",
-                borderRadius: "999px",
-                padding: "10px 22px",
-                minHeight: "44px",
-                cursor: "pointer",
-              }}
-            >
-              {faqExpanded ? "Show fewer questions" : `Show all ${activeFaqGroup.qs.length} questions`}
-            </button>
-          </div>
-        )}
-      </section>
-
-      {/* â”€â”€ FINAL CTA & SECOND FORM */}
-      <section
-        id="audit2"
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(36px, 4.5vw, 56px) clamp(16px, 3vw, 32px) clamp(72px, 10vw, 120px)",
-        }}
-      >
-        <div
-          style={{
-            position: "relative",
-            overflow: "hidden",
-            background: "#F5F5F7",
-            borderRadius: "40px",
-            padding: "clamp(28px, 5vw, 72px)",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))",
-            gap: "clamp(28px, 5vw, 64px)",
-            alignItems: "center",
-          }}
-        >
+          {/* Blue line accent under tabs */}
           <div
             aria-hidden="true"
             style={{
-              position: "absolute",
-              left: "-80px",
-              bottom: "-120px",
-              width: "360px",
-              height: "360px",
-              borderRadius: "50%",
-              background: "#f9d230",
-              opacity: 0.5,
-              filter: "blur(80px)",
+              width: "120px",
+              height: "2px",
+              background: "linear-gradient(90deg, #2563eb 0%, rgba(37, 99, 235, 0) 100%)",
+              margin: "6px auto 28px",
             }}
           />
 
-          {/* Left info */}
-          <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: "20px" }}>
-            <h2
-              className="webdev-heading"
-              style={{
-                margin: 0,
-                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.045em",
-                fontWeight: 700,
-              }}
-            >
-              Websites that perform.
-            </h2>
-            <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73", maxWidth: "44ch" }}>
-              Get a free website consultation and a clear view of what your site needs next. No obligation.
-            </p>
-
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center", paddingTop: "8px" }}>
-              <a
-                className="press"
-                href="https://wa.me/918369018104"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "#FFFFFF",
-                  background: "#000000",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  fontSize: "16px",
-                  padding: "13px 22px",
-                  borderRadius: "999px",
-                  minHeight: "48px",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                }}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M4 5h16v11H9l-5 4z" />
-                </svg>
-                +91 83690 18104
-              </a>
-              <a
-                className="press"
-                href="mailto:connect@oneimpact.in"
-                style={{
-                  color: "#000000",
-                  background: "rgba(0,0,0,0.06)",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  fontSize: "16px",
-                  padding: "13px 22px",
-                  borderRadius: "999px",
-                  minHeight: "48px",
-                  display: "inline-flex",
-                  alignItems: "center",
-                }}
-              >
-                connect@oneimpact.in
-              </a>
-            </div>
-          </div>
-
-          {/* Right Form Card */}
+          {/* Frosted Dark Box with Gold Dividers */}
           <div
-            className="form-card"
+            role="tabpanel"
             style={{
-              background: "#000000",
-              borderRadius: "30px",
-              padding: "clamp(24px, 3.2vw, 36px)",
-              color: "#FFFFFF",
-              boxShadow: "0 1px 0 rgba(255,255,255,0.12) inset, 0 40px 80px -40px rgba(0,0,0,0.5)",
+              background: "rgba(10, 10, 12, 0.85)",
+              border: "1px solid rgba(255, 255, 255, 0.12)",
+              borderRadius: "28px",
+              padding: "clamp(24px, 4vw, 44px)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
             }}
           >
-            {!sent2 ? (
-              <form
-                onSubmit={handleSubmit2}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "14px",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                <h3
-                  className="webdev-heading"
-                  style={{
-                    margin: 0,
-                    fontSize: "26px",
-                    lineHeight: 1.15,
-                    letterSpacing: "-0.035em",
-                    fontWeight: 700,
-                  }}
-                >
-                  Get your free website consultation
-                </h3>
-
-                {/* Name */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="final-name" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
-                    Your name
-                  </label>
-                  <input
-                    id="final-name"
-                    className="fd"
-                    type="text"
-                    placeholder="First and last name"
-                    value={name2}
-                    onChange={(e) => setName2(e.target.value)}
-                    onBlur={() => setTouched2((t) => ({ ...t, name: true }))}
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {visibleFaqs.map((f, qIdx) => {
+                const isOpen = openFaqQ === qIdx;
+                return (
+                  <div
+                    key={qIdx}
                     style={{
-                      font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showName2Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
-                      width: "100%",
-                    }}
-                  />
-                  {showName2Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
-                      Enter your name so we know who to reply to
-                    </span>
-                  )}
-                </div>
-
-                {/* Phone */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="final-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
-                    Phone or WhatsApp number
-                  </label>
-                  <input
-                    id="final-phone"
-                    className="fd"
-                    type="tel"
-                    inputMode="tel"
-                    placeholder="98XXX XXXXX"
-                    value={phone2}
-                    onChange={(e) => setPhone2(e.target.value)}
-                    onBlur={() => setTouched2((t) => ({ ...t, phone: true }))}
-                    style={{
-                      font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showPhone2Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
-                      width: "100%",
-                    }}
-                  />
-                  {showPhone2Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
-                      Enter a 10-digit mobile number
-                    </span>
-                  )}
-                </div>
-
-                {/* Website or Business Name */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="final-handle" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
-                    Current website or business name
-                  </label>
-                  <input
-                    id="final-handle"
-                    className="fd"
-                    type="text"
-                    placeholder="yourbrand.com or Your Brand"
-                    value={handle2}
-                    onChange={(e) => setHandle2(e.target.value)}
-                    onBlur={() => setTouched2((t) => ({ ...t, handle: true }))}
-                    style={{
-                      font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showHandle2Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
-                      width: "100%",
-                    }}
-                  />
-                  {showHandle2Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
-                      Enter your website or business name
-                    </span>
-                  )}
-                </div>
-
-                {/* Need dropdown */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="final-need" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>
-                    What do you need? <span style={{ color: "#8E8E93" }}>(optional)</span>
-                  </label>
-                  <select
-                    id="final-need"
-                    className="fd"
-                    value={need2}
-                    onChange={(e) => setNeed2(e.target.value)}
-                    style={{
-                      font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 14px",
-                      borderRadius: "14px",
-                      border: "1.5px solid #3A3A3C",
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
-                      width: "100%",
+                      borderBottom: "1px solid rgba(249, 210, 48, 0.55)",
+                      padding: "20px 0",
                     }}
                   >
-                    <option value="Not sure yet">Not sure yet</option>
-                    <option value="New website">New website</option>
-                    <option value="Website redesign">Website redesign</option>
-                    <option value="E-commerce store">E-commerce store</option>
-                    <option value="Web application">Web application</option>
-                    <option value="Maintenance and support">Maintenance and support</option>
-                    <option value="Something else">Something else</option>
-                  </select>
-                </div>
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaqQ(isOpen ? null : qIdx)}
+                      aria-expanded={isOpen}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: "16px",
+                        background: "none",
+                        border: "none",
+                        padding: 0,
+                        cursor: "pointer",
+                        textAlign: "left",
+                        color: "#FFFFFF",
+                        font: "inherit",
+                        fontSize: "17.5px",
+                        fontWeight: 600,
+                        letterSpacing: "-0.015em",
+                      }}
+                    >
+                      <span>{f.q}</span>
+                      <span
+                        aria-hidden="true"
+                        style={{
+                          flex: "none",
+                          fontSize: "24px",
+                          lineHeight: 1,
+                          fontWeight: 400,
+                          color: "#f9d230",
+                          width: "24px",
+                          textAlign: "center",
+                          userSelect: "none",
+                        }}
+                      >
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <p
+                        className="prewrap"
+                        style={{
+                          margin: "14px 0 4px",
+                          color: "rgba(255, 255, 255, 0.72)",
+                          fontSize: "15.5px",
+                          lineHeight: 1.65,
+                          maxWidth: "80ch",
+                        }}
+                      >
+                        {f.a}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
 
+            {activeFaqGroup.qs.length > 5 && (
+              <div style={{ marginTop: "28px", textAlign: "center" }}>
                 <button
-                  type="submit"
+                  type="button"
                   className="press y btn-sheen"
+                  onClick={() => setFaqExpanded(!faqExpanded)}
                   style={{
                     font: "inherit",
-                    fontSize: "17px",
-                    fontWeight: 650,
+                    fontSize: "15px",
+                    fontWeight: 700,
                     letterSpacing: "-0.01em",
                     color: "#000000",
                     background: "#f9d230",
                     border: 0,
                     borderRadius: "999px",
-                    minHeight: "54px",
-                    cursor: "pointer",
-                    marginTop: "4px",
-                  }}
-                >
-                  Get my free website consultation
-                </button>
-
-                <span style={{ fontSize: "13px", color: "#8E8E93", textAlign: "center", letterSpacing: 0 }}>
-                  No spam, no sales scripts. Weâ€™ll reply on WhatsApp or call.
-                </span>
-              </form>
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "16px",
-                  alignItems: "flex-start",
-                  padding: "12px 0",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                <span
-                  style={{
-                    width: "56px",
-                    height: "56px",
-                    borderRadius: "50%",
-                    background: "#f9d230",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M5 12.5l4.5 4.5L19 7.5" />
-                  </svg>
-                </span>
-                <h3 role="status" className="webdev-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}>
-                  Request received
-                </h3>
-                <p style={{ margin: 0, color: "#C7C7CC" }}>
-                  Thanks, {name2}. Weâ€™ll look at {handle2} and get in touch on {phone2}.
-                </p>
-                <button
-                  type="button"
-                  className="press"
-                  onClick={() => {
-                    setSent2(false);
-                    setName2("");
-                    setPhone2("");
-                    setHandle2("");
-                    setTouched2({});
-                  }}
-                  style={{
-                    font: "inherit",
-                    fontSize: "15px",
-                    fontWeight: 600,
-                    color: "#FFFFFF",
-                    background: "rgba(255,255,255,0.12)",
-                    border: 0,
-                    borderRadius: "999px",
+                    padding: "10px 24px",
                     minHeight: "44px",
-                    padding: "8px 18px",
                     cursor: "pointer",
+                    boxShadow: "0 4px 14px rgba(249, 210, 48, 0.35)",
                   }}
                 >
-                  Send another request
+                  {faqExpanded ? "Show fewer questions" : `Load more (${activeFaqGroup.qs.length - 5} more questions)`}
                 </button>
               </div>
             )}
@@ -2958,108 +2858,406 @@ export default function WebDevelopmentPage() {
         </div>
       </section>
 
-      {/* â”€â”€ FOOTER */}
-      <footer
+      {/* ── FINAL CTA & SECOND FORM */}
+      <section
+        id="audit2"
         style={{
-          borderTop: "1px solid #E5E5EA",
-          padding: "clamp(48px, 6vw, 72px) 0 32px",
-          background: "#FFFFFF",
+          width: "100%",
+          backgroundColor: "#000000",
+          padding: "clamp(48px, 6vw, 84px) 0",
         }}
       >
-        <div
-          style={{
-            maxWidth: "1360px",
-            margin: "0 auto",
-            padding: "0 clamp(16px, 3vw, 32px)",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))",
-            gap: "40px",
-          }}
-        >
-          {/* Logo & Tagline */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/LOGO/oneimpact-logo.webp"
-              alt="One Impact"
-              style={{ display: "block", width: "105px", height: "auto" }}
-            />
-            <span style={{ fontSize: "14px", color: "#6E6E73", lineHeight: 1.4 }}>
-              Integrated marketing and growth partner for ambitious brands.
-            </span>
-          </div>
+        <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px)" }}>
+          <div
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              background: "#000000",
+              border: "1.5px solid #2563EB",
+              borderRadius: "36px",
+              padding: "clamp(28px, 4.5vw, 64px)",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))",
+              gap: "clamp(28px, 5vw, 64px)",
+              alignItems: "center",
+            }}
+          >
+            {/* Left info */}
+            <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: "20px" }}>
+              <h2
+                className="webdev-heading"
+                style={{
+                  margin: 0,
+                  fontSize: "clamp(2.4rem, 4.8vw, 4.4rem)",
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.04em",
+                  fontWeight: 700,
+                  color: "#FFFFFF",
+                }}
+              >
+                Websites that{" "}
+                <span
+                  style={{
+                    color: "#f9d230",
+                    fontStyle: "italic",
+                    fontFamily: "var(--font-serif), Georgia, serif",
+                  }}
+                >
+                  perform.
+                </span>
+              </h2>
+              <p
+                style={{
+                  fontSize: "17.5px",
+                  color: "rgba(255, 255, 255, 0.72)",
+                  maxWidth: "44ch",
+                  margin: 0,
+                  lineHeight: 1.55,
+                }}
+              >
+                Get a free website consultation and a clear view of what your site needs next. No obligation.
+              </p>
 
-          {/* Services Column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px", fontSize: "14.5px" }}>
-            <span style={{ fontWeight: 650, color: "#000000", marginBottom: "4px" }}>Services</span>
-            <a href="/seo" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              SEO services
-            </a>
-            <a href="/social-media-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Social media marketing
-            </a>
-            <a href="/influencer-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Influencer marketing
-            </a>
-            <a href="/branding-services" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Branding services
-            </a>
-            <a href="/web-development" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Website development
-            </a>
-          </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" }}>
+                <a
+                  className="press"
+                  href="https://wa.me/918369018104"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    minHeight: "46px",
+                    padding: "6px 20px 6px 7px",
+                    borderRadius: "999px",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(255, 255, 255, 0.14)",
+                    color: "#FFFFFF",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      background: "#f9d230",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#000000",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  +91 83690 18104
+                </a>
+                <a
+                  className="press"
+                  href="mailto:connect@oneimpact.in"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    minHeight: "46px",
+                    padding: "6px 20px 6px 7px",
+                    borderRadius: "999px",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(255, 255, 255, 0.14)",
+                    color: "#FFFFFF",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      background: "#f9d230",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#000000",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </span>
+                  connect@oneimpact.in
+                </a>
+              </div>
+            </div>
 
-          {/* Company Column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px", fontSize: "14.5px" }}>
-            <span style={{ fontWeight: 650, color: "#000000", marginBottom: "4px" }}>Company</span>
-            <a href="/about" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              About OneImpact
-            </a>
-            <Link href="/#showreel" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Our work
-            </Link>
-            <Link href="/#team" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Team
-            </Link>
-            <Link href="/#contact" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Contact
-            </Link>
-          </div>
+            {/* Right Form Card */}
+            <div
+              className="form-card"
+              style={{
+                background: "#0c0e14",
+                border: "1px solid rgba(255, 255, 255, 0.12)",
+                borderRadius: "28px",
+                padding: "clamp(24px, 3.2vw, 36px)",
+                color: "#FFFFFF",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.12) inset, 0 40px 80px -40px rgba(0,0,0,0.5)",
+              }}
+            >
+              {!sent2 ? (
+                <form
+                  onSubmit={handleSubmit2}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "14px",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  <h3
+                    className="webdev-heading"
+                    style={{
+                      margin: 0,
+                      fontSize: "26px",
+                      lineHeight: 1.15,
+                      letterSpacing: "-0.035em",
+                      fontWeight: 700,
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    Get your free website consultation
+                  </h3>
 
-          {/* Contact Column */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px", fontSize: "14.5px" }}>
-            <span style={{ fontWeight: 650, color: "#000000", marginBottom: "4px" }}>Contact</span>
-            <span style={{ color: "#6E6E73" }}>Mumbai, Maharashtra</span>
-            <a href="https://wa.me/918369018104" target="_blank" rel="noopener noreferrer" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              +91 83690 18104
-            </a>
-            <a href="mailto:connect@oneimpact.in" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              connect@oneimpact.in
-            </a>
+                  {/* Name */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="final-name" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      Your name
+                    </label>
+                    <input
+                      id="final-name"
+                      className="fd"
+                      type="text"
+                      placeholder="First and last name"
+                      value={name2}
+                      onChange={(e) => setName2(e.target.value)}
+                      onBlur={() => setTouched2((t) => ({ ...t, name: true }))}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 16px",
+                        borderRadius: "12px",
+                        border: `1.5px solid ${showName2Err ? "#FF9F95" : "rgba(255, 255, 255, 0.12)"}`,
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    />
+                    {showName2Err && (
+                      <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>
+                        Enter your name so we know who to reply to
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Phone */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="final-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      Phone or WhatsApp number
+                    </label>
+                    <input
+                      id="final-phone"
+                      className="fd"
+                      type="tel"
+                      inputMode="tel"
+                      placeholder="98XXX XXXXX"
+                      value={phone2}
+                      onChange={(e) => setPhone2(e.target.value)}
+                      onBlur={() => setTouched2((t) => ({ ...t, phone: true }))}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 16px",
+                        borderRadius: "12px",
+                        border: `1.5px solid ${showPhone2Err ? "#FF9F95" : "rgba(255, 255, 255, 0.12)"}`,
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    />
+                    {showPhone2Err && (
+                      <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>
+                        Enter a 10-digit mobile number
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Website or Business Name */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="final-handle" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      Current website or business name
+                    </label>
+                    <input
+                      id="final-handle"
+                      className="fd"
+                      type="text"
+                      placeholder="yourbrand.com or Your Brand"
+                      value={handle2}
+                      onChange={(e) => setHandle2(e.target.value)}
+                      onBlur={() => setTouched2((t) => ({ ...t, handle: true }))}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 16px",
+                        borderRadius: "12px",
+                        border: `1.5px solid ${showHandle2Err ? "#FF9F95" : "rgba(255, 255, 255, 0.12)"}`,
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    />
+                    {showHandle2Err && (
+                      <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>
+                        Enter your website or business name
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Need dropdown */}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="final-need" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      What do you need? <span style={{ color: "#8E8E93" }}>(optional)</span>
+                    </label>
+                    <select
+                      id="final-need"
+                      className="fd"
+                      value={need2}
+                      onChange={(e) => setNeed2(e.target.value)}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 14px",
+                        borderRadius: "12px",
+                        border: "1.5px solid rgba(255, 255, 255, 0.12)",
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    >
+                      <option value="Not sure yet">Not sure yet</option>
+                      <option value="New website">New website</option>
+                      <option value="Website redesign">Website redesign</option>
+                      <option value="E-commerce store">E-commerce store</option>
+                      <option value="Web application">Web application</option>
+                      <option value="Maintenance and support">Maintenance and support</option>
+                      <option value="Something else">Something else</option>
+                    </select>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="press y btn-sheen"
+                    style={{
+                      font: "inherit",
+                      fontSize: "16.5px",
+                      fontWeight: 650,
+                      letterSpacing: "-0.01em",
+                      color: "#000000",
+                      background: "#f9d230",
+                      border: 0,
+                      borderRadius: "999px",
+                      minHeight: "52px",
+                      cursor: "pointer",
+                      marginTop: "6px",
+                    }}
+                  >
+                    Get my free website consultation
+                  </button>
+
+                  <span style={{ fontSize: "13px", color: "#8E8E93", textAlign: "center", letterSpacing: 0 }}>
+                    No spam, no sales scripts. We&apos;ll reply on WhatsApp or call.
+                  </span>
+                </form>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "16px",
+                    alignItems: "flex-start",
+                    padding: "12px 0",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "50%",
+                      background: "#f9d230",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                  </span>
+                  <h3 role="status" className="webdev-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700, color: "#FFFFFF" }}>
+                    Request received
+                  </h3>
+                  <p style={{ margin: 0, color: "#C7C7CC" }}>
+                    Thanks, {name2}. We&apos;ll look at {handle2} and get in touch on {phone2}.
+                  </p>
+                  <button
+                    type="button"
+                    className="press"
+                    onClick={() => {
+                      setSent2(false);
+                      setName2("");
+                      setPhone2("");
+                      setHandle2("");
+                      setTouched2({});
+                    }}
+                    style={{
+                      font: "inherit",
+                      fontSize: "15px",
+                      fontWeight: 600,
+                      color: "#FFFFFF",
+                      background: "rgba(255,255,255,0.12)",
+                      border: 0,
+                      borderRadius: "999px",
+                      minHeight: "44px",
+                      padding: "8px 18px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Send another request
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
+      </section>
 
-        <div
-          style={{
-            maxWidth: "1360px",
-            margin: "40px auto 0",
-            padding: "24px clamp(16px, 3vw, 32px) 0",
-            borderTop: "1px solid #E5E5EA",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            fontSize: "13px",
-            color: "#8E8E93",
-            flexWrap: "wrap",
-            gap: "12px",
-          }}
-        >
-          <span>Â© 2026 OneImpact. All rights reserved.</span>
-          <span>Mumbai Â· Bengaluru Â· Delhi NCR</span>
-        </div>
-      </footer>
+      {/* ── FOOTER */}
+      <Footer />
 
-      {/* â”€â”€ MOBILE STICKY BOTTOM BAR */}
+      {/* ── MOBILE STICKY BOTTOM BAR */}
       <div
         className="mbar"
         style={{

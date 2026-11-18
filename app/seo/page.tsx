@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/common/Navbar";
+import { Footer } from "@/components/common/Footer";
 import { LiveDashboardPreview } from "@/components/seo/LiveDashboardPreview";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
@@ -931,10 +932,13 @@ export default function SeoLandingPage() {
 
   // State for Offer tabs (17 categories)
   const [offerIdx, setOfferIdx] = useState(0);
+  const [offerExpanded, setOfferExpanded] = useState(false);
+  const [openOfferQ, setOpenOfferQ] = useState<number | null>(null);
 
   // State for FAQ tabs (Obstacles vs Why)
   const [faqIdx, setFaqIdx] = useState(0);
   const [faqExpanded, setFaqExpanded] = useState(false);
+  const [openFaqQ, setOpenFaqQ] = useState<number | null>(null);
 
   // Carousel track state
   const [carIdx, setCarIdx] = useState(0);
@@ -1006,6 +1010,7 @@ export default function SeoLandingPage() {
   };
 
   const activeOffer = OFFER_TOPICS[offerIdx];
+  const visibleOfferQs = offerExpanded ? activeOffer.qs : activeOffer.qs.slice(0, 5);
   const activeFaqGroup = FAQ_GROUPS[faqIdx];
   const visibleFaqs = faqExpanded ? activeFaqGroup.qs : activeFaqGroup.qs.slice(0, 5);
   const activeServices = SVC_GROUPS[svcIdx];
@@ -2196,583 +2201,642 @@ export default function SeoLandingPage() {
       <section
         id="why-oneimpact"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(40px, 5vw, 56px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
-          borderTop: "1px solid #EBEBED",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(48px, 6vw, 76px) clamp(16px, 3vw, 32px)",
+          position: "relative",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: "24px",
-            marginBottom: "36px",
-          }}
-        >
-          <div>
-            <h2
-              className="seo-heading"
-              style={{
-                margin: "0 0 10px",
-                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.045em",
-                fontWeight: 700,
-              }}
-            >
-              {whyTab === 0 ? "What We Do" : "How We Customise For You"}
-            </h2>
-            <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73", maxWidth: "52ch" }}>
-              {whyTab === 0
-                ? "Full-spectrum SEO execution built to generate compounding organic traffic and rankings."
-                : "No cookie-cutter playbooks. Every strategy is built around your market, audience, and revenue goals."}
-            </p>
-          </div>
-
-          {/* Elevated Segmented Switcher Pill with Shiny Theme Yellow */}
+        <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
           <div
-            role="tablist"
-            aria-label="Capabilities and Customisation Switcher"
             style={{
-              position: "relative",
-              display: "inline-grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              background: "#F2F2F5",
-              border: "1px solid #E5E5EA",
-              borderRadius: "999px",
-              padding: "4px",
-              boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.06)",
-              width: "min(460px, 100%)",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: "24px",
+              marginBottom: "clamp(32px, 4vw, 44px)",
             }}
           >
-            {/* Sliding shiny theme-yellow indicator pill with button's #f9d230 and btn-sheen */}
-            <span
-              aria-hidden="true"
-              className="btn-sheen"
-              style={{
-                position: "absolute",
-                top: "4px",
-                bottom: "4px",
-                left: "4px",
-                width: "calc((100% - 8px) / 2)",
-                transform: `translateX(${whyTab * 100}%)`,
-                transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#f9d230",
-                borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
-              }}
-            />
-
-            {/* Tab 0 */}
-            <button
-              type="button"
-              role="tab"
-              aria-selected={whyTab === 0}
-              onClick={() => setWhyTab(0)}
-              style={{
-                position: "relative",
-                zIndex: 1,
-                font: "inherit",
-                fontSize: "14.5px",
-                fontWeight: whyTab === 0 ? 700 : 500,
-                color: whyTab === 0 ? "#000000" : "#555558",
-                background: "transparent",
-                border: 0,
-                borderRadius: "999px",
-                minHeight: "42px",
-                padding: "8px 18px",
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
-                transition: "color 200ms ease",
-                whiteSpace: "nowrap",
-                letterSpacing: "-0.015em",
-              }}
-            >
-              <span>What We Do</span>
-              <span
+            <div>
+              <h2
+                className="seo-heading"
                 style={{
-                  fontSize: "11px",
+                  margin: "0 0 10px",
+                  fontSize: "clamp(2.1rem, 3.8vw, 3.1rem)",
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.02em",
                   fontWeight: 700,
-                  padding: "1px 7px",
-                  borderRadius: "999px",
-                  background: whyTab === 0 ? "rgba(0, 0, 0, 0.12)" : "rgba(0, 0, 0, 0.05)",
-                  color: whyTab === 0 ? "#000000" : "#8E8E93",
-                  transition: "all 200ms ease",
+                  color: "#f9d230",
                 }}
               >
-                8
-              </span>
-            </button>
+                {whyTab === 0 ? "What We Do" : "How We Customise For You"}
+              </h2>
+              <p style={{ margin: 0, fontSize: "16px", color: "rgba(255, 255, 255, 0.72)", maxWidth: "56ch", lineHeight: 1.5 }}>
+                {whyTab === 0
+                  ? "Full-spectrum SEO execution built to generate compounding organic traffic and rankings."
+                  : "No cookie-cutter playbooks. Every strategy is built around your market, audience, and revenue goals."}
+              </p>
+            </div>
 
-            {/* Tab 1 */}
-            <button
-              type="button"
-              role="tab"
-              aria-selected={whyTab === 1}
-              onClick={() => setWhyTab(1)}
+            {/* Tab Switcher */}
+            <div
+              role="tablist"
+              aria-label="Capabilities and Customisation Switcher"
               style={{
                 position: "relative",
-                zIndex: 1,
-                font: "inherit",
-                fontSize: "14.5px",
-                fontWeight: whyTab === 1 ? 700 : 500,
-                color: whyTab === 1 ? "#000000" : "#555558",
-                background: "transparent",
-                border: 0,
+                display: "inline-grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                background: "#1C1C1E",
+                border: "1px solid rgba(255, 255, 255, 0.25)",
                 borderRadius: "999px",
-                minHeight: "42px",
-                padding: "8px 18px",
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
-                transition: "color 200ms ease",
-                whiteSpace: "nowrap",
-                letterSpacing: "-0.015em",
+                padding: "4px",
               }}
             >
-              <span>How We Customise For You</span>
-              <span
+              {/* Sliding Active Pill */}
+              <div
+                aria-hidden="true"
                 style={{
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  padding: "1px 7px",
+                  position: "absolute",
+                  top: "4px",
+                  bottom: "4px",
+                  left: "4px",
+                  width: "calc(50% - 4px)",
+                  transform: `translateX(${whyTab * 100}%)`,
+                  transition: "transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1)",
+                  background: "#f9d230",
                   borderRadius: "999px",
-                  background: whyTab === 1 ? "rgba(0, 0, 0, 0.12)" : "rgba(0, 0, 0, 0.05)",
-                  color: whyTab === 1 ? "#000000" : "#8E8E93",
-                  transition: "all 200ms ease",
+                  boxShadow: "0 3px 12px rgba(249, 210, 48, 0.35)",
+                }}
+              />
+              {[
+                { label: "What We Do", count: BUT_WHY_CARDS.length },
+                { label: "How We Customise For You", count: WHY2_POINTS.length },
+              ].map((tab, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  aria-selected={whyTab === i}
+                  onClick={() => setWhyTab(i)}
+                  style={{
+                    position: "relative",
+                    zIndex: 1,
+                    font: "inherit",
+                    fontSize: "14px",
+                    fontWeight: whyTab === i ? 700 : 500,
+                    color: whyTab === i ? "#000000" : "rgba(255, 255, 255, 0.7)",
+                    background: "transparent",
+                    border: 0,
+                    borderRadius: "999px",
+                    minHeight: "42px",
+                    padding: "8px 18px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    transition: "color 200ms ease",
+                    whiteSpace: "nowrap",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  <span>{tab.label}</span>
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      width: "22px",
+                      height: "22px",
+                      borderRadius: "999px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: whyTab === i ? "#000000" : "transparent",
+                      border: whyTab === i ? "none" : "1px solid rgba(255, 255, 255, 0.3)",
+                      color: whyTab === i ? "#FFFFFF" : "rgba(255, 255, 255, 0.7)",
+                      transition: "all 200ms ease",
+                    }}
+                  >
+                    {tab.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Cards Grid */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+              gap: "18px",
+            }}
+          >
+            {(whyTab === 0 ? BUT_WHY_CARDS : WHY2_POINTS).map((w, idx) => (
+              <div
+                key={idx}
+                style={{
+                  background: "#000000",
+                  border: "1.5px solid rgba(255, 255, 255, 0.28)",
+                  borderRadius: "20px",
+                  padding: "24px 22px 28px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
                 }}
               >
-                7
-              </span>
-            </button>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: "12px",
+                    marginBottom: "18px",
+                  }}
+                >
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                    <h3
+                      style={{
+                        margin: 0,
+                        fontSize: "17.5px",
+                        lineHeight: 1.25,
+                        letterSpacing: "-0.015em",
+                        fontWeight: 700,
+                        color: "#f9d230",
+                      }}
+                    >
+                      {w.t}
+                    </h3>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: "22px",
+                        height: "2.5px",
+                        borderRadius: "999px",
+                        backgroundColor: "#4066c6",
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "14px",
+                      overflow: "hidden",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flex: "none",
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/icons/icon-test.gif"
+                      alt=""
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                        display: "block",
+                      }}
+                    />
+                  </div>
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    color: "rgba(255, 255, 255, 0.78)",
+                    fontSize: "13.5px",
+                    lineHeight: 1.55,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {w.a}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* Tab 0: What We Do (8 cards) */}
-        {whyTab === 0 && (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
-              gap: "14px",
-            }}
-          >
-            {BUT_WHY_CARDS.map((w, idx) => (
-              <div
-                key={idx}
-                style={{
-                  background: "#F5F5F7",
-                  borderRadius: "22px",
-                  padding: "24px 22px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                  border: "1px solid rgba(0, 0, 0, 0.03)",
-                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)",
-                  transition: "transform 200ms ease, box-shadow 200ms ease",
-                }}
-              >
-                <span
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "50%",
-                    background: w.chip === "#f9d230"
-                      ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
-                      : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: w.chip === "#f9d230"
-                      ? "0 3px 8px rgba(249, 210, 48, 0.35)"
-                      : "0 3px 8px rgba(64, 102, 198, 0.35)",
-                  }}
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke={w.chip === "#f9d230" ? "#1D1D1F" : "#FFFFFF"}
-                    strokeWidth="2.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M5 12.5l4.5 4.5L19 7.5" />
-                  </svg>
-                </span>
-                <h3
-                  className="seo-heading"
-                  style={{
-                    margin: "2px 0 0",
-                    fontSize: "18.5px",
-                    letterSpacing: "-0.025em",
-                    fontWeight: 700,
-                    lineHeight: 1.25,
-                    color: "#1D1D1F",
-                  }}
-                >
-                  {w.t}
-                </h3>
-                <p style={{ margin: 0, color: "#6E6E73", fontSize: "14.5px", lineHeight: 1.5 }}>{w.a}</p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Tab 1: How We Customise For You (7 cards) */}
-        {whyTab === 1 && (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
-              gap: "14px",
-            }}
-          >
-            {WHY2_POINTS.map((w, idx) => (
-              <div
-                key={idx}
-                style={{
-                  background: "#F5F5F7",
-                  borderRadius: "22px",
-                  padding: "24px 22px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                  border: "1px solid rgba(0, 0, 0, 0.03)",
-                  boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)",
-                  transition: "transform 200ms ease, box-shadow 200ms ease",
-                }}
-              >
-                <span
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "50%",
-                    background: idx % 2 === 0
-                      ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)"
-                      : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: idx % 2 === 0
-                      ? "0 3px 8px rgba(249, 210, 48, 0.35)"
-                      : "0 3px 8px rgba(64, 102, 198, 0.35)",
-                  }}
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke={idx % 2 === 0 ? "#1D1D1F" : "#FFFFFF"}
-                    strokeWidth="2.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M5 12.5l4.5 4.5L19 7.5" />
-                  </svg>
-                </span>
-                <h3
-                  className="seo-heading"
-                  style={{
-                    margin: "2px 0 0",
-                    fontSize: "18.5px",
-                    letterSpacing: "-0.025em",
-                    fontWeight: 700,
-                    lineHeight: 1.25,
-                    color: "#1D1D1F",
-                  }}
-                >
-                  {w.t}
-                </h3>
-                <p style={{ margin: 0, color: "#6E6E73", fontSize: "14.5px", lineHeight: 1.5 }}>{w.a}</p>
-              </div>
-            ))}
-          </div>
-        )}
       </section>
 
       {/* ── SECTION 8: EXPLORE OUR SEO SERVICES ────────────────────────────── */}
       <section
         id="services"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(24px, 3vw, 40px) clamp(16px, 3vw, 32px) clamp(24px, 3.5vw, 36px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(12px, 2vw, 24px)",
+          position: "relative",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: "24px",
-            marginBottom: "12px",
-          }}
-        >
-          <h2
-            className="seo-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-              maxWidth: "14ch",
-            }}
-          >
-            Explore our SEO services
-          </h2>
-
-          {/* Segmented Switcher for Services */}
+        <div style={{ maxWidth: "1240px", margin: "0 auto" }}>
           <div
-            role="tablist"
-            aria-label="Service groups"
             style={{
-              position: "relative",
-              display: "grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              background: "#F2F2F5",
-              border: "1px solid #E5E5EA",
-              borderRadius: "999px",
-              padding: "4px",
-              boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)",
-              width: "min(420px, 100%)",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              gap: "24px",
+              marginBottom: "16px",
             }}
           >
-            <span
-              aria-hidden="true"
-              className="btn-sheen"
+            <h2
               style={{
-                position: "absolute",
-                top: "4px",
-                bottom: "4px",
-                left: "4px",
-                width: "calc((100% - 8px) / 2)",
-                transform: `translateX(${svcIdx * 100}%)`,
-                transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
-                background: "#f9d230",
-                borderRadius: "999px",
-                boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
+                margin: 0,
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.4rem, 4.4vw, 3.8rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.035em",
+                fontWeight: 700,
+                color: "#f9d230",
+                maxWidth: "14ch",
               }}
-            />
-            {SVC_GROUPS.map((grp, i) => (
-              <button
-                key={i}
-                type="button"
-                role="tab"
-                className="press"
-                aria-selected={svcIdx === i}
-                onClick={() => setSvcIdx(i)}
-                style={{
-                  position: "relative",
-                  zIndex: 1,
-                  font: "inherit",
-                  fontSize: "15px",
-                  fontWeight: svcIdx === i ? 650 : 500,
-                  color: svcIdx === i ? "#000000" : "#555558",
-                  background: "transparent",
-                  border: 0,
-                  borderRadius: "999px",
-                  minHeight: "44px",
-                  padding: "9px 18px",
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  whiteSpace: "nowrap",
-                  letterSpacing: "-0.015em",
-                  transition: "color 200ms ease",
-                }}
-              >
-                {grp.label}
-              </button>
-            ))}
-          </div>
-        </div>
+            >
+              Explore our SEO services
+            </h2>
 
-        <p style={{ margin: "0 0 32px", fontSize: "19px", color: "#6E6E73", maxWidth: "56ch" }}>
-          Curious about what else we bring to the table? Here’s a deeper look at our SEO offerings.
-        </p>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
-            gap: "14px",
-          }}
-        >
-          {activeServices.items.map((s, i) => (
+            {/* Segmented Switcher for Services */}
             <div
-              key={i}
+              role="tablist"
+              aria-label="Service groups"
               style={{
-                background: "#FFFFFF",
-                border: "1px solid #E5E5EA",
-                borderRadius: "24px",
-                padding: "28px 26px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "12px",
-                boxShadow: "0 20px 40px -32px rgba(0,0,0,0.3)",
+                position: "relative",
+                display: "grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                background: "#1C1C1E",
+                border: "1px solid rgba(255, 255, 255, 0.25)",
+                borderRadius: "999px",
+                padding: "4px",
+                width: "min(340px, 100%)",
+                boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.35)",
               }}
             >
               <span
                 aria-hidden="true"
-                style={{ width: "10px", height: "10px", borderRadius: "50%", background: s.dot }}
+                style={{
+                  position: "absolute",
+                  top: "4px",
+                  bottom: "4px",
+                  left: "4px",
+                  width: "calc((100% - 8px) / 2)",
+                  transform: `translateX(${svcIdx * 100}%)`,
+                  transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
+                  background: "#f9d230",
+                  borderRadius: "999px",
+                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.35)",
+                }}
               />
-              <h3
-                className="seo-heading"
-                style={{ margin: 0, fontSize: "21px", letterSpacing: "-0.03em", fontWeight: 700 }}
-              >
-                {s.t}
-              </h3>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16px" }}>{s.a}</p>
+              {SVC_GROUPS.map((grp, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  className="press"
+                  aria-selected={svcIdx === i}
+                  onClick={() => setSvcIdx(i)}
+                  style={{
+                    position: "relative",
+                    zIndex: 1,
+                    font: "inherit",
+                    fontSize: "14.5px",
+                    fontWeight: svcIdx === i ? 700 : 500,
+                    color: svcIdx === i ? "#000000" : "rgba(255, 255, 255, 0.72)",
+                    background: "transparent",
+                    border: 0,
+                    borderRadius: "999px",
+                    minHeight: "42px",
+                    padding: "8px 16px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    whiteSpace: "nowrap",
+                    letterSpacing: "-0.015em",
+                    transition: "color 200ms ease",
+                  }}
+                >
+                  {grp.label}
+                </button>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <p
+            style={{
+              margin: "0 0 32px",
+              fontSize: "clamp(15px, 1.3vw, 17px)",
+              color: "rgba(255, 255, 255, 0.72)",
+              maxWidth: "68ch",
+              lineHeight: 1.5,
+            }}
+          >
+            Curious about what else we bring to the table? Here’s a deeper look at our SEO offerings.
+          </p>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))",
+              gap: "16px",
+            }}
+          >
+            {activeServices.items.map((s, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "#000000",
+                  border: "1.5px solid rgba(255, 255, 255, 0.28)",
+                  borderRadius: "20px",
+                  padding: "26px 22px 28px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  boxShadow: "0 16px 36px -28px rgba(0,0,0,0.5)",
+                }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <h3
+                    style={{
+                      margin: 0,
+                      fontSize: "17.5px",
+                      lineHeight: 1.25,
+                      letterSpacing: "-0.015em",
+                      fontWeight: 700,
+                      color: "#f9d230",
+                    }}
+                  >
+                    {s.t}
+                  </h3>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      width: "22px",
+                      height: "2.5px",
+                      borderRadius: "999px",
+                      backgroundColor: "#4066c6",
+                    }}
+                  />
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    color: "rgba(255, 255, 255, 0.78)",
+                    fontSize: "13.5px",
+                    lineHeight: 1.55,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {s.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Section Separator */}
-      <div
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "0 clamp(16px, 3vw, 32px)",
-        }}
-      >
-        <div style={{ height: "1px", background: "rgba(0, 0, 0, 0.08)" }} />
+      {/* ── Breaker Divider ── */}
+      <div className="w-full overflow-hidden select-none pointer-events-none -mb-1 bg-[#000000]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/Breaker.svg"
+          alt=""
+          className="w-full h-auto block select-none pointer-events-none"
+        />
       </div>
 
       {/* ── SECTION 10: WHAT WE OFFER (ACCORDIONS) ─────────────────────────── */}
       <section
         id="offer"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(24px, 3.5vw, 40px) clamp(16px, 3vw, 32px) clamp(56px, 7vw, 80px)",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(24px, 3vw, 44px) clamp(16px, 3vw, 32px) 0",
         }}
       >
-        <h2
-          className="seo-heading"
-          style={{
-            margin: "0 0 12px",
-            fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.045em",
-            fontWeight: 700,
-          }}
-        >
-          What we offer
-        </h2>
-        <p style={{ margin: "0 0 28px", fontSize: "19px", color: "#6E6E73" }}>
-          Pick a topic to see exactly how we approach it.
-        </p>
-
-        {/* Horizontal Topic Pill Row */}
-        <div className="scrollrow" role="tablist" aria-label="Offer topics">
-          {OFFER_TOPICS.map((t, i) => (
-            <button
-              key={i}
-              type="button"
-              role="tab"
-              className="press"
-              aria-selected={offerIdx === i}
-              onClick={() => setOfferIdx(i)}
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          {/* Header: What we offer */}
+          <div style={{ textAlign: "center", marginBottom: "32px" }}>
+            <h2
               style={{
-                font: "inherit",
-                fontSize: "15px",
-                fontWeight: offerIdx === i ? 600 : 500,
-                color: "#000000",
-                background: offerIdx === i
-                  ? "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)"
-                  : "#FFFFFF",
-                border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`,
-                boxShadow: offerIdx === i
-                  ? "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)"
-                  : "0 1px 2px rgba(0, 0, 0, 0.03)",
-                borderRadius: "999px",
-                minHeight: "44px",
-                padding: "8px 18px",
-                cursor: "pointer",
-                transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)",
+                margin: "0 0 12px",
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.4rem, 4.8vw, 3.8rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
               }}
             >
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Offer Accordions Tabpanel */}
-        <div
-          role="tabpanel"
-          style={{
-            marginTop: "20px",
-            background: "#F5F5F7",
-            borderRadius: "28px",
-            padding: "clamp(20px, 4vw, 44px)",
-          }}
-        >
-          {"intro" in activeOffer && activeOffer.intro && (
-            <p className="prewrap" style={{ margin: "0 0 20px", fontSize: "17.5px", color: "#3A3A3C", maxWidth: "75ch" }}>
-              {activeOffer.intro}
+              <span style={{ color: "#FFFFFF" }}>What </span>
+              <span style={{ color: "#f9d230" }}>we offer</span>
+            </h2>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "clamp(15px, 1.3vw, 18px)",
+                color: "rgba(255, 255, 255, 0.72)",
+                fontFamily: "var(--font-manrope, system-ui, sans-serif)",
+              }}
+            >
+              Pick a topic to see exactly how we approach it.
             </p>
-          )}
+          </div>
 
-          <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #D2D2D7" }}>
-            {activeOffer.qs.map((f, qIdx) => (
-              <details key={qIdx} style={{ borderTop: "1px solid #D2D2D7" }}>
-                <summary
+          {/* Horizontal Topic Pill Row */}
+          <div
+            className="scrollrow"
+            role="tablist"
+            aria-label="Offer topics"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              overflowX: "auto",
+              paddingBottom: "10px",
+              justifyContent: "flex-start",
+              scrollbarWidth: "none",
+            }}
+          >
+            {OFFER_TOPICS.map((t, i) => (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                className="press"
+                aria-selected={offerIdx === i}
+                onClick={() => {
+                  setOfferIdx(i);
+                  setOfferExpanded(false);
+                  setOpenOfferQ(null);
+                }}
+                style={{
+                  font: "inherit",
+                  fontSize: "14.5px",
+                  fontWeight: offerIdx === i ? 700 : 500,
+                  color: offerIdx === i ? "#000000" : "rgba(255, 255, 255, 0.82)",
+                  background: offerIdx === i ? "#f9d230" : "rgba(255, 255, 255, 0.08)",
+                  border: offerIdx === i ? "1px solid #f9d230" : "1px solid rgba(255, 255, 255, 0.18)",
+                  boxShadow: offerIdx === i ? "0 4px 18px rgba(249, 210, 48, 0.35)" : "none",
+                  borderRadius: "999px",
+                  minHeight: "44px",
+                  padding: "9px 24px",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "all 180ms ease",
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Accent horizontal divider line under active tabs */}
+          <div
+            style={{
+              width: "100%",
+              height: "1px",
+              background: "linear-gradient(90deg, rgba(27, 61, 255, 0.6) 0%, rgba(27, 61, 255, 0.2) 35%, transparent 75%)",
+              marginTop: "12px",
+              marginBottom: "36px",
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Accordion Box Container */}
+          <div
+            role="tabpanel"
+            style={{
+              borderRadius: "28px",
+              border: "1px solid rgba(255, 255, 255, 0.22)",
+              background: "rgba(10, 10, 14, 0.6)",
+              backdropFilter: "blur(12px)",
+              padding: "clamp(20px, 3.5vw, 40px) clamp(22px, 4vw, 48px)",
+            }}
+          >
+            {"intro" in activeOffer && activeOffer.intro && (
+              <p
+                className="prewrap"
+                style={{
+                  margin: "0 0 20px",
+                  fontSize: "16.5px",
+                  color: "rgba(255, 255, 255, 0.72)",
+                  maxWidth: "75ch",
+                  lineHeight: 1.6,
+                }}
+              >
+                {activeOffer.intro}
+              </p>
+            )}
+
+            <div>
+              {visibleOfferQs.map((f, qIdx) => {
+                const isOpen = openOfferQ === qIdx;
+                return (
+                  <div
+                    key={qIdx}
+                    style={{
+                      borderBottom: "1px solid rgba(249, 210, 48, 0.55)",
+                      transition: "border-color 200ms ease",
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenOfferQ(isOpen ? null : qIdx)}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: "16px",
+                        padding: "22px 0",
+                        fontSize: "clamp(15.5px, 1.3vw, 18px)",
+                        fontWeight: 500,
+                        color: "#FFFFFF",
+                        background: "none",
+                        border: 0,
+                        textAlign: "left",
+                        cursor: "pointer",
+                        fontFamily: "var(--font-manrope, system-ui, sans-serif)",
+                        letterSpacing: "-0.015em",
+                      }}
+                      aria-expanded={isOpen}
+                    >
+                      <span style={{ color: isOpen ? "#f9d230" : "#FFFFFF", transition: "color 180ms ease" }}>
+                        {f.q}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "24px",
+                          fontWeight: 300,
+                          color: "rgba(255, 255, 255, 0.75)",
+                          flexShrink: 0,
+                          lineHeight: 1,
+                          userSelect: "none",
+                          transition: "transform 180ms ease",
+                        }}
+                      >
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div
+                        style={{
+                          paddingBottom: "22px",
+                          color: "rgba(255, 255, 255, 0.76)",
+                          fontSize: "15.5px",
+                          lineHeight: 1.65,
+                          maxWidth: "78ch",
+                        }}
+                      >
+                        <p style={{ margin: 0, whiteSpace: "pre-line" }}>{f.a}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {activeOffer.qs.length > 5 && (
+              <div style={{ textAlign: "center", marginTop: "28px" }}>
+                <button
+                  type="button"
+                  className="press y btn-sheen"
+                  onClick={() => setOfferExpanded(!offerExpanded)}
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    gap: "16px",
-                    padding: "18px 0",
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    letterSpacing: "-0.02em",
-                    minHeight: "44px",
+                    font: "inherit",
+                    fontSize: "14.5px",
+                    fontWeight: 650,
+                    color: "#000000",
+                    background: "#f9d230",
+                    border: "1px solid #f9d230",
+                    borderRadius: "999px",
+                    minHeight: "42px",
+                    padding: "8px 24px",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 14px rgba(249, 210, 48, 0.35)",
                   }}
                 >
-                  {f.q}
-                  <svg
-                    className="chev"
-                    style={{ flex: "none" }}
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                </summary>
-                <p className="prewrap" style={{ margin: "0 0 18px", color: "#3A3A3C", maxWidth: "75ch" }}>
-                  {f.a}
-                </p>
-              </details>
-            ))}
+                  {offerExpanded ? "Show fewer questions" : `Load more (${activeOffer.qs.length - 5} more questions)`}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
+      {/* ── Breaker Divider ── */}
+      <div className="w-full overflow-hidden select-none pointer-events-none -mb-1 bg-[#000000]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/Breaker.svg"
+          alt=""
+          className="w-full h-auto block select-none pointer-events-none"
+        />
+      </div>
+
       {/* ── SECTION 4: WHY ONEIMPACT / USPs CAROUSEL ────────────────────────── */}
-      <section id="usps" style={{ background: "#F5F5F7", padding: "clamp(52px, 6.5vw, 80px) 0" }}>
+      <section id="usps" style={{ background: "#000000", color: "#FFFFFF", padding: "clamp(36px, 4.5vw, 56px) 0" }}>
         <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px)" }}>
           <div
             style={{
@@ -2781,7 +2845,7 @@ export default function SeoLandingPage() {
               justifyContent: "space-between",
               alignItems: "flex-end",
               gap: "24px",
-              marginBottom: "40px",
+              marginBottom: "32px",
             }}
           >
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -2790,20 +2854,21 @@ export default function SeoLandingPage() {
                 style={{
                   margin: 0,
                   fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-                  lineHeight: 1.05,
-                  letterSpacing: "-0.045em",
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.03em",
                   fontWeight: 700,
                   maxWidth: "16ch",
                 }}
               >
-                SEO that fits your business. Not a template.
+                <span>SEO that </span>
+                <span style={{ color: "#f9d230" }}>fits your business. Not a template.</span>
               </h2>
-              <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73", maxWidth: "50ch" }}>
+              <p style={{ margin: 0, fontSize: "18px", color: "rgba(255, 255, 255, 0.72)", maxWidth: "50ch" }}>
                 Swipe through what you get with One Impact as your SEO services provider.
               </p>
             </div>
 
-            <div style={{ display: "flex", gap: "10px" }}>
+            <div style={{ display: "flex", gap: "12px" }}>
               <button
                 type="button"
                 className="press"
@@ -2815,25 +2880,17 @@ export default function SeoLandingPage() {
                   height: "44px",
                   borderRadius: "50%",
                   border: 0,
-                  background: "rgba(0,0,0,0.08)",
+                  background: "#ffd60a",
                   color: "#000000",
-                  cursor: "pointer",
+                  cursor: carIdx === 0 ? "default" : "pointer",
+                  opacity: carIdx === 0 ? 0.35 : 1,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  boxShadow: "0 2px 8px rgba(255, 214, 10, 0.3)",
                 }}
               >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M15 6l-6 6 6 6" />
                 </svg>
               </button>
@@ -2848,103 +2905,91 @@ export default function SeoLandingPage() {
                   height: "44px",
                   borderRadius: "50%",
                   border: 0,
-                  background: "rgba(0,0,0,0.08)",
+                  background: "#ffd60a",
                   color: "#000000",
-                  cursor: "pointer",
+                  cursor: carIdx >= USP_CARDS.length - 1 ? "default" : "pointer",
+                  opacity: carIdx >= USP_CARDS.length - 1 ? 0.35 : 1,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  boxShadow: "0 2px 8px rgba(255, 214, 10, 0.3)",
                 }}
               >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M9 6l6 6-6 6" />
                 </svg>
               </button>
             </div>
           </div>
-        </div>
 
-        <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px)" }}>
-          <div
-            className="car-view"
-            ref={trackRef}
-            onScroll={handleTrackScroll}
-            aria-roledescription="carousel"
-            aria-label="Top reasons to choose One Impact"
-          >
+          <div ref={trackRef} className="car-view" onScroll={handleTrackScroll} aria-roledescription="carousel" aria-label="Top reasons to choose One Impact">
             <div className="car-track">
               {USP_CARDS.map((u, i) => (
                 <div
                   key={i}
                   className="car-card"
                   style={{
-                    background: "#FFFFFF",
-                    borderRadius: "22px",
-                    padding: "20px 22px",
-                    minHeight: "145px",
+                    background: "#08080a",
+                    border: "1.5px solid rgba(255, 255, 255, 0.12)",
+                    borderRadius: "24px",
+                    padding: "26px 24px",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "flex-start",
-                    gap: "12px",
-                    border: "1px solid rgba(0, 0, 0, 0.04)",
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.03)",
+                    justifyContent: "space-between",
+                    minHeight: "180px",
+                    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)",
                   }}
                 >
-                  {/* Top row: Icon on left, Title on right */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "16px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                      <span
+                        style={{
+                          color: "#f9d230",
+                          fontSize: "15px",
+                          fontWeight: 700,
+                          letterSpacing: "-0.01em",
+                        }}
+                      >
+                        {u.head}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        style={{
+                          width: "28px",
+                          height: "2.5px",
+                          borderRadius: "999px",
+                          background: "#2563eb",
+                        }}
+                      />
+                    </div>
                     <span
                       style={{
                         width: "44px",
                         height: "44px",
-                        borderRadius: "14px",
-                        background: u.chip,
+                        borderRadius: "12px",
+                        background: "#2563eb",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        flexShrink: 0,
+                        flex: "none",
+                        color: "#FFFFFF",
+                        boxShadow: "0 4px 12px rgba(37, 99, 235, 0.35)",
                       }}
                     >
-                      <svg
-                        width="22"
-                        height="22"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#000000"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <path d={u.d} />
                       </svg>
                     </span>
-                    <h3
-                      className="seo-heading"
-                      style={{
-                        margin: 0,
-                        fontSize: "21px",
-                        letterSpacing: "-0.03em",
-                        fontWeight: 700,
-                        lineHeight: 1.2,
-                        color: "#1D1D1F",
-                      }}
-                    >
-                      {u.head}
-                    </h3>
                   </div>
-
-                  {/* Text below */}
-                  <p style={{ margin: 0, fontSize: "14.5px", lineHeight: 1.48, color: "#515154" }}>
+                  <p
+                    style={{
+                      margin: "16px 0 0",
+                      color: "rgba(255, 255, 255, 0.78)",
+                      fontSize: "14.5px",
+                      lineHeight: 1.5,
+                      fontWeight: 500,
+                    }}
+                  >
                     {u.text}
                   </p>
                 </div>
@@ -2952,27 +2997,28 @@ export default function SeoLandingPage() {
             </div>
           </div>
 
-          {/* Progress bar */}
+          {/* Dots Indicator */}
           <div
             aria-hidden="true"
             style={{
-              marginTop: "28px",
-              height: "4px",
-              borderRadius: "999px",
-              background: "rgba(0,0,0,0.08)",
-              maxWidth: "240px",
-              overflow: "hidden",
+              display: "flex",
+              justifyContent: "center",
+              gap: "8px",
+              marginTop: "24px",
             }}
           >
-            <div
-              style={{
-                height: "100%",
-                width: `${((carIdx + 1) / USP_CARDS.length) * 100}%`,
-                background: "#000000",
-                borderRadius: "999px",
-                transition: "width 400ms cubic-bezier(0.32,0.72,0,1)",
-              }}
-            />
+            {[...Array(5)].map((_, dotI) => (
+              <span
+                key={dotI}
+                style={{
+                  width: dotI === Math.min(4, Math.floor((carIdx / Math.max(1, USP_CARDS.length - 1)) * 5)) ? "24px" : "8px",
+                  height: "8px",
+                  borderRadius: "999px",
+                  background: dotI === Math.min(4, Math.floor((carIdx / Math.max(1, USP_CARDS.length - 1)) * 5)) ? "#ffd60a" : "rgba(255, 255, 255, 0.2)",
+                  transition: "all 240ms ease",
+                }}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -2983,88 +3029,106 @@ export default function SeoLandingPage() {
       <section
         id="why"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px) 0",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "40px" }}>
-          <h2
-            className="seo-heading"
-            style={{
-              margin: 0,
-              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.045em",
-              fontWeight: 700,
-            }}
-          >
-            How optimizing for SEO helps
-          </h2>
-          <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73" }}>
-            Here’s what happens when you optimize for SEO:
-          </p>
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))",
-            gap: "16px",
-          }}
-        >
-          {HELPS_CARDS.map((h, i) => (
-            <div
-              key={i}
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
+            <h2
+              className="seo-heading"
               style={{
-                background: "#F5F5F7",
-                borderRadius: "28px",
-                padding: "30px 28px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "14px",
+                margin: 0,
+                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+                color: "#FFFFFF",
               }}
             >
-              <span
+              How optimizing for SEO <span style={{ color: "#f9d230" }}>helps</span>
+            </h2>
+            <p style={{ margin: 0, fontSize: "18px", color: "rgba(255, 255, 255, 0.72)" }}>
+              Here’s what happens when you optimize for SEO:
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+              gap: "16px",
+            }}
+          >
+            {HELPS_CARDS.map((h, i) => (
+              <div
+                key={i}
                 style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "14px",
-                  background: h.chip,
+                  background: "#08080a",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                  borderRadius: "20px",
+                  padding: "24px 22px",
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  flexDirection: "column",
+                  gap: "10px",
                 }}
               >
-                <svg
-                  width="23"
-                  height="23"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#000000"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
+                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                  <span
+                    style={{
+                      width: "42px",
+                      height: "42px",
+                      borderRadius: "12px",
+                      background: "rgba(37, 99, 235, 0.18)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flex: "none",
+                      color: "#60a5fa",
+                    }}
+                  >
+                    <svg
+                      width="21"
+                      height="21"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d={h.d} />
+                    </svg>
+                  </span>
+                  <h3
+                    className="seo-heading"
+                    style={{
+                      margin: 0,
+                      fontSize: "19px",
+                      letterSpacing: "-0.025em",
+                      fontWeight: 700,
+                      lineHeight: 1.25,
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    {h.t}
+                  </h3>
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    color: "rgba(255, 255, 255, 0.72)",
+                    fontSize: "14.5px",
+                    lineHeight: 1.55,
+                  }}
                 >
-                  <path d={h.d} />
-                </svg>
-              </span>
-              <h3
-                className="seo-heading"
-                style={{
-                  margin: "4px 0 0",
-                  fontSize: "22px",
-                  letterSpacing: "-0.03em",
-                  fontWeight: 700,
-                  lineHeight: 1.2,
-                }}
-              >
-                {h.t}
-              </h3>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "16.5px" }}>{h.a}</p>
-            </div>
-          ))}
+                  {h.a}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -3078,164 +3142,227 @@ export default function SeoLandingPage() {
       <section
         id="local"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px) 0",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(48px, 6vw, 96px) clamp(16px, 3vw, 32px)",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
         <div
           style={{
+            maxWidth: "1320px",
+            margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))",
-            gap: "clamp(32px, 6vw, 88px)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
+            gap: "clamp(36px, 6vw, 84px)",
             alignItems: "center",
           }}
         >
-          {/* Left Text */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          {/* Left Column: Copy & CTA */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "620px" }}>
             <h2
-              className="seo-heading"
               style={{
                 margin: 0,
-                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.045em",
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.4rem, 4.8vw, 4.2rem)",
+                lineHeight: 1.06,
+                letterSpacing: "-0.025em",
                 fontWeight: 700,
-                maxWidth: "13ch",
+                color: "#ffd60a",
               }}
             >
-              Local SEO That Puts You on the Map
+              Local SEO
+              <br />
+              That Puts You on the Map
             </h2>
-            <p style={{ margin: 0, fontSize: "18px", color: "#3A3A3C" }}>
+
+            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
               Trying to connect with local customers? Our Local SEO services are built to make sure your business
               appears in the right place at the right time. At One Impact, we fine-tune your digital footprint,
               optimizing your Google Business Profile, local map listings, directories, and citations, so your brand
               shows up exactly where nearby customers are looking.
             </p>
-            <p style={{ margin: 0, fontSize: "18px", color: "#3A3A3C" }}>
+
+            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
               We handle everything from geo-specific keyword strategies and managing reviews to ensuring NAP (Name,
               Address, Phone) consistency across the web. Whether you operate from one location or several, our
               tailored approach helps you attract attention locally and earn trust in your neighborhood.
             </p>
-            <p style={{ margin: 0, fontSize: "18px", fontWeight: 600 }}>
+
+            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "#FFFFFF", fontWeight: 500, margin: 0 }}>
               No shortcuts, just strategic moves that help local customers discover your business when it matters most.
             </p>
-            <a
-              className="press y btn-sheen"
-              href="#audit"
-              style={{
-                alignSelf: "flex-start",
-                background: "#f9d230",
-                color: "#000000",
-                textDecoration: "none",
-                fontWeight: 650,
-                fontSize: "17px",
-                padding: "14px 24px",
-                borderRadius: "999px",
-                minHeight: "52px",
-                display: "inline-flex",
-                alignItems: "center",
-              }}
-            >
-              Let’s make your brand the go-to name in town
-            </a>
+
+            <div style={{ paddingTop: "8px" }}>
+              <a
+                href="#audit"
+                className="group inline-flex items-center justify-center font-sans font-bold text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
+                style={{
+                  background: "#5b8def",
+                  padding: "14px 34px",
+                  borderRadius: "999px",
+                  fontSize: "16.5px",
+                  textDecoration: "none",
+                  boxShadow: "0 6px 24px rgba(91, 141, 239, 0.35)",
+                }}
+              >
+                Let’s make your brand the go-to name in town
+              </a>
+            </div>
           </div>
 
-          {/* Right Map Visual Figure */}
-          <figure
-            aria-label="Illustration of a local map search"
+          {/* Right Column: Dark Rounded Card with Collage & Process Pills */}
+          <div
             style={{
-              margin: 0,
+              background: "#08080a",
+              border: "1.5px solid rgba(255, 255, 255, 0.16)",
               borderRadius: "32px",
+              padding: "clamp(20px, 3.5vw, 36px)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              boxShadow: "0 24px 60px -20px rgba(0, 0, 0, 0.9)",
+              position: "relative",
               overflow: "hidden",
-              background: "#FFFFFF",
-              boxShadow: "0 0 0 1px rgba(0,0,0,0.06), 0 40px 80px -40px rgba(0,0,0,0.35)",
             }}
           >
-            <div
-              style={{
-                position: "relative",
-                height: "230px",
-                background: "#E8F0FF",
-                backgroundImage:
-                  "linear-gradient(115deg, transparent 46%, #FFFFFF 46%, #FFFFFF 50%, transparent 50%), linear-gradient(25deg, transparent 58%, #FFFFFF 58%, #FFFFFF 61%, transparent 61%), linear-gradient(0deg, transparent 30%, #D6E5FF 30%, #D6E5FF 44%, transparent 44%)",
-              }}
-            >
-              <span
+            {/* Collage Artwork */}
+            <div style={{ position: "relative", width: "100%", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/Mumbai-Influencer-Collage.png"
+                alt="Mumbai Local SEO Collage"
                 style={{
-                  position: "absolute",
-                  left: "22%",
-                  top: "34%",
-                  width: "22px",
-                  height: "22px",
-                  borderRadius: "50% 50% 50% 0",
-                  transform: "rotate(-45deg)",
-                  background: "#AEAEB2",
-                }}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  left: "70%",
-                  top: "60%",
-                  width: "22px",
-                  height: "22px",
-                  borderRadius: "50% 50% 50% 0",
-                  transform: "rotate(-45deg)",
-                  background: "#AEAEB2",
-                }}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  left: "47%",
-                  top: "30%",
-                  width: "36px",
-                  height: "36px",
-                  borderRadius: "50% 50% 50% 0",
-                  transform: "rotate(-45deg)",
-                  background: "#f9d230",
-                  boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
+                  width: "100%",
+                  height: "auto",
+                  maxHeight: "360px",
+                  objectFit: "contain",
+                  display: "block",
                 }}
               />
             </div>
-            <div style={{ padding: "10px 14px 14px", display: "flex", flexDirection: "column", gap: "6px" }}>
-              {MAP_ROWS.map((m, i) => (
-                <div
-                  key={i}
+
+            {/* 3 Step Pill Rows */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
+              {/* Step 1: Active */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "14px",
+                  padding: "12px 18px",
+                  borderRadius: "18px",
+                  background: "#2a2a2e",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                }}
+              >
+                <span
                   style={{
+                    flexShrink: 0,
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "50%",
+                    background: "#ffd60a",
+                    color: "#000000",
+                    fontWeight: 700,
+                    fontSize: "14px",
                     display: "flex",
                     alignItems: "center",
-                    gap: "12px",
-                    padding: "12px 10px",
-                    borderRadius: "16px",
-                    background: m.bg,
+                    justifyContent: "center",
                   }}
                 >
-                  <span
-                    style={{
-                      flex: "none",
-                      width: "34px",
-                      height: "34px",
-                      borderRadius: "50%",
-                      background: m.pin,
-                      fontSize: "13px",
-                      fontWeight: 700,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {m.n}
+                  {MAP_ROWS[0].n}
+                </span>
+                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+                  <span style={{ color: "#FFFFFF", fontWeight: 650, fontSize: "15px" }}>
+                    {MAP_ROWS[0].name}
                   </span>
-                  <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                    <span style={{ fontWeight: 650, fontSize: "16px" }}>{m.name}</span>
-                    <span style={{ fontSize: "13.5px", color: "#6E6E73", letterSpacing: 0 }}>{m.meta}</span>
-                  </div>
+                  <span style={{ color: "#A1A1A6", fontSize: "12.5px" }}>
+                    {MAP_ROWS[0].meta}
+                  </span>
                 </div>
-              ))}
+              </div>
+
+              {/* Step 2: Next */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "14px",
+                  padding: "12px 18px",
+                  borderRadius: "18px",
+                  background: "#1c1c1f",
+                  border: "1px solid rgba(255, 255, 255, 0.06)",
+                }}
+              >
+                <span
+                  style={{
+                    flexShrink: 0,
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "50%",
+                    background: "#403710",
+                    color: "#ffd60a",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {MAP_ROWS[1].n}
+                </span>
+                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+                  <span style={{ color: "rgba(255, 255, 255, 0.72)", fontWeight: 550, fontSize: "15px" }}>
+                    {MAP_ROWS[1].name}
+                  </span>
+                  <span style={{ color: "#6E6E73", fontSize: "12.5px" }}>
+                    {MAP_ROWS[1].meta}
+                  </span>
+                </div>
+              </div>
+
+              {/* Step 3: Pending */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "14px",
+                  padding: "12px 18px",
+                  borderRadius: "18px",
+                  background: "#141416",
+                  border: "1px solid rgba(255, 255, 255, 0.04)",
+                }}
+              >
+                <span
+                  style={{
+                    flexShrink: 0,
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "50%",
+                    background: "#242426",
+                    color: "rgba(255, 255, 255, 0.35)",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {MAP_ROWS[2].n}
+                </span>
+                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+                  <span style={{ color: "rgba(255, 255, 255, 0.45)", fontWeight: 550, fontSize: "15px" }}>
+                    {MAP_ROWS[2].name}
+                  </span>
+                  <span style={{ color: "#48484A", fontSize: "12.5px" }}>
+                    {MAP_ROWS[2].meta}
+                  </span>
+                </div>
+              </div>
             </div>
-          </figure>
+          </div>
         </div>
       </section>
 
@@ -3249,574 +3376,582 @@ export default function SeoLandingPage() {
       <section
         id="faq"
         style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px) 0",
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 64px) clamp(16px, 3vw, 32px)",
         }}
       >
-        <h2
-          className="seo-heading"
-          style={{
-            margin: "0 0 12px",
-            fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.045em",
-            fontWeight: 700,
-          }}
-        >
-          Questions, answered
-        </h2>
-        <p style={{ margin: "0 0 28px", fontSize: "19px", color: "#6E6E73" }}>
-          Anything else?{" "}
-          <a
-            href="https://wa.me/918369018104"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ fontWeight: 600, textDecoration: "underline" }}
-          >
-            Message us on WhatsApp
-          </a>
-          .
-        </p>
-
-        {/* FAQ Category Segmented Switcher */}
-        <div
-          role="tablist"
-          aria-label="FAQ groups"
-          style={{
-            position: "relative",
-            display: "grid",
-            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-            background: "#E8E8ED",
-            borderRadius: "999px",
-            padding: "3px",
-            width: "min(360px, 100%)",
-            marginBottom: "24px",
-          }}
-        >
-          <span
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              top: "3px",
-              bottom: "3px",
-              left: "3px",
-              width: "calc((100% - 6px) / 2)",
-              transform: `translateX(${faqIdx * 100}%)`,
-              transition: "transform 420ms cubic-bezier(0.32,0.72,0,1)",
-              background: "#FFFFFF",
-              borderRadius: "999px",
-              boxShadow: "0 3px 8px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.04)",
-            }}
-          />
-          {FAQ_GROUPS.map((grp, i) => (
-            <button
-              key={i}
-              type="button"
-              role="tab"
-              className="press"
-              aria-selected={faqIdx === i}
-              onClick={() => {
-                setFaqIdx(i);
-                setFaqExpanded(false);
-              }}
-              style={{
-                position: "relative",
-                zIndex: 1,
-                font: "inherit",
-                fontSize: "15px",
-                fontWeight: faqIdx === i ? 600 : 500,
-                color: "#000000",
-                background: "transparent",
-                border: 0,
-                borderRadius: "999px",
-                minHeight: "42px",
-                padding: "8px 14px",
-                cursor: "pointer",
-              }}
-            >
-              {grp.label}
-            </button>
-          ))}
-        </div>
-
-        {/* FAQ Accordion List (Shows 5 by default, expands on Load More) */}
-        <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #E5E5EA" }}>
-          {visibleFaqs.map((f, idx) => (
-            <details key={idx} style={{ borderTop: "1px solid #E5E5EA" }}>
-              <summary
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  gap: "16px",
-                  padding: "18px 0",
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  letterSpacing: "-0.02em",
-                  minHeight: "44px",
-                }}
-              >
-                {f.q}
-                <svg
-                  className="chev"
-                  style={{ flex: "none" }}
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-              </summary>
-              <p className="prewrap" style={{ margin: "0 0 20px", color: "#3A3A3C", maxWidth: "75ch" }}>
-                {f.a}
-              </p>
-            </details>
-          ))}
-        </div>
-
-        {/* Load More / Show Less Toggle Button */}
-        {activeFaqGroup.qs.length > 5 && (
-          <div style={{ display: "flex", justifyContent: "center", marginTop: "32px" }}>
-            <button
-              type="button"
-              className="press"
-              onClick={() => setFaqExpanded((prev) => !prev)}
-              style={{
-                font: "inherit",
-                fontSize: "15px",
-                fontWeight: 600,
-                color: "#1D1D1F",
-                background: "#FFFFFF",
-                border: "1.5px solid #D2D2D7",
-                borderRadius: "999px",
-                padding: "11px 24px",
-                minHeight: "44px",
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "10px",
-                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
-                transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)",
-              }}
-            >
-              <span>
-                {faqExpanded
-                  ? "Show fewer questions"
-                  : `Load more (${activeFaqGroup.qs.length - 5} more questions)`}
-              </span>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{
-                  transform: faqExpanded ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 250ms ease",
-                }}
-                aria-hidden="true"
-              >
-                <path d="M6 9l6 6 6-6" />
-              </svg>
-            </button>
-          </div>
-        )}
-      </section>
-
-      {/* ── SECTION 13: BOTTOM AUDIT CONVERSION SECTION ─────────────────────── */}
-      <section
-        id="audit2"
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(72px, 10vw, 128px) clamp(16px, 3vw, 32px) clamp(72px, 10vw, 120px)",
-        }}
-      >
-        <div
-          style={{
-            position: "relative",
-            overflow: "hidden",
-            background: "#F5F5F7",
-            borderRadius: "40px",
-            padding: "clamp(28px, 5vw, 72px)",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))",
-            gap: "clamp(28px, 5vw, 64px)",
-            alignItems: "center",
-          }}
-        >
-          {/* Ambient Glow */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              left: "-80px",
-              bottom: "-120px",
-              width: "360px",
-              height: "360px",
-              borderRadius: "50%",
-              background: "#f9d230",
-              opacity: 0.5,
-              filter: "blur(80px)",
-            }}
-          />
-
-          {/* Left Column */}
-          <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "18px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: "32px" }}>
             <h2
-              className="seo-heading"
+              style={{
+                margin: "0 0 12px",
+                fontFamily: "var(--font-display), Georgia, serif",
+                fontSize: "clamp(2.4rem, 4.8vw, 3.8rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+              }}
+            >
+              <span style={{ color: "#FFFFFF" }}>Questions, </span>
+              <span style={{ color: "#f9d230" }}>answered</span>
+            </h2>
+            <p
               style={{
                 margin: 0,
-                fontSize: "clamp(2.4rem, 5vw, 4.2rem)",
-                lineHeight: 1.02,
-                letterSpacing: "-0.05em",
-                fontWeight: 700,
-                maxWidth: "12ch",
+                fontSize: "clamp(15px, 1.3vw, 18px)",
+                color: "rgba(255, 255, 255, 0.72)",
+                fontFamily: "var(--font-manrope, system-ui, sans-serif)",
               }}
             >
-              Outperform your competition.
-            </h2>
-            <p style={{ margin: 0, fontSize: "19px", color: "#3A3A3C", maxWidth: "44ch" }}>
-              Get an SEO audit and see exactly what’s holding your website back. No obligation.
-            </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              Anything else?{" "}
               <a
-                className="press"
                 href="https://wa.me/918369018104"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  minHeight: "46px",
-                  padding: "10px 18px",
-                  borderRadius: "999px",
-                  background: "#000000",
-                  color: "#FFFFFF",
-                  textDecoration: "none",
+                  color: "#f9d230",
                   fontWeight: 600,
-                  fontSize: "15.5px",
+                  textDecoration: "underline",
+                  textUnderlineOffset: "3px",
                 }}
               >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M4 5h16v11H9l-5 4z" />
-                </svg>
-                +91 83690 18104
+                Message us on WhatsApp
               </a>
-              <a
-                className="press"
-                href="mailto:teamhr@oneimpact.co"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  minHeight: "46px",
-                  padding: "10px 18px",
-                  borderRadius: "999px",
-                  background: "rgba(0,0,0,0.07)",
-                  color: "#000000",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  fontSize: "15.5px",
-                }}
-              >
-                teamhr@oneimpact.co
-              </a>
-            </div>
+              .
+            </p>
           </div>
 
-          {/* Right Column: Bottom Form Card */}
+          {/* FAQ Group Pills */}
           <div
-            className="form-card"
+            className="scrollrow"
+            role="tablist"
+            aria-label="FAQ groups"
             style={{
-              position: "relative",
-              background: "#000000",
-              color: "#FFFFFF",
-              borderRadius: "30px",
-              padding: "clamp(24px, 3.2vw, 36px)",
-              boxShadow: "0 1px 0 rgba(255,255,255,0.12) inset, 0 40px 80px -40px rgba(0,0,0,0.5)",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              overflowX: "auto",
+              paddingBottom: "10px",
+              justifyContent: "flex-start",
+              scrollbarWidth: "none",
             }}
           >
-            {!sent2 ? (
-              <form
-                onSubmit={handleSubmit2}
-                style={{ display: "flex", flexDirection: "column", gap: "14px", position: "relative", zIndex: 1 }}
+            {FAQ_GROUPS.map((g, i) => (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                className="press"
+                aria-selected={faqIdx === i}
+                onClick={() => {
+                  setFaqIdx(i);
+                  setFaqExpanded(false);
+                  setOpenFaqQ(null);
+                }}
+                style={{
+                  font: "inherit",
+                  fontSize: "14.5px",
+                  fontWeight: faqIdx === i ? 700 : 500,
+                  color: faqIdx === i ? "#000000" : "rgba(255, 255, 255, 0.82)",
+                  background: faqIdx === i ? "#f9d230" : "rgba(255, 255, 255, 0.08)",
+                  border: faqIdx === i ? "1px solid #f9d230" : "1px solid rgba(255, 255, 255, 0.18)",
+                  boxShadow: faqIdx === i ? "0 4px 18px rgba(249, 210, 48, 0.35)" : "none",
+                  borderRadius: "999px",
+                  minHeight: "44px",
+                  padding: "9px 24px",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "all 180ms ease",
+                }}
               >
-                <h3
-                  className="seo-heading"
-                  style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.035em", fontWeight: 700 }}
-                >
-                  Get your SEO audit
-                </h3>
+                {g.label}
+              </button>
+            ))}
+          </div>
 
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="bottom-name" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0" }}>
-                    Your name
-                  </label>
-                  <input
-                    id="bottom-name"
-                    className="fd"
-                    type="text"
-                    autoComplete="name"
-                    placeholder="First and last name"
-                    value={name2}
-                    onChange={(e) => setName2(e.target.value)}
-                    onBlur={() => setTouched2((t) => ({ ...t, name: true }))}
+          {/* Accent horizontal divider line under active tabs */}
+          <div
+            style={{
+              width: "100%",
+              height: "1px",
+              background: "linear-gradient(90deg, rgba(27, 61, 255, 0.6) 0%, rgba(27, 61, 255, 0.2) 35%, transparent 75%)",
+              marginTop: "12px",
+              marginBottom: "36px",
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Accordion Box Container */}
+          <div
+            role="tabpanel"
+            style={{
+              borderRadius: "28px",
+              border: "1px solid rgba(255, 255, 255, 0.22)",
+              background: "rgba(10, 10, 14, 0.6)",
+              backdropFilter: "blur(12px)",
+              padding: "clamp(20px, 3.5vw, 40px) clamp(22px, 4vw, 48px)",
+            }}
+          >
+            <div>
+              {visibleFaqs.map((f, qIdx) => {
+                const isOpen = openFaqQ === qIdx;
+                return (
+                  <div
+                    key={qIdx}
                     style={{
-                      font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showName2Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
-                      width: "100%",
+                      borderBottom: "1px solid rgba(249, 210, 48, 0.55)",
+                      transition: "border-color 200ms ease",
                     }}
-                  />
-                  {showName2Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
-                      Enter your name so we know who to reply to
-                    </span>
-                  )}
-                </div>
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaqQ(isOpen ? null : qIdx)}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: "16px",
+                        padding: "22px 0",
+                        fontSize: "clamp(15.5px, 1.3vw, 18px)",
+                        fontWeight: 500,
+                        color: "#FFFFFF",
+                        background: "none",
+                        border: 0,
+                        textAlign: "left",
+                        cursor: "pointer",
+                        fontFamily: "var(--font-manrope, system-ui, sans-serif)",
+                        letterSpacing: "-0.015em",
+                      }}
+                      aria-expanded={isOpen}
+                    >
+                      <span style={{ color: isOpen ? "#f9d230" : "#FFFFFF", transition: "color 180ms ease" }}>
+                        {f.q}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "24px",
+                          fontWeight: 300,
+                          color: "rgba(255, 255, 255, 0.75)",
+                          flexShrink: 0,
+                          lineHeight: 1,
+                          userSelect: "none",
+                          transition: "transform 180ms ease",
+                        }}
+                      >
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div
+                        style={{
+                          paddingBottom: "22px",
+                          color: "rgba(255, 255, 255, 0.76)",
+                          fontSize: "15.5px",
+                          lineHeight: 1.65,
+                          maxWidth: "78ch",
+                        }}
+                      >
+                        <p style={{ margin: 0, whiteSpace: "pre-line" }}>{f.a}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
 
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="bottom-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0" }}>
-                    Phone or WhatsApp number
-                  </label>
-                  <input
-                    id="bottom-phone"
-                    className="fd"
-                    type="tel"
-                    inputMode="tel"
-                    autoComplete="tel"
-                    placeholder="98XXX XXXXX"
-                    value={phone2}
-                    onChange={(e) => setPhone2(e.target.value)}
-                    onBlur={() => setTouched2((t) => ({ ...t, phone: true }))}
-                    style={{
-                      font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showPhone2Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
-                      width: "100%",
-                    }}
-                  />
-                  {showPhone2Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
-                      Enter a 10-digit mobile number
-                    </span>
-                  )}
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="bottom-url" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0" }}>
-                    Website address
-                  </label>
-                  <input
-                    id="bottom-url"
-                    className="fd"
-                    type="text"
-                    placeholder="yourbrand.com"
-                    value={url2}
-                    onChange={(e) => setUrl2(e.target.value)}
-                    onBlur={() => setTouched2((t) => ({ ...t, url: true }))}
-                    style={{
-                      font: "inherit",
-                      fontSize: "17px",
-                      height: "50px",
-                      padding: "0 16px",
-                      borderRadius: "14px",
-                      border: `1.5px solid ${showUrl2Err ? "#FF9F95" : "#3A3A3C"}`,
-                      background: "#1C1C1E",
-                      color: "#FFFFFF",
-                      width: "100%",
-                    }}
-                  />
-                  {showUrl2Err && (
-                    <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>
-                      Enter your website address, like yourbrand.com
-                    </span>
-                  )}
-                </div>
-
+            {activeFaqGroup.qs.length > 5 && (
+              <div style={{ textAlign: "center", marginTop: "28px" }}>
                 <button
-                  type="submit"
+                  type="button"
                   className="press y btn-sheen"
+                  onClick={() => setFaqExpanded(!faqExpanded)}
                   style={{
                     font: "inherit",
-                    fontSize: "17px",
+                    fontSize: "14.5px",
                     fontWeight: 650,
                     color: "#000000",
                     background: "#f9d230",
-                    border: 0,
+                    border: "1px solid #f9d230",
                     borderRadius: "999px",
-                    minHeight: "54px",
+                    minHeight: "42px",
+                    padding: "8px 24px",
                     cursor: "pointer",
-                    marginTop: "4px",
+                    boxShadow: "0 4px 14px rgba(249, 210, 48, 0.35)",
                   }}
                 >
-                  Get my SEO audit
+                  {faqExpanded ? "Show fewer questions" : `Load more (${activeFaqGroup.qs.length - 5} more questions)`}
                 </button>
-              </form>
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "14px",
-                  alignItems: "flex-start",
-                  padding: "10px 0",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                <span
-                  style={{
-                    width: "52px",
-                    height: "52px",
-                    borderRadius: "50%",
-                    background: "#f9d230",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <svg
-                    width="26"
-                    height="26"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#000000"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M5 12.5l4.5 4.5L19 7.5" />
-                  </svg>
-                </span>
-                <h3
-                  role="status"
-                  className="seo-heading"
-                  style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}
-                >
-                  Audit requested
-                </h3>
-                <p style={{ margin: 0, color: "#C7C7CC" }}>
-                  Thanks, {name2}. We’ll review {url2} and get in touch on {phone2}.
-                </p>
               </div>
             )}
           </div>
         </div>
       </section>
 
-      {/*  FOOTER  */}
-      <footer style={{ background: "#F5F5F7", color: "#000000", fontSize: "13.5px", letterSpacing: 0 }}>
+      {/* ── SECTION 13: BOTTOM AUDIT CONVERSION SECTION ─────────────────────── */}
+      <section
+        id="audit2"
+        style={{
+          width: "100%",
+          backgroundColor: "#000000",
+          padding: "clamp(48px, 6vw, 84px) 0",
+        }}
+      >
         <div
           style={{
             maxWidth: "1360px",
             margin: "0 auto",
-            padding: "44px clamp(16px, 3vw, 32px) 28px",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-            gap: "28px",
+            padding: "0 clamp(16px, 3vw, 32px)",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "12px" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/LOGO/oneimpact-logo.webp"
-              alt="One Impact"
+          <div
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              background: "#000000",
+              border: "1.5px solid #2563EB",
+              borderRadius: "36px",
+              padding: "clamp(28px, 4.5vw, 64px)",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))",
+              gap: "clamp(28px, 5vw, 64px)",
+              alignItems: "center",
+            }}
+          >
+            {/* Left Column */}
+            <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "20px" }}>
+              <h2
+                className="seo-heading"
+                style={{
+                  margin: 0,
+                  fontSize: "clamp(2.4rem, 4.8vw, 4.4rem)",
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.04em",
+                  fontWeight: 700,
+                  color: "#FFFFFF",
+                }}
+              >
+                Outperform your{" "}
+                <span
+                  style={{
+                    color: "#f9d230",
+                    fontStyle: "italic",
+                    fontFamily: "var(--font-serif), Georgia, serif",
+                  }}
+                >
+                  competition.
+                </span>
+              </h2>
+              <p
+                style={{
+                  fontSize: "17.5px",
+                  color: "rgba(255, 255, 255, 0.72)",
+                  maxWidth: "44ch",
+                  margin: 0,
+                  lineHeight: 1.55,
+                }}
+              >
+                Get an SEO audit and see exactly what’s holding your website back. No obligation.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" }}>
+                <a
+                  className="press"
+                  href="https://wa.me/918369018104"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    minHeight: "46px",
+                    padding: "6px 20px 6px 7px",
+                    borderRadius: "999px",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(255, 255, 255, 0.14)",
+                    color: "#FFFFFF",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      background: "#f9d230",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#000000",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  +91 83690 18104
+                </a>
+                <a
+                  className="press"
+                  href="mailto:teamhr@oneimpact.co"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    minHeight: "46px",
+                    padding: "6px 20px 6px 7px",
+                    borderRadius: "999px",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(255, 255, 255, 0.14)",
+                    color: "#FFFFFF",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      background: "#f9d230",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#000000",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </span>
+                  teamhr@oneimpact.co
+                </a>
+              </div>
+            </div>
+
+            {/* Right Column: Bottom Form Card */}
+            <div
+              className="form-card"
               style={{
-                display: "block",
-                height: "32px",
-                width: "auto",
-                maxWidth: "110px",
-                objectFit: "contain",
-                alignSelf: "flex-start",
+                position: "relative",
+                background: "#0c0e14",
+                border: "1px solid rgba(255, 255, 255, 0.12)",
+                borderRadius: "28px",
+                padding: "clamp(24px, 3.2vw, 36px)",
+                color: "#FFFFFF",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.12) inset, 0 40px 80px -40px rgba(0,0,0,0.5)",
               }}
-            />
-            <span style={{ color: "#6E6E73" }}>360-degree digital marketing for that ONE big bang IMPACT.</span>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
-            <span style={{ fontWeight: 600 }}>Services</span>
-            <Link href="/seo" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              SEO and AIO
-            </Link>
-            <Link href="/social-media-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Social media
-            </Link>
-            <Link href="/influencer-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Influencer marketing
-            </Link>
-            <Link href="/branding-services" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Branding and design
-            </Link>
-            <Link href="/web-development" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Website development
-            </Link>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
-            <span style={{ fontWeight: 600 }}>Company</span>
-            <Link href="/#about-banner" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              About us
-            </Link>
-            <Link href="/#proof" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Why us
-            </Link>
-            <Link href="/#showreel" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              Blog
-            </Link>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
-            <span style={{ fontWeight: 600 }}>Contact</span>
-            <span style={{ color: "#6E6E73" }}>Mumbai, Maharashtra</span>
-            <a href="mailto:teamhr@oneimpact.co" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              teamhr@oneimpact.co
-            </a>
-            <a href="tel:+918369018104" style={{ color: "#6E6E73", textDecoration: "none" }}>
-              +91 83690 18104
-            </a>
+            >
+              {!sent2 ? (
+                <form
+                  onSubmit={handleSubmit2}
+                  style={{ display: "flex", flexDirection: "column", gap: "14px", position: "relative", zIndex: 1 }}
+                >
+                  <h3
+                    className="seo-heading"
+                    style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.035em", fontWeight: 700, color: "#FFFFFF" }}
+                  >
+                    Get your SEO audit
+                  </h3>
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="bottom-name" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      Your name
+                    </label>
+                    <input
+                      id="bottom-name"
+                      className="fd"
+                      type="text"
+                      autoComplete="name"
+                      placeholder="First and last name"
+                      value={name2}
+                      onChange={(e) => setName2(e.target.value)}
+                      onBlur={() => setTouched2((t) => ({ ...t, name: true }))}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 16px",
+                        borderRadius: "12px",
+                        border: `1.5px solid ${showName2Err ? "#FF9F95" : "rgba(255, 255, 255, 0.12)"}`,
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    />
+                    {showName2Err && (
+                      <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>
+                        Enter your name so we know who to reply to
+                      </span>
+                    )}
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="bottom-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      Phone or WhatsApp number
+                    </label>
+                    <input
+                      id="bottom-phone"
+                      className="fd"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      placeholder="98XXX XXXXX"
+                      value={phone2}
+                      onChange={(e) => setPhone2(e.target.value)}
+                      onBlur={() => setTouched2((t) => ({ ...t, phone: true }))}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 16px",
+                        borderRadius: "12px",
+                        border: `1.5px solid ${showPhone2Err ? "#FF9F95" : "rgba(255, 255, 255, 0.12)"}`,
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    />
+                    {showPhone2Err && (
+                      <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>
+                        Enter a 10-digit mobile number
+                      </span>
+                    )}
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="bottom-url" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      Website address
+                    </label>
+                    <input
+                      id="bottom-url"
+                      className="fd"
+                      type="text"
+                      placeholder="yourbrand.com"
+                      value={url2}
+                      onChange={(e) => setUrl2(e.target.value)}
+                      onBlur={() => setTouched2((t) => ({ ...t, url: true }))}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 16px",
+                        borderRadius: "12px",
+                        border: `1.5px solid ${showUrl2Err ? "#FF9F95" : "rgba(255, 255, 255, 0.12)"}`,
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    />
+                    {showUrl2Err && (
+                      <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>
+                        Enter your website address, like yourbrand.com
+                      </span>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="press y btn-sheen"
+                    style={{
+                      font: "inherit",
+                      fontSize: "16.5px",
+                      fontWeight: 650,
+                      color: "#000000",
+                      background: "#f9d230",
+                      border: 0,
+                      borderRadius: "999px",
+                      minHeight: "52px",
+                      cursor: "pointer",
+                      marginTop: "6px",
+                    }}
+                  >
+                    Get my SEO audit
+                  </button>
+                </form>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "14px",
+                    alignItems: "flex-start",
+                    padding: "10px 0",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "52px",
+                      height: "52px",
+                      borderRadius: "50%",
+                      background: "#f9d230",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <svg
+                      width="26"
+                      height="26"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#000000"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                  </span>
+                  <h3
+                    role="status"
+                    className="seo-heading"
+                    style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700, color: "#FFFFFF" }}
+                  >
+                    Audit requested
+                  </h3>
+                  <p style={{ margin: 0, color: "#C7C7CC" }}>
+                    Thanks, {name2}. We’ll review {url2} and get in touch on {phone2}.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <div
-          style={{
-            maxWidth: "1360px",
-            margin: "0 auto",
-            padding: "16px clamp(16px, 3vw, 32px) 28px",
-            borderTop: "1px solid #D2D2D7",
-            color: "#6E6E73",
-          }}
-        >
-          © 2026 One Impact. All rights reserved.
-        </div>
-      </footer>
+      </section>
+
+      {/*  FOOTER  */}
+      <Footer />
 
       {/* ── MOBILE STICKY BAR ───────────────────────────────────────────────── */}
       <div

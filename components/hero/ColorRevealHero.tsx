@@ -379,6 +379,9 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
             muted
             loop
             playsInline
+            style={{
+              filter: "brightness(1.05) contrast(1.05) saturate(1.15)",
+            }}
           />
 
           {/* Layer 2: Grayscale desktop video (masked by cursor) */}
@@ -401,7 +404,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
               loop
               playsInline
               style={{
-                filter: "brightness(1.05) contrast(1.05) saturate(1.15)",
+                filter: "grayscale(100%) contrast(1.15) brightness(0.85)",
               }}
             />
           </div>

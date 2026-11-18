@@ -10,13 +10,16 @@ interface SmoothScrollProviderProps {
   children: React.ReactNode;
 }
 
-/** Detect touch-primary devices */
+/** Detect touch-only mobile devices (phones/tablets without a mouse/trackpad) */
 function isTouchPrimary(): boolean {
   if (typeof window === "undefined") return false;
+  // If user has a fine pointer (mouse or precision trackpad), keep smooth scroll enabled
+  if (window.matchMedia && window.matchMedia("(pointer: fine)").matches) {
+    return false;
+  }
+  // Coarse pointer without hover capability = true touch device (e.g. mobile phone)
   return (
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    window.matchMedia("(pointer: coarse)").matches
+    window.matchMedia?.("(pointer: coarse) and (hover: none)").matches ?? false
   );
 }
 
@@ -45,6 +48,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
     requestAnimationFrame(() => {
       setLenis(lenisInstance);
+      ScrollTrigger.refresh();
     });
 
     // Connect ScrollTrigger to update on Lenis scroll
@@ -58,6 +62,7 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     };
 
     gsap.ticker.add(updateTicker);
+    // Disable lag smoothing to prevent visual desync in heavy scroll animations
     gsap.ticker.lagSmoothing(0);
 
     return () => {

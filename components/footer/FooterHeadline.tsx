@@ -4,7 +4,11 @@ import React, { useRef } from "react";
 import { gsap } from "@/gsap";
 import { useGSAP } from "@gsap/react";
 
-export function FooterHeadline() {
+interface FooterHeadlineProps {
+  title?: string;
+}
+
+export function FooterHeadline({ title = "Let's play." }: FooterHeadlineProps) {
   const headlineRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
@@ -36,7 +40,7 @@ export function FooterHeadline() {
         ref={headlineRef}
         className="font-display text-[clamp(2rem,7vw,7rem)] font-black text-off-white leading-[0.95] tracking-tighter opacity-0"
       >
-        Let&apos;s talk.
+        {title}
       </h2>
     </div>
   );

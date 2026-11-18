@@ -7,10 +7,10 @@ import { GlassBreakIntro } from "@/components/intro/GlassBreakIntro";
 import { Hero } from "@/components/hero/Hero";
 import { Showreel } from "@/components/showroom/Showreel";
 import { AboutBanner } from "@/components/showroom/AboutBanner";
-import { CardSwapSection } from "@/components/showroom/CardSwapSection";
 import { ContactFormSection } from "@/components/contact/ContactFormSection";
+import { LetsPlaySection } from "@/components/common/LetsPlaySection";
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 
 /** Detect mobile/touch-primary devices so desktop intro never runs on mobile */
 function isMobileExperience(): boolean {
@@ -55,11 +55,11 @@ export default function Home() {
         {/* About Banner + Client Logos */}
         <AboutBanner />
 
-        {/* Featured Projects Card Swap */}
-        <CardSwapSection />
-
         {/* Project Inquiry & Contact Form Section */}
         <ContactFormSection />
+
+        {/* Interactive Sticker Playground ("Let's play") */}
+        <LetsPlaySection />
       </main>
 
       <Footer />

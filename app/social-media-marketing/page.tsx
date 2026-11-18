@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Navbar } from "@/components/common/Navbar";
+import { Footer } from "@/components/common/Footer";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
 
 const CLIENT_LOGOS = [
@@ -322,10 +323,12 @@ export default function SmmLandingPage() {
   // State for Offer tabs
   const [offerIdx, setOfferIdx] = useState(0);
   const [offerExpanded, setOfferExpanded] = useState(false);
+  const [openOfferQ, setOpenOfferQ] = useState<number | null>(null);
 
   // State for FAQ tabs
   const [faqIdx, setFaqIdx] = useState(0);
   const [faqExpanded, setFaqExpanded] = useState(false);
+  const [openFaqQ, setOpenFaqQ] = useState<number | null>(null);
 
   // Carousel track state
   const [carIdx, setCarIdx] = useState(0);
@@ -378,7 +381,7 @@ export default function SmmLandingPage() {
   // Carousel scroll helpers
   const scrollCarousel = (dir: "prev" | "next") => {
     if (!trackRef.current) return;
-    const cardWidth = 336;
+    const cardWidth = 338;
     const newIdx = dir === "next"
       ? Math.min(USP_CARDS.length - 1, carIdx + 1)
       : Math.max(0, carIdx - 1);
@@ -391,7 +394,7 @@ export default function SmmLandingPage() {
 
   const handleTrackScroll = () => {
     if (!trackRef.current) return;
-    const cardWidth = 336;
+    const cardWidth = 338;
     const idx = Math.round(trackRef.current.scrollLeft / cardWidth);
     setCarIdx(Math.min(USP_CARDS.length - 1, Math.max(0, idx)));
   };
@@ -412,9 +415,9 @@ export default function SmmLandingPage() {
     <div
       className="smm-landing-root"
       style={{
-        background: "#FFFFFF",
-        color: "#000000",
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif",
+        background: "#000000",
+        color: "#FFFFFF",
+        fontFamily: "var(--font-manrope, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif)",
         fontSize: "17px",
         lineHeight: 1.5,
         letterSpacing: "-0.01em",
@@ -450,12 +453,12 @@ export default function SmmLandingPage() {
         .smm-landing-root textarea {
           cursor: text !important;
         }
-        .smm-landing-root a:not(header a):not(.bg-black) {
-          color: #000000;
+        .smm-landing-root a:not(header a):not(footer a):not(.bg-black) {
+          color: #FFFFFF;
           transition: color 150ms ease;
         }
-        .smm-landing-root a:not(header a):not(.bg-black):hover {
-          color: #3a3a3c;
+        .smm-landing-root a:not(header a):not(footer a):not(.bg-black):hover {
+          color: #f9d230;
         }
         .smm-landing-root .press {
           transition: transform 100ms ease-out, background-color 150ms ease, box-shadow 150ms ease;
@@ -475,7 +478,7 @@ export default function SmmLandingPage() {
           background-color: #fae066 !important;
         }
         .smm-landing-root :focus-visible {
-          outline: 3px solid #4066c6;
+          outline: 3px solid #2563eb;
           outline-offset: 3px;
         }
         .smm-landing-root .fd::placeholder {
@@ -513,9 +516,38 @@ export default function SmmLandingPage() {
         }
         .smm-landing-root .hero-grid {
           display: grid;
-          grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-          gap: clamp(32px, 5vw, 80px);
+          grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+          gap: clamp(32px, 5vw, 72px);
           align-items: center;
+        }
+        .smm-landing-root .note-paper-card {
+          position: relative;
+          width: 100%;
+          max-width: 680px;
+          margin: 0 auto;
+          padding: 96px 12% 76px;
+        }
+        .smm-landing-root .note-paper-img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -52%);
+          width: 138%;
+          height: auto;
+          max-width: none;
+          pointer-events: none;
+          user-select: none;
+          z-index: 0;
+        }
+        @media (max-width: 640px) {
+          .smm-landing-root .note-paper-card {
+            padding: 88px 10% 68px;
+          }
+          .smm-landing-root .note-paper-img {
+            width: auto;
+            height: 146%;
+            min-width: 138%;
+          }
         }
         .smm-landing-root .scrollrow {
           display: flex;
@@ -540,7 +572,7 @@ export default function SmmLandingPage() {
         }
         .smm-landing-root .car-track {
           display: flex;
-          gap: 16px;
+          gap: 18px;
         }
         .smm-landing-root .car-card {
           flex: none;
@@ -678,8 +710,7 @@ export default function SmmLandingPage() {
           }
         }
         .smm-heading {
-          font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display",
-            "Segoe UI", system-ui, sans-serif;
+          font-family: var(--font-display), Georgia, serif;
         }
       `}</style>
 
@@ -687,69 +718,298 @@ export default function SmmLandingPage() {
       <Navbar />
 
       {/* ── HERO SECTION */}
-      <section id="top" style={{ position: "relative", overflow: "hidden", background: "#FFFFFF" }}>
-        <div aria-hidden="true" style={{ position: "absolute", top: "40px", right: "6%", width: "380px", height: "380px", borderRadius: "50%", background: "#f9d230", opacity: 0.55, filter: "blur(70px)" }} />
-        <div aria-hidden="true" style={{ position: "absolute", top: "260px", right: "24%", width: "320px", height: "320px", borderRadius: "50%", background: "#4066c6", opacity: 0.55, filter: "blur(80px)" }} />
-
-        <div className="hero-grid" style={{ position: "relative", maxWidth: "1360px", margin: "0 auto", padding: "clamp(92px, 10vw, 120px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 68px)" }}>
+      <section id="top" style={{ position: "relative", overflow: "hidden", background: "#000000", color: "#FFFFFF" }}>
+        <div
+          className="hero-grid"
+          style={{
+            position: "relative",
+            maxWidth: "1360px",
+            margin: "0 auto",
+            padding: "clamp(100px, 10vw, 128px) clamp(16px, 3vw, 32px) clamp(56px, 7vw, 88px)",
+          }}
+        >
           {/* Left Column */}
           <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
-            <span style={{ fontSize: "17px", fontWeight: 600, color: "#6E6E73", letterSpacing: "-0.01em" }}>
-              Social media services by One Impact
-            </span>
+            <div style={{ display: "inline-flex", flexDirection: "column", gap: "8px", alignItems: "flex-start" }}>
+              <span style={{ fontSize: "15px", fontWeight: 500, color: "rgba(255, 255, 255, 0.72)", letterSpacing: "-0.01em" }}>
+                Social media services by OneImpact
+              </span>
+              <span
+                aria-hidden="true"
+                style={{
+                  display: "block",
+                  width: "min(280px, 70%)",
+                  height: "1.5px",
+                  background: "linear-gradient(90deg, #6B8CE5 0%, rgba(107, 140, 229, 0) 100%)",
+                }}
+              />
+            </div>
 
-            <h1 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.6rem, 5.2vw, 4.8rem)", lineHeight: 1.05, letterSpacing: "-0.04em", fontWeight: 700, maxWidth: "18ch" }}>
-              Social Media Marketing That Stops the Scroll
+            <h1
+              className="smm-heading"
+              style={{
+                margin: 0,
+                fontSize: "clamp(2.6rem, 5.2vw, 4.8rem)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.035em",
+                fontWeight: 700,
+                maxWidth: "18ch",
+              }}
+            >
+              <span style={{ color: "#FFFFFF" }}>Social Media Marketing That </span>
+              <span style={{ color: "#f9d230" }}>Stops the Scroll</span>
             </h1>
 
+            <p style={{ margin: 0, fontSize: "clamp(15px, 1.3vw, 18px)", lineHeight: 1.6, color: "rgba(255, 255, 255, 0.78)", maxWidth: "48ch" }}>
+              We help brands build meaningful connections with their audience, turning casual scrollers into engaged followers and loyal customers.
+            </p>
+
             {/* CTAs */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", alignItems: "center", paddingTop: "4px" }}>
-              <a className="press" href="https://wa.me/918369018104" target="_blank" rel="noopener noreferrer" style={{ color: "#000000", textDecoration: "none", fontWeight: 600, fontSize: "17px", padding: "13px 22px", borderRadius: "999px", minHeight: "50px", display: "inline-flex", alignItems: "center", gap: "8px", background: "rgba(0,0,0,0.06)" }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" /></svg>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "20px",
+                alignItems: "center",
+                paddingTop: "8px",
+              }}
+            >
+              <a
+                className="press"
+                href="https://wa.me/918369018104"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "#FFFFFF",
+                  textDecoration: "none",
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  padding: "12px 22px",
+                  borderRadius: "999px",
+                  minHeight: "48px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  background: "#6B8CE5",
+                }}
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#111111"
+                  strokeWidth="1.9"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M4 5h16v11H9l-5 4z" />
+                </svg>
                 Chat on WhatsApp
               </a>
-              <a href="#usps" style={{ color: "#000000", fontWeight: 600, fontSize: "17px", textDecoration: "none", padding: "13px 4px", minHeight: "50px", display: "inline-flex", alignItems: "center", gap: "4px" }}>
-                Why One Impact
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+              <a
+                href="#usps"
+                style={{
+                  color: "#FFFFFF",
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  textDecoration: "none",
+                  padding: "12px 4px",
+                  minHeight: "48px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "4px",
+                }}
+              >
+                Why OneImpact
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
               </a>
             </div>
           </div>
 
-          {/* Hero Form Card */}
-          <div id="audit" className="form-card" style={{ background: "rgba(0,0,0,0.9)", backdropFilter: "blur(30px) saturate(160%)", WebkitBackdropFilter: "blur(30px) saturate(160%)", borderRadius: "32px", padding: "clamp(24px, 3.2vw, 36px)", color: "#FFFFFF", boxShadow: "0 1px 0 rgba(255,255,255,0.12) inset, 0 50px 100px -40px rgba(0,0,0,0.55), 0 20px 40px -24px rgba(0,0,0,0.35)" }}>
+          {/* Hero Form Card on Note_paper.png (Diary) */}
+          <div
+            id="audit"
+            className="note-paper-card"
+            style={{ color: "#111111" }}
+          >
+            {/* Note paper background image */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/Note_paper.png"
+              alt=""
+              aria-hidden="true"
+              draggable={false}
+              className="note-paper-img"
+            />
+
             {!sent1 ? (
-              <form onSubmit={handleSubmit1} style={{ display: "flex", flexDirection: "column", gap: "16px", position: "relative", zIndex: 1 }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#f9d230", letterSpacing: 0 }}>For your brand</span>
-                  <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(1.6rem, 2.4vw, 2rem)", lineHeight: 1.12, letterSpacing: "-0.035em", fontWeight: 700 }}>Get your social media audit</h2>
-                  <p style={{ fontSize: "15.5px", color: "#C7C7CC", letterSpacing: 0, margin: 0 }}>A real person from our team reviews your social media and gets back to you.</p>
+              <form
+                onSubmit={handleSubmit1}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <span style={{ fontSize: "14px", fontWeight: 600, color: "#8B6508", letterSpacing: 0 }}>
+                    Free for your brand
+                  </span>
+                  <h2
+                    className="smm-heading"
+                    style={{
+                      margin: 0,
+                      fontSize: "clamp(1.45rem, 2.2vw, 1.85rem)",
+                      lineHeight: 1.12,
+                      letterSpacing: "-0.035em",
+                      fontWeight: 700,
+                      color: "#111111",
+                    }}
+                  >
+                    Get your social media audit
+                  </h2>
+                  <p style={{ margin: 0, fontSize: "14px", color: "#555558", letterSpacing: 0 }}>
+                    A real person from our team reviews your social media and gets back to you.
+                  </p>
                 </div>
 
                 {/* Name */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-name" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>Your name</label>
-                  <input id="hero-name" className="fd" type="text" placeholder="First and last name" value={name1} onChange={(e) => setName1(e.target.value)} onBlur={() => setTouched1((t) => ({ ...t, name: true }))} style={{ font: "inherit", fontSize: "17px", height: "50px", padding: "0 16px", borderRadius: "14px", border: `1.5px solid ${showName1Err ? "#FF9F95" : "#3A3A3C"}`, background: "#1C1C1E", color: "#FFFFFF", width: "100%" }} />
-                  {showName1Err && <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>Enter your name so we know who to reply to</span>}
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="hero-name" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
+                    Your name
+                  </label>
+                  <input
+                    id="hero-name"
+                    className="fd"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="First and last name"
+                    value={name1}
+                    onChange={(e) => setName1(e.target.value)}
+                    onBlur={() => setTouched1((t) => ({ ...t, name: true }))}
+                    style={{
+                      font: "inherit",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 14px",
+                      borderRadius: "12px",
+                      border: `1.5px solid ${showName1Err ? "#DC2626" : "#D2D2D7"}`,
+                      background: "#FFFFFF",
+                      color: "#111111",
+                      width: "100%",
+                    }}
+                  />
+                  {showName1Err && (
+                    <span role="alert" style={{ fontSize: "12.5px", color: "#DC2626" }}>
+                      Enter your name so we know who to reply to
+                    </span>
+                  )}
                 </div>
 
                 {/* Phone */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>Phone or WhatsApp number</label>
-                  <input id="hero-phone" className="fd" type="tel" inputMode="tel" placeholder="98XXX XXXXX" value={phone1} onChange={(e) => setPhone1(e.target.value)} onBlur={() => setTouched1((t) => ({ ...t, phone: true }))} style={{ font: "inherit", fontSize: "17px", height: "50px", padding: "0 16px", borderRadius: "14px", border: `1.5px solid ${showPhone1Err ? "#FF9F95" : "#3A3A3C"}`, background: "#1C1C1E", color: "#FFFFFF", width: "100%" }} />
-                  {showPhone1Err && <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>Enter a 10-digit mobile number</span>}
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="hero-phone" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
+                    Phone or WhatsApp number
+                  </label>
+                  <input
+                    id="hero-phone"
+                    className="fd"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    placeholder="98XXX XXXXX"
+                    value={phone1}
+                    onChange={(e) => setPhone1(e.target.value)}
+                    onBlur={() => setTouched1((t) => ({ ...t, phone: true }))}
+                    style={{
+                      font: "inherit",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 14px",
+                      borderRadius: "12px",
+                      border: `1.5px solid ${showPhone1Err ? "#DC2626" : "#D2D2D7"}`,
+                      background: "#FFFFFF",
+                      color: "#111111",
+                      width: "100%",
+                    }}
+                  />
+                  {showPhone1Err && (
+                    <span role="alert" style={{ fontSize: "12.5px", color: "#DC2626" }}>
+                      Enter a 10-digit mobile number
+                    </span>
+                  )}
                 </div>
 
                 {/* Website or Instagram handle */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-handle" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>Website or Instagram handle</label>
-                  <input id="hero-handle" className="fd" type="text" placeholder="@yourbrand" value={handle1} onChange={(e) => setHandle1(e.target.value)} onBlur={() => setTouched1((t) => ({ ...t, handle: true }))} style={{ font: "inherit", fontSize: "17px", height: "50px", padding: "0 16px", borderRadius: "14px", border: `1.5px solid ${showHandle1Err ? "#FF9F95" : "#3A3A3C"}`, background: "#1C1C1E", color: "#FFFFFF", width: "100%" }} />
-                  {showHandle1Err && <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>Enter your website or Instagram handle</span>}
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="hero-handle" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
+                    Website or Instagram handle
+                  </label>
+                  <input
+                    id="hero-handle"
+                    className="fd"
+                    type="text"
+                    placeholder="@yourbrand"
+                    value={handle1}
+                    onChange={(e) => setHandle1(e.target.value)}
+                    onBlur={() => setTouched1((t) => ({ ...t, handle: true }))}
+                    style={{
+                      font: "inherit",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 14px",
+                      borderRadius: "12px",
+                      border: `1.5px solid ${showHandle1Err ? "#DC2626" : "#D2D2D7"}`,
+                      background: "#FFFFFF",
+                      color: "#111111",
+                      width: "100%",
+                    }}
+                  />
+                  {showHandle1Err && (
+                    <span role="alert" style={{ fontSize: "12.5px", color: "#DC2626" }}>
+                      Enter your website or Instagram handle
+                    </span>
+                  )}
                 </div>
 
                 {/* Need dropdown */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="hero-need" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>What do you need? <span style={{ color: "#8E8E93" }}>(optional)</span></label>
-                  <select id="hero-need" className="fd" value={need1} onChange={(e) => setNeed1(e.target.value)} style={{ font: "inherit", fontSize: "17px", height: "50px", padding: "0 14px", borderRadius: "14px", border: "1.5px solid #3A3A3C", background: "#1C1C1E", color: "#FFFFFF", width: "100%" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <label htmlFor="hero-need" style={{ fontWeight: 600, fontSize: "13px", color: "#1D1D1F", letterSpacing: 0 }}>
+                    What do you need? <span style={{ color: "#6E6E73", fontWeight: 500 }}>(optional)</span>
+                  </label>
+                  <select
+                    id="hero-need"
+                    className="fd"
+                    value={need1}
+                    onChange={(e) => setNeed1(e.target.value)}
+                    style={{
+                      font: "inherit",
+                      fontSize: "15.5px",
+                      height: "44px",
+                      padding: "0 12px",
+                      borderRadius: "12px",
+                      border: "1.5px solid #D2D2D7",
+                      background: "#FFFFFF",
+                      color: "#111111",
+                      width: "100%",
+                    }}
+                  >
                     <option value="Not sure yet">Not sure yet</option>
                     <option value="Social media strategy">Social media strategy</option>
                     <option value="Content creation">Content creation</option>
@@ -760,22 +1020,88 @@ export default function SmmLandingPage() {
                   </select>
                 </div>
 
-                <button type="submit" className="press y btn-sheen" style={{ font: "inherit", fontSize: "17px", fontWeight: 650, letterSpacing: "-0.01em", color: "#000000", background: "#f9d230", border: 0, borderRadius: "999px", minHeight: "54px", cursor: "pointer", marginTop: "4px" }}>
+                <button
+                  type="submit"
+                  className="press y btn-sheen"
+                  style={{
+                    font: "inherit",
+                    fontSize: "16px",
+                    fontWeight: 650,
+                    letterSpacing: "-0.01em",
+                    color: "#000000",
+                    background: "#f9d230",
+                    border: "1.5px solid #000000",
+                    borderRadius: "999px",
+                    minHeight: "48px",
+                    cursor: "pointer",
+                    marginTop: "4px",
+                  }}
+                >
                   Get my social media audit
                 </button>
 
-                <span style={{ fontSize: "13px", color: "#8E8E93", textAlign: "center", letterSpacing: 0 }}>
+                <span style={{ fontSize: "12px", color: "#6E6E73", textAlign: "center", letterSpacing: 0 }}>
                   No spam, no sales scripts. We&apos;ll reply on WhatsApp or call.
                 </span>
               </form>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start", padding: "12px 0", position: "relative", zIndex: 1 }}>
-                <span style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#f9d230", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "16px",
+                  alignItems: "flex-start",
+                  padding: "12px 0",
+                  position: "relative",
+                  zIndex: 1,
+                  color: "#111111",
+                }}
+              >
+                <span
+                  style={{
+                    width: "56px",
+                    height: "56px",
+                    borderRadius: "50%",
+                    background: "#f9d230",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4)",
+                  }}
+                >
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M5 12.5l4.5 4.5L19 7.5" />
+                  </svg>
                 </span>
-                <h3 role="status" className="smm-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}>Audit requested</h3>
-                <p style={{ margin: 0, color: "#C7C7CC" }}>Thanks, {name1}. We&apos;ll review {handle1} and get in touch on {phone1}.</p>
-                <button type="button" className="press" onClick={() => { setSent1(false); setName1(""); setPhone1(""); setHandle1(""); setTouched1({}); }} style={{ font: "inherit", fontSize: "15px", fontWeight: 600, color: "#FFFFFF", background: "rgba(255,255,255,0.12)", border: 0, borderRadius: "999px", minHeight: "44px", padding: "8px 18px", cursor: "pointer" }}>
+                <h3 role="status" className="smm-heading" style={{ margin: 0, fontSize: "24px", letterSpacing: "-0.03em", fontWeight: 700, color: "#111111" }}>
+                  Audit requested
+                </h3>
+                <p style={{ margin: 0, color: "#555558", fontSize: "15px", lineHeight: 1.5 }}>
+                  Thanks, {name1}. We&apos;ll review {handle1} and get in touch on {phone1}.
+                </p>
+                <button
+                  type="button"
+                  className="press"
+                  onClick={() => {
+                    setSent1(false);
+                    setName1("");
+                    setPhone1("");
+                    setHandle1("");
+                    setTouched1({});
+                  }}
+                  style={{
+                    font: "inherit",
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    color: "#111111",
+                    background: "rgba(0,0,0,0.06)",
+                    border: "1px solid rgba(0,0,0,0.12)",
+                    borderRadius: "999px",
+                    minHeight: "40px",
+                    padding: "6px 18px",
+                    cursor: "pointer",
+                  }}
+                >
                   Request another audit
                 </button>
               </div>
@@ -785,14 +1111,141 @@ export default function SmmLandingPage() {
       </section>
 
       {/* ── BRANDS WE WORK WITH MARQUEE */}
-      <section aria-label="Brands we work with" style={{ padding: "clamp(32px, 4vw, 44px) 0 clamp(36px, 4.5vw, 48px)", backgroundColor: "#FAFAFC", borderTop: "1px solid #E5E5EA", borderBottom: "1px solid #E5E5EA", position: "relative", zIndex: 10 }}>
-        <p style={{ margin: "0 0 clamp(20px, 2.5vw, 28px)", fontSize: "14.5px", fontWeight: 500, color: "#6E6E73", textAlign: "center", letterSpacing: "-0.01em" }}>Brands we work with</p>
-        <div className="marqwrap" style={{ overflow: "hidden", width: "100%", WebkitMaskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)", maskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)" }}>
-          <div className="marq" style={{ display: "flex", gap: "clamp(56px, 6vw, 96px)", width: "max-content", alignItems: "center" }}>
+      <section
+        aria-label="Brands we work with"
+        style={{
+          padding: "clamp(64px, 7.5vw, 92px) 0 clamp(64px, 7.5vw, 92px)",
+          backgroundColor: "#FFFFFF",
+          position: "relative",
+          overflow: "hidden",
+          zIndex: 10,
+        }}
+      >
+        {/* Top black torn-paper border */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "clamp(18px, 2.6vw, 42px)",
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/first-banner-black-paper-cut.svg"
+            alt=""
+            draggable={false}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 0,
+              transform: "translate(-50%, -64.2%)",
+              width: "152%",
+              maxWidth: "none",
+              height: "auto",
+              userSelect: "none",
+            }}
+          />
+        </div>
+
+        {/* Bottom black torn-paper border */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "clamp(18px, 2.6vw, 42px)",
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/first-banner-black-paper-cut.svg"
+            alt=""
+            draggable={false}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 0,
+              transform: "translate(-50%, -78.4%)",
+              width: "152%",
+              maxWidth: "none",
+              height: "auto",
+              userSelect: "none",
+            }}
+          />
+        </div>
+
+        <p
+          style={{
+            position: "relative",
+            zIndex: 1,
+            margin: "0 0 clamp(20px, 2.5vw, 28px)",
+            fontSize: "14.5px",
+            fontWeight: 500,
+            color: "#6E6E73",
+            textAlign: "center",
+            letterSpacing: "-0.01em",
+          }}
+        >
+          Brands we work with
+        </p>
+        <div
+          className="marqwrap"
+          style={{
+            position: "relative",
+            zIndex: 1,
+            overflow: "hidden",
+            width: "100%",
+            WebkitMaskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+            maskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+          }}
+        >
+          <div
+            className="marq"
+            style={{
+              display: "flex",
+              gap: "clamp(56px, 6vw, 96px)",
+              width: "max-content",
+              alignItems: "center",
+            }}
+          >
             {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, idx) => (
-              <div key={`${logo.name}-${idx}`} style={{ display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, padding: "0 8px" }}>
+              <div
+                key={`${logo.name}-${idx}`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                  padding: "0 8px",
+                }}
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={logo.src} alt={logo.name} style={{ display: "block", height: "clamp(46px, 5.2vw, 68px)", width: "auto", maxWidth: "clamp(160px, 18vw, 240px)", objectFit: "contain", transition: "transform 0.3s ease" }} className="transition-transform duration-300 hover:scale-110" draggable={false} loading="lazy" />
+                <img
+                  src={logo.src}
+                  alt={logo.name}
+                  style={{
+                    display: "block",
+                    height: "clamp(46px, 5.2vw, 68px)",
+                    width: "auto",
+                    maxWidth: "clamp(160px, 18vw, 240px)",
+                    objectFit: "contain",
+                    transition: "transform 0.3s ease",
+                  }}
+                  className="transition-transform duration-300 hover:scale-110"
+                  draggable={false}
+                  loading="lazy"
+                />
               </div>
             ))}
           </div>
@@ -800,40 +1253,119 @@ export default function SmmLandingPage() {
       </section>
 
       {/* ── PROOF SECTION: TRUST & CREDIBILITY */}
-      <section id="proof" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(40px, 5vw, 56px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)" }}>
-        <div style={{ maxWidth: "1040px", margin: "0 auto", textAlign: "center", display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}>
-          <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700 }}>
+      <section
+        id="proof"
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(48px, 6vw, 72px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1040px",
+            margin: "0 auto",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            alignItems: "center",
+          }}
+        >
+          <h2
+            className="smm-heading"
+            style={{
+              margin: 0,
+              fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.03em",
+              fontWeight: 700,
+              color: "#f9d230",
+            }}
+          >
             Trust and credibility matter when choosing the right partner for your brand&apos;s online presence.
           </h2>
-          <p style={{ fontSize: "20px", lineHeight: 1.45, color: "#3A3A3C", margin: 0 }}>
+          <p style={{ fontSize: "20px", lineHeight: 1.5, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
             At One Impact, they guide everything we do, so your brand is not just seen, but remembered and respected online.
           </p>
-          <p style={{ fontSize: "18px", lineHeight: 1.5, color: "#6E6E73", margin: 0 }}>
+          <p style={{ fontSize: "17px", lineHeight: 1.6, color: "rgba(255, 255, 255, 0.65)", margin: 0 }}>
             We&apos;re not just into engagements and gathering likes and shares; we&apos;re focused on helping you create meaningful connections with your target audience. Our team stays ahead of social trends, algorithm shifts and tools to harness social media&apos;s full potential.
           </p>
         </div>
       </section>
 
       {/* ── CLIENT REVIEWS */}
-      <section id="reviews" style={{ backgroundColor: "#FFFFFF", padding: "0 clamp(16px, 3vw, 32px) clamp(36px, 4.5vw, 52px)" }}>
+      <section
+        id="reviews"
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(12px, 2vw, 24px) clamp(16px, 3vw, 32px) clamp(44px, 5.5vw, 68px)",
+        }}
+      >
         <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "16px" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+              gap: "18px",
+              maxWidth: "1080px",
+              margin: "0 auto",
+            }}
+          >
             {QUOTES.map((q, idx) => (
-              <figure key={idx} style={{ margin: 0, background: "#FFFFFF", border: "1px solid #E5E5EA", borderRadius: "24px", padding: "28px", display: "flex", flexDirection: "column", gap: "20px", justifyContent: "space-between", boxShadow: "0 2px 14px rgba(0, 0, 0, 0.03)" }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <figure
+                key={idx}
+                style={{
+                  margin: 0,
+                  background: "#000000",
+                  border: "1.5px solid rgba(255, 255, 255, 0.38)",
+                  borderRadius: "14px",
+                  padding: "22px 20px 24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  gap: "18px",
+                }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                   <span style={{ display: "inline-flex", gap: "3px", color: "#f9d230" }} aria-label="Rated 5 out of 5">
                     {[...Array(5)].map((_, sIdx) => (
-                      <svg key={sIdx} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" /></svg>
+                      <svg key={sIdx} width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
+                      </svg>
                     ))}
                   </span>
-                  <blockquote style={{ margin: 0, fontSize: "18px", lineHeight: 1.45, fontWeight: 600, letterSpacing: "-0.02em", color: "#1D1D1F" }}>
+                  <blockquote
+                    style={{
+                      margin: 0,
+                      fontSize: "14px",
+                      lineHeight: 1.55,
+                      fontWeight: 400,
+                      letterSpacing: "-0.01em",
+                      color: "rgba(255, 255, 255, 0.9)",
+                    }}
+                  >
                     &ldquo;{q.text}&rdquo;
                   </blockquote>
                 </div>
-                <figcaption style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <figcaption style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "auto" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/LOGO/oneimpact-logo.webp" alt="Client logo" style={{ display: "block", height: "20px", width: "auto", maxWidth: "65px", objectFit: "contain", opacity: 1 }} />
-                  <span style={{ fontSize: "14.5px", color: "#6E6E73", lineHeight: 1.3, letterSpacing: 0 }}>{q.role}</span>
+                  <img
+                    src="/LOGO/oneimpact-logo.webp"
+                    alt="OneImpact logo"
+                    style={{
+                      display: "block",
+                      height: "18px",
+                      width: "auto",
+                      maxWidth: "58px",
+                      objectFit: "contain",
+                      filter: "invert(50%) sepia(85%) saturate(800%) hue-rotate(190deg) brightness(105%) contrast(95%)",
+                    }}
+                  />
+                  <span style={{ fontSize: "13px", color: "rgba(255, 255, 255, 0.68)", lineHeight: 1.35, letterSpacing: 0 }}>
+                    {q.role}
+                  </span>
                 </figcaption>
               </figure>
             ))}
@@ -842,269 +1374,1044 @@ export default function SmmLandingPage() {
       </section>
 
       {/* ── BENEFITS: HOW SOCIAL MEDIA MARKETING COMPANIES CAN HELP */}
-      <section id="why" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(32px, 4vw, 48px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
-          <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700 }}>How social media marketing companies can help</h2>
-          <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73" }}>Here&apos;s what a social media marketing partner does for your brand:</p>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "14px" }}>
-          {HELPS_CARDS.map((b, i) => (
-            <div key={i} style={{ background: "#F5F5F7", borderRadius: "22px", padding: "24px 22px", display: "flex", flexDirection: "column", gap: "10px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                <span style={{ width: "42px", height: "42px", borderRadius: "12px", background: b.chip, display: "flex", alignItems: "center", justifyContent: "center", flex: "none" }}>
-                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={b.d} /></svg>
-                </span>
-                <h3 className="smm-heading" style={{ margin: 0, fontSize: "19.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25 }}>{b.t}</h3>
+      <section
+        id="why"
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+        }}
+      >
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "32px" }}>
+            <h2
+              className="smm-heading"
+              style={{
+                margin: 0,
+                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+              }}
+            >
+              <span style={{ color: "#FFFFFF" }}>How social media marketing companies </span>
+              <span style={{ color: "#f9d230" }}>can help</span>
+            </h2>
+            <p style={{ margin: 0, fontSize: "18px", color: "rgba(255, 255, 255, 0.72)" }}>
+              Here&apos;s what a social media marketing partner does for your brand:
+            </p>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "16px" }}>
+            {HELPS_CARDS.map((b, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "#08080a",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  borderRadius: "22px",
+                  padding: "24px 22px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.35)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                  <span
+                    style={{
+                      width: "42px",
+                      height: "42px",
+                      borderRadius: "12px",
+                      background: "#2563eb",
+                      color: "#FFFFFF",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flex: "none",
+                      boxShadow: "0 3px 10px rgba(37, 99, 235, 0.35)",
+                    }}
+                  >
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d={b.d} />
+                    </svg>
+                  </span>
+                  <h3
+                    className="smm-heading"
+                    style={{
+                      margin: 0,
+                      fontSize: "19px",
+                      letterSpacing: "-0.025em",
+                      fontWeight: 700,
+                      lineHeight: 1.25,
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    {b.t}
+                  </h3>
+                </div>
+                <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.7)", fontSize: "14.5px", lineHeight: 1.55 }}>
+                  {b.a}
+                </p>
               </div>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "15px", lineHeight: 1.5 }}>{b.a}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── BUT WHY ONE IMPACT? / WHAT WE DO SECTION */}
-      <section id="why-oneimpact" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(32px, 4vw, 48px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)", borderTop: "1px solid #EBEBED" }}>
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: "24px", marginBottom: "32px" }}>
-          <div>
-            <h2 className="smm-heading" style={{ margin: "0 0 10px", fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700 }}>
-              {whyTab === 0 ? "But why One Impact?" : "Why One Impact?"}
-            </h2>
-            <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73", maxWidth: "52ch" }}>
-              {whyTab === 0
-                ? "Here's what makes us the right social media marketing partner for your brand."
-                : "Content people want to engage with, creative instinct with platform insights, and meaningful metrics."}
-            </p>
+      <section
+        id="why-oneimpact"
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+        }}
+      >
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: "24px", marginBottom: "32px" }}>
+            <div>
+              <h2
+                className="smm-heading"
+                style={{
+                  margin: "0 0 10px",
+                  fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.03em",
+                  fontWeight: 700,
+                }}
+              >
+                <span style={{ color: "#FFFFFF" }}>{whyTab === 0 ? "But why " : "Why "}</span>
+                <span style={{ color: "#f9d230" }}>OneImpact?</span>
+              </h2>
+              <p style={{ margin: 0, fontSize: "18px", color: "rgba(255, 255, 255, 0.72)", maxWidth: "52ch" }}>
+                {whyTab === 0
+                  ? "Here's what makes us the right social media marketing partner for your brand."
+                  : "Content people want to engage with, creative instinct with platform insights, and meaningful metrics."}
+              </p>
+            </div>
+
+            {/* Tab Switcher */}
+            <div
+              role="tablist"
+              aria-label="Why One Impact tabs"
+              style={{
+                position: "relative",
+                display: "inline-grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                background: "#1C1C1E",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+                borderRadius: "999px",
+                padding: "4px",
+                boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.35)",
+                width: "min(460px, 100%)",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                className="btn-sheen"
+                style={{
+                  position: "absolute",
+                  top: "4px",
+                  bottom: "4px",
+                  left: "4px",
+                  width: "calc((100% - 8px) / 2)",
+                  transform: `translateX(${whyTab * 100}%)`,
+                  transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
+                  background: "#f9d230",
+                  borderRadius: "999px",
+                  boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
+                }}
+              />
+              {["But why One Impact?", "Why One Impact?"].map((label, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  aria-selected={whyTab === i}
+                  onClick={() => setWhyTab(i)}
+                  style={{
+                    position: "relative",
+                    zIndex: 1,
+                    font: "inherit",
+                    fontSize: "14.5px",
+                    fontWeight: whyTab === i ? 700 : 500,
+                    color: whyTab === i ? "#000000" : "rgba(255, 255, 255, 0.72)",
+                    background: "transparent",
+                    border: 0,
+                    borderRadius: "999px",
+                    minHeight: "42px",
+                    padding: "8px 18px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    transition: "color 200ms ease",
+                    whiteSpace: "nowrap",
+                    letterSpacing: "-0.015em",
+                  }}
+                >
+                  <span>{label}</span>
+                  <span
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      padding: "1px 7px",
+                      borderRadius: "999px",
+                      background: whyTab === i ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.12)",
+                      color: whyTab === i ? "#000000" : "rgba(255, 255, 255, 0.65)",
+                      transition: "all 200ms ease",
+                    }}
+                  >
+                    {i === 0 ? BUT_WHY_CARDS.length : WHY2_POINTS.length}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Tab Switcher */}
-          <div role="tablist" aria-label="Why One Impact tabs" style={{ position: "relative", display: "inline-grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", background: "#F2F2F5", border: "1px solid #E5E5EA", borderRadius: "999px", padding: "4px", boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.06)", width: "min(460px, 100%)" }}>
-            <span aria-hidden="true" className="btn-sheen" style={{ position: "absolute", top: "4px", bottom: "4px", left: "4px", width: "calc((100% - 8px) / 2)", transform: `translateX(${whyTab * 100}%)`, transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)", background: "#f9d230", borderRadius: "999px", boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)" }} />
-            {["But why One Impact?", "Why One Impact?"].map((label, i) => (
-              <button key={i} type="button" role="tab" aria-selected={whyTab === i} onClick={() => setWhyTab(i)} style={{ position: "relative", zIndex: 1, font: "inherit", fontSize: "14.5px", fontWeight: whyTab === i ? 700 : 500, color: whyTab === i ? "#000000" : "#555558", background: "transparent", border: 0, borderRadius: "999px", minHeight: "42px", padding: "8px 18px", cursor: "pointer", display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px", transition: "color 200ms ease", whiteSpace: "nowrap", letterSpacing: "-0.015em" }}>
-                <span>{label}</span>
-                <span style={{ fontSize: "11px", fontWeight: 700, padding: "1px 7px", borderRadius: "999px", background: whyTab === i ? "rgba(0, 0, 0, 0.12)" : "rgba(0, 0, 0, 0.05)", color: whyTab === i ? "#000000" : "#8E8E93", transition: "all 200ms ease" }}>
-                  {i === 0 ? BUT_WHY_CARDS.length : WHY2_POINTS.length}
-                </span>
-              </button>
-            ))}
-          </div>
+          {/* Tab 0: But why One Impact? */}
+          {whyTab === 0 && (
+            <div className="smm-why-grid">
+              {BUT_WHY_CARDS.map((w, idx) => (
+                <div
+                  key={idx}
+                  className="smm-why-card"
+                  style={{
+                    background: "#08080a",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    borderRadius: "22px",
+                    padding: "24px 22px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.35)",
+                    transition: "transform 200ms ease, box-shadow 200ms ease",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <span
+                      className="why-icon"
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        borderRadius: "50%",
+                        background: "#2563eb",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flex: "none",
+                        boxShadow: "0 3px 10px rgba(37, 99, 235, 0.35)",
+                      }}
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M5 12.5l4.5 4.5L19 7.5" />
+                      </svg>
+                    </span>
+                    <h3 className="smm-heading" style={{ margin: 0, fontSize: "18.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#FFFFFF" }}>
+                      {w.t}
+                    </h3>
+                  </div>
+                  <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.7)", fontSize: "14.5px", lineHeight: 1.55 }}>
+                    {w.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Tab 1: Why One Impact? */}
+          {whyTab === 1 && (
+            <div className="smm-why-grid">
+              {WHY2_POINTS.map((w, idx) => (
+                <div
+                  key={idx}
+                  className="smm-why-card"
+                  style={{
+                    background: "#08080a",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    borderRadius: "22px",
+                    padding: "24px 22px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "12px",
+                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.35)",
+                    transition: "transform 200ms ease, box-shadow 200ms ease",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <span
+                      className="why-icon"
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        borderRadius: "50%",
+                        background: "#2563eb",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flex: "none",
+                        boxShadow: "0 3px 10px rgba(37, 99, 235, 0.35)",
+                      }}
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M5 12.5l4.5 4.5L19 7.5" />
+                      </svg>
+                    </span>
+                    <h3 className="smm-heading" style={{ margin: 0, fontSize: "18.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#FFFFFF" }}>
+                      {w.t}
+                    </h3>
+                  </div>
+                  <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.7)", fontSize: "14.5px", lineHeight: 1.55 }}>
+                    {w.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-
-        {/* Tab 0: But why One Impact? (all 8 cards visible by default) */}
-        {whyTab === 0 && (
-          <div className="smm-why-grid">
-            {BUT_WHY_CARDS.map((w, idx) => (
-              <div key={idx} className="smm-why-card" style={{ background: "#F5F5F7", borderRadius: "22px", padding: "24px 22px", display: "flex", flexDirection: "column", gap: "10px", border: "1px solid rgba(0, 0, 0, 0.03)", boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)", transition: "transform 200ms ease, box-shadow 200ms ease" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span className="why-icon" style={{ width: "36px", height: "36px", borderRadius: "50%", background: w.chip === "#f9d230" ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)" : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)", display: "flex", alignItems: "center", justifyContent: "center", flex: "none", boxShadow: w.chip === "#f9d230" ? "0 3px 8px rgba(249, 210, 48, 0.35)" : "0 3px 8px rgba(64, 102, 198, 0.35)" }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={w.chip === "#f9d230" ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-                  </span>
-                  <h3 className="smm-heading" style={{ margin: 0, fontSize: "18.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#1D1D1F" }}>{w.t}</h3>
-                </div>
-                <p style={{ margin: 0, color: "#6E6E73", fontSize: "14.5px", lineHeight: 1.5 }}>{w.a}</p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Tab 1: Why One Impact? (highlight cards) */}
-        {whyTab === 1 && (
-          <div className="smm-why-grid">
-            {WHY2_POINTS.map((w, idx) => (
-              <div key={idx} className="smm-why-card" style={{ background: "#F5F5F7", borderRadius: "22px", padding: "24px 22px", display: "flex", flexDirection: "column", gap: "10px", border: "1px solid rgba(0, 0, 0, 0.03)", boxShadow: "0 2px 10px rgba(0, 0, 0, 0.02)", transition: "transform 200ms ease, box-shadow 200ms ease" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span className="why-icon" style={{ width: "36px", height: "36px", borderRadius: "50%", background: idx % 2 === 0 ? "linear-gradient(135deg, #f9d230 0%, #e5bd19 100%)" : "linear-gradient(135deg, #4066c6 0%, #3152a5 100%)", display: "flex", alignItems: "center", justifyContent: "center", flex: "none", boxShadow: idx % 2 === 0 ? "0 3px 8px rgba(249, 210, 48, 0.35)" : "0 3px 8px rgba(64, 102, 198, 0.35)" }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={idx % 2 === 0 ? "#1D1D1F" : "#FFFFFF"} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-                  </span>
-                  <h3 className="smm-heading" style={{ margin: 0, fontSize: "18.5px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#1D1D1F" }}>{w.t}</h3>
-                </div>
-                <p style={{ margin: 0, color: "#6E6E73", fontSize: "14.5px", lineHeight: 1.5 }}>{w.a}</p>
-              </div>
-            ))}
-          </div>
-        )}
       </section>
 
       {/* ── EXPLORE OUR SOCIAL MEDIA SERVICES */}
-      <section id="services" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(24px, 3vw, 36px) clamp(16px, 3vw, 32px) clamp(20px, 2.5vw, 28px)" }}>
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: "24px", marginBottom: "12px" }}>
-          <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700, maxWidth: "14ch" }}>Explore our social media services</h2>
+      <section
+        id="services"
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px) clamp(24px, 3vw, 36px)",
+        }}
+      >
+        <div style={{ maxWidth: "1360px", margin: "0 auto" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: "24px", marginBottom: "16px" }}>
+            <h2
+              className="smm-heading"
+              style={{
+                margin: 0,
+                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+                maxWidth: "16ch",
+              }}
+            >
+              <span style={{ color: "#FFFFFF" }}>Explore our </span>
+              <span style={{ color: "#f9d230" }}>social media services</span>
+            </h2>
 
-          <div role="tablist" aria-label="Service groups" style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", background: "#F2F2F5", border: "1px solid #E5E5EA", borderRadius: "999px", padding: "4px", boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)", width: "min(420px, 100%)" }}>
-            <span aria-hidden="true" className="btn-sheen" style={{ position: "absolute", top: "4px", bottom: "4px", left: "4px", width: "calc((100% - 8px) / 2)", transform: `translateX(${svcIdx * 100}%)`, transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)", background: "#f9d230", borderRadius: "999px", boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)" }} />
-            {SVC_GROUPS.map((grp, i) => (
-              <button key={i} type="button" role="tab" className="press" aria-selected={svcIdx === i} onClick={() => setSvcIdx(i)} style={{ position: "relative", zIndex: 1, font: "inherit", fontSize: "15px", fontWeight: svcIdx === i ? 650 : 500, color: svcIdx === i ? "#000000" : "#555558", background: "transparent", border: 0, borderRadius: "999px", minHeight: "44px", padding: "9px 18px", cursor: "pointer", display: "inline-flex", alignItems: "center", justifyContent: "center", whiteSpace: "nowrap", letterSpacing: "-0.015em", transition: "color 200ms ease" }}>
-                {grp.label}
-              </button>
+            <div
+              role="tablist"
+              aria-label="Service groups"
+              style={{
+                position: "relative",
+                display: "grid",
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                background: "#1C1C1E",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+                borderRadius: "999px",
+                padding: "4px",
+                boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.35)",
+                width: "min(420px, 100%)",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                className="btn-sheen"
+                style={{
+                  position: "absolute",
+                  top: "4px",
+                  bottom: "4px",
+                  left: "4px",
+                  width: "calc((100% - 8px) / 2)",
+                  transform: `translateX(${svcIdx * 100}%)`,
+                  transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)",
+                  background: "#f9d230",
+                  borderRadius: "999px",
+                  boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)",
+                }}
+              />
+              {SVC_GROUPS.map((grp, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  role="tab"
+                  className="press"
+                  aria-selected={svcIdx === i}
+                  onClick={() => setSvcIdx(i)}
+                  style={{
+                    position: "relative",
+                    zIndex: 1,
+                    font: "inherit",
+                    fontSize: "15px",
+                    fontWeight: svcIdx === i ? 700 : 500,
+                    color: svcIdx === i ? "#000000" : "rgba(255, 255, 255, 0.72)",
+                    background: "transparent",
+                    border: 0,
+                    borderRadius: "999px",
+                    minHeight: "44px",
+                    padding: "9px 18px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    whiteSpace: "nowrap",
+                    letterSpacing: "-0.015em",
+                    transition: "color 200ms ease",
+                  }}
+                >
+                  {grp.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <p style={{ margin: "0 0 28px", fontSize: "18px", color: "rgba(255, 255, 255, 0.72)", maxWidth: "56ch" }}>
+            At One Impact, our social media marketing offerings fall into two broad categories: organic services and platform-based services.
+          </p>
+
+          <div className="smm-services-grid">
+            {activeServices.items.map((s, i) => (
+              <div
+                key={i}
+                className="smm-service-card"
+                style={{
+                  background: "#08080a",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  borderRadius: "22px",
+                  padding: "24px 22px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.35)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      width: "10px",
+                      height: "10px",
+                      borderRadius: "50%",
+                      background: "#2563eb",
+                      flex: "none",
+                      boxShadow: "0 0 8px #2563eb",
+                    }}
+                  />
+                  <h3 className="smm-heading" style={{ margin: 0, fontSize: "19px", letterSpacing: "-0.025em", fontWeight: 700, color: "#FFFFFF" }}>
+                    {s.t}
+                  </h3>
+                </div>
+                <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.7)", fontSize: "14.5px", lineHeight: 1.55 }}>
+                  {s.a}
+                </p>
+              </div>
             ))}
           </div>
         </div>
-
-        <p style={{ margin: "0 0 28px", fontSize: "19px", color: "#6E6E73", maxWidth: "56ch" }}>
-          At One Impact, our social media marketing offerings fall into two broad categories: organic services and platform-based services.
-        </p>
-
-        <div className="smm-services-grid">
-          {activeServices.items.map((s, i) => (
-            <div key={i} className="smm-service-card" style={{ background: "#FFFFFF", border: "1px solid #E5E5EA", borderRadius: "22px", padding: "24px 22px", display: "flex", flexDirection: "column", gap: "10px", boxShadow: "0 16px 36px -28px rgba(0,0,0,0.25)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <span aria-hidden="true" style={{ width: "10px", height: "10px", borderRadius: "50%", background: s.dot, flex: "none" }} />
-                <h3 className="smm-heading" style={{ margin: 0, fontSize: "19.5px", letterSpacing: "-0.025em", fontWeight: 700 }}>{s.t}</h3>
-              </div>
-              <p style={{ margin: 0, color: "#3A3A3C", fontSize: "15px", lineHeight: 1.5 }}>{s.a}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
-      {/* Section Separator */}
-      <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px)" }}>
-        <div style={{ height: "1px", background: "rgba(0, 0, 0, 0.08)" }} />
+      {/* ── Breaker Divider ── */}
+      <div className="w-full overflow-hidden select-none pointer-events-none -mb-1 bg-[#000000]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/Breaker.svg"
+          alt=""
+          className="w-full h-auto block select-none pointer-events-none"
+        />
       </div>
 
       {/* ── WHAT WE OFFER (ACCORDIONS) */}
-      <section id="offer" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(24px, 3vw, 36px) clamp(16px, 3vw, 32px) clamp(36px, 4.5vw, 52px)" }}>
-        <h2 className="smm-heading" style={{ margin: "0 0 12px", fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700 }}>What we offer</h2>
-        <p style={{ margin: "0 0 24px", fontSize: "19px", color: "#6E6E73" }}>Pick a topic to see exactly how we approach it.</p>
-
-        {/* Topic Pills */}
-        <div className="scrollrow" role="tablist" aria-label="Offer topics">
-          {OFFER_TOPICS.map((t, i) => (
-            <button key={i} type="button" role="tab" className="press" aria-selected={offerIdx === i} onClick={() => { setOfferIdx(i); setOfferExpanded(false); }} style={{ font: "inherit", fontSize: "15px", fontWeight: offerIdx === i ? 600 : 500, color: "#000000", background: offerIdx === i ? "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)" : "#FFFFFF", border: `1.5px solid ${offerIdx === i ? "#000000" : "#D2D2D7"}`, boxShadow: offerIdx === i ? "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)" : "0 1px 2px rgba(0, 0, 0, 0.03)", borderRadius: "999px", minHeight: "44px", padding: "8px 18px", cursor: "pointer", transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)" }}>
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Accordion Panel */}
-        <div role="tabpanel" style={{ marginTop: "20px", background: "#F5F5F7", borderRadius: "28px", padding: "clamp(20px, 4vw, 44px)" }}>
-          {activeOffer.intro && (
-            <p className="prewrap" style={{ margin: "0 0 20px", fontSize: "17.5px", color: "#3A3A3C", maxWidth: "75ch" }}>{activeOffer.intro}</p>
-          )}
-          <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #D2D2D7" }}>
-            {visibleOfferQs.map((f, qIdx) => (
-              <details key={qIdx} style={{ borderTop: "1px solid #D2D2D7" }}>
-                <summary style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "16px", padding: "18px 0", fontSize: "18px", fontWeight: 600, letterSpacing: "-0.02em", minHeight: "44px" }}>
-                  {f.q}
-                  <svg className="chev" style={{ flex: "none" }} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-                </summary>
-                <p className="prewrap" style={{ margin: "0 0 18px", color: "#3A3A3C", maxWidth: "75ch" }}>{f.a}</p>
-              </details>
-            ))}
+      <section
+        id="offer"
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(24px, 3vw, 44px) clamp(16px, 3vw, 32px) 0",
+        }}
+      >
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: "32px" }}>
+            <h2
+              className="smm-heading"
+              style={{
+                margin: "0 0 12px",
+                fontSize: "clamp(2.4rem, 4.8vw, 3.8rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+              }}
+            >
+              <span style={{ color: "#FFFFFF" }}>What </span>
+              <span style={{ color: "#f9d230" }}>we offer</span>
+            </h2>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "clamp(15px, 1.3vw, 18px)",
+                color: "rgba(255, 255, 255, 0.72)",
+              }}
+            >
+              Pick a topic to see exactly how we approach it.
+            </p>
           </div>
 
-          {activeOffer.qs.length > 5 && (
-            <div style={{ textAlign: "center", marginTop: "24px" }}>
+          {/* Topic Pills */}
+          <div
+            className="scrollrow"
+            role="tablist"
+            aria-label="Offer topics"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              overflowX: "auto",
+              paddingBottom: "10px",
+              justifyContent: "flex-start",
+              scrollbarWidth: "none",
+            }}
+          >
+            {OFFER_TOPICS.map((t, i) => (
               <button
+                key={i}
                 type="button"
-                className="press y btn-sheen"
-                onClick={() => setOfferExpanded(!offerExpanded)}
+                role="tab"
+                className="press"
+                aria-selected={offerIdx === i}
+                onClick={() => {
+                  setOfferIdx(i);
+                  setOfferExpanded(false);
+                  setOpenOfferQ(null);
+                }}
                 style={{
                   font: "inherit",
                   fontSize: "14.5px",
-                  fontWeight: 650,
-                  color: "#000000",
-                  background: "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)",
-                  border: "1.5px solid #000000",
+                  fontWeight: offerIdx === i ? 700 : 500,
+                  color: offerIdx === i ? "#000000" : "rgba(255, 255, 255, 0.82)",
+                  background: offerIdx === i ? "#f9d230" : "rgba(255, 255, 255, 0.08)",
+                  border: offerIdx === i ? "1px solid #f9d230" : "1px solid rgba(255, 255, 255, 0.18)",
+                  boxShadow: offerIdx === i ? "0 4px 18px rgba(249, 210, 48, 0.35)" : "none",
                   borderRadius: "999px",
-                  minHeight: "42px",
-                  padding: "8px 22px",
+                  minHeight: "44px",
+                  padding: "9px 24px",
                   cursor: "pointer",
-                  boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)",
+                  whiteSpace: "nowrap",
+                  transition: "all 180ms ease",
                 }}
               >
-                {offerExpanded ? "Show fewer questions" : `Load more (${activeOffer.qs.length - 5} more questions)`}
+                {t.label}
               </button>
+            ))}
+          </div>
+
+          {/* Accent horizontal divider line */}
+          <div
+            style={{
+              width: "100%",
+              height: "1px",
+              background: "linear-gradient(90deg, rgba(27, 61, 255, 0.6) 0%, rgba(27, 61, 255, 0.2) 35%, transparent 75%)",
+              marginTop: "12px",
+              marginBottom: "36px",
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Accordion Box Container */}
+          <div
+            role="tabpanel"
+            style={{
+              borderRadius: "28px",
+              border: "1px solid rgba(255, 255, 255, 0.22)",
+              background: "rgba(10, 10, 14, 0.6)",
+              backdropFilter: "blur(12px)",
+              padding: "clamp(20px, 3.5vw, 40px) clamp(22px, 4vw, 48px)",
+            }}
+          >
+            {activeOffer.intro && (
+              <p
+                className="prewrap"
+                style={{
+                  margin: "0 0 20px",
+                  fontSize: "16.5px",
+                  color: "rgba(255, 255, 255, 0.72)",
+                  maxWidth: "75ch",
+                  lineHeight: 1.6,
+                }}
+              >
+                {activeOffer.intro}
+              </p>
+            )}
+
+            <div>
+              {visibleOfferQs.map((f, qIdx) => {
+                const isOpen = openOfferQ === qIdx;
+                return (
+                  <div
+                    key={qIdx}
+                    style={{
+                      borderBottom: "1px solid rgba(249, 210, 48, 0.55)",
+                      transition: "border-color 200ms ease",
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenOfferQ(isOpen ? null : qIdx)}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: "16px",
+                        padding: "22px 0",
+                        fontSize: "clamp(15.5px, 1.3vw, 18px)",
+                        fontWeight: 500,
+                        color: "#FFFFFF",
+                        background: "none",
+                        border: 0,
+                        textAlign: "left",
+                        cursor: "pointer",
+                        letterSpacing: "-0.015em",
+                      }}
+                      aria-expanded={isOpen}
+                    >
+                      <span style={{ color: isOpen ? "#f9d230" : "#FFFFFF", transition: "color 180ms ease" }}>
+                        {f.q}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "24px",
+                          fontWeight: 300,
+                          color: "rgba(255, 255, 255, 0.75)",
+                          flexShrink: 0,
+                          lineHeight: 1,
+                          userSelect: "none",
+                          transition: "transform 180ms ease",
+                        }}
+                      >
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div
+                        style={{
+                          paddingBottom: "22px",
+                          color: "rgba(255, 255, 255, 0.76)",
+                          fontSize: "15.5px",
+                          lineHeight: 1.65,
+                          maxWidth: "78ch",
+                        }}
+                      >
+                        <p style={{ margin: 0, whiteSpace: "pre-line" }}>{f.a}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          )}
+
+            {activeOffer.qs.length > 5 && (
+              <div style={{ textAlign: "center", marginTop: "28px" }}>
+                <button
+                  type="button"
+                  className="press y btn-sheen"
+                  onClick={() => setOfferExpanded(!offerExpanded)}
+                  style={{
+                    font: "inherit",
+                    fontSize: "14.5px",
+                    fontWeight: 650,
+                    color: "#000000",
+                    background: "#f9d230",
+                    border: "1px solid #f9d230",
+                    borderRadius: "999px",
+                    minHeight: "42px",
+                    padding: "8px 24px",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 14px rgba(249, 210, 48, 0.35)",
+                  }}
+                >
+                  {offerExpanded ? "Show fewer questions" : `Load more (${activeOffer.qs.length - 5} more questions)`}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
+      {/* ── Breaker Divider ── */}
+      <div className="w-full overflow-hidden select-none pointer-events-none -mb-1 bg-[#000000]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/Breaker.svg"
+          alt=""
+          className="w-full h-auto block select-none pointer-events-none"
+        />
+      </div>
+
       {/* ── USP CAROUSEL */}
-      <section id="usps" style={{ background: "#F5F5F7", padding: "clamp(36px, 4.5vw, 56px) 0" }}>
+      <section id="usps" style={{ background: "#000000", color: "#FFFFFF", padding: "clamp(36px, 4.5vw, 60px) 0 clamp(48px, 6vw, 72px)" }}>
         <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px)" }}>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: "24px", marginBottom: "32px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700, maxWidth: "16ch" }}>Social media marketing that fits your business. Not a template.</h2>
-              <p style={{ margin: 0, fontSize: "19px", color: "#6E6E73", maxWidth: "50ch" }}>Swipe through what you get with One Impact as your social media marketing agency.</p>
+              <h2
+                className="smm-heading"
+                style={{
+                  margin: 0,
+                  fontSize: "clamp(2.4rem, 4.8vw, 3.8rem)",
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.03em",
+                  fontWeight: 700,
+                  maxWidth: "18ch",
+                }}
+              >
+                <span style={{ color: "#FFFFFF" }}>Social media marketing that </span>
+                <span style={{ color: "#f9d230" }}>fits your business. Not a template.</span>
+              </h2>
+              <p style={{ margin: 0, fontSize: "18px", color: "rgba(255, 255, 255, 0.72)", maxWidth: "50ch" }}>
+                Swipe through what you get with One Impact as your social media marketing agency.
+              </p>
             </div>
             <div style={{ display: "flex", gap: "10px" }}>
-              <button type="button" className="press" aria-label="Previous" onClick={() => scrollCarousel("prev")} disabled={carIdx === 0} style={{ width: "44px", height: "44px", borderRadius: "50%", border: 0, background: "rgba(0,0,0,0.08)", color: "#000000", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+              <button
+                type="button"
+                className="press"
+                aria-label="Previous"
+                onClick={() => scrollCarousel("prev")}
+                disabled={carIdx === 0}
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "50%",
+                  border: 0,
+                  background: "#ffd60a",
+                  color: "#000000",
+                  cursor: carIdx === 0 ? "default" : "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: carIdx === 0 ? 0.35 : 1,
+                  boxShadow: "0 2px 10px rgba(255, 214, 10, 0.25)",
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
               </button>
-              <button type="button" className="press" aria-label="Next" onClick={() => scrollCarousel("next")} disabled={carIdx >= USP_CARDS.length - 1} style={{ width: "44px", height: "44px", borderRadius: "50%", border: 0, background: "rgba(0,0,0,0.08)", color: "#000000", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+              <button
+                type="button"
+                className="press"
+                aria-label="Next"
+                onClick={() => scrollCarousel("next")}
+                disabled={carIdx >= USP_CARDS.length - 1}
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "50%",
+                  border: 0,
+                  background: "#ffd60a",
+                  color: "#000000",
+                  cursor: carIdx >= USP_CARDS.length - 1 ? "default" : "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: carIdx >= USP_CARDS.length - 1 ? 0.35 : 1,
+                  boxShadow: "0 2px 10px rgba(255, 214, 10, 0.25)",
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
               </button>
             </div>
           </div>
 
           <div ref={trackRef} className="car-view" onScroll={handleTrackScroll} aria-roledescription="carousel">
-            <div className="car-track">
+            <div className="car-track" style={{ gap: "18px" }}>
               {USP_CARDS.map((u, i) => (
-                <div key={i} className="car-card" style={{ background: "#FFFFFF", borderRadius: "28px", padding: "28px 26px", display: "flex", gap: "16px", alignItems: "flex-start", boxShadow: "0 1px 2px rgba(0,0,0,0.04)" }}>
-                  <span style={{ width: "52px", height: "52px", borderRadius: "16px", background: u.chip, display: "flex", alignItems: "center", justifyContent: "center", flex: "none" }}>
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={u.d} /></svg>
-                  </span>
+                <div
+                  key={i}
+                  className="car-card"
+                  style={{
+                    background: "#08080a",
+                    border: "1.5px solid rgba(255, 255, 255, 0.16)",
+                    borderRadius: "24px",
+                    padding: "26px 24px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    minHeight: "220px",
+                    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.4)",
+                    flex: "none",
+                    width: "min(320px, 78vw)",
+                  }}
+                >
                   <div>
-                    <h3 className="smm-heading" style={{ margin: 0, fontSize: "28px", letterSpacing: "-0.04em", fontWeight: 700, lineHeight: 1.1 }}>{u.head}</h3>
-                    <p style={{ fontSize: "17px", color: "#3A3A3C", marginTop: "8px" }}>{u.text}</p>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                        gap: "12px",
+                        marginBottom: "16px",
+                      }}
+                    >
+                      <div>
+                        <h3
+                          style={{
+                            margin: 0,
+                            fontSize: "18px",
+                            fontWeight: 700,
+                            color: "#ffd60a",
+                            letterSpacing: "-0.02em",
+                            lineHeight: 1.25,
+                          }}
+                        >
+                          {u.head}
+                        </h3>
+                        <div
+                          style={{
+                            width: "20px",
+                            height: "3px",
+                            borderRadius: "999px",
+                            backgroundColor: "#1b3dff",
+                            marginTop: "8px",
+                          }}
+                        />
+                      </div>
+                      <div
+                        style={{
+                          width: "42px",
+                          height: "42px",
+                          borderRadius: "12px",
+                          backgroundColor: "#2563eb",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                          boxShadow: "0 3px 10px rgba(37, 99, 235, 0.35)",
+                        }}
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#FFFFFF"
+                          strokeWidth="2.2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d={u.d} />
+                        </svg>
+                      </div>
+                    </div>
+                    <p
+                      style={{
+                        margin: 0,
+                        fontSize: "14.5px",
+                        lineHeight: 1.55,
+                        color: "rgba(255, 255, 255, 0.78)",
+                      }}
+                    >
+                      {u.text}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Progress bar */}
-          <div style={{ marginTop: "24px", height: "4px", borderRadius: "999px", background: "rgba(0,0,0,0.08)", maxWidth: "240px", overflow: "hidden" }}>
-            <div style={{ height: "100%", width: `${Math.round(((carIdx + 1) / USP_CARDS.length) * 100)}%`, background: "#000000", borderRadius: "999px", transition: "width 400ms cubic-bezier(0.32, 0.72, 0, 1)" }} />
+          {/* Dots Pagination */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "8px",
+              marginTop: "32px",
+            }}
+          >
+            {[0, 1, 2, 3, 4].map((dotIdx) => {
+              const activeDot = Math.min(4, Math.round((carIdx / (USP_CARDS.length - 1)) * 4));
+              const isActive = dotIdx === activeDot;
+              return (
+                <button
+                  key={dotIdx}
+                  type="button"
+                  aria-label={`Go to slide page ${dotIdx + 1}`}
+                  onClick={() => {
+                    const targetCard = Math.min(
+                      USP_CARDS.length - 1,
+                      Math.round((dotIdx / 4) * (USP_CARDS.length - 1))
+                    );
+                    setCarIdx(targetCard);
+                    trackRef.current?.scrollTo({
+                      left: targetCard * 338,
+                      behavior: "smooth",
+                    });
+                  }}
+                  style={{
+                    width: isActive ? "8px" : "6px",
+                    height: isActive ? "8px" : "6px",
+                    borderRadius: "50%",
+                    backgroundColor: isActive ? "#ffd60a" : "#2a2a2d",
+                    border: "none",
+                    padding: 0,
+                    cursor: "pointer",
+                    transition: "all 200ms ease",
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ── SPOTLIGHT: SOCIAL MEDIA MARKETING IN MUMBAI */}
-      <section id="mumbai" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(36px, 4.5vw, 56px) clamp(16px, 3vw, 32px)" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: "clamp(32px, 6vw, 88px)", alignItems: "center" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700, maxWidth: "13ch" }}>Social Media Marketing in Mumbai</h2>
-            <p style={{ fontSize: "18px", color: "#3A3A3C", margin: 0 }}>Mumbai is not only India&apos;s financial and entertainment hub, it&apos;s a city beaming with opportunities. With its superfast lifestyle, mixed crowd and lucrative industries, Mumbai is &ldquo;THE&rdquo; place for businesses aiming to create an impact, and a social media game that appeals to your target group is no longer optional.</p>
-            <p style={{ fontSize: "18px", color: "#3A3A3C", margin: 0 }}>Showing up consistently on Instagram, Facebook, LinkedIn and X can set your business apart. At One Impact, every business we partner with gets a plan built from scratch and tailored to its audience, goals and brand voice, with solutions that bundle creativity and performance marketing, backed by data.</p>
-            <p style={{ color: "#000000", fontWeight: 600, fontSize: "18px", margin: 0 }}>We don&apos;t just provide a service, we partner with you like a team.</p>
-            <a className="press y btn-sheen" href="#audit" style={{ alignSelf: "flex-start", fontWeight: 650, fontSize: "17px", padding: "14px 24px", minHeight: "52px", background: "#f9d230", color: "#000000", textDecoration: "none", border: 0, borderRadius: "999px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
-              Let&apos;s build something that leaves a lasting impression
-            </a>
+      <section
+        id="mumbai"
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(48px, 6vw, 96px) clamp(16px, 3vw, 32px)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1320px",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
+            gap: "clamp(36px, 6vw, 84px)",
+            alignItems: "center",
+          }}
+        >
+          {/* Left Column: Copy & CTA */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "22px", maxWidth: "620px" }}>
+            <h2
+              className="smm-heading"
+              style={{
+                margin: 0,
+                fontSize: "clamp(2.4rem, 4.8vw, 4.2rem)",
+                lineHeight: 1.06,
+                letterSpacing: "-0.025em",
+                fontWeight: 700,
+                color: "#ffd60a",
+              }}
+            >
+              Social Media Marketing
+              <br />
+              in Mumbai
+            </h2>
+            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
+              Mumbai is not only India&apos;s financial and entertainment hub, it&apos;s a city beaming with opportunities. With its superfast lifestyle, mixed crowd and lucrative industries, Mumbai is &ldquo;THE&rdquo; place for businesses aiming to create an impact, and a social media game that appeals to your target group is no longer optional.
+            </p>
+            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
+              Showing up consistently on Instagram, Facebook, LinkedIn and X can set your business apart. At One Impact, every business we partner with gets a plan built from scratch and tailored to its audience, goals and brand voice, with solutions that bundle creativity and performance marketing, backed by data.
+            </p>
+            <p style={{ color: "#FFFFFF", fontWeight: 600, fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, margin: 0 }}>
+              We don&apos;t just provide a service, we partner with you like a team.
+            </p>
+            <div style={{ paddingTop: "8px" }}>
+              <a
+                className="press y btn-sheen"
+                href="#audit"
+                style={{
+                  alignSelf: "flex-start",
+                  fontWeight: 650,
+                  fontSize: "16.5px",
+                  padding: "14px 28px",
+                  minHeight: "52px",
+                  background: "#f9d230",
+                  color: "#000000",
+                  textDecoration: "none",
+                  border: 0,
+                  borderRadius: "999px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 6px 20px rgba(249, 210, 48, 0.35)",
+                }}
+              >
+                Let&apos;s build something that leaves a lasting impression
+              </a>
+            </div>
           </div>
 
-          {/* Visual: Phone mockup */}
-          <figure style={{ margin: 0, borderRadius: "32px", overflow: "hidden", background: "#FFFFFF", boxShadow: "0 0 0 1px rgba(0,0,0,0.06), 0 40px 80px -40px rgba(0,0,0,0.35)" }} aria-label="Illustration of a social media feed">
-            <div style={{ position: "relative", height: "230px", background: "#E8F0FF", overflow: "hidden" }}>
-              <div style={{ position: "absolute", left: "50%", top: "22px", bottom: "-30px", width: "132px", marginLeft: "-66px", borderRadius: "26px", background: "#000000", padding: "8px" }}>
-                <div style={{ height: "100%", borderRadius: "19px", background: "#FFFFFF", padding: "10px", display: "flex", flexDirection: "column", gap: "8px" }}>
+          {/* Right Column: Dark Styled Feed Mockup Card */}
+          <figure
+            style={{
+              margin: 0,
+              borderRadius: "32px",
+              overflow: "hidden",
+              background: "#08080a",
+              border: "1.5px solid rgba(255, 255, 255, 0.16)",
+              boxShadow: "0 24px 60px -20px rgba(0, 0, 0, 0.9)",
+            }}
+            aria-label="Illustration of a social media feed"
+          >
+            <div style={{ position: "relative", height: "230px", background: "#0e182e", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ position: "absolute", left: "50%", top: "22px", bottom: "-30px", width: "132px", marginLeft: "-66px", borderRadius: "26px", background: "#000000", padding: "8px", border: "1px solid rgba(255,255,255,0.15)" }}>
+                <div style={{ height: "100%", borderRadius: "19px", background: "#141416", padding: "10px", display: "flex", flexDirection: "column", gap: "8px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                     <span style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#f9d230" }} />
-                    <span style={{ height: "6px", width: "46px", borderRadius: "4px", background: "#E5E5EA" }} />
+                    <span style={{ height: "6px", width: "46px", borderRadius: "4px", background: "rgba(255,255,255,0.2)" }} />
                   </div>
-                  <div style={{ height: "98px", borderRadius: "10px", background: "#D6E5FF", position: "relative" }}>
+                  <div style={{ height: "98px", borderRadius: "10px", background: "#1c2b54", position: "relative" }}>
                     <span style={{ position: "absolute", right: "12px", top: "12px", width: "22px", height: "22px", borderRadius: "50%", background: "#f9d230" }} />
                   </div>
-                  <div style={{ display: "flex", gap: "6px", color: "#000000" }}>
+                  <div style={{ display: "flex", gap: "6px", color: "#FFFFFF" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></svg>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 5h16v11H9l-5 4z" /></svg>
                   </div>
-                  <span style={{ height: "6px", width: "80%", borderRadius: "4px", background: "#E5E5EA" }} />
+                  <span style={{ height: "6px", width: "80%", borderRadius: "4px", background: "rgba(255,255,255,0.2)" }} />
                 </div>
               </div>
             </div>
-            <div style={{ padding: "10px 14px 14px", display: "flex", flexDirection: "column" }}>
+            <div style={{ padding: "16px 18px", display: "flex", flexDirection: "column", gap: "10px" }}>
               {[
                 { title: "Your Brand", meta: "New reel. Posted 2h ago" },
                 { title: "Another Account", meta: "Posted yesterday" },
                 { title: "Nearby Competitor", meta: "Sponsored" },
               ].map((r, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px 10px", borderRadius: "16px", ...(i === 0 ? { background: "#FFF4DE" } : {}) }}>
-                  <span style={{ flex: "none", width: "34px", height: "34px", borderRadius: "50%", fontSize: "13px", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", background: i === 0 ? "#f9d230" : "#E5E5EA" }}>{i + 1}</span>
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "14px",
+                    padding: "12px 18px",
+                    borderRadius: "18px",
+                    background: i === 0 ? "#241f0a" : i === 1 ? "#1c1c1f" : "#141416",
+                    border: i === 0 ? "1px solid rgba(255, 214, 10, 0.3)" : "1px solid rgba(255, 255, 255, 0.06)",
+                  }}
+                >
+                  <span
+                    style={{
+                      flexShrink: 0,
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      fontSize: "14px",
+                      fontWeight: 700,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: i === 0 ? "#ffd60a" : i === 1 ? "#403710" : "#242426",
+                      color: i === 0 ? "#000000" : i === 1 ? "#ffd60a" : "rgba(255, 255, 255, 0.35)",
+                    }}
+                  >
+                    {i + 1}
+                  </span>
                   <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                    <span style={{ fontWeight: 650, fontSize: "16px" }}>{r.title}</span>
-                    <span style={{ fontSize: "13.5px", color: "#6E6E73", letterSpacing: 0 }}>{r.meta}</span>
+                    <span style={{ fontWeight: 650, fontSize: "15px", color: i === 0 ? "#FFFFFF" : "rgba(255, 255, 255, 0.72)" }}>
+                      {r.title}
+                    </span>
+                    <span style={{ fontSize: "12.5px", color: "#8E8E93", letterSpacing: 0 }}>
+                      {r.meta}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -1120,146 +2427,556 @@ export default function SmmLandingPage() {
       />
 
       {/* ── FAQs */}
-      <section id="faq" style={{ maxWidth: "1360px", margin: "0 auto", padding: "clamp(24px, 3vw, 36px) clamp(16px, 3vw, 32px) clamp(36px, 4.5vw, 52px)" }}>
-        <h2 className="smm-heading" style={{ margin: "0 0 12px", fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)", lineHeight: 1.05, letterSpacing: "-0.045em", fontWeight: 700 }}>Questions, answered</h2>
-        <p style={{ margin: "0 0 24px", fontSize: "19px", color: "#6E6E73" }}>
-          Anything else? <a href="https://wa.me/918369018104" target="_blank" rel="noopener noreferrer" style={{ fontWeight: 600 }}>Message us on WhatsApp</a>.
-        </p>
+      <section
+        id="faq"
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          padding: "clamp(36px, 4.5vw, 64px) clamp(16px, 3vw, 32px)",
+        }}
+      >
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          {/* Header */}
+          <div style={{ textAlign: "center", marginBottom: "32px" }}>
+            <h2
+              className="smm-heading"
+              style={{
+                margin: "0 0 12px",
+                fontSize: "clamp(2.4rem, 4.8vw, 3.8rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+                fontWeight: 700,
+              }}
+            >
+              <span style={{ color: "#FFFFFF" }}>Questions, </span>
+              <span style={{ color: "#f9d230" }}>answered</span>
+            </h2>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "clamp(15px, 1.3vw, 18px)",
+                color: "rgba(255, 255, 255, 0.72)",
+              }}
+            >
+              Anything else?{" "}
+              <a
+                href="https://wa.me/918369018104"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "#f9d230",
+                  fontWeight: 600,
+                  textDecoration: "underline",
+                  textUnderlineOffset: "3px",
+                }}
+              >
+                Message us on WhatsApp
+              </a>
+              .
+            </p>
+          </div>
 
-        {/* FAQ tab switcher */}
-        <div style={{ marginBottom: "24px" }}>
-          <div role="tablist" aria-label="FAQ groups" style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${FAQ_GROUPS.length}, minmax(0, 1fr))`, background: "#F2F2F5", border: "1px solid #E5E5EA", borderRadius: "999px", padding: "4px", boxShadow: "inset 0 1.5px 3px rgba(0, 0, 0, 0.05)", width: "min(360px, 100%)" }}>
-            <span aria-hidden="true" className="btn-sheen" style={{ position: "absolute", top: "4px", bottom: "4px", left: "4px", width: `calc((100% - 8px) / ${FAQ_GROUPS.length})`, transform: `translateX(${faqIdx * 100}%)`, transition: "transform 360ms cubic-bezier(0.32, 0.72, 0, 1)", background: "#f9d230", borderRadius: "999px", boxShadow: "0 3px 12px rgba(249, 210, 48, 0.45)" }} />
+          {/* FAQ Group Pills */}
+          <div
+            className="scrollrow"
+            role="tablist"
+            aria-label="FAQ groups"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              overflowX: "auto",
+              paddingBottom: "10px",
+              justifyContent: "flex-start",
+              scrollbarWidth: "none",
+            }}
+          >
             {FAQ_GROUPS.map((g, i) => (
-              <button key={i} type="button" role="tab" className="press" aria-selected={faqIdx === i} onClick={() => { setFaqIdx(i); setFaqExpanded(false); }} style={{ position: "relative", zIndex: 1, font: "inherit", fontSize: "15px", fontWeight: faqIdx === i ? 650 : 500, color: faqIdx === i ? "#000000" : "#555558", background: "transparent", border: 0, borderRadius: "999px", minHeight: "44px", padding: "9px 18px", cursor: "pointer", display: "inline-flex", alignItems: "center", justifyContent: "center", whiteSpace: "nowrap", letterSpacing: "-0.015em", transition: "color 200ms ease" }}>
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                className="press"
+                aria-selected={faqIdx === i}
+                onClick={() => {
+                  setFaqIdx(i);
+                  setFaqExpanded(false);
+                  setOpenFaqQ(null);
+                }}
+                style={{
+                  font: "inherit",
+                  fontSize: "14.5px",
+                  fontWeight: faqIdx === i ? 700 : 500,
+                  color: faqIdx === i ? "#000000" : "rgba(255, 255, 255, 0.82)",
+                  background: faqIdx === i ? "#f9d230" : "rgba(255, 255, 255, 0.08)",
+                  border: faqIdx === i ? "1px solid #f9d230" : "1px solid rgba(255, 255, 255, 0.18)",
+                  boxShadow: faqIdx === i ? "0 4px 18px rgba(249, 210, 48, 0.35)" : "none",
+                  borderRadius: "999px",
+                  minHeight: "44px",
+                  padding: "9px 24px",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "all 180ms ease",
+                }}
+              >
                 {g.label}
               </button>
             ))}
           </div>
-        </div>
 
-        <div style={{ display: "flex", flexDirection: "column", borderBottom: "1px solid #E5E5EA" }}>
-          {visibleFaqs.map((f, qIdx) => (
-            <details key={qIdx} style={{ borderTop: "1px solid #E5E5EA" }}>
-              <summary style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "16px", padding: "18px 0", fontSize: "18px", fontWeight: 600, letterSpacing: "-0.02em", minHeight: "44px" }}>
-                {f.q}
-                <svg className="chev" style={{ flex: "none" }} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-              </summary>
-              <p className="prewrap" style={{ margin: "0 0 20px", color: "#3A3A3C", maxWidth: "75ch" }}>{f.a}</p>
-            </details>
-          ))}
-        </div>
+          {/* Accent horizontal divider line under active tabs */}
+          <div
+            style={{
+              width: "100%",
+              height: "1px",
+              background: "linear-gradient(90deg, rgba(27, 61, 255, 0.6) 0%, rgba(27, 61, 255, 0.2) 35%, transparent 75%)",
+              marginTop: "12px",
+              marginBottom: "36px",
+            }}
+            aria-hidden="true"
+          />
 
-        {/* Load More button */}
-        {activeFaqGroup.qs.length > 5 && (
-          <div style={{ textAlign: "center", marginTop: "24px" }}>
-            <button type="button" className="press y btn-sheen" onClick={() => setFaqExpanded(!faqExpanded)} style={{ font: "inherit", fontSize: "14.5px", fontWeight: 650, color: "#000000", background: "linear-gradient(180deg, #fae066 0%, #f9d230 50%, #e5bd19 100%)", border: "1.5px solid #000000", borderRadius: "999px", minHeight: "42px", padding: "8px 22px", cursor: "pointer", boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.12)" }}>
-              {faqExpanded ? "Show fewer" : `Load more (${activeFaqGroup.qs.length - 5} more)`}
-            </button>
-          </div>
-        )}
-      </section>
-
-      {/* ── FINAL CTA + SECOND FORM */}
-      <section id="audit2" style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px) clamp(44px, 6vw, 76px)" }}>
-        <div style={{ position: "relative", overflow: "hidden", background: "#F5F5F7", borderRadius: "40px", padding: "clamp(28px, 5vw, 72px)", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: "clamp(28px, 5vw, 64px)", alignItems: "center" }}>
-          <div aria-hidden="true" style={{ position: "absolute", left: "-80px", bottom: "-120px", width: "360px", height: "360px", borderRadius: "50%", background: "#f9d230", opacity: 0.5, filter: "blur(80px)" }} />
-
-          <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "18px" }}>
-            <h2 className="smm-heading" style={{ margin: 0, fontSize: "clamp(2.4rem, 5vw, 4.2rem)", lineHeight: 1.02, letterSpacing: "-0.05em", fontWeight: 700, maxWidth: "12ch" }}>Stop the scroll.</h2>
-            <p style={{ fontSize: "19px", color: "#3A3A3C", maxWidth: "44ch", margin: 0 }}>Get a social media audit and see what&apos;s holding your brand back. No obligation.</p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-              <a className="press" href="https://wa.me/918369018104" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px", minHeight: "46px", padding: "10px 18px", borderRadius: "999px", background: "#000000", color: "#FFFFFF", textDecoration: "none", fontWeight: 600, fontSize: "15.5px" }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" /></svg>
-                +91 83690 18104
-              </a>
-              <a className="press" href="mailto:teamhr@oneimpact.co" style={{ display: "inline-flex", alignItems: "center", minHeight: "46px", padding: "10px 18px", borderRadius: "999px", background: "rgba(0,0,0,0.07)", color: "#000000", textDecoration: "none", fontWeight: 600, fontSize: "15.5px" }}>
-                teamhr@oneimpact.co
-              </a>
+          {/* Accordion Box Container */}
+          <div
+            role="tabpanel"
+            style={{
+              borderRadius: "28px",
+              border: "1px solid rgba(255, 255, 255, 0.22)",
+              background: "rgba(10, 10, 14, 0.6)",
+              backdropFilter: "blur(12px)",
+              padding: "clamp(20px, 3.5vw, 40px) clamp(22px, 4vw, 48px)",
+            }}
+          >
+            <div>
+              {visibleFaqs.map((f, qIdx) => {
+                const isOpen = openFaqQ === qIdx;
+                return (
+                  <div
+                    key={qIdx}
+                    style={{
+                      borderBottom: "1px solid rgba(249, 210, 48, 0.55)",
+                      transition: "border-color 200ms ease",
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaqQ(isOpen ? null : qIdx)}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: "16px",
+                        padding: "22px 0",
+                        fontSize: "clamp(15.5px, 1.3vw, 18px)",
+                        fontWeight: 500,
+                        color: "#FFFFFF",
+                        background: "none",
+                        border: 0,
+                        textAlign: "left",
+                        cursor: "pointer",
+                        letterSpacing: "-0.015em",
+                      }}
+                      aria-expanded={isOpen}
+                    >
+                      <span style={{ color: isOpen ? "#f9d230" : "#FFFFFF", transition: "color 180ms ease" }}>
+                        {f.q}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "24px",
+                          fontWeight: 300,
+                          color: "rgba(255, 255, 255, 0.75)",
+                          flexShrink: 0,
+                          lineHeight: 1,
+                          userSelect: "none",
+                          transition: "transform 180ms ease",
+                        }}
+                      >
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div
+                        style={{
+                          paddingBottom: "22px",
+                          color: "rgba(255, 255, 255, 0.76)",
+                          fontSize: "15.5px",
+                          lineHeight: 1.65,
+                          maxWidth: "78ch",
+                        }}
+                      >
+                        <p style={{ margin: 0, whiteSpace: "pre-line" }}>{f.a}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          </div>
 
-          {/* Bottom form */}
-          <div className="form-card" style={{ background: "#000000", borderRadius: "30px", padding: "clamp(24px, 3.2vw, 36px)", color: "#FFFFFF", boxShadow: "0 1px 0 rgba(255,255,255,0.12) inset, 0 40px 80px -40px rgba(0,0,0,0.5)" }}>
-            {!sent2 ? (
-              <form onSubmit={handleSubmit2} style={{ display: "flex", flexDirection: "column", gap: "14px", position: "relative", zIndex: 1 }}>
-                <h3 className="smm-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.035em", fontWeight: 700 }}>Get your social media audit</h3>
-
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="btm-name" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>Your name</label>
-                  <input id="btm-name" className="fd" type="text" placeholder="First and last name" value={name2} onChange={(e) => setName2(e.target.value)} onBlur={() => setTouched2((t) => ({ ...t, name: true }))} style={{ font: "inherit", fontSize: "17px", height: "50px", padding: "0 16px", borderRadius: "14px", border: `1.5px solid ${showName2Err ? "#FF9F95" : "#3A3A3C"}`, background: "#1C1C1E", color: "#FFFFFF", width: "100%" }} />
-                  {showName2Err && <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>Enter your name so we know who to reply to</span>}
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="btm-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>Phone or WhatsApp number</label>
-                  <input id="btm-phone" className="fd" type="tel" inputMode="tel" placeholder="98XXX XXXXX" value={phone2} onChange={(e) => setPhone2(e.target.value)} onBlur={() => setTouched2((t) => ({ ...t, phone: true }))} style={{ font: "inherit", fontSize: "17px", height: "50px", padding: "0 16px", borderRadius: "14px", border: `1.5px solid ${showPhone2Err ? "#FF9F95" : "#3A3A3C"}`, background: "#1C1C1E", color: "#FFFFFF", width: "100%" }} />
-                  {showPhone2Err && <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>Enter a 10-digit mobile number</span>}
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <label htmlFor="btm-handle" style={{ fontWeight: 500, fontSize: "14px", color: "#EBEBF0", letterSpacing: 0 }}>Website or Instagram handle</label>
-                  <input id="btm-handle" className="fd" type="text" placeholder="@yourbrand" value={handle2} onChange={(e) => setHandle2(e.target.value)} onBlur={() => setTouched2((t) => ({ ...t, handle: true }))} style={{ font: "inherit", fontSize: "17px", height: "50px", padding: "0 16px", borderRadius: "14px", border: `1.5px solid ${showHandle2Err ? "#FF9F95" : "#3A3A3C"}`, background: "#1C1C1E", color: "#FFFFFF", width: "100%" }} />
-                  {showHandle2Err && <span role="alert" style={{ fontSize: "14px", color: "#FF9F95" }}>Enter your website or Instagram handle</span>}
-                </div>
-
-                <button type="submit" className="press y btn-sheen" style={{ font: "inherit", fontSize: "17px", fontWeight: 650, letterSpacing: "-0.01em", color: "#000000", background: "#f9d230", border: 0, borderRadius: "999px", minHeight: "54px", cursor: "pointer", marginTop: "4px" }}>
-                  Get my social media audit
+            {activeFaqGroup.qs.length > 5 && (
+              <div style={{ textAlign: "center", marginTop: "28px" }}>
+                <button
+                  type="button"
+                  className="press y btn-sheen"
+                  onClick={() => setFaqExpanded(!faqExpanded)}
+                  style={{
+                    font: "inherit",
+                    fontSize: "14.5px",
+                    fontWeight: 650,
+                    color: "#000000",
+                    background: "#f9d230",
+                    border: "1px solid #f9d230",
+                    borderRadius: "999px",
+                    minHeight: "42px",
+                    padding: "8px 24px",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 14px rgba(249, 210, 48, 0.35)",
+                  }}
+                >
+                  {faqExpanded ? "Show fewer questions" : `Load more (${activeFaqGroup.qs.length - 5} more questions)`}
                 </button>
-              </form>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start", padding: "12px 0", position: "relative", zIndex: 1 }}>
-                <span style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#f9d230", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-                </span>
-                <h3 role="status" className="smm-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700 }}>Audit requested</h3>
-                <p style={{ margin: 0, color: "#C7C7CC" }}>Thanks, {name2}. We&apos;ll review {handle2} and get in touch on {phone2}.</p>
               </div>
             )}
           </div>
         </div>
       </section>
 
+      {/* ── FINAL CTA + SECOND FORM */}
+      <section
+        id="audit2"
+        style={{
+          width: "100%",
+          backgroundColor: "#000000",
+          padding: "clamp(48px, 6vw, 84px) 0",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1360px",
+            margin: "0 auto",
+            padding: "0 clamp(16px, 3vw, 32px)",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              background: "#000000",
+              border: "1.5px solid #2563EB",
+              borderRadius: "36px",
+              padding: "clamp(28px, 4.5vw, 64px)",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))",
+              gap: "clamp(28px, 5vw, 64px)",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "20px" }}>
+              <h2
+                className="smm-heading"
+                style={{
+                  margin: 0,
+                  fontSize: "clamp(2.4rem, 4.8vw, 4.4rem)",
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.04em",
+                  fontWeight: 700,
+                  color: "#FFFFFF",
+                }}
+              >
+                Stop the{" "}
+                <span
+                  style={{
+                    color: "#f9d230",
+                    fontStyle: "italic",
+                    fontFamily: "var(--font-serif), Georgia, serif",
+                  }}
+                >
+                  scroll.
+                </span>
+              </h2>
+              <p
+                style={{
+                  fontSize: "17.5px",
+                  color: "rgba(255, 255, 255, 0.72)",
+                  maxWidth: "44ch",
+                  margin: 0,
+                  lineHeight: 1.55,
+                }}
+              >
+                Get a social media audit and see what&apos;s holding your brand back. No obligation.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" }}>
+                <a
+                  className="press"
+                  href="https://wa.me/918369018104"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    minHeight: "46px",
+                    padding: "6px 20px 6px 7px",
+                    borderRadius: "999px",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(255, 255, 255, 0.14)",
+                    color: "#FFFFFF",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      background: "#f9d230",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#000000",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  +91 83690 18104
+                </a>
+                <a
+                  className="press"
+                  href="mailto:teamhr@oneimpact.co"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    minHeight: "46px",
+                    padding: "6px 20px 6px 7px",
+                    borderRadius: "999px",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(255, 255, 255, 0.14)",
+                    color: "#FFFFFF",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: "15px",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      background: "#f9d230",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#000000",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </span>
+                  teamhr@oneimpact.co
+                </a>
+              </div>
+            </div>
+
+            {/* Bottom form */}
+            <div
+              className="form-card"
+              style={{
+                background: "#0c0e14",
+                border: "1px solid rgba(255, 255, 255, 0.12)",
+                borderRadius: "28px",
+                padding: "clamp(24px, 3.2vw, 36px)",
+                color: "#FFFFFF",
+                boxShadow: "0 1px 0 rgba(255,255,255,0.12) inset, 0 40px 80px -40px rgba(0,0,0,0.5)",
+              }}
+            >
+              {!sent2 ? (
+                <form onSubmit={handleSubmit2} style={{ display: "flex", flexDirection: "column", gap: "14px", position: "relative", zIndex: 1 }}>
+                  <h3 className="smm-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.035em", fontWeight: 700, color: "#FFFFFF" }}>
+                    Get your social media audit
+                  </h3>
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="btm-name" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      Your name
+                    </label>
+                    <input
+                      id="btm-name"
+                      className="fd"
+                      type="text"
+                      placeholder="First and last name"
+                      value={name2}
+                      onChange={(e) => setName2(e.target.value)}
+                      onBlur={() => setTouched2((t) => ({ ...t, name: true }))}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 16px",
+                        borderRadius: "12px",
+                        border: `1.5px solid ${showName2Err ? "#FF9F95" : "rgba(255, 255, 255, 0.12)"}`,
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    />
+                    {showName2Err && <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>Enter your name so we know who to reply to</span>}
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="btm-phone" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      Phone or WhatsApp number
+                    </label>
+                    <input
+                      id="btm-phone"
+                      className="fd"
+                      type="tel"
+                      inputMode="tel"
+                      placeholder="98XXX XXXXX"
+                      value={phone2}
+                      onChange={(e) => setPhone2(e.target.value)}
+                      onBlur={() => setTouched2((t) => ({ ...t, phone: true }))}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 16px",
+                        borderRadius: "12px",
+                        border: `1.5px solid ${showPhone2Err ? "#FF9F95" : "rgba(255, 255, 255, 0.12)"}`,
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    />
+                    {showPhone2Err && <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>Enter a 10-digit mobile number</span>}
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <label htmlFor="btm-handle" style={{ fontWeight: 500, fontSize: "14px", color: "#f9d230", letterSpacing: 0 }}>
+                      Website or Instagram handle
+                    </label>
+                    <input
+                      id="btm-handle"
+                      className="fd"
+                      type="text"
+                      placeholder="@yourbrand"
+                      value={handle2}
+                      onChange={(e) => setHandle2(e.target.value)}
+                      onBlur={() => setTouched2((t) => ({ ...t, handle: true }))}
+                      style={{
+                        font: "inherit",
+                        fontSize: "16px",
+                        height: "48px",
+                        padding: "0 16px",
+                        borderRadius: "12px",
+                        border: `1.5px solid ${showHandle2Err ? "#FF9F95" : "rgba(255, 255, 255, 0.12)"}`,
+                        background: "#161922",
+                        color: "#FFFFFF",
+                        width: "100%",
+                      }}
+                    />
+                    {showHandle2Err && <span role="alert" style={{ fontSize: "13px", color: "#FF9F95" }}>Enter your website or Instagram handle</span>}
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="press y btn-sheen"
+                    style={{
+                      font: "inherit",
+                      fontSize: "16.5px",
+                      fontWeight: 650,
+                      letterSpacing: "-0.01em",
+                      color: "#000000",
+                      background: "#f9d230",
+                      border: 0,
+                      borderRadius: "999px",
+                      minHeight: "52px",
+                      cursor: "pointer",
+                      marginTop: "6px",
+                    }}
+                  >
+                    Get my social media audit
+                  </button>
+                </form>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "flex-start", padding: "12px 0", position: "relative", zIndex: 1 }}>
+                  <span style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#f9d230", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                  </span>
+                  <h3 role="status" className="smm-heading" style={{ margin: 0, fontSize: "26px", letterSpacing: "-0.03em", fontWeight: 700, color: "#FFFFFF" }}>Audit requested</h3>
+                  <p style={{ margin: 0, color: "#C7C7CC" }}>Thanks, {name2}. We&apos;ll review {handle2} and get in touch on {phone2}.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── FOOTER */}
-      <footer style={{ background: "#F5F5F7", color: "#000000", fontSize: "13.5px", letterSpacing: 0 }}>
-        <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "40px clamp(16px, 3vw, 32px) 24px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "28px" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/LOGO/oneimpact-logo.webp" alt="One Impact" style={{ display: "block", width: "105px", height: "auto", marginBottom: "3px" }} />
-            <span style={{ color: "#6E6E73" }}>360-degree digital marketing for that ONE big bang IMPACT.</span>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
-            <span style={{ fontWeight: 600 }}>Services</span>
-            <a href="/seo" style={{ color: "#6E6E73", textDecoration: "none" }}>SEO and AIO</a>
-            <a href="/social-media-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>Social media</a>
-            <a href="/influencer-marketing" style={{ color: "#6E6E73", textDecoration: "none" }}>Influencer marketing</a>
-            <a href="/branding-services" style={{ color: "#6E6E73", textDecoration: "none" }}>Branding and design</a>
-            <a href="/web-development" style={{ color: "#6E6E73", textDecoration: "none" }}>Website development</a>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
-            <span style={{ fontWeight: 600 }}>Company</span>
-            <a href="#" style={{ color: "#6E6E73", textDecoration: "none" }}>About us</a>
-            <a href="#proof" style={{ color: "#6E6E73", textDecoration: "none" }}>Why us</a>
-            <a href="#" style={{ color: "#6E6E73", textDecoration: "none" }}>Blog</a>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
-            <span style={{ fontWeight: 600 }}>Contact</span>
-            <span style={{ color: "#6E6E73" }}>Mumbai, Maharashtra</span>
-            <a href="mailto:teamhr@oneimpact.co" style={{ color: "#6E6E73", textDecoration: "none" }}>teamhr@oneimpact.co</a>
-            <a href="tel:+918369018104" style={{ color: "#6E6E73", textDecoration: "none" }}>+91 83690 18104</a>
-          </div>
-        </div>
-        <div style={{ maxWidth: "1360px", margin: "0 auto", padding: "0 clamp(16px, 3vw, 32px)" }}>
-          <div style={{ borderTop: "1px solid #D2D2D7", color: "#6E6E73", paddingTop: "16px", paddingBottom: "24px" }}>© 2026 One Impact. All rights reserved.</div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* ── MOBILE STICKY BAR */}
-      <div className="mbar" style={{ position: "sticky", bottom: 0, zIndex: 60, padding: "10px 16px calc(10px + env(safe-area-inset-bottom))", background: "rgba(255,255,255,0.78)", backdropFilter: "blur(24px) saturate(180%)", WebkitBackdropFilter: "blur(24px) saturate(180%)" }}>
-        <a className="press" href="https://wa.me/918369018104" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp us" style={{ flex: "none", width: "52px", height: "52px", borderRadius: "50%", background: "rgba(0,0,0,0.07)", color: "#000000", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" /></svg>
+      <div
+        className="mbar"
+        style={{
+          position: "sticky",
+          bottom: 0,
+          zIndex: 60,
+          padding: "10px 16px calc(10px + env(safe-area-inset-bottom))",
+          background: "rgba(255,255,255,0.78)",
+          backdropFilter: "blur(24px) saturate(180%)",
+          WebkitBackdropFilter: "blur(24px) saturate(180%)",
+          borderTop: "1px solid rgba(0, 0, 0, 0.08)",
+        }}
+      >
+        <a
+          className="press"
+          href="https://wa.me/918369018104"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp us"
+          style={{
+            flex: "none",
+            width: "52px",
+            height: "52px",
+            borderRadius: "50%",
+            background: "rgba(0,0,0,0.07)",
+            color: "#000000",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M4 5h16v11H9l-5 4z" />
+          </svg>
         </a>
-        <a className="press btn-sheen" href="#audit" style={{ flex: 1, background: "#f9d230", color: "#000000", textDecoration: "none", fontWeight: 650, fontSize: "16.5px", borderRadius: "999px", minHeight: "52px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <a
+          className="press btn-sheen"
+          href="#audit"
+          style={{
+            flex: 1,
+            background: "#f9d230",
+            color: "#000000",
+            textDecoration: "none",
+            fontWeight: 650,
+            fontSize: "16.5px",
+            borderRadius: "999px",
+            minHeight: "52px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           Get my social media audit
         </a>
       </div>

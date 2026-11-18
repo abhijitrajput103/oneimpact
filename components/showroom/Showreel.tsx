@@ -71,20 +71,19 @@ export function Showreel({ className }: ShowreelProps) {
         }
       );
 
-      // Animate scattered polaroid photo cards
+      // Animate scattered polaroid photo cards smoothly
       gsap.fromTo(
         section.querySelectorAll(".showreel-card"),
-        { y: 80, opacity: 0, scale: 0.85 },
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
+          duration: 0.8,
+          stagger: 0.06,
+          ease: "power2.out",
           scrollTrigger: {
-            trigger: section.querySelector(".showreel-card"),
-            start: "top 92%",
+            trigger: carouselRef.current || section,
+            start: "top 88%",
             once: true,
           },
         }

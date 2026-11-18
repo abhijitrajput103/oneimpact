@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { WaveDivider } from "@/components/common/WaveDivider";
 
 /**
  * Section 3: THE IMPACT CHRONICLE | ONE IMPACT
@@ -72,22 +71,10 @@ export function ImpactChronicle() {
       aria-labelledby="chronicle-heading"
       className="relative w-full overflow-hidden"
       style={{
-        backgroundColor: "#111111",
+        backgroundColor: "#070707",
         color: "#FAF9F6",
       }}
     >
-      {/* ── Signature Organic Wave Divider transitioning from Manifesto ── */}
-      <WaveDivider
-        fillAbove="#050505"
-        fillBelow="#111111"
-        strokeColor="#FFFFFF"
-        strokeWidth={12}
-        containerStyle={{
-          position: "relative",
-          zIndex: 20,
-        }}
-      />
-
       {/* ── Subtle Dark Grunge / Wall Noise Texture ── */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.045] mix-blend-overlay"
@@ -209,18 +196,6 @@ export function ImpactChronicle() {
           </div>
         </div>
       </div>
-
-      {/* ── Signature Organic Wave Divider transitioning to Section 4: Disciplines ── */}
-      <WaveDivider
-        fillAbove="#111111"
-        fillBelow="#050507"
-        strokeColor="#FFFFFF"
-        strokeWidth={12}
-        containerStyle={{
-          position: "relative",
-          zIndex: 20,
-        }}
-      />
     </section>
   );
 }

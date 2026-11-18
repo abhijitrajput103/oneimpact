@@ -762,7 +762,7 @@ export function StickerPlayground() {
       case "image":
         return (
           <div
-            className="rounded-lg sm:rounded-2xl overflow-hidden drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
+            className="rounded-lg sm:rounded-2xl overflow-hidden"
             style={{ width: sticker.width, height: sticker.height }}
           >
             <Image
@@ -779,7 +779,7 @@ export function StickerPlayground() {
       case "badge":
         return (
           <div
-            className="bg-accent-yellow text-black font-display text-[6px] sm:text-[10px] font-extrabold tracking-wide px-1.5 py-0.5 sm:px-4 sm:py-2 rounded-full whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
+            className="bg-accent-yellow text-black font-display text-[6px] sm:text-[10px] font-extrabold tracking-wide px-1.5 py-0.5 sm:px-4 sm:py-2 rounded-full whitespace-nowrap shadow-md"
             style={{ maxWidth: sticker.width }}
           >
             {sticker.content}
@@ -789,7 +789,7 @@ export function StickerPlayground() {
       case "bubble":
         return (
           <div
-            className="bg-white text-black font-sans text-[6.5px] sm:text-[11px] leading-snug px-2 py-1 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-2xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)] relative"
+            className="bg-white text-black font-sans text-[6.5px] sm:text-[11px] leading-snug px-2 py-1 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-2xl shadow-md relative"
             style={{ maxWidth: sticker.width }}
           >
             {sticker.content}
@@ -805,6 +805,7 @@ export function StickerPlayground() {
       <div
         ref={containerRef}
         className="relative w-full h-[180px] sm:h-[280px] md:h-[380px] overflow-hidden rounded-2xl bg-[#111111] border border-white/[0.04]"
+        style={{ contain: "paint layout", transform: "translateZ(0)" }}
       >
         {/* Subtle grid noise texture */}
         <div className="absolute inset-0 opacity-[0.015] pointer-events-none bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)] bg-[length:24px_24px]" />

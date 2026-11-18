@@ -30,10 +30,8 @@ export function StickerItem({
     <div
       data-sticker-id={id}
       className={cn(
-        "absolute top-0 left-0 touch-none select-none will-change-transform",
+        "absolute top-0 left-0 touch-none select-none",
         "cursor-grab active:cursor-grabbing",
-        "transition-[filter] duration-200",
-        "hover:drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]",
         className
       )}
       style={{

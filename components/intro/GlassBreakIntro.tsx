@@ -123,13 +123,75 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
   const crackRef = useRef<CrackCanvasHandle>(null);
   const shardsRef = useRef<GlassShardsHandle>(null);
   const particlesRef = useRef<ParticleSystemHandle>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const audioBufferRef = useRef<AudioBuffer | null>(null);
+  const currentSourceRef = useRef<AudioBufferSourceNode | null>(null);
+  const currentGainRef = useRef<GainNode | null>(null);
   const shatterAudioRef = useRef<HTMLAudioElement | null>(null);
   const audioErrorRef = useRef(false);
+  const stopTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const lenis = useLenis();
 
-  // Preload custom glass-break audio file from /audio/glass-break.mp3
+  // Stop any active audio immediately (prevents lingering sound after breaking)
+  const stopAllAudio = useCallback(() => {
+    if (stopTimeoutRef.current) {
+      clearTimeout(stopTimeoutRef.current);
+      stopTimeoutRef.current = null;
+    }
+
+    if (currentSourceRef.current && audioCtxRef.current) {
+      try {
+        const ctx = audioCtxRef.current;
+        if (currentGainRef.current) {
+          currentGainRef.current.gain.cancelScheduledValues(ctx.currentTime);
+          currentGainRef.current.gain.setValueAtTime(0, ctx.currentTime);
+        }
+        currentSourceRef.current.stop();
+        currentSourceRef.current.disconnect();
+      } catch {}
+      currentSourceRef.current = null;
+    }
+
+    if (shatterAudioRef.current) {
+      try {
+        shatterAudioRef.current.pause();
+        shatterAudioRef.current.currentTime = 0;
+      } catch {}
+    }
+  }, []);
+
+  // Pre-fetch & pre-decode glass-break audio file for instant 0ms latency in deployed production
   useEffect(() => {
+    let isCancelled = false;
+
+    // 1. Web Audio API pre-decode (zero network / streaming latency on impact)
+    try {
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        audioCtxRef.current = ctx;
+
+        fetch("/audio/glass-break.mp3")
+          .then((res) => {
+            if (!res.ok) throw new Error("Audio fetch failed");
+            return res.arrayBuffer();
+          })
+          .then((arrayBuffer) => ctx.decodeAudioData(arrayBuffer))
+          .then((decodedBuffer) => {
+            if (!isCancelled) {
+              audioBufferRef.current = decodedBuffer;
+            }
+          })
+          .catch(() => {
+            audioErrorRef.current = true;
+          });
+      }
+    } catch {
+      audioErrorRef.current = true;
+    }
+
+    // 2. HTML5 Audio fallback preloading
     const audio = new Audio("/audio/glass-break.mp3");
     audio.preload = "auto";
     audio.volume = 0.85;
@@ -143,23 +205,88 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
     shatterAudioRef.current = audio;
 
     return () => {
+      isCancelled = true;
       audio.removeEventListener("error", handleError);
+      stopAllAudio();
+      if (audioCtxRef.current && audioCtxRef.current.state !== "closed") {
+        audioCtxRef.current.close().catch(() => {});
+      }
     };
-  }, []);
+  }, [stopAllAudio]);
 
   const triggerShatterSound = useCallback(() => {
+    const ctx = audioCtxRef.current;
+    const buffer = audioBufferRef.current;
+    const BREAK_DURATION = 1.4; // Synced precisely to the glass breaking animation (stops lingering music)
+
+    // ── APPROACH 1: Web Audio API with pre-decoded buffer (instant 0ms trigger in deployed version) ──
+    if (ctx && buffer) {
+      try {
+        if (ctx.state === "suspended") {
+          ctx.resume();
+        }
+
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+
+        const gainNode = ctx.createGain();
+        const now = ctx.currentTime;
+
+        // Full impact volume during initial shatter
+        gainNode.gain.setValueAtTime(0.85, now);
+        // Hold full level while shards fly
+        gainNode.gain.setValueAtTime(0.85, now + 1.05);
+        // Natural exponential fade out right as breaking concludes (eliminates lingering music tail)
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + BREAK_DURATION);
+
+        source.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        source.start(now);
+        source.stop(now + BREAK_DURATION + 0.05);
+
+        currentSourceRef.current = source;
+        currentGainRef.current = gainNode;
+        return;
+      } catch {
+        // Fall through to fallback
+      }
+    }
+
+    // ── APPROACH 2: HTMLAudioElement fallback with timed cutoff ──
     const audio = shatterAudioRef.current;
     if (audio && !audioErrorRef.current) {
-      audio.currentTime = 0;
-      audio.play().catch(() => {
+      try {
+        audio.currentTime = 0;
+        audio.volume = 0.85;
+        audio.play().then(() => {
+          stopTimeoutRef.current = setTimeout(() => {
+            const fadeInterval = setInterval(() => {
+              if (audio.volume > 0.1) {
+                audio.volume = Math.max(0, audio.volume - 0.15);
+              } else {
+                audio.pause();
+                audio.currentTime = 0;
+                clearInterval(fadeInterval);
+              }
+            }, 30);
+          }, 1150);
+        }).catch(() => {
+          playGlassShatterSound();
+        });
+        return;
+      } catch {
         playGlassShatterSound();
-      });
-      return;
+        return;
+      }
     }
+
+    // ── APPROACH 3: Procedural Web Audio synth (instant, zero file dependency) ──
     playGlassShatterSound();
   }, []);
 
   const completeIntro = useCallback(() => {
+    stopAllAudio();
     setIsActive(false);
     sessionStorage.setItem("oneimpact-intro", "true");
 
@@ -339,6 +466,11 @@ export function GlassBreakIntro({ onComplete }: GlassBreakIntroProps) {
   return (
     <div
       ref={containerRef}
+      onPointerDown={() => {
+        if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
+          audioCtxRef.current.resume().catch(() => {});
+        }
+      }}
       onClick={handleGlassClick}
       className="fixed inset-0 w-screen h-screen z-[9999] overflow-hidden intro-cursor-hidden select-none cursor-none"
       style={{ cursor: "none" }}

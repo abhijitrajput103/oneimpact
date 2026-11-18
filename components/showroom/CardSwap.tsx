@@ -127,10 +127,13 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
 
     onCardChange?.(order.current[0]);
 
+    const isVisibleRef = { current: false };
+
     const startInterval = () => {
       clearInterval(intervalRef.current);
+      if (!isVisibleRef.current) return;
       intervalRef.current = setInterval(() => {
-        if (!isHoveredRef.current) {
+        if (!isHoveredRef.current && isVisibleRef.current) {
           swap();
         }
       }, delay);
@@ -162,9 +165,9 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
 
       // Front card drops down snappily
       tl.to(elFront, {
-        y: "+=360",
-        opacity: 0.4,
-        duration: 0.45,
+        y: "+=280",
+        opacity: 0,
+        duration: 0.35,
         ease: "power2.in",
       });
 
@@ -179,12 +182,12 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
             x: slot.x,
             y: slot.y,
             z: slot.z,
-            duration: 0.5,
-            ease: "power3.out",
+            zIndex: slot.zIndex,
+            duration: 0.4,
+            ease: "power2.out",
           },
-          "<0.05"
+          "<0.04"
         );
-        tl.set(el, { zIndex: slot.zIndex }, "<");
       });
 
       const backSlot = makeSlot(
@@ -204,15 +207,35 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
       tl.to(elFront, {
         y: backSlot.y,
         opacity: 1,
-        duration: 0.5,
-        ease: "power3.out",
+        duration: 0.35,
+        ease: "power2.out",
       });
     };
 
     swapRef.current = swap;
-    startInterval();
 
     const node = containerRef.current;
+    let observer: IntersectionObserver | null = null;
+
+    if (node && typeof IntersectionObserver !== "undefined") {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          isVisibleRef.current = entry.isIntersecting;
+          if (entry.isIntersecting) {
+            startInterval();
+          } else {
+            clearInterval(intervalRef.current);
+          }
+        },
+        { threshold: 0.05 }
+      );
+      observer.observe(node);
+    } else {
+      isVisibleRef.current = true;
+      startInterval();
+    }
+
     if (node) {
       const onEnter = () => {
         if (pauseOnHover) {
@@ -229,12 +252,16 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
       node.addEventListener("mouseenter", onEnter);
       node.addEventListener("mouseleave", onLeave);
       return () => {
+        observer?.disconnect();
         node.removeEventListener("mouseenter", onEnter);
         node.removeEventListener("mouseleave", onLeave);
         clearInterval(intervalRef.current);
       };
     }
-    return () => clearInterval(intervalRef.current);
+    return () => {
+      observer?.disconnect();
+      clearInterval(intervalRef.current);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
 
@@ -280,25 +307,23 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
           transform-origin: center right;
           perspective: 1000px;
           overflow: visible;
+          contain: layout style;
         }
         .card-swap-card {
           position: absolute;
           top: 50%;
           left: 50%;
           border-radius: 16px;
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          border: 1px solid rgba(255, 255, 255, 0.12);
           background: #0a0a0a;
           transform-style: preserve-3d;
-          will-change: transform;
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
           overflow: hidden;
           cursor: pointer;
-          transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .card-swap-card:hover {
-          border-color: rgba(255, 215, 0, 0.4);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(249, 210, 48, 0.15);
+          border-color: rgba(255, 215, 0, 0.35);
         }
         @media (min-width: 1536px) {
           .card-swap-container {

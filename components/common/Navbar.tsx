@@ -145,7 +145,7 @@ export function Navbar() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/LOGO/oneimpact-logo.webp"
+                src="/images/logo-tight.webp"
                 alt="One Impact"
                 className="h-6 sm:h-7 md:h-8 w-auto object-contain"
               />

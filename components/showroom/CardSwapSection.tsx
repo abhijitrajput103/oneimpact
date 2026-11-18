@@ -11,50 +11,26 @@ const PROJECTS = [
   {
     title: "Brand Strategy & Visual Design",
     category: "BRANDING",
-    description: "Crafting bespoke brand narratives, identity systems, and high-impact visual design that command attention.",
-    gradient: "from-amber-950/70 via-black/40 to-transparent",
     image: "/images/service-branding.webp",
   },
   {
     title: "Interactive Web & Digital Engineering",
     category: "WEBSITE DEV",
-    description: "High-performance digital architectures, bespoke UI/UX, and immersive interactive web experiences.",
-    gradient: "from-zinc-950/80 via-black/40 to-transparent",
     image: "/images/service-website-development.webp",
   },
   {
     title: "Organic Search & Traffic Growth",
     category: "SEO SERVICES",
-    description: "Technical SEO audits, domain authority building, and data-backed strategies for scalable organic ranking dominance.",
-    gradient: "from-amber-950/70 via-black/40 to-transparent",
     image: "/images/service-seo.webp",
-  },
-  {
-    title: "Commercial Studio & Art Direction",
-    category: "CONTENT & FILM",
-    description: "Cinematic commercial photography, high-end studio film production, and viral visual asset creation.",
-    gradient: "from-stone-950/80 via-black/40 to-transparent",
-    image: "/images/service-content-creative.webp",
   },
   {
     title: "Creator Partnerships & Strategic PR",
     category: "INFLUENCER PR",
-    description: "Curating high-converting creator alliances that amplify brand authority, reach, and organic engagement.",
-    gradient: "from-rose-950/70 via-black/40 to-transparent",
     image: "/images/service-influencer-marketing.webp",
-  },
-  {
-    title: "Creator-Led Social Campaigns",
-    category: "UGC CAMPAIGNS",
-    description: "Relatable, authentic creator-led video content engineered for paid social performance and viral conversions.",
-    gradient: "from-zinc-950/80 via-black/40 to-transparent",
-    image: "/images/service-ugc.webp",
   },
   {
     title: "Performance & Social Media Marketing",
     category: "SOCIAL MEDIA",
-    description: "Data-driven social media growth, viral content strategy, and multi-channel campaign management for market leadership.",
-    gradient: "from-purple-950/70 via-black/40 to-transparent",
     image: "/images/service-social-media.webp",
   },
 ];
@@ -114,26 +90,6 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
           }
         );
       }
-
-      // Animate the card container
-      const cardContainer = section.querySelector(".card-swap-wrapper");
-      if (cardContainer) {
-        gsap.fromTo(
-          cardContainer,
-          { x: 80, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 85%",
-              once: true,
-            },
-          }
-        );
-      }
     },
     { scope: sectionRef }
   );
@@ -156,13 +112,6 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
         fillBelow="#000000"
         strokeColor="#4066c6"
         strokeWidth={12}
-      />
-      {/* Background noise texture */}
-      <div
-        className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        }}
       />
 
       <div className="relative z-[1] px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28 pt-4 sm:pt-6 md:pt-8 lg:pt-10 pb-8 sm:pb-10 md:pb-12 lg:pb-14">
@@ -206,40 +155,41 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
           </div>
 
           {/* Right — Card Swap */}
-          <div className="card-swap-wrapper w-full lg:w-[58%] xl:w-[62%] relative flex flex-col items-center lg:items-end overflow-visible" style={{ opacity: 0 }}>
+          <div className="card-swap-wrapper w-full lg:w-[58%] xl:w-[62%] relative flex flex-col items-center lg:items-end overflow-visible">
             <div className="relative w-full h-[260px] sm:h-[320px] md:h-[420px] lg:h-[520px] xl:h-[560px]">
               <CardSwap
                 ref={cardSwapRef}
                 width={560}
                 height={315}
-                cardDistance={26}
-                verticalDistance={36}
+                cardDistance={22}
+                verticalDistance={30}
                 delay={4500}
                 pauseOnHover={true}
-                skewAmount={4}
+                skewAmount={3}
                 easing="smooth"
               >
                 {PROJECTS.map((project, i) => (
                   <Card key={i}>
                     {/* Card interior */}
-                    <div className="relative w-full h-full overflow-hidden rounded-2xl group/card cursor-pointer bg-zinc-950 shadow-2xl">
+                    <div className="relative w-full h-full overflow-hidden rounded-2xl group/card cursor-pointer bg-zinc-950">
                       {/* Background image */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover/card:scale-105 filter brightness-105 contrast-105"
+                        className="absolute inset-0 w-full h-full object-cover"
                         loading="lazy"
+                        decoding="async"
                         draggable={false}
                       />
 
                       {/* Subtle gradient overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-10" />
 
-                      {/* Service Name Pill at Top Right (Uncovered across all stacked cards!) */}
+                      {/* Service Name Pill at Top Right */}
                       <div className="absolute top-2 sm:top-2.5 right-2 sm:right-3.5 z-30 flex items-center pointer-events-none">
-                        <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/25 shadow-lg whitespace-nowrap">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow shadow-[0_0_8px_#f9d230]" />
+                        <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-black/90 border border-white/20 whitespace-nowrap">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow" />
                           <span className="text-[8.5px] sm:text-[10px] font-display font-extrabold tracking-wider text-off-white uppercase">
                             <span className="text-accent-yellow mr-1">0{i + 1}</span>
                             {project.category}
@@ -252,7 +202,7 @@ export function CardSwapSection({ className }: CardSwapSectionProps) {
                         <span className="text-[7.5px] sm:text-[9.5px] font-display font-black tracking-widest text-accent-yellow uppercase block mb-0.5">
                           FEATURED SERVICE // {project.category}
                         </span>
-                        <h3 className="text-xs sm:text-base md:text-lg font-display font-bold text-white tracking-tight leading-tight line-clamp-1 drop-shadow">
+                        <h3 className="text-xs sm:text-base md:text-lg font-display font-bold text-white tracking-tight leading-tight line-clamp-1">
                           {project.title}
                         </h3>
                       </div>

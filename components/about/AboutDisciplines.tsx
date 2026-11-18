@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { WaveDivider } from "@/components/common/WaveDivider";
 
 /**
  * Section 4: SEVEN DISCIPLINES. ONE CREATIVE ENGINE.
@@ -226,11 +225,11 @@ const DISCIPLINES: DisciplineCard[] = [
 
 export function AboutDisciplines() {
   return (
-    <div className="relative w-full overflow-hidden" style={{ backgroundColor: "#050507" }}>
+    <div className="relative w-full overflow-hidden" style={{ backgroundColor: "#070707" }}>
       <section id="disciplines" className="disciplines-sec" aria-labelledby="disciplines-heading">
         <style>{`
           .disciplines-sec {
-            --bg: #050507;
+            --bg: #070707;
             --fg: #f3f0ea;
             --blue: #2457ff;
             --yellow: #ffd60a;
@@ -620,19 +619,6 @@ export function AboutDisciplines() {
           </div>
         </div>
       </section>
-
-      {/* ── Signature Organic Wave Divider transitioning to Values & CTA Marquee (#f9d230) ── */}
-      <WaveDivider
-        fillAbove="#050507"
-        fillBelow="#f9d230"
-        strokeColor="#FFFFFF"
-        strokeWidth={12}
-        containerStyle={{
-          position: "relative",
-          zIndex: 20,
-          marginTop: "-2px",
-        }}
-      />
     </div>
   );
 }
