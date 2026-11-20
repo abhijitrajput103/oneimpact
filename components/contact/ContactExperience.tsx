@@ -292,7 +292,7 @@ export default function ContactExperience() {
           <div className={styles.heroRight} id="contact-form">
             <div className={styles.phoneArt} data-reveal>
               <div className={styles.yellowRay} aria-hidden>✳</div>
-              <Image src="/oneimpact-contact/phone-envelope.jpeg" alt="Editorial collage featuring a vintage telephone and envelope" width={620} height={1106} priority/>
+              <Image src="/oneimpact-contact/phone-envelope.webp" alt="Editorial collage featuring a vintage telephone and envelope" width={620} height={1106} priority/>
             </div>
             <div data-reveal className={styles.formPosition}><ContactForm/></div>
           </div>
@@ -320,7 +320,7 @@ export default function ContactExperience() {
         <div className={`${styles.container} ${styles.officeGrid}`}>
           <div className={styles.officePhoto} data-reveal>
             <div className={styles.tape} aria-hidden="true"/>
-            <Image src="/oneimpact-contact/office-sample.jpeg" alt="Illustrative studio interior — replace with a real One Impact office photograph" width={820} height={580}/>
+            <Image src="/oneimpact-contact/office-sample.webp" alt="Illustrative studio interior — replace with a real One Impact office photograph" width={820} height={580}/>
             <span className={styles.photoCaption}>STUDIO IMAGE / REPLACE BEFORE LAUNCH</span>
           </div>
           <div className={styles.officeCopy} data-reveal>
@@ -333,8 +333,8 @@ export default function ContactExperience() {
           </div>
           <div className={styles.mapWrap} data-reveal>
             {DETAILS.mapUrl
-              ? <a href={DETAILS.mapUrl} target="_blank" rel="noopener noreferrer" className={styles.mapFrame} aria-label="Open One Impact office in maps"><Image src="/oneimpact-contact/map-sample.jpeg" alt="Map preview (replace with verified location)" width={600} height={562}/><span>Open in Maps ↗</span></a>
-              : <div className={styles.mapFrame}><Image src="/oneimpact-contact/map-sample.jpeg" alt="Illustrative map artwork, not an actual office location" width={600} height={562}/><span className={styles.mapPlaceholder}>ILLUSTRATIVE MAP</span></div>}
+              ? <a href={DETAILS.mapUrl} target="_blank" rel="noopener noreferrer" className={styles.mapFrame} aria-label="Open One Impact office in maps"><Image src="/oneimpact-contact/map-sample.webp" alt="Map preview (replace with verified location)" width={600} height={562}/><span>Open in Maps ↗</span></a>
+              : <div className={styles.mapFrame}><Image src="/oneimpact-contact/map-sample.webp" alt="Illustrative map artwork, not an actual office location" width={600} height={562}/><span className={styles.mapPlaceholder}>ILLUSTRATIVE MAP</span></div>}
           </div>
         </div>
       </section>

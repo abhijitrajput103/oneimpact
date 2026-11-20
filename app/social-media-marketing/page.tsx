@@ -849,7 +849,7 @@ export default function SmmLandingPage() {
             {/* Note paper background image */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/Note_paper.png"
+              src="/images/Note_paper.webp"
               alt=""
               aria-hidden="true"
               draggable={false}

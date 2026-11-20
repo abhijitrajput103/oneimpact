@@ -1210,7 +1210,7 @@ export default function InfluencerMarketingPage() {
             {/* Note paper background image */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/Note_paper.png"
+              src="/images/Note_paper.webp"
               alt=""
               aria-hidden="true"
               draggable={false}
@@ -1687,7 +1687,7 @@ export default function InfluencerMarketingPage() {
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/Influencer Marketing Sticker Collage.png"
+              src="/images/Influencer Marketing Sticker Collage.webp"
               alt="Influencer Marketing Sticker Collage"
               draggable={false}
               style={{
@@ -1897,7 +1897,7 @@ export default function InfluencerMarketingPage() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/Four Principles of Influencer Marketing.png"
+              src="/images/Four Principles of Influencer Marketing.webp"
               alt="Four Principles of Influencer Marketing"
               style={{
                 display: "block",
@@ -3093,7 +3093,7 @@ export default function InfluencerMarketingPage() {
             <div style={{ position: "relative", width: "100%", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/Mumbai-Influencer-Collage.png"
+                src="/images/Mumbai-Influencer-Collage.webp"
                 alt="Mumbai Influencer Marketing Collage"
                 style={{
                   width: "100%",

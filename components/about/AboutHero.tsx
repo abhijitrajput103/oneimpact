@@ -178,7 +178,7 @@ export function AboutHero() {
       {/* 1. Full-bleed crumpled gold paper texture overlay */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/images/about-paper-texture.jpg"
+        src="/images/about-paper-texture.webp"
         alt=""
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
         style={{ mixBlendMode: "multiply", opacity: 0.45 }}
@@ -408,7 +408,7 @@ export function AboutHero() {
               <div className="relative my-1.5 sm:my-2 overflow-hidden border border-[#222]/30 filter grayscale contrast-125">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/about-newspaper.jpg"
+                  src="/images/about-newspaper.webp"
                   alt=""
                   className="w-full h-16 xs:h-20 sm:h-24 md:h-28 object-cover"
                 />
@@ -687,7 +687,7 @@ export function AboutHero() {
               <div className="relative my-1.5 sm:my-2 overflow-hidden border border-[#222]/30 filter grayscale contrast-125">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/about-creative-process.jpg"
+                  src="/images/about-creative-process.webp"
                   alt=""
                   className="w-full h-14 xs:h-18 sm:h-22 md:h-24 object-cover"
                 />

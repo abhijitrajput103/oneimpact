@@ -227,7 +227,7 @@ a.contactTile:hover svg { transform: rotate(-12deg) scale(1.13); }
 .faqAnswer > div { min-height: 0; overflow: hidden; }
 .faqAnswer p { font-size: 13px; color: #35302b; line-height: 1.6; margin: 0; padding: 0 16px 16px; }
 .ctaPanel {
-  position: relative; background: url("/oneimpact-contact/cta-clean.png") center / 100% 100% no-repeat;
+  position: relative; background: url("/oneimpact-contact/cta-clean.webp") center / 100% 100% no-repeat;
   padding: clamp(79px,9vw,135px) clamp(40px,7vw,115px) clamp(75px,8vw,125px) clamp(35px,6vw,95px);
   margin-left: -2.5%; isolation: isolate; z-index: 1; overflow: hidden;
 }

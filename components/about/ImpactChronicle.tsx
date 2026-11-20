@@ -43,14 +43,14 @@ const CHRONICLE_ITEMS: ChronicleItem[] = [
   {
     year: "2021",
     subtext: "First clients & creative experiments.",
-    image: "/images/about-hero-team.jpg",
+    image: "/images/about-hero-team.webp",
     alt: "2021 - First clients & creative experiments",
     rotation: "rotate-[2deg]",
   },
   {
     year: "2023",
     subtext: "New disciplines. Bigger ideas.",
-    image: "/images/about-creative-process.jpg",
+    image: "/images/about-creative-process.webp",
     alt: "2023 - New disciplines. Bigger ideas",
     rotation: "-rotate-[1.5deg]",
   },

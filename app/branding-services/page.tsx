@@ -1154,7 +1154,7 @@ export default function BrandingServicesPage() {
             {/* Note paper background image */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/Note_paper.png"
+              src="/images/Note_paper.webp"
               alt=""
               aria-hidden="true"
               draggable={false}
@@ -2653,7 +2653,7 @@ export default function BrandingServicesPage() {
             <div style={{ position: "relative", width: "100%", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/Mumbai-Influencer-Collage.png"
+                src="/images/Mumbai-Influencer-Collage.webp"
                 alt="Mumbai Branding Collage"
                 style={{
                   width: "100%",

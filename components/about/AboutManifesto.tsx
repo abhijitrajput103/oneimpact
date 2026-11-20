@@ -18,7 +18,7 @@ import Image from "next/image";
  *      "[ FIG. 02 — CREATIVE DOCTRINE ]" label, and the manifesto statement paragraph
  * - Right stage:
  *    - Full creative studio collage (monitor with ONE IMPACT®, DSLR camera, digital tablet with chalk stroke, eye polaroid, and film strips)
- *      from "/images/OurPhilosophy-image.png"
+ *      from "/images/OurPhilosophy-image.webp"
  * - Bottom folio: "02 / 05 — MANIFESTO" | "ONE IMPACT® CREATIVE STUDIO"
  */
 
@@ -437,7 +437,7 @@ export function AboutManifesto() {
         {/* RIGHT COLUMN: Full Collage (Monitor + Camera + Tablet + Eye + Film) */}
         <div className="art-wrap" aria-hidden="true">
           <Image
-            src="/images/OurPhilosophy-image.png"
+            src="/images/OurPhilosophy-image.webp"
             alt="One Impact Creative Tools and Studio Collage"
             width={1536}
             height={1024}

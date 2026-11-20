@@ -10,7 +10,6 @@ import { AboutDisciplines } from "@/components/about/AboutDisciplines";
 import { AboutFounders } from "@/components/about/AboutFounders";
 import { AboutClients } from "@/components/about/AboutClients";
 import { AboutValuesCTA } from "@/components/about/AboutValuesCTA";
-import { LetsPlaySection } from "@/components/common/LetsPlaySection";
 
 export default function AboutPage() {
   React.useEffect(() => {

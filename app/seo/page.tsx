@@ -1437,7 +1437,7 @@ export default function SeoLandingPage() {
             {/* Note paper background image */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/Note_paper.png"
+              src="/images/Note_paper.webp"
               alt=""
               aria-hidden="true"
               draggable={false}
@@ -1869,7 +1869,7 @@ export default function SeoLandingPage() {
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/illustration.png"
+              src="/images/illustration.webp"
               alt="SEO visibility illustration"
               draggable={false}
               style={{
@@ -3310,7 +3310,7 @@ export default function SeoLandingPage() {
             <div style={{ position: "relative", width: "100%", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/Mumbai-Influencer-Collage.png"
+                src="/images/Mumbai-Influencer-Collage.webp"
                 alt="Mumbai Local SEO Collage"
                 style={{
                   width: "100%",

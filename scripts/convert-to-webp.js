@@ -11,10 +11,13 @@ const PUBLIC_DIR = path.join(__dirname, "..", "public");
 // Directories to scan for images
 const SCAN_DIRS = [
   path.join(PUBLIC_DIR, "images"),
+  path.join(PUBLIC_DIR, "images", "home-services"),
+  path.join(PUBLIC_DIR, "images", "services"),
   path.join(PUBLIC_DIR, "images", "reels"),
   path.join(PUBLIC_DIR, "images", "stickers"),
   path.join(PUBLIC_DIR, "LOGO"),
   path.join(PUBLIC_DIR, "LOGO", "transparent"),
+  path.join(PUBLIC_DIR, "oneimpact-contact"),
 ];
 
 const IMAGE_EXTS = [".png", ".jpg", ".jpeg"];

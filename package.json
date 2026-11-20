@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "optimize-images": "node scripts/optimize-images.js",
+    "convert-to-webp": "node scripts/convert-to-webp.js"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

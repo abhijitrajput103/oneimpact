@@ -652,7 +652,7 @@ export function AboutFounders() {
         >
           <Image
             alt="Kartik Mittal"
-            src="/images/founder-kartik-mittal.jpg"
+            src="/images/founder-kartik-mittal.webp"
             width={600}
             height={800}
             priority
@@ -736,7 +736,7 @@ export function AboutFounders() {
         >
           <Image
             alt="Kajol Chavan"
-            src="/images/founder-kajol-chavan.jpg"
+            src="/images/founder-kajol-chavan.webp"
             width={600}
             height={800}
             sizes="(max-width: 820px) 100vw, 50vw"
