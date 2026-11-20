@@ -1,15 +1,28 @@
 "use client";
 
 import React, { useState, useSyncExternalStore } from "react";
+import dynamic from "next/dynamic";
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
-import { GlassBreakIntro } from "@/components/intro/GlassBreakIntro";
 import { Hero } from "@/components/hero/Hero";
 import { Showreel } from "@/components/showroom/Showreel";
 import { AboutBanner } from "@/components/showroom/AboutBanner";
 import { FullServiceCreativeSection } from "@/components/showroom/FullServiceCreativeSection";
-import { ContactFormSection } from "@/components/contact/ContactFormSection";
-import { LetsPlaySection } from "@/components/common/LetsPlaySection";
+
+const GlassBreakIntro = dynamic(
+  () => import("@/components/intro/GlassBreakIntro").then((m) => m.GlassBreakIntro),
+  { ssr: false }
+);
+
+const ContactFormSection = dynamic(
+  () => import("@/components/contact/ContactFormSection").then((m) => m.ContactFormSection),
+  { ssr: true }
+);
+
+const LetsPlaySection = dynamic(
+  () => import("@/components/common/LetsPlaySection").then((m) => m.LetsPlaySection),
+  { ssr: true }
+);
 
 const emptySubscribe = () => () => { };
 
@@ -51,19 +64,29 @@ export default function Home() {
         <Hero />
 
         {/* Showreel Portfolio Section */}
-        <Showreel />
+        <div className="section-contained">
+          <Showreel />
+        </div>
 
         {/* About Banner + Client Logos */}
-        <AboutBanner />
+        <div className="section-contained">
+          <AboutBanner />
+        </div>
 
         {/* Full-Service Creative Services Section */}
-        <FullServiceCreativeSection />
+        <div className="section-contained">
+          <FullServiceCreativeSection />
+        </div>
 
         {/* Project Inquiry & Contact Form Section */}
-        <ContactFormSection />
+        <div className="section-contained">
+          <ContactFormSection />
+        </div>
 
         {/* Interactive Sticker Playground ("Let's play") */}
-        <LetsPlaySection />
+        <div className="section-contained">
+          <LetsPlaySection />
+        </div>
       </main>
 
       <Footer />

@@ -29,6 +29,7 @@
     background-color: #050505;
     color: #F5F5F7;
     overflow-x: hidden;
+    overscroll-behavior-y: none;
     cursor: auto !important;
   }
 
@@ -37,6 +38,9 @@
     color: #F5F5F7;
     font-family: var(--font-sans);
     overflow-x: hidden;
+    overscroll-behavior-y: none;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     cursor: auto !important;
@@ -87,6 +91,33 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Off-screen layout containment for 60/120fps scrolling */
+  .section-contained {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 750px;
+  }
+
+  /* GPU layer promotion for frictionless transforms */
+  .gpu-layer {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+}
+
+/* Mobile blur optimization: avoid heavy GPU thermal throttling during scroll */
+@media (hover: none) and (pointer: coarse) {
+  .glassmorphism {
+    background: rgba(10, 10, 10, 0.92) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .glassmorphism-dark {
+    background: rgba(5, 5, 5, 0.95) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 }
 

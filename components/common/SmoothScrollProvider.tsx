@@ -35,15 +35,16 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       return;
     }
 
-    // Desktop: Instantiate Lenis with premium smooth scroll settings
+    // Desktop: Instantiate Lenis with tuned high-performance smooth scroll settings
     const lenisInstance = new Lenis({
-      duration: 1.2,
+      duration: 0.95,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.0,
+      syncTouch: false,
     });
 
     requestAnimationFrame(() => {
@@ -62,8 +63,8 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     };
 
     gsap.ticker.add(updateTicker);
-    // Disable lag smoothing to prevent visual desync in heavy scroll animations
-    gsap.ticker.lagSmoothing(0);
+    // Smooth lag compensation: smooths across minor micro-stalls (up to 500ms, floor 33ms)
+    gsap.ticker.lagSmoothing(500, 33);
 
     return () => {
       gsap.ticker.remove(updateTicker);

@@ -27,23 +27,34 @@ export default function AboutPage() {
         <AboutHero />
 
         {/* 2. Section 02: The Manifesto — Editorial philosophy, typography & motion */}
-        <AboutManifesto />
+        <div className="section-contained">
+          <AboutManifesto />
+        </div>
 
         {/* 3. Section 03: The Impact Chronicle — Interactive editorial timeline */}
-        <ImpactChronicle />
+        <div className="section-contained">
+          <ImpactChronicle />
+        </div>
 
         {/* 4. Section 04: Seven Disciplines — 3D isometric fanned card engine */}
-        <AboutDisciplines />
+        <div className="section-contained">
+          <AboutDisciplines />
+        </div>
 
         {/* 5. Section 05: Our Founders — Kartik Mittal & Kajol Chavan */}
-        <AboutFounders />
+        <div className="section-contained">
+          <AboutFounders />
+        </div>
 
         {/* 6. Section 06: Brands That Trust Our Impact — Interactive Megaphone & Client Grid */}
-        <AboutClients />
+        <div className="section-contained">
+          <AboutClients />
+        </div>
 
         {/* 7. Values marquee + CTA with parallax */}
-        <AboutValuesCTA />
-        
+        <div className="section-contained">
+          <AboutValuesCTA />
+        </div>
       </main>
 
       <Footer />

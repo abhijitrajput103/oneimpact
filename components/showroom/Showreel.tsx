@@ -4,8 +4,13 @@ import React, { useRef, useState } from "react";
 import { gsap } from "@/gsap";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/utils/cn";
+import dynamic from "next/dynamic";
 import { SHOWREEL_REELS } from "./ReelsData";
-import { ReelModal } from "./ReelModal";
+
+const ReelModal = dynamic(
+  () => import("./ReelModal").then((m) => m.ReelModal),
+  { ssr: false }
+);
 
 interface ShowreelProps {
   className?: string;

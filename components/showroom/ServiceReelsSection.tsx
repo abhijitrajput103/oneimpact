@@ -1,8 +1,13 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { SHOWREEL_REELS } from "./ReelsData";
-import { ReelModal } from "./ReelModal";
+
+const ReelModal = dynamic(
+  () => import("./ReelModal").then((m) => m.ReelModal),
+  { ssr: false }
+);
 
 interface ServiceReelsSectionProps {
   heading?: string;

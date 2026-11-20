@@ -379,6 +379,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
             muted
             loop
             playsInline
+            preload="metadata"
             style={{
               filter: "brightness(1.05) contrast(1.05) saturate(1.15)",
             }}
@@ -403,6 +404,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
               muted
               loop
               playsInline
+              preload="metadata"
               style={{
                 filter: "grayscale(100%) contrast(1.15) brightness(0.85)",
               }}
