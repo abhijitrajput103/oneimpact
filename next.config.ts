@@ -117,7 +117,6 @@ const nextConfig: NextConfig = {
 
   // Performance: bundle optimization & tree-shaking
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ["lucide-react", "gsap", "@gsap/react", "lenis"],
   },
 };

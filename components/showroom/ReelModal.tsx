@@ -40,7 +40,7 @@ export function ReelModal({
   activeIndex,
   onClose,
   onSelectIndex,
-  projectCtaHref = "/#contact",
+  projectCtaHref = "/contact",
 }: ReelModalProps) {
   const lenis = useContext(LenisContext);
   const pathname = usePathname();

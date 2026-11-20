@@ -271,8 +271,11 @@ export function Navbar() {
           <div className="flex items-center gap-2 sm:gap-3">
             {/* CTA Button */}
             <Link
-              href="/#contact"
-              onClick={(e) => handleHashNav(e, "contact")}
+              href="/contact"
+              onClick={() => {
+                setIsMenuOpen(false);
+                setIsServicesOpen(false);
+              }}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-display text-[10px] sm:text-xs font-black tracking-wider uppercase transition-all duration-300 hover:scale-105 active:scale-95 text-[#f9d230] !text-[#f9d230] bg-black hover:bg-black/85 cursor-pointer"
               style={{ color: "#f9d230" }}
               onMouseEnter={() => setCursorType("hover")}
@@ -401,8 +404,8 @@ export function Navbar() {
           <div className="w-16 h-[2px] bg-black/20 my-2" />
 
           <Link
-            href="/#contact"
-            onClick={(e) => handleHashNav(e, "contact")}
+            href="/contact"
+            onClick={() => setIsMenuOpen(false)}
             className="w-full py-4 rounded-full font-display text-sm font-black tracking-wider uppercase text-[#f9d230] !text-[#f9d230] bg-black hover:bg-black/85 transition-transform active:scale-95 text-center shadow-lg"
             style={{ color: "#f9d230" }}
           >

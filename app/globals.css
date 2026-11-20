@@ -120,3 +120,31 @@ html.lenis body {
     opacity: 1;
   }
 }
+
+/* ── Global Mouse Movement Sparks (from Footer) ── */
+.spk {
+  position: fixed;
+  z-index: 99999;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+  background: var(--k, #f9d230);
+  clip-path: polygon(
+    50% 0,
+    62% 38%,
+    100% 50%,
+    62% 62%,
+    50% 100%,
+    38% 62%,
+    0 50%,
+    38% 38%
+  );
+  animation: spkAnim 0.8s forwards;
+}
+
+@keyframes spkAnim {
+  to {
+    transform: translate(var(--dx, 0px), var(--dy, 24px)) rotate(180deg) scale(0);
+    opacity: 0;
+  }
+}

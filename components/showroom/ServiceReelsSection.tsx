@@ -13,7 +13,7 @@ interface ServiceReelsSectionProps {
 export function ServiceReelsSection({
   heading = "Creator reels in action",
   subtitle = "Explore creator-led stories and brand films right inside the page.",
-  projectCtaHref = "#contact",
+  projectCtaHref = "/contact",
 }: ServiceReelsSectionProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);

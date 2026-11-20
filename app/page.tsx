@@ -7,6 +7,7 @@ import { GlassBreakIntro } from "@/components/intro/GlassBreakIntro";
 import { Hero } from "@/components/hero/Hero";
 import { Showreel } from "@/components/showroom/Showreel";
 import { AboutBanner } from "@/components/showroom/AboutBanner";
+import { FullServiceCreativeSection } from "@/components/showroom/FullServiceCreativeSection";
 import { ContactFormSection } from "@/components/contact/ContactFormSection";
 import { LetsPlaySection } from "@/components/common/LetsPlaySection";
 
@@ -54,6 +55,9 @@ export default function Home() {
 
         {/* About Banner + Client Logos */}
         <AboutBanner />
+
+        {/* Full-Service Creative Services Section */}
+        <FullServiceCreativeSection />
 
         {/* Project Inquiry & Contact Form Section */}
         <ContactFormSection />

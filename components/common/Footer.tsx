@@ -278,7 +278,7 @@ export function Footer() {
                 <Link href="/#about-banner">Our Clients</Link>
               </li>
               <li>
-                <Link href="/#contact">Contact</Link>
+                <Link href="/contact">Contact</Link>
               </li>
             </ul>
           </div>
@@ -316,7 +316,7 @@ export function Footer() {
                 <Link href="/about">The Team</Link>
               </li>
               <li>
-                <Link href="/#contact">
+                <Link href="/contact">
                   Careers <i>↗</i>
                 </Link>
               </li>
@@ -336,7 +336,7 @@ export function Footer() {
               ref={noteRef}
               className="note"
               id="note"
-              href="/#contact"
+              href="/contact"
               aria-label="Let's Create Impact Together — Contact One Impact"
             >
               <span className="tape" aria-hidden="true" />

@@ -33,24 +33,28 @@ const USP_CARDS = [
     text: "Strategy backed by intelligent data analysis",
     d: "M4 20V10M10 20V4M16 20v-7M22 20H2",
     chip: "#FFE7B8",
+    icon: "/icons/SEO that fits your business. Not a template/icons_Data-led.png",
   },
   {
     head: "Sales-first",
     text: "Designed to directly improve your sales performance",
     d: "M3 17l6-6 4 4 8-8M15 7h6v6",
     chip: "#D6E5FF",
+    icon: "/icons/SEO that fits your business. Not a template/icons_Sales-first.png",
   },
   {
     head: "Made to fit",
     text: "Tailor-made SEO solutions for every business type",
     d: "M4 7h10M18 7h2M4 17h4M12 17h8M16 5v4M10 15v4",
     chip: "#FFE7B8",
+    icon: "/icons/SEO that fits your business. Not a template/icons_Made to fit.png",
   },
   {
     head: "AI-enhanced",
     text: "AI-enhanced SEO for smarter, more efficient execution",
     d: "M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z",
     chip: "#D6E5FF",
+    icon: "/icons/SEO that fits your business. Not a template/icons_AI-enhanced.png",
   },
   {
     head: "Creative + data",
@@ -107,21 +111,25 @@ const EEAT_CARDS = [
     k: "E",
     t: "Experience",
     a: "Our team has worked hands-on with brands across industries, successfully navigating SEO challenges and delivering results. From traffic surges to strategic keyword wins, we know what it takes to rank, and stay there.",
+    icon: "/icons/E-E-A-T framework/SEO Page-19.png",
   },
   {
     k: "E",
     t: "Expertise",
     a: "We bring together professionals from diverse sectors, each bringing unique insights to the table. No generic blueprints, just carefully crafted SEO plans built around your market, your goals, and your audience.",
+    icon: "/icons/E-E-A-T framework/SEO Page_Expertise.png",
   },
   {
     k: "A",
     t: "Authoritativeness",
     a: "Our strategies help you earn credibility in your industry. By consistently publishing quality content and building the right links, we position your brand as a trusted voice in your space.",
+    icon: "/icons/E-E-A-T framework/SEO Page_Authoritativeness.png",
   },
   {
     k: "T",
     t: "Trustworthiness",
     a: "Transparency is non-negotiable. We set expectations early, deliver honest reports, and always keep you in the loop. Our work is measurable, ethical, and designed for long-term success.",
+    icon: "/icons/E-E-A-T framework/SEO Page_Trustworthiness.png",
   },
 ];
 
@@ -146,36 +154,42 @@ const HELPS_CARDS = [
     a: "We help you rank for keywords your audience is actively searching. That means you show up just when they need your product or service.",
     d: "M11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14zM20 20l-4-4",
     chip: "#f9d230",
+    icon: "/icons/How optimizing for SEO helps/icon_Better visibility .png",
   },
   {
     t: "Traffic that converts",
     a: "Unlike paid ads that reach broad audiences, SEO brings in users with intent: people already looking for what you offer.",
     d: "M3 17l6-6 4 4 8-8M15 7h6v6",
     chip: "#4066c6",
+    icon: "/icons/How optimizing for SEO helps/icon_Traffic that converts.png",
   },
   {
     t: "Higher rankings without paying for ads",
     a: "Top organic rankings build trust and click-throughs. People trust what ranks naturally over what’s paid.",
     d: "M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z",
     chip: "#f9d230",
+    icon: "/icons/How optimizing for SEO helps/icon_Higher rankings.png",
   },
   {
     t: "Cost-efficient, long-term strategy",
     a: "No bidding wars or ad spend needed. Your optimized content keeps working for you over time.",
     d: "M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.8 5 3.5 5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3",
     chip: "#4066c6",
+    icon: "/icons/How optimizing for SEO helps/icon_Cost-efficient,.png",
   },
   {
     t: "An edge over competitors",
     a: "While others rely solely on ads, your SEO presence makes sure you’re visible in the long run.",
     d: "M5 21V9l7-6 7 6v12M9 21v-6h6v6",
     chip: "#f9d230",
+    icon: "/icons/How optimizing for SEO helps/icon_An edge over competitors.png",
   },
   {
     t: "Smarter decisions from real data",
     a: "SEO tools give insight into user behavior and performance, helping you adjust campaigns intelligently.",
     d: "M4 20V10M10 20V4M16 20v-7M22 20H2",
     chip: "#4066c6",
+    icon: "/icons/How optimizing for SEO helps/icon_Smarter decisions from real data.png",
   },
 ];
 
@@ -222,7 +236,14 @@ const BUT_WHY_CARDS = [
   },
 ];
 
-const SVC_GROUPS = [
+interface ServiceItem {
+  t: string;
+  a: string;
+  dot: string;
+  icon?: string;
+}
+
+const SVC_GROUPS: Array<{ label: string; items: ServiceItem[] }> = [
   {
     label: "Organic SEO services",
     items: [
@@ -230,31 +251,37 @@ const SVC_GROUPS = [
         t: "SEO services",
         a: "Our SEO services are built to elevate your visibility, generate qualified traffic, and convert leads. Every strategy we develop includes precise on-page SEO, keyword mapping, and content optimization, tailored to meet your business goals.",
         dot: "#f9d230",
+        icon: "/icons/Explore our SEO services/SEO services.png",
       },
       {
         t: "CRO services (Conversion Rate Optimization)",
         a: "Make the most of your existing traffic. With CRO, we optimize user journeys to lower bounce rates and increase conversion. It means less spend on new users, and more action from your current visitors.",
         dot: "#4066c6",
+        icon: "/icons/Explore our SEO services/CRO services (Conversion Rate Optimization).png",
       },
       {
         t: "ASO services (App Store Optimization)",
         a: "Want your app to show up when someone searches for related tools on the Play Store or App Store? Our ASO services include keyword optimization, localization, content updates, and more to increase installs.",
         dot: "#f9d230",
+        icon: "/icons/Explore our SEO services/ASO services (App Store Optimization).png",
       },
       {
         t: "SEO audit services",
         a: "Our in-depth SEO audit uncovers the issues holding your website back. We review backlinks, content, load speeds, technical setup, and more to build a plan that elevates your SEO.",
         dot: "#4066c6",
+        icon: "/icons/Explore our SEO services/SEO audit services.png",
       },
       {
         t: "Enterprise SEO services",
         a: "Have a large website or multiple locations? We create strategies tailored to large-scale businesses, including internal linking, crawl optimization, global content management, and collaboration across teams.",
         dot: "#f9d230",
+        icon: "/icons/Explore our SEO services/_Enterprise SEO services.png",
       },
       {
         t: "Penalty recovery services",
         a: "If Google hit your site with a penalty, we find the cause, clean it up, and future-proof your website with compliant white-hat strategies that align with algorithm guidelines.",
         dot: "#4066c6",
+        icon: "/icons/Explore our SEO services/Penalty recovery services.png",
       },
     ],
   },
@@ -2102,46 +2129,39 @@ export default function SeoLandingPage() {
                   <span
                     aria-hidden="true"
                     style={{
+                      width: "48px",
+                      height: "48px",
                       display: "inline-flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      color: "#f9d230",
                       flexShrink: 0,
                     }}
                   >
-                    {idx === 0 && (
-                      <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M8 40h32" />
-                        <path d="M12 40v-8h6v8" />
-                        <path d="M22 40V26h6v14" />
-                        <path d="M32 40V18h6v22" />
-                        <circle cx="15" cy="12" r="3" />
-                        <path d="M11 22l4-6 4 4 5-5" />
-                        <path d="M12 29l26-19" />
-                        <path d="M32 10h6v6" />
-                      </svg>
-                    )}
-                    {idx === 1 && (
-                      <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M24 8a11 11 0 0 0-6 20.1V32h12v-3.9A11 11 0 0 0 24 8z" />
-                        <path d="M19 36h10" />
-                        <path d="M21 40h6" />
-                        <path d="M24 14v6" />
-                        <path d="M21 17h6" />
-                      </svg>
-                    )}
-                    {idx === 2 && (
-                      <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="24" cy="19" r="10" />
-                        <path d="M18 27.5L15 41l9-4 9 4-3-13.5" />
-                        <path d="M24 14l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" />
-                      </svg>
-                    )}
-                    {idx === 3 && (
-                      <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M24 7l14 5v10c0 9.5-5.8 16.2-14 19-8.2-2.8-14-9.5-14-19V12l14-5z" />
-                        <path d="M18 24l4 4 8-8" />
-                      </svg>
+                    {e.icon ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={e.icon}
+                        alt={e.t}
+                        style={{
+                          width: "44px",
+                          height: "44px",
+                          objectFit: "contain",
+                          display: "block",
+                        }}
+                      />
+                    ) : (
+                      idx === 0 && (
+                        <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M8 40h32" />
+                          <path d="M12 40v-8h6v8" />
+                          <path d="M22 40V26h6v14" />
+                          <path d="M32 40V18h6v22" />
+                          <circle cx="15" cy="12" r="3" />
+                          <path d="M11 22l4-6 4 4 5-5" />
+                          <path d="M12 29l26-19" />
+                          <path d="M32 10h6v6" />
+                        </svg>
+                      )
                     )}
                   </span>
 
@@ -2555,28 +2575,57 @@ export default function SeoLandingPage() {
                   boxShadow: "0 16px 36px -28px rgba(0,0,0,0.5)",
                 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                  <h3
-                    style={{
-                      margin: 0,
-                      fontSize: "17.5px",
-                      lineHeight: 1.25,
-                      letterSpacing: "-0.015em",
-                      fontWeight: 700,
-                      color: "#f9d230",
-                    }}
-                  >
-                    {s.t}
-                  </h3>
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      width: "22px",
-                      height: "2.5px",
-                      borderRadius: "999px",
-                      backgroundColor: "#4066c6",
-                    }}
-                  />
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                    <h3
+                      style={{
+                        margin: 0,
+                        fontSize: "17.5px",
+                        lineHeight: 1.25,
+                        letterSpacing: "-0.015em",
+                        fontWeight: 700,
+                        color: "#f9d230",
+                      }}
+                    >
+                      {s.t}
+                    </h3>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: "22px",
+                        height: "2.5px",
+                        borderRadius: "999px",
+                        backgroundColor: "#4066c6",
+                      }}
+                    />
+                  </div>
+                  {s.icon && (
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "12px",
+                        background: "rgba(37, 99, 235, 0.14)",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={s.icon}
+                        alt={s.t}
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          objectFit: "contain",
+                          display: "block",
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
                 <p
                   style={{
@@ -2974,11 +3023,26 @@ export default function SeoLandingPage() {
                         flex: "none",
                         color: "#FFFFFF",
                         boxShadow: "0 4px 12px rgba(37, 99, 235, 0.35)",
+                        overflow: "hidden",
                       }}
                     >
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d={u.d} />
-                      </svg>
+                      {u.icon ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={u.icon}
+                          alt={u.head}
+                          style={{
+                            width: "26px",
+                            height: "26px",
+                            objectFit: "contain",
+                            display: "block",
+                          }}
+                        />
+                      ) : (
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <path d={u.d} />
+                        </svg>
+                      )}
                     </span>
                   </div>
                   <p
@@ -3086,21 +3150,36 @@ export default function SeoLandingPage() {
                       justifyContent: "center",
                       flex: "none",
                       color: "#60a5fa",
+                      overflow: "hidden",
                     }}
                   >
-                    <svg
-                      width="21"
-                      height="21"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d={h.d} />
-                    </svg>
+                    {h.icon ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={h.icon}
+                        alt={h.t}
+                        style={{
+                          width: "28px",
+                          height: "28px",
+                          objectFit: "contain",
+                          display: "block",
+                        }}
+                      />
+                    ) : (
+                      <svg
+                        width="21"
+                        height="21"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d={h.d} />
+                      </svg>
+                    )}
                   </span>
                   <h3
                     className="seo-heading"

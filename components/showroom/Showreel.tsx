@@ -263,7 +263,7 @@ export function Showreel({ className }: ShowreelProps) {
         activeIndex={activeIndex}
         onClose={() => setActiveIndex(null)}
         onSelectIndex={(idx) => setActiveIndex(idx)}
-        projectCtaHref="/#contact"
+        projectCtaHref="/contact"
       />
     </section>
   );
