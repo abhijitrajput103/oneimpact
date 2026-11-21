@@ -1,7 +1,3 @@
-"use client";
-
-import React, { useState, useSyncExternalStore } from "react";
-import dynamic from "next/dynamic";
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { Hero } from "@/components/hero/Hero";
@@ -9,53 +5,14 @@ import { Showreel } from "@/components/showroom/Showreel";
 import { AboutBanner } from "@/components/showroom/AboutBanner";
 import { FullServiceCreativeSection } from "@/components/showroom/FullServiceCreativeSection";
 
-const GlassBreakIntro = dynamic(
-  () => import("@/components/intro/GlassBreakIntro").then((m) => m.GlassBreakIntro),
-  { ssr: false }
-);
-
-const ContactFormSection = dynamic(
-  () => import("@/components/contact/ContactFormSection").then((m) => m.ContactFormSection),
-  { ssr: true }
-);
-
-const LetsPlaySection = dynamic(
-  () => import("@/components/common/LetsPlaySection").then((m) => m.LetsPlaySection),
-  { ssr: true }
-);
-
-const emptySubscribe = () => () => { };
-
-/** Detect mobile/touch-primary devices so desktop intro never runs on mobile */
-function isMobileExperience(): boolean {
-  if (typeof window === "undefined") return false;
-  const isTouch =
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    window.matchMedia("(pointer: coarse)").matches;
-  return window.innerWidth < 768 || (isTouch && window.innerWidth < 1024);
-}
-
-function getDesktopIntroSnapshot(): boolean {
-  if (typeof window === "undefined") return false;
-  if (isMobileExperience()) return false;
-  return sessionStorage.getItem("oneimpact-intro") !== "true";
-}
+import { DesktopIntro } from "@/components/intro/DesktopIntro";
+import { ContactFormSection } from "@/components/contact/ContactFormSection";
+import { LetsPlaySection } from "@/components/common/LetsPlaySection";
 
 export default function Home() {
-  const [introDismissed, setIntroDismissed] = useState(false);
-  const shouldShowDesktopIntro = useSyncExternalStore(
-    emptySubscribe,
-    getDesktopIntroSnapshot,
-    () => false
-  );
-  const introActive = shouldShowDesktopIntro && !introDismissed;
-
   return (
     <div className="flex flex-col min-h-screen">
-      {introActive && (
-        <GlassBreakIntro onComplete={() => setIntroDismissed(true)} />
-      )}
+      <DesktopIntro />
 
       <Navbar />
 

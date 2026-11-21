@@ -36,7 +36,7 @@ export function AboutHero() {
   useGSAP(
     () => {
       const section = sectionRef.current;
-      if (!section) return;
+      if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
@@ -178,7 +178,11 @@ export function AboutHero() {
       {/* 1. Full-bleed crumpled gold paper texture overlay */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/images/about-paper-texture.webp"
+        src="/media/about-paper-texture-0a62cdae9fdb.webp"
+        srcSet="/media/about-paper-texture-0a62cdae9fdb.webp 640w, /media/about-paper-texture-3de474606d4e.webp 1200w"
+        sizes="100vw"
+        width={1200}
+        height={670}
         alt=""
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
         style={{ mixBlendMode: "multiply", opacity: 0.45 }}
@@ -408,7 +412,12 @@ export function AboutHero() {
               <div className="relative my-1.5 sm:my-2 overflow-hidden border border-[#222]/30 filter grayscale contrast-125">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/about-newspaper.webp"
+                  src="/media/about-newspaper-2e0d41a99426.webp"
+                  srcSet="/media/about-newspaper-2e0d41a99426.webp 320w, /media/about-newspaper-b330cc6d4ead.webp 640w"
+                  sizes="(max-width: 640px) 35vw, 320px"
+                  width={640}
+                  height={857}
+                  fetchPriority="high"
                   alt=""
                   className="w-full h-16 xs:h-20 sm:h-24 md:h-28 object-cover"
                 />
@@ -577,7 +586,9 @@ export function AboutHero() {
                       {/* Official One Impact Logo Image */}
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src="/images/logo-white.webp"
+                        src="/media/wordmark-white-8229a9710d60.webp"
+                        width={307}
+                        height={100}
                         alt="One Impact"
                         className="h-6 xs:h-7 sm:h-9 md:h-11 w-auto object-contain drop-shadow-lg"
                       />
@@ -687,7 +698,11 @@ export function AboutHero() {
               <div className="relative my-1.5 sm:my-2 overflow-hidden border border-[#222]/30 filter grayscale contrast-125">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/about-creative-process.webp"
+                  src="/media/about-creative-process-94aa75f47699.webp"
+                  srcSet="/media/about-creative-process-94aa75f47699.webp 320w, /media/about-creative-process-6f7d77768fc1.webp 640w"
+                  sizes="(max-width: 640px) 140px, 275px"
+                  width={1200}
+                  height={896}
                   alt=""
                   className="w-full h-14 xs:h-18 sm:h-22 md:h-24 object-cover"
                 />

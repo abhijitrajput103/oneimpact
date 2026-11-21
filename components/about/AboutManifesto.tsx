@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 
@@ -441,7 +439,7 @@ export function AboutManifesto() {
             alt="One Impact Creative Tools and Studio Collage"
             width={1536}
             height={1024}
-            priority
+
             className="w-full h-full object-contain object-center lg:object-left filter drop-shadow-[0_16px_36px_rgba(0,0,0,0.7)] scale-100 lg:scale-[1.08] origin-left transition-transform duration-500"
           />
         </div>

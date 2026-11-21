@@ -19,23 +19,20 @@ interface ColorRevealHeroProps {
   className?: string;
 }
 
-function subscribeResize(callback: () => void) {
-  window.addEventListener("resize", callback, { passive: true });
-  return () => window.removeEventListener("resize", callback);
+function subscribeViewport(callback: () => void) {
+  const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  motion.addEventListener("change", callback);
+  window.addEventListener("resize", callback);
+  return () => {
+    motion.removeEventListener("change", callback);
+    window.removeEventListener("resize", callback);
+  };
 }
 
-function getIsMobileSnapshot(): boolean {
-  return window.innerWidth < 768 || (isTouchDevice() && window.innerWidth < 1024);
-}
-
-/** Detect touch-primary devices */
-function isTouchDevice(): boolean {
-  if (typeof window === "undefined") return false;
-  return (
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    window.matchMedia("(pointer: coarse)").matches
-  );
+function getHeroMode() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return "poster";
+  const touch = navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches;
+  return window.innerWidth < 768 || (touch && window.innerWidth < 1024) ? "scratch" : "video";
 }
 
 /** Mobile Canvas Scratch-to-Reveal */
@@ -150,18 +147,6 @@ function MobileScratchView({
 
   return (
     <>
-      {/* Layer 1: Full-color illustration (revealed underneath) */}
-      <div className="absolute inset-0 w-full h-full select-none pointer-events-none">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/One_impact _illustration_Mobile.webp"
-          alt="One Impact Hero Illustration"
-          className="w-full h-full object-cover object-bottom select-none pointer-events-none"
-          draggable={false}
-          loading="eager"
-        />
-      </div>
-
       {/* Layer 2: Scratchable Grayscale Canvas (Hardware Accelerated, CSS grayscale works on iOS + Android) */}
       <canvas
         ref={canvasRef}
@@ -217,22 +202,41 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
   const targetY = useRef(0);
   const currentX = useRef(0);
   const currentY = useRef(0);
-  const isMouseInside = useRef(false);
+
   const frameId = useRef<number | null>(null);
   const radiusRef = useRef(RADIUS_DESKTOP);
   const isMobileRef = useRef(false);
 
-  const isMobile = useSyncExternalStore(
-    subscribeResize,
-    getIsMobileSnapshot,
-    () => false
-  );
+  const mode = useSyncExternalStore(subscribeViewport, getHeroMode, () => "poster");
+  const isMobile = mode === "scratch";
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    let inView = false;
+    const update = () => {
+      if (inView && !document.hidden) void video.play().catch(() => {});
+      else video.pause();
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      update();
+    });
+    observer.observe(video);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+      video.pause();
+    };
+  }, [mode]);
   const [mobileRevealed, setMobileRevealed] = useState(false);
 
   // ─── DESKTOP MOUSE REVEAL ─────────────────────────────────────────
   useEffect(() => {
     isMobileRef.current = isMobile;
-    if (isMobile) return;
+    if (mode !== "video") return;
 
     const container = containerRef.current;
     const grayscale = grayscaleRef.current;
@@ -285,7 +289,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
 
       const dx = Math.abs(targetX.current - currentX.current);
       const dy = Math.abs(targetY.current - currentY.current);
-      if (isMouseInside.current || dx > 0.1 || dy > 0.1) {
+      if (dx > 0.1 || dy > 0.1) {
         frameId.current = requestAnimationFrame(tick);
       } else {
         frameId.current = null;
@@ -303,7 +307,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
     };
 
     const handleMouseEnter = (e: MouseEvent) => {
-      isMouseInside.current = true;
+
       const rect = container.getBoundingClientRect();
       targetX.current = e.clientX - rect.left;
       targetY.current = e.clientY - rect.top;
@@ -317,7 +321,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
     };
 
     const handleMouseLeave = () => {
-      isMouseInside.current = false;
+
       cursor.style.opacity = "0";
       grayscale.style.maskImage = "none";
       grayscale.style.webkitMaskImage = "none";
@@ -353,7 +357,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
         frameId.current = null;
       }
     };
-  }, [isMobile]);
+  }, [mode, isMobile]);
 
   return (
     <div
@@ -369,13 +373,19 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
       {/* ------------------------------------------------------------------- */}
       {/* DESKTOP MEDIA LAYERS (md and up)                                   */}
       {/* ------------------------------------------------------------------- */}
-      {!isMobile && (
+      <picture>
+        <source media="(max-width: 767px), (pointer: coarse) and (max-width: 1023px)" srcSet="/images/One_impact%20_illustration_Mobile.webp" />
+        <img src="/media/hero-poster-05180473b626.webp" alt="One Impact hero illustration" fetchPriority="high"
+          width={1280} height={720} className="absolute inset-0 h-full w-full object-cover object-bottom" />
+      </picture>
+      {mode === "video" && (
         <>
           {/* Layer 1: Colorful desktop video (always visible underneath) */}
           <video
             className="hidden md:block absolute inset-0 w-full h-full min-w-full min-h-full object-cover object-bottom select-none pointer-events-none"
-            src="/videos/sample.mp4"
-            autoPlay
+            ref={videoRef}
+            poster="/media/hero-poster-05180473b626.webp"
+            src="/media/hero-loop-df0c4d230200.mp4"
             muted
             loop
             playsInline
@@ -390,6 +400,8 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
             ref={grayscaleRef}
             className="hidden md:block absolute inset-0 w-full h-full pointer-events-none select-none"
             style={{
+              backdropFilter: "grayscale(1) contrast(1.1) brightness(.85)",
+              WebkitBackdropFilter: "grayscale(1) contrast(1.1) brightness(.85)",
               maskImage: "none",
               WebkitMaskImage: "none",
               maskRepeat: "no-repeat",
@@ -397,18 +409,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
               transition: "opacity 0.3s ease",
             }}
           >
-            <video
-              className="absolute inset-0 w-full h-full min-w-full min-h-full object-cover object-bottom select-none pointer-events-none"
-              src="/videos/sample.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              style={{
-                filter: "grayscale(100%) contrast(1.15) brightness(0.85)",
-              }}
-            />
+
           </div>
 
           {/* Custom reveal cursor circle (Desktop) */}

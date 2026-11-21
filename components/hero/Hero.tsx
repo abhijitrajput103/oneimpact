@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { gsap } from "@/gsap";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/utils/cn";
@@ -17,13 +17,6 @@ interface HeroProps {
 
 export function Hero({ className }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  // Fade-in on mount (800ms)
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 50);
-    return () => clearTimeout(timer);
-  }, []);
 
   useGSAP(
     () => {
@@ -67,10 +60,6 @@ export function Hero({ className }: HeroProps) {
         "relative w-full min-h-[100dvh] max-sm:min-h-[max(100dvh,177.78vw)] md:min-h-[max(100dvh,56.25vw)] overflow-hidden flex flex-col justify-center items-center z-10 select-none pb-12 sm:pb-16 md:pb-20",
         className
       )}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transition: "opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1)",
-      }}
     >
       {/* Interactive color reveal artwork background */}
       <ColorRevealHero />

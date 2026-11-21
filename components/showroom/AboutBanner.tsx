@@ -118,6 +118,7 @@ export function AboutBanner({ className }: AboutBannerProps) {
         {/* Background paper cut SVG - Full Width & Height */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          loading="lazy"
           src="/images/about-us-blue-paper-cut.svg"
           alt=""
           className="absolute inset-0 w-full h-full object-fill pointer-events-none select-none scale-x-105"

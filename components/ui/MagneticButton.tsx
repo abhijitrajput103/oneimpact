@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { applyMagneticEffect, resetMagneticEffect } from "@/utils/gsapHelpers";
+import type * as MagneticEffects from "@/utils/gsapHelpers";
 import { useCursor } from "@/hooks/useCursor";
 
 interface MagneticButtonProps {
@@ -18,15 +18,18 @@ export function MagneticButton({
   className,
 }: MagneticButtonProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const effects = useRef<typeof MagneticEffects | null>(null);
   const { setCursorType, setMagneticTarget, resetCursor } = useCursor();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (containerRef.current) {
-      applyMagneticEffect(containerRef.current, e.nativeEvent, strength, textStrength);
+      effects.current?.applyMagneticEffect(containerRef.current, e.nativeEvent, strength, textStrength);
     }
   };
 
   const handleMouseEnter = () => {
+    if (!window.matchMedia("(pointer: fine) and (prefers-reduced-motion: no-preference)").matches) return;
+    if (!effects.current) void import("@/utils/gsapHelpers").then((module) => { effects.current = module; });
     setCursorType("magnetic");
     if (containerRef.current) {
       setMagneticTarget(containerRef.current);
@@ -36,7 +39,7 @@ export function MagneticButton({
   const handleMouseLeave = () => {
     resetCursor();
     if (containerRef.current) {
-      resetMagneticEffect(containerRef.current);
+      effects.current?.resetMagneticEffect(containerRef.current);
     }
   };
 

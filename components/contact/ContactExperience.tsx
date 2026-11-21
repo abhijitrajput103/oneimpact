@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import type { FormEvent, PointerEvent, ReactNode } from "react";
 import Image from "next/image";
 import { Navbar } from "@/components/common/Navbar";
-import { Footer } from "@/components/common/Footer";
 import styles from "./ContactExperience.module.css";
 
 // EDIT THESE VALUES BEFORE LAUNCH. Demo values are not business verification.
@@ -200,7 +199,7 @@ function ContactForm() {
           <>
             <span className={styles.smallKicker}>YOUR NEXT CHAPTER STARTS HERE</span>
             <h2>Send Us a Message<span className={styles.inkStar} aria-hidden>✳</span></h2>
-            <p className={styles.formIntro}>Tell us what you're working on. We’d love to hear the story.</p>
+            <p className={styles.formIntro}>Tell us what you&apos;re working on. We’d love to hear the story.</p>
             <label className={styles.visuallyHidden} htmlFor="oi-name">Your name</label>
             <input id="oi-name" name="name" autoComplete="name" placeholder="Your Name *" value={values.name} onChange={e=>update("name", e.target.value)} aria-invalid={tried && invalid.name} aria-describedby={tried && invalid.name ? "oi-name-error" : undefined}/>
             {tried && invalid.name && <small id="oi-name-error" className={styles.fieldError}>Enter your name (at least 2 characters).</small>}
@@ -243,7 +242,7 @@ function FaqList() {
   </div>;
 }
 
-export default function ContactExperience() {
+export default function ContactExperience({ children }: { children: React.ReactNode }) {
   const pageRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -267,8 +266,8 @@ export default function ContactExperience() {
       <main ref={pageRef} className={`${styles.page} flex-grow pt-20 sm:pt-24`} id="top">
         <section className={styles.hero} id="contact" aria-labelledby="oi-hero-title">
         <div className={`${styles.container} ${styles.heroGrid}`}>
-          <div className={styles.heroCopy} data-reveal>
-            <p className={styles.eyebrow}>// GET IN TOUCH</p>
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>{"// GET IN TOUCH"}</p>
             <h1 id="oi-hero-title" className={styles.heroTitle}>Let’s Create <span className={styles.titleBottom}><mark>Impact</mark> Together.</span></h1>
             <p className={styles.heroDescription}>Have a project in mind, a question, or simply an idea worth exploring? We’d love to hear from you.</p>
             <div className={styles.contacts}>
@@ -290,9 +289,9 @@ export default function ContactExperience() {
           </div>
 
           <div className={styles.heroRight} id="contact-form">
-            <div className={styles.phoneArt} data-reveal>
+            <div className={styles.phoneArt}>
               <div className={styles.yellowRay} aria-hidden>✳</div>
-              <Image src="/oneimpact-contact/phone-envelope.webp" alt="Editorial collage featuring a vintage telephone and envelope" width={620} height={1106} priority/>
+              <Image src="/oneimpact-contact/phone-envelope.webp" alt="Editorial collage featuring a vintage telephone and envelope" width={620} height={1106} unoptimized fetchPriority="high" loading="eager"/>
             </div>
             <div data-reveal className={styles.formPosition}><ContactForm/></div>
           </div>
@@ -304,7 +303,7 @@ export default function ContactExperience() {
         <div className={`${styles.container} ${styles.expectGrid}`}>
           <TiltSurface className={styles.expectNote}>
             <div className={styles.noteContent} data-reveal><h2 id="oi-expect-heading">What to Expect<span className={styles.titleDot}>?</span></h2>
-              <p>We’re here to listen, collaborate, and turn thoughtful ideas into meaningful creative work. Here's how we approach every conversation.</p>
+              <p>We’re here to listen, collaborate, and turn thoughtful ideas into meaningful creative work. Here&apos;s how we approach every conversation.</p>
             </div>
           </TiltSurface>
           <div className={styles.featureGrid}>
@@ -324,7 +323,7 @@ export default function ContactExperience() {
             <span className={styles.photoCaption}>STUDIO IMAGE / REPLACE BEFORE LAUNCH</span>
           </div>
           <div className={styles.officeCopy} data-reveal>
-            <p className={styles.eyebrow}>// FIND YOUR WAY TO US</p>
+            <p className={styles.eyebrow}>{"// FIND YOUR WAY TO US"}</p>
             <h2 id="oi-office-title">Visit Our <span>Office</span></h2>
             <p>Good ideas are even better over a conversation. Reach out to arrange a visit.</p>
             <div className={styles.officeDetail}><Glyph name="pin"/><span>{DETAILS.streetAddress || DETAILS.city}<small>{!DETAILS.streetAddress && "Exact address available on request"}</small></span></div>
@@ -343,14 +342,14 @@ export default function ContactExperience() {
         <div className={`${styles.container} ${styles.faqGrid}`}>
           <div className={styles.faqPanel} data-reveal>
             <div className={styles.faqContent}>
-              <p className={styles.eyebrow}>// BEFORE YOU SAY HELLO</p>
+              <p className={styles.eyebrow}>{"// BEFORE YOU SAY HELLO"}</p>
               <h2>Frequently Asked <span>Questions</span></h2>
               <FaqList/>
             </div>
           </div>
           <div className={styles.ctaPanel} data-reveal>
             <div className={styles.ctaContent}>
-              <p className={styles.eyebrow}>// STILL HAVE QUESTIONS?</p>
+              <p className={styles.eyebrow}>{"// STILL HAVE QUESTIONS?"}</p>
               <h2>Let’s <em>Talk.</em></h2>
               <p>Drop us a message. Let’s turn a new conversation into something worth making.</p>
               <MagneticButton href="#contact-form">Contact Us</MagneticButton>
@@ -361,7 +360,7 @@ export default function ContactExperience() {
       </section>
       </main>
 
-      <Footer />
+      {children}
     </div>
   );
 }

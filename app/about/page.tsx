@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { AboutHero } from "@/components/about/AboutHero";
@@ -12,12 +9,6 @@ import { AboutClients } from "@/components/about/AboutClients";
 import { AboutValuesCTA } from "@/components/about/AboutValuesCTA";
 
 export default function AboutPage() {
-  React.useEffect(() => {
-    document.body.classList.remove("custom-cursor-active");
-    document.body.style.cursor = "auto";
-    document.body.style.backgroundColor = "#070707";
-  }, []);
-
   return (
     <div className="flex flex-col min-h-screen bg-[#070707]">
       <Navbar />

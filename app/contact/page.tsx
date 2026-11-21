@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Footer } from "@/components/common/Footer";
 import ContactExperience from "@/components/contact/ContactExperience";
 
 export const metadata: Metadata = {
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactExperience />;
+  return <ContactExperience><Footer /></ContactExperience>;
 }

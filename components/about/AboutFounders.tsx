@@ -655,7 +655,7 @@ export function AboutFounders() {
             src="/images/founder-kartik-mittal.webp"
             width={600}
             height={800}
-            priority
+
             sizes="(max-width: 820px) 100vw, 50vw"
           />
         </div>

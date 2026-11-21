@@ -66,47 +66,17 @@ const nextConfig: NextConfig = {
       return [];
     }
 
+    const pages = ["/", "/about", "/contact", "/seo", "/social-media-marketing", "/influencer-marketing", "/branding-services", "/web-development"];
     return [
       {
-        // Cache all static assets (images, fonts, videos, JS, CSS) for 1 year
-        source: "/:all*(svg|jpg|jpeg|png|webp|avif|gif|ico|mp4|webm|woff|woff2|ttf|eot|js|css)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
+        // Only content-addressed assets live in /media.
+        source: "/media/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
-      {
-        // Cache logo images specifically
-        source: "/LOGO/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        // Cache video assets
-        source: "/videos/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        // Pages — cache for 1 hour, revalidate in background
-        source: "/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, s-maxage=3600, stale-while-revalidate=86400",
-          },
-        ],
-      },
+      ...pages.map((source) => ({
+        source,
+        headers: [{ key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" }],
+      })),
     ];
   },
 

@@ -76,23 +76,7 @@ export function Showreel({ className }: ShowreelProps) {
         }
       );
 
-      // Animate scattered polaroid photo cards smoothly
-      gsap.fromTo(
-        section.querySelectorAll(".showreel-card"),
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.06,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: carouselRef.current || section,
-            start: "top 88%",
-            once: true,
-          },
-        }
-      );
+
     },
     { scope: sectionRef }
   );
@@ -181,7 +165,6 @@ export function Showreel({ className }: ShowreelProps) {
                 className="showreel-card group relative flex-shrink-0 text-left bg-transparent border-0 p-0 appearance-none cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f9d230] rounded-[6px]"
                 style={{
                   transform: `rotate(${reel.rotation}deg) translateY(${reel.offsetY}px)`,
-                  opacity: 0,
                 }}
               >
                 {/* Inner wrapper for hover lift */}

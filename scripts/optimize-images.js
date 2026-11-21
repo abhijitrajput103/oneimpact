@@ -54,6 +54,9 @@ function getOptimizationRules(filePath) {
   const basename = path.basename(filePath).toLowerCase();
 
   // Stickers & Small Icons (render at <= 120px)
+  if (normPath.includes("/icons/")) {
+    return { webpQuality: 83, avifQuality: 75, resize: { width: 96, height: 96, fit: "inside", withoutEnlargement: true } };
+  }
   if (normPath.includes("/stickers/")) {
     return {
       webpQuality: 82,
@@ -63,7 +66,7 @@ function getOptimizationRules(filePath) {
   }
 
   // Logos (need high clarity and sharp alpha)
-  if (normPath.includes("/logo/")) {
+  if (normPath.toLowerCase().includes("/logo/")) {
     return {
       webpQuality: 88,
       avifQuality: 80,
@@ -221,7 +224,7 @@ function updateCodeReferences() {
     let changed = false;
 
     // Match image paths referenced in code (e.g. /images/...png or /oneimpact-contact/...jpeg)
-    const regex = /(['"`])(\/(?:images|LOGO|oneimpact-contact)\/[^'"`\s\(\)]*?\.(png|jpg|jpeg))(['"`])/gi;
+    const regex = /(['"`])(\/(?:images|icons|LOGO|oneimpact-contact)\/[^'"`\r\n]*?\.(png|jpg|jpeg))(['"`])/gi;
 
     content = content.replace(regex, (match, p1, imgPath, ext, p4) => {
       const publicPath = path.join(PUBLIC_DIR, imgPath.slice(1));

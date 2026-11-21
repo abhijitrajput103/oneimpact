@@ -1,7 +1,6 @@
 "use client";
 
 import React, { createContext, useEffect } from "react";
-import { ScrollTrigger } from "@/gsap";
 import { usePathname } from "next/navigation";
 
 export const GSAPContext = createContext<null>(null);
@@ -15,7 +14,12 @@ export function GSAPProvider({ children }: GSAPProviderProps) {
 
   useEffect(() => {
     // Force ScrollTrigger to refresh coordinates when routing occurs
-    ScrollTrigger.refresh();
+    if (pathname !== "/") return;
+    let active = true;
+    void import("@/gsap").then(({ ScrollTrigger }) => {
+      if (active) ScrollTrigger.refresh();
+    });
+    return () => { active = false; };
   }, [pathname]);
 
   return (

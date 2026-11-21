@@ -145,7 +145,9 @@ export function Navbar() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/logo-tight.webp"
+                src="/media/wordmark-black-4fb515125c4d.webp"
+                width={197}
+                height={64}
                 alt="One Impact"
                 className="h-6 sm:h-7 md:h-8 w-auto object-contain"
               />
@@ -243,6 +245,7 @@ export function Navbar() {
                   {SERVICE_LINKS.map((link) => (
                     <Link
                       key={link.href}
+                      prefetch={isServicesOpen ? null : false}
                       href={link.href}
                       onClick={() => setIsServicesOpen(false)}
                       className="font-display text-[11px] sm:text-xs font-black tracking-widest text-black/90 hover:text-[#f9d230] hover:bg-black uppercase transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-xl block text-center whitespace-nowrap"
@@ -317,6 +320,7 @@ export function Navbar() {
 
       {/* Mobile Navigation Overlay */}
       <div
+        inert={!isMenuOpen}
         className={cn(
           "fixed inset-0 z-40 md:hidden bg-[#f9d230]/95 backdrop-blur-2xl flex flex-col justify-center items-center transition-all duration-500 ease-in-out px-6",
           isMenuOpen
@@ -330,6 +334,7 @@ export function Navbar() {
           </span>
 
           <Link
+            prefetch={isMenuOpen ? null : false}
             href="/#showreel"
             onClick={(e) => handleHashNav(e, "showreel")}
             className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1"
@@ -338,6 +343,7 @@ export function Navbar() {
           </Link>
 
           <Link
+            prefetch={isMenuOpen ? null : false}
             href="/#card-swap"
             onClick={(e) => handleHashNav(e, "card-swap")}
             className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1"
@@ -383,6 +389,7 @@ export function Navbar() {
               {SERVICE_LINKS.map((link) => (
                 <Link
                   key={link.href}
+                  prefetch={isMenuOpen && isMobileServicesOpen ? null : false}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
                   className="font-display text-base sm:text-lg font-bold tracking-wider text-black/85 hover:text-black uppercase py-1"
@@ -394,6 +401,7 @@ export function Navbar() {
           </div>
 
           <Link
+            prefetch={isMenuOpen ? null : false}
             href="/about"
             onClick={() => setIsMenuOpen(false)}
             className="font-display text-2xl sm:text-3xl font-black tracking-wider text-black hover:text-black/70 uppercase transition-colors duration-300 py-1"
@@ -404,6 +412,7 @@ export function Navbar() {
           <div className="w-16 h-[2px] bg-black/20 my-2" />
 
           <Link
+            prefetch={isMenuOpen ? null : false}
             href="/contact"
             onClick={() => setIsMenuOpen(false)}
             className="w-full py-4 rounded-full font-display text-sm font-black tracking-wider uppercase text-[#f9d230] !text-[#f9d230] bg-black hover:bg-black/85 transition-transform active:scale-95 text-center shadow-lg"

@@ -241,7 +241,7 @@ export function FullServiceCreativeSection() {
         {/* ======================================================== */}
         <div className="relative flex flex-col items-center text-center max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20">
           {/* Eyebrow */}
-          <div className="fsc-eb mb-4 sm:mb-5">// OUR SERVICES &amp; EXPERTISE</div>
+          <div className="fsc-eb mb-4 sm:mb-5">{"// OUR SERVICES & EXPERTISE"}</div>
 
           {/* Headline */}
           <h2 className="fsc-h1 font-display italic font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.12] tracking-tight">
@@ -316,6 +316,9 @@ export function FullServiceCreativeSection() {
                 >
                   <div className="fsc-tilt w-full h-full relative">
                     <img
+                      loading="lazy"
+                      width={800}
+                      height={890}
                       src={card.image}
                       alt={card.title}
                       className="w-full h-full block"
@@ -369,6 +372,9 @@ export function FullServiceCreativeSection() {
                 >
                   <div className="fsc-tilt w-full h-full relative">
                     <img
+                      loading="lazy"
+                      width={800}
+                      height={430}
                       src={card.image}
                       alt={card.title}
                       className="w-full h-full block"
