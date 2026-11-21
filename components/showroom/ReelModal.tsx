@@ -295,7 +295,7 @@ export function ReelModal({
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={activeReel.thumbnail}
-                    alt={activeReel.title}
+                    alt={activeReel.thumbnailAlt}
                     className="w-full h-full object-cover opacity-50"
                     draggable={false}
                   />
@@ -452,7 +452,7 @@ export function ReelModal({
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={item.thumbnail}
-                        alt={item.title}
+                        alt={item.thumbnailAlt}
                         className="w-full h-full object-cover"
                         draggable={false}
                       />

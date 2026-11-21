@@ -8,19 +8,18 @@ import styles from "./ContactExperience.module.css";
 
 // EDIT THESE VALUES BEFORE LAUNCH. Demo values are not business verification.
 const DETAILS = {
-  email: "hello@oneimpact.in",
+  email: "contact@oneimpact.co",
   city: "Mumbai, India",
-  phone: "", // Add the verified public phone number, if desired.
+  phone: "+918369018104", 
   streetAddress: "", // Add the verified street address before enabling directions.
   mapUrl: "", // Add a verified Google Maps link.
   linkedIn: "",
   instagram: "",
   youtube: "",
-  behance: "",
 };
 
 const SERVICES = [
-  "SEO Services",
+  "SEO",
   "Social Media Marketing",
   "Influencer Marketing",
   "Branding",
@@ -273,14 +272,12 @@ export default function ContactExperience({ children }: { children: React.ReactN
             <div className={styles.contacts}>
               {DETAILS.phone && <a href={`tel:${DETAILS.phone.replace(/\s/g,"")}`} className={styles.contactTile}><Glyph name="phone"/><strong>{DETAILS.phone}</strong><span>Call us</span></a>}
               <a href={`mailto:${DETAILS.email}`} className={styles.contactTile}><Glyph name="mail"/><strong>{DETAILS.email}</strong><span>Drop us an email</span></a>
-              <div className={styles.contactTile}><Glyph name="pin"/><strong>{DETAILS.city}</strong><span>Studio visits by appointment</span></div>
             </div>
             <div className={styles.socialRow}>
               {[
                 ["LinkedIn", DETAILS.linkedIn, "in"],
                 ["Instagram", DETAILS.instagram, "◎"],
                 ["YouTube", DETAILS.youtube, "▶"],
-                ["Behance", DETAILS.behance, "Bē"],
               ].filter((item) => item[1]).map(([name, href, glyph]) =>
                 <a href={href} className={styles.social} aria-label={name} key={name} target="_blank" rel="noopener noreferrer">{glyph}</a>
               )}
@@ -291,7 +288,7 @@ export default function ContactExperience({ children }: { children: React.ReactN
           <div className={styles.heroRight} id="contact-form">
             <div className={styles.phoneArt}>
               <div className={styles.yellowRay} aria-hidden>✳</div>
-              <Image src="/oneimpact-contact/phone-envelope.webp" alt="Editorial collage featuring a vintage telephone and envelope" width={620} height={1106} unoptimized fetchPriority="high" loading="eager"/>
+              <Image src="/oneimpact-contact/phone-envelope.webp" alt="Hand holding a telephone receiver above an envelope" width={620} height={1106} unoptimized fetchPriority="high" loading="eager"/>
             </div>
             <div data-reveal className={styles.formPosition}><ContactForm/></div>
           </div>
@@ -319,7 +316,7 @@ export default function ContactExperience({ children }: { children: React.ReactN
         <div className={`${styles.container} ${styles.officeGrid}`}>
           <div className={styles.officePhoto} data-reveal>
             <div className={styles.tape} aria-hidden="true"/>
-            <Image src="/oneimpact-contact/office-sample.webp" alt="Illustrative studio interior — replace with a real One Impact office photograph" width={820} height={580}/>
+            <Image src="/oneimpact-contact/office-sample.webp" alt="Illustration of a studio workspace with One Impact lettering on the wall" width={820} height={580}/>
             <span className={styles.photoCaption}>STUDIO IMAGE / REPLACE BEFORE LAUNCH</span>
           </div>
           <div className={styles.officeCopy} data-reveal>
@@ -332,8 +329,8 @@ export default function ContactExperience({ children }: { children: React.ReactN
           </div>
           <div className={styles.mapWrap} data-reveal>
             {DETAILS.mapUrl
-              ? <a href={DETAILS.mapUrl} target="_blank" rel="noopener noreferrer" className={styles.mapFrame} aria-label="Open One Impact office in maps"><Image src="/oneimpact-contact/map-sample.webp" alt="Map preview (replace with verified location)" width={600} height={562}/><span>Open in Maps ↗</span></a>
-              : <div className={styles.mapFrame}><Image src="/oneimpact-contact/map-sample.webp" alt="Illustrative map artwork, not an actual office location" width={600} height={562}/><span className={styles.mapPlaceholder}>ILLUSTRATIVE MAP</span></div>}
+              ? <a href={DETAILS.mapUrl} target="_blank" rel="noopener noreferrer" className={styles.mapFrame} aria-label="Open One Impact office in maps"><Image src="/oneimpact-contact/map-sample.webp" alt="Illustrated map with a location pin" width={600} height={562}/><span>Open in Maps ↗</span></a>
+              : <div className={styles.mapFrame}><Image src="/oneimpact-contact/map-sample.webp" alt="Illustrated street map with a yellow location pin" width={600} height={562}/><span className={styles.mapPlaceholder}>ILLUSTRATIVE MAP</span></div>}
           </div>
         </div>
       </section>

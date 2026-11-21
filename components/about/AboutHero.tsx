@@ -208,7 +208,7 @@ export function AboutHero() {
           <div className="inline-flex items-center gap-2 px-3 py-0.5 sm:px-3.5 sm:py-1 rounded-full border border-[#1A1A1A]/30 bg-[#f9d230]/40 backdrop-blur-sm">
             <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#1A1A1A] animate-pulse" />
             <span className="font-sans text-[9px] sm:text-xs font-black tracking-[0.25em] text-[#1A1A1A] uppercase">
-              STICK WITH YOU THROUGH THREE GENERATIONS
+              YOUR DIGITAL GROWTH PARTNER
             </span>
           </div>
         </div>
@@ -418,7 +418,7 @@ export function AboutHero() {
                   width={640}
                   height={857}
                   fetchPriority="high"
-                  alt=""
+                  alt="Newspaper clipping with the headline New Agency Launch"
                   className="w-full h-16 xs:h-20 sm:h-24 md:h-28 object-cover"
                 />
                 <span className="font-mono text-[6px] sm:text-[7px] text-[#333] block mt-0.5 text-right px-0.5">
@@ -703,7 +703,7 @@ export function AboutHero() {
                   sizes="(max-width: 640px) 140px, 275px"
                   width={1200}
                   height={896}
-                  alt=""
+                  alt="Campaign layouts, color swatches and a laptop with an analytics dashboard"
                   className="w-full h-14 xs:h-18 sm:h-22 md:h-24 object-cover"
                 />
                 <span className="font-mono text-[6px] sm:text-[7px] text-[#333] block mt-0.5 text-left px-0.5">

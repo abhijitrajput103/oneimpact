@@ -9,7 +9,7 @@ import Image from "next/image";
  * - Top folio: "02 / OUR PHILOSOPHY" | "A DIFFERENT WAY OF THINKING — ONE IMPACT®"
  * - Left stage:
  *    - Crown doodle floating above headline
- *    - Stacked editorial headline: "WE BELIEVE GOOD DESIGN SHOULD MAKE YOU"
+ *    - Stacked editorial headline: "WE BELIEVE GOOD MARKETING SHOULD MAKE YOU"
  *    - "FEEL SOMETHING." on jagged yellow tape badge with electric blue italic text and underline swoosh
  *    - Yellow hand-drawn arrow doodle pointing down-left
  *    - Compact lower row with rotating yellow stamp badge ("IDEAS IN MOTION • EST. 2020 • ONE IMPACT"),
@@ -357,7 +357,7 @@ export function AboutManifesto() {
               <span style={{ "--i": 0 } as React.CSSProperties}>We believe</span>
             </span>
             <span className="ln">
-              <span style={{ "--i": 1 } as React.CSSProperties}>Good design</span>
+              <span style={{ "--i": 1 } as React.CSSProperties}>Good marketing</span>
             </span>
             <span className="ln">
               <span style={{ "--i": 2 } as React.CSSProperties}>Should</span>
@@ -433,10 +433,10 @@ export function AboutManifesto() {
         </div>
 
         {/* RIGHT COLUMN: Full Collage (Monitor + Camera + Tablet + Eye + Film) */}
-        <div className="art-wrap" aria-hidden="true">
+        <div className="art-wrap">
           <Image
             src="/images/OurPhilosophy-image.webp"
-            alt="One Impact Creative Tools and Studio Collage"
+            alt="Camera, drawing tablet and screen displaying the One Impact wordmark"
             width={1536}
             height={1024}
 

@@ -195,7 +195,7 @@ export function ServiceReelsSection({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={reel.thumbnail}
-                  alt={`${reel.title} — ${reel.label}`}
+                  alt={reel.thumbnailAlt}
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter brightness-95"
                   loading="lazy"
                   draggable={false}

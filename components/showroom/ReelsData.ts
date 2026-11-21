@@ -4,6 +4,7 @@ export interface ReelItem {
   label: string;
   title: string;
   thumbnail: string;
+  thumbnailAlt: string;
   rotation: number;
   offsetY: number;
   serviceTag: string;
@@ -21,6 +22,7 @@ export const SHOWREEL_REELS: ReelItem[] = [
     label: "Spatial Design",
     title: "Sanjay Puri Interiors",
     thumbnail: "/images/reels/reel-1.webp",
+    thumbnailAlt: "Woman in green presenting an interiors project in the Sanjay Puri Interiors reel",
     rotation: -8,
     offsetY: 20,
     serviceTag: "Brand Storytelling & Reels",
@@ -41,6 +43,7 @@ export const SHOWREEL_REELS: ReelItem[] = [
     label: "Architecture Series",
     title: "Dialogues Directory",
     thumbnail: "/images/reels/reel-2.webp",
+    thumbnailAlt: "Speaker discussing architecture in the Dialogues Directory interview",
     rotation: 4,
     offsetY: -10,
     serviceTag: "Creator & Thought Leadership",
@@ -61,6 +64,7 @@ export const SHOWREEL_REELS: ReelItem[] = [
     label: "Brand Film",
     title: "Cafe Pibatie",
     thumbnail: "/images/reels/reel-3.webp",
+    thumbnailAlt: "Close-up of a dessert in the Cafe Pibatie brand film",
     rotation: -3,
     offsetY: 15,
     serviceTag: "Commercial Film & Production",
@@ -81,6 +85,7 @@ export const SHOWREEL_REELS: ReelItem[] = [
     label: "Campaign Film",
     title: "Sweet Bengal",
     thumbnail: "/images/reels/reel-4.webp",
+    thumbnailAlt: "Hands arranging sweets in the Sweet Bengal campaign reel",
     rotation: 6,
     offsetY: -15,
     serviceTag: "Seasonal Social Campaign",
@@ -101,6 +106,7 @@ export const SHOWREEL_REELS: ReelItem[] = [
     label: "Luxury Storytelling",
     title: "Vinanti Manji",
     thumbnail: "/images/reels/reel-5.webp",
+    thumbnailAlt: "Woman presenting jewelry in the Vinanti Manji reel",
     rotation: -5,
     offsetY: 10,
     serviceTag: "Creator-Led Brand Showcase",

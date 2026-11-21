@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import kartikPortrait from "@/public/images/founder-kartik-mittal.webp";
+import kajolPortrait from "@/public/images/founder-kajol-chavan.webp";
 
 const SPARK_COLORS = ["#ffd60a", "#2457ff", "#f4f1ea", "#ffd60a"];
 
@@ -115,15 +117,6 @@ export function AboutFounders() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [focusFounder]);
 
-  // Once mounted, ensure .live class is applied
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (p1Ref.current) p1Ref.current.classList.add("live");
-      if (p2Ref.current) p2Ref.current.classList.add("live");
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="relative w-full overflow-hidden" style={{ backgroundColor: "#070707" }}>
       <section
@@ -231,9 +224,8 @@ export function AboutFounders() {
             position: relative;
             z-index: 2;
             cursor: pointer;
-            opacity: 0;
-            animation: pin 1s cubic-bezier(.2, .9, .2, 1) forwards;
-            transition: transform .5s cubic-bezier(.3, 1.5, .4, 1), opacity .4s, filter .4s;
+            transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotate(var(--r));
+            transition: transform .18s ease-out, opacity .4s, filter .4s;
           }
 
           .founders-sec .photo img {
@@ -246,7 +238,6 @@ export function AboutFounders() {
           .founders-sec .p1 {
             grid-area: p1;
             --r: -2deg;
-            animation-delay: .2s;
             margin-top: -30px;
             justify-self: center;
             width: 100%;
@@ -256,25 +247,9 @@ export function AboutFounders() {
           .founders-sec .p2 {
             grid-area: p2;
             --r: 2deg;
-            animation-delay: .5s;
             justify-self: center;
             width: 100%;
             max-width: clamp(340px, 34vw, 540px);
-          }
-
-          @keyframes pin {
-            from {
-              opacity: 0;
-              transform: translateY(50px) rotate(calc(var(--r) * 3));
-            }
-            to {
-              opacity: 1;
-              transform: rotate(var(--r));
-            }
-          }
-
-          .founders-sec .photo:hover {
-            transform: rotate(calc(var(--r) * -1)) scale(1.04);
           }
 
           .founders-sec .p1 img {
@@ -282,16 +257,11 @@ export function AboutFounders() {
             mask-image: linear-gradient(#000 84%, transparent 98%);
           }
 
-          .founders-sec .photo.live {
-            transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotate(var(--r));
-            transition: transform .18s ease-out, opacity .4s, filter .4s;
-          }
-
-          .founders-sec .photo.live:hover {
+          .founders-sec .photo:hover {
             transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotate(var(--r)) scale(1.05);
           }
 
-          .founders-sec .photo.live.on {
+          .founders-sec .photo.on {
             transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotate(0deg) scale(1.09);
             z-index: 10;
           }
@@ -651,12 +621,12 @@ export function AboutFounders() {
           onPointerLeave={() => handlePhotoPointerLeave(p1Ref.current)}
         >
           <Image
-            alt="Kartik Mittal"
-            src="/images/founder-kartik-mittal.webp"
-            width={600}
-            height={800}
-
-            sizes="(max-width: 820px) 100vw, 50vw"
+            alt="Kartik Mittal, partner and CEO of One Impact"
+            src={kartikPortrait}
+            unoptimized
+            loading="eager"
+            fetchPriority="low"
+            placeholder="blur"
           />
         </div>
 
@@ -735,11 +705,12 @@ export function AboutFounders() {
           onPointerLeave={() => handlePhotoPointerLeave(p2Ref.current)}
         >
           <Image
-            alt="Kajol Chavan"
-            src="/images/founder-kajol-chavan.webp"
-            width={600}
-            height={800}
-            sizes="(max-width: 820px) 100vw, 50vw"
+            alt="Kajol Chavan, co-founder and COO of One Impact"
+            src={kajolPortrait}
+            unoptimized
+            loading="eager"
+            fetchPriority="low"
+            placeholder="blur"
           />
         </div>
 

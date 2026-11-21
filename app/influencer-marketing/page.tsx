@@ -295,6 +295,7 @@ export default function InfluencerMarketingPage() {
         @media (max-width: 640px) {
           .inf-landing-root .note-paper-card {
             padding: 88px 10% 68px;
+            margin-top: 52px !important;
           }
           .inf-landing-root .note-paper-img {
             width: auto;
@@ -396,6 +397,10 @@ export default function InfluencerMarketingPage() {
           .inf-landing-root .hero-grid,
           .inf-landing-root .inf-intro-grid {
             grid-template-columns: minmax(0, 1fr) !important;
+            gap: 48px !important;
+          }
+          .inf-landing-root .note-paper-card {
+            margin-top: 48px !important;
           }
         }
         .inf-landing-root .inf-intro-grid {
@@ -867,7 +872,7 @@ export default function InfluencerMarketingPage() {
               sizes="(max-width: 768px) 95vw, 50vw"
               width={1200}
               height={800}
-              alt="Influencer Marketing Sticker Collage"
+              alt="Creator filming with a ring light beside social posts and engagement icons"
               draggable={false}
               style={{
                 width: "100%",
@@ -1082,7 +1087,7 @@ export default function InfluencerMarketingPage() {
               sizes="(max-width: 768px) 95vw, 50vw"
               width={1200}
               height={600}
-              alt="Four Principles of Influencer Marketing"
+              alt="Campaign planners reviewing audience and social engagement charts"
               style={{
                 display: "block",
                 width: "100%",
@@ -1144,7 +1149,7 @@ export default function InfluencerMarketingPage() {
                   <img
                     loading="lazy"
                     src="/LOGO/oneimpact-logo.webp"
-                    alt="OneImpact logo"
+                    alt="One Impact"
                     style={{
                       display: "block",
                       height: "18px",
@@ -1419,7 +1424,7 @@ export default function InfluencerMarketingPage() {
                 sizes="(max-width: 768px) 95vw, 50vw"
                 width={1200}
                 height={800}
-                alt="Mumbai Influencer Marketing Collage"
+                alt="Collage of a creator filming beside the Gateway of India, a Mumbai taxi and a local train"
                 style={{
                   width: "100%",
                   height: "auto",

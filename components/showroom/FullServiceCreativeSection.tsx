@@ -9,6 +9,7 @@ interface ServiceCardData {
   description: string;
   href: string;
   image: string;
+  imageAlt: string;
   aspectClass: string;
   txStyle: React.CSSProperties;
   h3Class?: string;
@@ -23,6 +24,7 @@ const CARDS_ROW_1: ServiceCardData[] = [
     description: "Boost visibility, rank higher, and attract the right audience.",
     href: "/seo",
     image: "/images/home-services/seo-service.webp",
+    imageAlt: "Marketer tracking search performance on an analytics dashboard",
     aspectClass: "aspect-[800/890]",
     txStyle: { left: "9%", top: "7.5%", right: "8%" },
   },
@@ -32,6 +34,7 @@ const CARDS_ROW_1: ServiceCardData[] = [
     description: "Build a strong brand presence, engage communities, and drive growth.",
     href: "/social-media-marketing",
     image: "/images/home-services/smm-service.webp",
+    imageAlt: "Social media campaign displayed across a laptop and phone",
     aspectClass: "aspect-[800/890]",
     txStyle: { left: "8.5%", top: "7.0%", right: "8%" },
   },
@@ -41,6 +44,7 @@ const CARDS_ROW_1: ServiceCardData[] = [
     description: "Partner with the right voices to create authentic reach and real impact.",
     href: "/influencer-marketing",
     image: "/images/home-services/influencer-service.webp",
+    imageAlt: "Creator recording a campaign video in a studio",
     aspectClass: "aspect-[800/890]",
     txStyle: { left: "8.0%", top: "7.0%", right: "8%" },
   },
@@ -53,6 +57,7 @@ const CARDS_ROW_2: ServiceCardData[] = [
     description: "Build a distinct, memorable brand with strategy, design and storytelling.",
     href: "/branding-services",
     image: "/images/home-services/branding-service.webp",
+    imageAlt: "Designer arranging type and color samples for a brand identity",
     aspectClass: "aspect-[800/430]",
     txStyle: { left: "7.5%", top: "8.5%", maxWidth: "50%" },
     h3Class: "fsc-h3-wide",
@@ -65,6 +70,7 @@ const CARDS_ROW_2: ServiceCardData[] = [
     description: "Create high-performance, brand-aligned websites and digital experiences that deliver.",
     href: "/web-development",
     image: "/images/home-services/web-dev-service.webp",
+    imageAlt: "Developer working on a website layout and code on a laptop",
     aspectClass: "aspect-[800/430]",
     txStyle: { left: "6.5%", top: "8.5%", maxWidth: "50%" },
     h3Class: "fsc-h3-wide",
@@ -209,6 +215,7 @@ export function FullServiceCreativeSection() {
 
   return (
     <section
+      id="card-swap"
       ref={sectionRef}
       className="fsc-root relative w-full overflow-hidden bg-[#040405] text-[#f4f1ea] py-16 sm:py-20 md:py-24"
     >
@@ -320,7 +327,7 @@ export function FullServiceCreativeSection() {
                       width={800}
                       height={890}
                       src={card.image}
-                      alt={card.title}
+                      alt={card.imageAlt}
                       className="w-full h-full block"
                     />
 
@@ -376,7 +383,7 @@ export function FullServiceCreativeSection() {
                       width={800}
                       height={430}
                       src={card.image}
-                      alt={card.title}
+                      alt={card.imageAlt}
                       className="w-full h-full block"
                     />
 
@@ -521,23 +528,9 @@ export function FullServiceCreativeSection() {
         /* Responsive Card Container Queries */
         .fsc-card {
           container-type: inline-size;
-          opacity: 0;
-          animation: fsc-cin 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
-          animation-delay: calc(0.2s + var(--n) * 0.1s);
           outline: 0;
           text-decoration: none;
           color: inherit;
-        }
-
-        @keyframes fsc-cin {
-          from {
-            opacity: 0;
-            transform: translateY(35px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
         }
 
         .fsc-tilt {

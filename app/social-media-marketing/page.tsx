@@ -168,6 +168,7 @@ export default function SmmLandingPage() {
         @media (max-width: 640px) {
           .smm-landing-root .note-paper-card {
             padding: 88px 10% 68px;
+            margin-top: 52px !important;
           }
           .smm-landing-root .note-paper-img {
             width: auto;
@@ -259,6 +260,10 @@ export default function SmmLandingPage() {
         @media (max-width: 980px) {
           .smm-landing-root .hero-grid {
             grid-template-columns: minmax(0, 1fr) !important;
+            gap: 48px !important;
+          }
+          .smm-landing-root .note-paper-card {
+            margin-top: 48px !important;
           }
         }
         @media (max-width: 900px) {
@@ -717,7 +722,7 @@ export default function SmmLandingPage() {
                   <img
                     loading="lazy"
                     src="/LOGO/oneimpact-logo.webp"
-                    alt="OneImpact logo"
+                    alt="One Impact"
                     style={{
                       display: "block",
                       height: "18px",

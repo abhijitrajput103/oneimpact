@@ -231,6 +231,7 @@ export default function BrandingServicesPage() {
         @media (max-width: 640px) {
           .branding-landing-root .note-paper-card {
             padding: 88px 10% 68px;
+            margin-top: 52px !important;
           }
           .branding-landing-root .note-paper-img {
             width: auto;
@@ -335,6 +336,10 @@ export default function BrandingServicesPage() {
         @media (max-width: 980px) {
           .branding-landing-root .hero-grid {
             grid-template-columns: minmax(0, 1fr) !important;
+            gap: 48px !important;
+          }
+          .branding-landing-root .note-paper-card {
+            margin-top: 48px !important;
           }
         }
         @media (max-width: 900px) {
@@ -916,7 +921,7 @@ export default function BrandingServicesPage() {
                   <img
                     loading="lazy"
                     src="/LOGO/oneimpact-logo.webp"
-                    alt="OneImpact logo"
+                    alt="One Impact"
                     style={{
                       display: "block",
                       height: "18px",
@@ -1139,7 +1144,7 @@ export default function BrandingServicesPage() {
                 sizes="(max-width: 768px) 95vw, 50vw"
                 width={1200}
                 height={800}
-                alt="Mumbai Branding Collage"
+                alt="Collage of a creator filming beside the Gateway of India, a Mumbai taxi and a local train"
                 style={{
                   width: "100%",
                   height: "auto",

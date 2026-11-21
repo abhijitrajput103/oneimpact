@@ -7,11 +7,13 @@ const StickerPlayground = dynamic(() => import("@/components/footer/StickerPlayg
 
 interface LetsPlaySectionProps {
   headline?: string;
+  subtitle?: string;
   className?: string;
 }
 
 export function LetsPlaySection({
   headline = "Let's play.",
+  subtitle = "Throw things around! We come here and do it virtually when we are stressed too🤭",
   className = "",
 }: LetsPlaySectionProps) {
   const section = useRef<HTMLElement>(null);
@@ -35,11 +37,11 @@ export function LetsPlaySection({
       className={`bg-black pt-4 pb-12 sm:pt-8 sm:pb-16 md:pt-10 md:pb-20 select-none relative z-10 ${className}`}
     >
       <div className="px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28">
-        {/* Large display headline */}
-        <FooterHeadline title={headline} />
+        {/* Large display headline & subtitle */}
+        <FooterHeadline title={headline} subtitle={subtitle} />
 
         {/* Interactive sticker physics playground */}
-        {nearby ? <StickerPlayground /> : <div aria-hidden className="mt-6 h-[240px] sm:h-[340px] md:h-[440px]" />}
+        {nearby ? <StickerPlayground /> : <div aria-hidden className="mt-6 h-[260px] sm:h-[320px] md:h-[380px] lg:h-[420px]" />}
       </div>
     </section>
   );

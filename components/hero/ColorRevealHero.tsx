@@ -375,7 +375,7 @@ export function ColorRevealHero({ className }: ColorRevealHeroProps) {
       {/* ------------------------------------------------------------------- */}
       <picture>
         <source media="(max-width: 767px), (pointer: coarse) and (max-width: 1023px)" srcSet="/images/One_impact%20_illustration_Mobile.webp" />
-        <img src="/media/hero-poster-05180473b626.webp" alt="One Impact hero illustration" fetchPriority="high"
+        <img src="/media/hero-poster-05180473b626.webp" alt="Illustrated One Impact creative team working with a camera, computer and mobile devices" fetchPriority="high"
           width={1280} height={720} className="absolute inset-0 h-full w-full object-cover object-bottom" />
       </picture>
       {mode === "video" && (

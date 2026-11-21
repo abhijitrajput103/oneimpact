@@ -9,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactExperience><Footer /></ContactExperience>;
+  return (
+    <ContactExperience>
+      <Footer />
+    </ContactExperience>
+  );
 }

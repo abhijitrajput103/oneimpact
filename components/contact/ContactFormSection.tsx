@@ -8,19 +8,18 @@ import { WaveDivider } from "@/components/common/WaveDivider";
 
 const SERVICES_OPTIONS = [
   "Website Development",
-  "Brand Identity",
-  "SEO & Growth",
-  "Creative & Content",
+  "SEO",
+  "AI Ranking",
+  "Social Media Marketing",
+  "Google & Meta Ads",
   "Influencer Marketing",
-  "UGC Campaigns",
 ];
 
 const BUDGET_OPTIONS = [
-  "< ₹2.5L",
-  "₹2.5L – ₹5L",
-  "₹5L – ₹15L",
-  "₹15L+",
-];
+  "< ₹1L", 
+  "₹1L – ₹2L", 
+  "₹2L – ₹3L", 
+  "₹3L+"];
 
 export function ContactFormSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -33,7 +32,9 @@ export function ContactFormSection() {
     company: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [copied, setCopied] = useState(false);
 
   // GSAP Entrance animation
@@ -58,16 +59,18 @@ export function ContactFormSection() {
               start: "top 85%",
               once: true,
             },
-          }
+          },
         );
       }
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   const toggleService = (service: string) => {
     setSelectedServices((prev) =>
-      prev.includes(service) ? prev.filter((s) => s !== service) : [...prev, service]
+      prev.includes(service)
+        ? prev.filter((s) => s !== service)
+        : [...prev, service],
     );
   };
 
@@ -75,13 +78,16 @@ export function ContactFormSection() {
     e.preventDefault();
     e.stopPropagation();
     if (navigator.clipboard) {
-      navigator.clipboard.writeText("hello@oneimpact.in").then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      }).catch(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      });
+      navigator.clipboard
+        .writeText("contact@oneimpact.co")
+        .then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        })
+        .catch(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        });
     } else {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -136,7 +142,7 @@ export function ContactFormSection() {
         <source srcSet="/images/contact-us-bg.webp" type="image/webp" />
         <img
           src="/images/contact-us-bg.webp"
-          alt="Contact background"
+          alt=""
           className="w-full h-full object-cover object-center"
           draggable={false}
           loading="lazy"
@@ -181,21 +187,14 @@ export function ContactFormSection() {
 
       <div className="relative z-10 px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28 pt-8 sm:pt-10 md:pt-12 pb-10 sm:pb-14 md:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
           {/* ========================================================= */}
           {/* LEFT COLUMN: Proportional, reduced font sizes             */}
           {/* ========================================================= */}
           <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center">
             
-            {/* Top Label */}
-            <div className="contact-reveal inline-flex items-center gap-2.5 border border-[#D8D3C9] rounded-full px-4 py-1.5 text-[10px] sm:text-[11px] font-extrabold tracking-[2px] text-[#161616] mb-4 sm:mb-5 w-fit bg-white/90 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#f9d230]" />
-              {"// START A PROJECT"}
-            </div>
-
             {/* Main Heading with Highlight & Spark rays */}
             <h2 className="contact-reveal font-display text-2xl sm:text-3xl md:text-[38px] lg:text-[42px] font-bold leading-[1.15] tracking-tight text-[#161616] mb-3.5 sm:mb-4">
-              Turn your vision into{" "}
+              Make your brand{" "}
               <span className="inline-block relative">
                 <svg
                   className="absolute -top-3.5 sm:-top-4 -right-5 sm:-right-6 w-5 sm:w-6 h-5 sm:h-6 text-[#f9d230] pointer-events-none"
@@ -211,18 +210,18 @@ export function ContactFormSection() {
                 </svg>
               </span>
               <br />
-              <span className="project-highlight">experiences.</span>
+              <span className="project-highlight">stronger!</span>
             </h2>
 
             {/* Description */}
             <p className="contact-reveal text-[#161616] text-xs sm:text-sm md:text-base leading-relaxed max-w-[480px] mb-5 sm:mb-6 font-semibold">
-              Have an ambitious idea or looking to scale your brand? Tell us about your goals.
-              We collaborate with industry frontrunners to engineer category-defining digital experiences.
+              Have an ambitious idea or looking to scale your brand? Tell us
+              about your goals. We collaborate with industry frontrunners to
+              engineer category-defining digital experiences.
             </p>
 
             {/* Contact Information Cards */}
             <div className="contact-reveal flex flex-col gap-2.5 sm:gap-3 max-w-[500px]">
-              
               {/* Direct Email Card */}
               <div className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/95 border border-[#E6E1D8] rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl shadow-md">
                 <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center rounded-xl bg-[#FFF0B5] text-[#171717]">
@@ -247,10 +246,10 @@ export function ContactFormSection() {
                     Direct Email
                   </div>
                   <a
-                    href="mailto:hello@oneimpact.in"
+                    href="mailto:contact@oneimpact.co"
                     className="text-xs sm:text-sm md:text-base font-bold text-[#161616] hover:text-[#4066c6] transition-colors break-words no-underline block"
                   >
-                    hello@oneimpact.in
+                    contact@oneimpact.co
                   </a>
                 </div>
 
@@ -279,7 +278,7 @@ export function ContactFormSection() {
 
               {/* WhatsApp / Phone Card */}
               <a
-                href="https://wa.me/919999999999"
+                href="https://wa.me/918369018104"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/95 border border-[#E6E1D8] rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl shadow-md no-underline text-inherit"
@@ -306,7 +305,7 @@ export function ContactFormSection() {
                     WhatsApp / Phone
                   </div>
                   <span className="text-xs sm:text-sm md:text-base font-bold text-[#161616] break-words block">
-                    +91 99999 99999
+                    +91 83690 18104 
                   </span>
                 </div>
 
@@ -319,17 +318,24 @@ export function ContactFormSection() {
 
             {/* Trust Indicators */}
             <div className="contact-reveal mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-[#D9D5CD] flex flex-wrap sm:flex-nowrap items-center gap-4 sm:gap-6 max-w-[500px]">
-              
               {/* 24h Response */}
               <div className="flex items-center gap-2.5 sm:gap-3 flex-1 min-w-[160px]">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 flex items-center justify-center rounded-xl bg-[#FFF1C8] text-[#E6A900]">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <svg
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
                     <path d="M13.2 1.5 4.8 13h5.5l-.9 9.5L19.2 10h-5.7l-.3-8.5Z" />
                   </svg>
                 </div>
                 <div>
-                  <div className="text-xs sm:text-sm font-bold text-[#161616] leading-tight">24h Response</div>
-                  <div className="text-[10px] sm:text-[11px] text-[#66635D]">Guaranteed turnaround</div>
+                  <div className="text-xs sm:text-sm font-bold text-[#161616] leading-tight">
+                    24h Response
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] text-[#66635D]">
+                    Guaranteed turnaround
+                  </div>
                 </div>
               </div>
 
@@ -351,12 +357,15 @@ export function ContactFormSection() {
                   </svg>
                 </div>
                 <div>
-                  <div className="text-xs sm:text-sm font-bold text-[#161616] leading-tight">Confidentiality</div>
-                  <div className="text-[10px] sm:text-[11px] text-[#66635D]">Strict NDA protected</div>
+                  <div className="text-xs sm:text-sm font-bold text-[#161616] leading-tight">
+                    Confidentiality
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] text-[#66635D]">
+                    Strict NDA protected
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* ========================================================= */}
@@ -364,22 +373,32 @@ export function ContactFormSection() {
           {/* ========================================================= */}
           <div className="lg:col-span-6 xl:col-span-7 w-full">
             <div className="contact-reveal relative rounded-3xl bg-white/98 text-[#161616] p-5 sm:p-7 md:p-8 shadow-2xl border border-[#E6E1D8] overflow-hidden">
-              
               {/* Subtle top golden accent */}
               <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#f9d230]/40 via-[#f9d230] to-[#f9d230]/40" />
 
               {status === "success" ? (
                 <div className="py-10 px-4 text-center flex flex-col items-center justify-center animate-fade-in">
                   <div className="w-12 h-12 rounded-full bg-[#f9d230]/20 border border-[#f9d230] flex items-center justify-center text-[#161616] mb-3 shadow-md shadow-[#f9d230]/20">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2.5}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                   </div>
                   <h3 className="font-display text-xl sm:text-2xl font-bold text-[#161616] mb-1.5">
                     Message Received!
                   </h3>
                   <p className="text-xs sm:text-sm text-[#66635D] max-w-sm mx-auto mb-5">
-                    Thank you for reaching out. A senior partner will review your project details and get back to you within 24 hours.
+                    Thank you for reaching out. A senior partner will review
+                    your project details and get back to you within 24 hours.
                   </p>
                   <button
                     type="button"
@@ -394,7 +413,8 @@ export function ContactFormSection() {
                   {/* Services Multi-Select */}
                   <div>
                     <label className="block text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#66635D] mb-2">
-                      I&apos;m interested in <span className="text-[#4066c6]">*</span>
+                      I&apos;m interested in{" "}
+                      <span className="text-[#4066c6]">*</span>
                     </label>
                     <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {SERVICES_OPTIONS.map((service) => {
@@ -408,7 +428,7 @@ export function ContactFormSection() {
                               "text-[11px] sm:text-xs font-semibold px-3 py-1.5 rounded-full border transition-all duration-200 cursor-pointer",
                               isSelected
                                 ? "bg-[#f9d230] text-[#161616] border-[#f9d230] shadow-sm shadow-[#f9d230]/30 font-bold"
-                                : "bg-[#F5F5F7] text-[#161616] border-[#E5E5EA] hover:border-[#f9d230] hover:bg-white"
+                                : "bg-[#F5F5F7] text-[#161616] border-[#E5E5EA] hover:border-[#f9d230] hover:bg-white",
                             )}
                           >
                             {isSelected ? "✓ " : "+ "}
@@ -429,7 +449,9 @@ export function ContactFormSection() {
                         type="text"
                         required
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
                         placeholder="John Doe"
                         className="w-full bg-[#F5F5F7] border border-[#E5E5EA] focus:border-[#4066c6] focus:bg-white rounded-xl px-3.5 py-2 text-xs sm:text-sm text-[#161616] placeholder:text-[#A39E93] outline-none transition-all duration-200"
                       />
@@ -442,7 +464,9 @@ export function ContactFormSection() {
                         type="email"
                         required
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                         placeholder="john@company.com"
                         className="w-full bg-[#F5F5F7] border border-[#E5E5EA] focus:border-[#4066c6] focus:bg-white rounded-xl px-3.5 py-2 text-xs sm:text-sm text-[#161616] placeholder:text-[#A39E93] outline-none transition-all duration-200"
                       />
@@ -458,7 +482,9 @@ export function ContactFormSection() {
                       <input
                         type="tel"
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
                         placeholder="+91 98765 43210"
                         className="w-full bg-[#F5F5F7] border border-[#E5E5EA] focus:border-[#4066c6] focus:bg-white rounded-xl px-3.5 py-2 text-xs sm:text-sm text-[#161616] placeholder:text-[#A39E93] outline-none transition-all duration-200"
                       />
@@ -470,7 +496,9 @@ export function ContactFormSection() {
                       <input
                         type="text"
                         value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, company: e.target.value })
+                        }
                         placeholder="Acme Studio"
                         className="w-full bg-[#F5F5F7] border border-[#E5E5EA] focus:border-[#4066c6] focus:bg-white rounded-xl px-3.5 py-2 text-xs sm:text-sm text-[#161616] placeholder:text-[#A39E93] outline-none transition-all duration-200"
                       />
@@ -489,12 +517,14 @@ export function ContactFormSection() {
                           <button
                             key={budget}
                             type="button"
-                            onClick={() => setSelectedBudget(isSelected ? "" : budget)}
+                            onClick={() =>
+                              setSelectedBudget(isSelected ? "" : budget)
+                            }
                             className={cn(
                               "text-[11px] sm:text-xs py-1.5 px-2 rounded-lg border text-center transition-all duration-200 cursor-pointer font-medium",
                               isSelected
                                 ? "bg-[#f9d230] border-[#f9d230] text-[#161616] font-bold shadow-sm"
-                                : "bg-[#F5F5F7] border-[#E5E5EA] text-[#66635D] hover:border-[#f9d230] hover:bg-white"
+                                : "bg-[#F5F5F7] border-[#E5E5EA] text-[#66635D] hover:border-[#f9d230] hover:bg-white",
                             )}
                           >
                             {budget}
@@ -512,7 +542,9 @@ export function ContactFormSection() {
                     <textarea
                       rows={2}
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, message: e.target.value })
+                      }
                       placeholder="Briefly describe what you'd like to build, timeline, or goals..."
                       className="w-full bg-[#F5F5F7] border border-[#E5E5EA] focus:border-[#4066c6] focus:bg-white rounded-xl p-2.5 text-xs sm:text-sm text-[#161616] placeholder:text-[#A39E93] outline-none transition-all duration-200 resize-none"
                     />
@@ -532,9 +564,24 @@ export function ContactFormSection() {
                     >
                       {status === "loading" ? (
                         <>
-                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#161616]" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          <svg
+                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#161616]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            />
                           </svg>
                           SENDING INQUIRY...
                         </>
@@ -553,7 +600,6 @@ export function ContactFormSection() {
               )}
             </div>
           </div>
-
         </div>
       </div>
 

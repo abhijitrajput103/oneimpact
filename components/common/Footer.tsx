@@ -105,14 +105,6 @@ export function Footer() {
                   <path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.6 2.6 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z" />
                 </svg>
               </a>
-              <a
-                href="https://behance.net"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Behance"
-              >
-                Bē
-              </a>
             </div>
           </div>
 
@@ -127,7 +119,7 @@ export function Footer() {
           </svg>
 
           {/* Navigate Column */}
-          <div className="col rv" style={{ "--i": 2 } as React.CSSProperties}>
+          <div className="col rv col-nav" style={{ "--i": 2 } as React.CSSProperties}>
             <h4>Navigate</h4>
             <ul>
               <li>
@@ -149,11 +141,11 @@ export function Footer() {
           </div>
 
           {/* What We Do Column */}
-          <div className="col rv" style={{ "--i": 3 } as React.CSSProperties}>
+          <div className="col rv col-what" style={{ "--i": 3 } as React.CSSProperties}>
             <h4>What We Do</h4>
             <ul>
               <li>
-                <Link href="/seo">SEO Services</Link>
+                <Link href="/seo">SEO</Link>
               </li>
               <li>
                 <Link href="/social-media-marketing">Social Media Marketing</Link>
@@ -162,7 +154,7 @@ export function Footer() {
                 <Link href="/influencer-marketing">Influencer Marketing</Link>
               </li>
               <li>
-                <Link href="/branding-services">Branding Services</Link>
+                <Link href="/branding-services">Branding</Link>
               </li>
               <li>
                 <Link href="/web-development">Web Development</Link>
@@ -171,11 +163,11 @@ export function Footer() {
           </div>
 
           {/* Company Column */}
-          <div className="col rv" style={{ "--i": 4 } as React.CSSProperties}>
+          <div className="col rv col-company" style={{ "--i": 4 } as React.CSSProperties}>
             <h4>Company</h4>
             <ul>
               <li>
-                <Link href="/about">Our Founders</Link>
+                <Link href="/about#founders">Our Founders</Link>
               </li>
               <li>
                 <Link href="/about">The Team</Link>
@@ -202,12 +194,12 @@ export function Footer() {
               className="note"
               id="note"
               href="/contact"
-              aria-label="Let's Create Impact Together — Contact One Impact"
+              aria-label="Let's Create An Impact Together — Contact One Impact"
             >
               <span className="tape" aria-hidden="true" />
               <h3>
                 <span>Let’s</span>
-                <span>Create</span>
+                <span>Create An</span>
                 <span className="hl">Impact</span>
                 <span>Together.</span>
               </h3>
@@ -532,11 +524,6 @@ export function Footer() {
           color: var(--yellow) !important;
           transition: transform 0.3s;
         }
-          display: inline-block;
-          font-style: normal;
-          margin-left: 0.3em;
-          transition: transform 0.3s;
-        }
 
         .col li a:hover i {
           transform: translate(3px, -3px);
@@ -609,6 +596,7 @@ export function Footer() {
 
         .note h3 span {
           display: block;
+          white-space: nowrap;
         }
 
         .note .hl {
@@ -742,8 +730,8 @@ export function Footer() {
 
         @media (max-width: 1000px) {
           .main {
-            grid-template-columns: 1fr 1fr;
-            gap: 40px 20px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 44px 24px;
           }
           .brand {
             grid-column: 1 / -1;
@@ -753,16 +741,85 @@ export function Footer() {
           .cta .sp {
             display: none;
           }
+          .col-nav {
+            grid-column: 1;
+            grid-row: 2;
+          }
+          .col-what {
+            grid-column: 2;
+            grid-row: 2;
+          }
+          .col-company {
+            grid-column: 1;
+            grid-row: 3;
+          }
           .cta {
-            grid-column: 1 / -1;
+            grid-column: 2;
+            grid-row: 3;
             justify-self: start;
-            margin-top: 10px;
+            margin-top: 0;
+            width: 100%;
+            max-width: 250px;
           }
         }
 
-        @media (max-width: 560px) {
+        @media (max-width: 640px) {
           .main {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 36px 14px;
+          }
+          .col ul {
+            padding-left: 0.1em;
+          }
+          .col h4 {
+            margin-bottom: 16px;
+            font-size: clamp(15px, 4.2vw, 19px);
+            padding: 0.2em 0.5em;
+          }
+          .col li {
+            margin-bottom: 12px;
+          }
+          .col li a {
+            font-size: clamp(13px, 3.4vw, 15px);
+            line-height: 1.35;
+          }
+          .cta {
+            grid-column: 2;
+            grid-row: 3;
+            justify-self: center;
+            width: 100%;
+            max-width: 175px;
+          }
+          .note {
+            padding: 22px 14px 26px 16px;
+            transform: rotate(3deg);
+          }
+          .note h3 {
+            font-size: clamp(17px, 4.6vw, 22px);
+            line-height: 1.05;
+          }
+          .note .hl {
+            margin: 1px 0 1px -6px;
+            padding: 0 6px;
+          }
+          .tape {
+            top: -15px;
+            height: 28px;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .main {
+            gap: 30px 10px;
+          }
+          .cta {
+            max-width: 150px;
+          }
+          .note {
+            padding: 18px 10px 22px 12px;
+          }
+          .note h3 {
+            font-size: 15.5px;
           }
         }
 

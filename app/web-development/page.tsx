@@ -263,6 +263,7 @@ export default function WebDevelopmentPage() {
         @media (max-width: 640px) {
           .webdev-landing-root .note-paper-card {
             padding: 88px 10% 68px;
+            margin-top: 52px !important;
           }
           .webdev-landing-root .note-paper-img {
             width: auto;
@@ -367,6 +368,10 @@ export default function WebDevelopmentPage() {
         @media (max-width: 980px) {
           .webdev-landing-root .hero-grid {
             grid-template-columns: minmax(0, 1fr) !important;
+            gap: 48px !important;
+          }
+          .webdev-landing-root .note-paper-card {
+            margin-top: 48px !important;
           }
         }
         @media (max-width: 900px) {
@@ -916,7 +921,7 @@ export default function WebDevelopmentPage() {
                   <img
                     loading="lazy"
                     src="/LOGO/oneimpact-logo.webp"
-                    alt="OneImpact logo"
+                    alt="One Impact"
                     style={{
                       display: "block",
                       height: "18px",

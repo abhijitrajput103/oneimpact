@@ -144,7 +144,7 @@ export const HammerCursor = forwardRef<HammerCursorHandle, HammerCursorProps>(
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/hammer-right-v4.webp"
-              alt="Hammer"
+              alt=""
               width={120}
               height={120}
               className="w-[120px] h-[120px] object-contain drop-shadow-xl"

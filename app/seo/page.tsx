@@ -338,6 +338,10 @@ export default function SeoLandingPage() {
           .seo-landing-root .hero-grid,
           .seo-landing-root .reality-grid {
             grid-template-columns: minmax(0, 1fr) !important;
+            gap: 48px !important;
+          }
+          .seo-landing-root .note-paper-card {
+            margin-top: 48px !important;
           }
         }
         .seo-landing-root .reality-grid {
@@ -368,6 +372,7 @@ export default function SeoLandingPage() {
         @media (max-width: 640px) {
           .seo-landing-root .note-paper-card {
             padding: 88px 10% 68px;
+            margin-top: 52px !important;
           }
           .seo-landing-root .note-paper-img {
             width: auto;
@@ -688,7 +693,7 @@ export default function SeoLandingPage() {
             <img
               loading="lazy"
               src="/images/illustration.webp"
-              alt="SEO visibility illustration"
+              alt="Marketer examining a mobile screen through a magnifying glass"
               draggable={false}
               style={{
                 width: "100%",
@@ -862,7 +867,7 @@ export default function SeoLandingPage() {
                   <img
                     loading="lazy"
                     src="/LOGO/oneimpact-logo.webp"
-                    alt="Client logo"
+                    alt="One Impact"
                     style={{
                       display: "block",
                       height: "20px",
@@ -1302,7 +1307,7 @@ export default function SeoLandingPage() {
                 sizes="(max-width: 768px) 95vw, 50vw"
                 width={1200}
                 height={800}
-                alt="Mumbai Local SEO Collage"
+                alt="Collage of a creator filming beside the Gateway of India, a Mumbai taxi and a local train"
                 style={{
                   width: "100%",
                   height: "auto",

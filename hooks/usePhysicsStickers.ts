@@ -96,6 +96,11 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
     []
   );
 
+  const unregisterSticker = useCallback((id: string) => {
+    stickersRef.current.delete(id);
+    elCacheRef.current.delete(id);
+  }, []);
+
   const resetStickers = useCallback(() => {
     stickersRef.current.clear();
     elCacheRef.current.clear();
@@ -314,7 +319,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
     };
 
     rafRef.current = requestAnimationFrame(tick);
-  }, [getContainerBounds, containerRef, resolveCollisions, getElement]);
+  }, [getContainerBounds, resolveCollisions, getElement]);
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent, stickerId: string) => {
@@ -357,7 +362,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
 
       startSimulation();
     },
-    [containerRef, startSimulation]
+    [containerRef, startSimulation, getElement]
   );
 
   const handlePointerMove = useCallback(
@@ -429,7 +434,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
 
       startSimulation();
     },
-    [containerRef, startSimulation, getElement]
+    [startSimulation, getElement]
   );
 
   const cleanup = useCallback(() => {
@@ -470,6 +475,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
 
   return {
     registerSticker,
+    unregisterSticker,
     resetStickers,
     startSimulation,
     handlePointerDown,
