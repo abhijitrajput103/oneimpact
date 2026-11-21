@@ -1,6 +1,47 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import {
+  Search,
+  TrendingUp,
+  Smartphone,
+  FileSearch,
+  Globe,
+  ShieldCheck,
+  ShoppingCart,
+  MapPin,
+  Package,
+  Video,
+  Layers,
+  Store,
+  BarChart3,
+  Target,
+  Sliders,
+  Cpu,
+  Sparkles,
+} from "lucide-react";
+
+const SERVICE_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  "SEO services": Search,
+  "CRO services (Conversion Rate Optimization)": TrendingUp,
+  "ASO services (App Store Optimization)": Smartphone,
+  "SEO audit services": FileSearch,
+  "Enterprise SEO services": Globe,
+  "Penalty recovery services": ShieldCheck,
+  "E-commerce SEO": ShoppingCart,
+  "Local SEO": MapPin,
+  "Amazon SEO": Package,
+  "YouTube SEO": Video,
+  "WordPress SEO": Layers,
+  "Shopify SEO": Store,
+};
+
+const USP_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  "Data-led": BarChart3,
+  "Sales-first": Target,
+  "Made to fit": Sliders,
+  "AI-enhanced": Cpu,
+};
 
 const USP_CARDS = [
   {
@@ -1503,34 +1544,33 @@ export function ServiceTabs() {
                     }}
                   />
                 </div>
-                {s.icon && (
-                  <div
-                    style={{
-                      width: "44px",
-                      height: "44px",
-                      borderRadius: "12px",
-                      background: "rgba(37, 99, 235, 0.14)",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      loading="lazy"
-                      src={s.icon}
-                      alt={s.t}
+                {(() => {
+                  const IconComp = SERVICE_ICONS[s.t] || Search;
+                  const isYellow = s.dot === "#f9d230";
+                  const iconColor = isYellow ? "#ffd60a" : "#60a5fa";
+                  const glowColor = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                  const badgeBg = isYellow ? "rgba(255, 214, 10, 0.08)" : "rgba(96, 165, 250, 0.08)";
+                  const badgeBorder = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                  return (
+                    <div
                       style={{
-                        width: "30px",
-                        height: "30px",
-                        objectFit: "contain",
-                        display: "block",
+                        width: "48px",
+                        height: "48px",
+                        borderRadius: "14px",
+                        background: badgeBg,
+                        border: `1.5px solid ${badgeBorder}`,
+                        boxShadow: `0 4px 16px ${glowColor}`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        color: iconColor,
                       }}
-                    />
-                  </div>
-                )}
+                    >
+                      <IconComp size={24} strokeWidth={2.2} />
+                    </div>
+                  );
+                })()}
               </div>
               <p
                 style={{
@@ -1928,40 +1968,28 @@ export function WorkCarousel() {
                       }}
                     />
                   </div>
-                  <span
-                    style={{
-                      width: "44px",
-                      height: "44px",
-                      borderRadius: "12px",
-                      background: "#2563eb",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flex: "none",
-                      color: "#FFFFFF",
-                      boxShadow: "0 4px 12px rgba(37, 99, 235, 0.35)",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {u.icon ? (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
-                        loading="lazy"
-                        src={u.icon}
-                        alt={u.head}
+                  {(() => {
+                    const UspIcon = USP_ICONS[u.head] || Sparkles;
+                    return (
+                      <div
                         style={{
-                          width: "26px",
-                          height: "26px",
-                          objectFit: "contain",
-                          display: "block",
+                          width: "48px",
+                          height: "48px",
+                          borderRadius: "14px",
+                          background: "rgba(37, 99, 235, 0.12)",
+                          border: "1.5px solid rgba(37, 99, 235, 0.28)",
+                          boxShadow: "0 4px 16px rgba(37, 99, 235, 0.25)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flex: "none",
+                          color: "#60a5fa",
                         }}
-                      />
-                    ) : (
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d={u.d} />
-                      </svg>
-                    )}
-                  </span>
+                      >
+                        <UspIcon size={24} strokeWidth={2.2} />
+                      </div>
+                    );
+                  })()}
                 </div>
                 <p
                   style={{

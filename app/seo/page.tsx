@@ -2,7 +2,18 @@ import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { LiveDashboardPreview } from "@/components/seo/LiveDashboardPreview";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
+import { MumbaiSpotlightSection } from "@/components/common/MumbaiSpotlightSection";
 import { HeroForm, ApproachTabs, ServiceTabs, OfferSection, WorkCarousel, FaqSection, InquirySection } from "./interactive-sections";
+import { Eye, TrendingUp, Trophy, Coins, Flame, Brain, Sparkles } from "lucide-react";
+
+const HELPS_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  "Better visibility where it counts": Eye,
+  "Traffic that converts": TrendingUp,
+  "Higher rankings without paying for ads": Trophy,
+  "Cost-efficient, long-term strategy": Coins,
+  "An edge over competitors": Flame,
+  "Smarter decisions from real data": Brain,
+};
 
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
@@ -112,22 +123,22 @@ const HELPS_CARDS = [
 const MAP_ROWS = [
   {
     n: "1",
-    name: "Your Business Name",
-    meta: "4.9 ★ (120+) · SEO & Digital Marketing · Open now",
+    name: "Google Local 3-Pack #1",
+    meta: "4.9 ★ (200+) · #1 on Google Maps & Local Search · Open now",
     pin: "#f9d230",
     bg: "#FFF9E6",
   },
   {
     n: "2",
-    name: "Competitor Agency A",
-    meta: "4.2 ★ (45) · Advertising agency",
-    pin: "#E5E5EA",
+    name: "Geo-Targeted Keywords",
+    meta: "Dominating high-volume commercial searches in your market",
+    pin: "#ffd60a",
     bg: "#FFFFFF",
   },
   {
     n: "3",
-    name: "Competitor Agency B",
-    meta: "3.9 ★ (18) · Marketing consultant",
+    name: "Technical & Local Authority",
+    meta: "Zero crawl errors, speed-optimized & verified NAP citations",
     pin: "#E5E5EA",
     bg: "#FFFFFF",
   },
@@ -1128,50 +1139,34 @@ export default function SeoLandingPage() {
                   gap: "10px",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <span
-                    style={{
-                      width: "42px",
-                      height: "42px",
-                      borderRadius: "12px",
-                      background: "rgba(37, 99, 235, 0.18)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flex: "none",
-                      color: "#60a5fa",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {h.icon ? (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
-                        loading="lazy"
-                        src={h.icon}
-                        alt={h.t}
+                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                  {(() => {
+                    const HelpsIcon = HELPS_ICONS[h.t] || Sparkles;
+                    const isYellow = h.chip === "#f9d230";
+                    const iconColor = isYellow ? "#ffd60a" : "#60a5fa";
+                    const glowColor = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    const badgeBg = isYellow ? "rgba(255, 214, 10, 0.08)" : "rgba(96, 165, 250, 0.08)";
+                    const badgeBorder = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    return (
+                      <div
                         style={{
-                          width: "28px",
-                          height: "28px",
-                          objectFit: "contain",
-                          display: "block",
+                          width: "48px",
+                          height: "48px",
+                          borderRadius: "14px",
+                          background: badgeBg,
+                          border: `1.5px solid ${badgeBorder}`,
+                          boxShadow: `0 4px 16px ${glowColor}`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flex: "none",
+                          color: iconColor,
                         }}
-                      />
-                    ) : (
-                      <svg
-                        width="21"
-                        height="21"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
                       >
-                        <path d={h.d} />
-                      </svg>
-                    )}
-                  </span>
+                        <HelpsIcon size={24} strokeWidth={2.2} />
+                      </div>
+                    );
+                  })()}
                   <h3
                     className="seo-heading"
                     style={{
@@ -1209,237 +1204,26 @@ export default function SeoLandingPage() {
 
 
       {/* ── SECTION 11: LOCAL SEO THAT PUTS YOU ON THE MAP ─────────────────── */}
-      <section
-        id="local"
-        style={{
-          backgroundColor: "#000000",
-          color: "#FFFFFF",
-          padding: "clamp(48px, 6vw, 96px) clamp(16px, 3vw, 32px)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1320px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
-            gap: "clamp(36px, 6vw, 84px)",
-            alignItems: "center",
-          }}
-        >
-          {/* Left Column: Copy & CTA */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "620px" }}>
-            <h2
-              style={{
-                margin: 0,
-                fontFamily: "var(--font-display), Georgia, serif",
-                fontSize: "clamp(2.4rem, 4.8vw, 4.2rem)",
-                lineHeight: 1.06,
-                letterSpacing: "-0.025em",
-                fontWeight: 700,
-                color: "#ffd60a",
-              }}
-            >
-              Local SEO
-              <br />
-              That Puts You on the Map
-            </h2>
-
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
-              Trying to connect with local customers? Our Local SEO services are built to make sure your business
-              appears in the right place at the right time. At One Impact, we fine-tune your digital footprint,
-              optimizing your Google Business Profile, local map listings, directories, and citations, so your brand
-              shows up exactly where nearby customers are looking.
-            </p>
-
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
-              We handle everything from geo-specific keyword strategies and managing reviews to ensuring NAP (Name,
-              Address, Phone) consistency across the web. Whether you operate from one location or several, our
-              tailored approach helps you attract attention locally and earn trust in your neighborhood.
-            </p>
-
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "#FFFFFF", fontWeight: 500, margin: 0 }}>
-              No shortcuts, just strategic moves that help local customers discover your business when it matters most.
-            </p>
-
-            <div style={{ paddingTop: "8px" }}>
-              <a
-                href="#audit"
-                className="group inline-flex items-center justify-center font-sans font-bold text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
-                style={{
-                  background: "#5b8def",
-                  padding: "14px 34px",
-                  borderRadius: "999px",
-                  fontSize: "16.5px",
-                  textDecoration: "none",
-                  boxShadow: "0 6px 24px rgba(91, 141, 239, 0.35)",
-                }}
-              >
-                Let’s make your brand the go-to name in town
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Dark Rounded Card with Collage & Process Pills */}
-          <div
-            style={{
-              background: "#08080a",
-              border: "1.5px solid rgba(255, 255, 255, 0.16)",
-              borderRadius: "32px",
-              padding: "clamp(20px, 3.5vw, 36px)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              boxShadow: "0 24px 60px -20px rgba(0, 0, 0, 0.9)",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            {/* Collage Artwork */}
-            <div style={{ position: "relative", width: "100%", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                loading="lazy"
-                src="/media/mumbai-influencer-collage-9dff9b265237.webp"
-                srcSet="/media/mumbai-influencer-collage-9dff9b265237.webp 640w, /media/mumbai-influencer-collage-a91d989521c9.webp 1200w"
-                sizes="(max-width: 768px) 95vw, 50vw"
-                width={1200}
-                height={800}
-                alt="Collage of a creator filming beside the Gateway of India, a Mumbai taxi and a local train"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  maxHeight: "360px",
-                  objectFit: "contain",
-                  display: "block",
-                }}
-              />
-            </div>
-
-            {/* 3 Step Pill Rows */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
-              {/* Step 1: Active */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  padding: "12px 18px",
-                  borderRadius: "18px",
-                  background: "#2a2a2e",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "#ffd60a",
-                    color: "#000000",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {MAP_ROWS[0].n}
-                </span>
-                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  <span style={{ color: "#FFFFFF", fontWeight: 650, fontSize: "15px" }}>
-                    {MAP_ROWS[0].name}
-                  </span>
-                  <span style={{ color: "#A1A1A6", fontSize: "12.5px" }}>
-                    {MAP_ROWS[0].meta}
-                  </span>
-                </div>
-              </div>
-
-              {/* Step 2: Next */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  padding: "12px 18px",
-                  borderRadius: "18px",
-                  background: "#1c1c1f",
-                  border: "1px solid rgba(255, 255, 255, 0.06)",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "#403710",
-                    color: "#ffd60a",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {MAP_ROWS[1].n}
-                </span>
-                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  <span style={{ color: "rgba(255, 255, 255, 0.72)", fontWeight: 550, fontSize: "15px" }}>
-                    {MAP_ROWS[1].name}
-                  </span>
-                  <span style={{ color: "#6E6E73", fontSize: "12.5px" }}>
-                    {MAP_ROWS[1].meta}
-                  </span>
-                </div>
-              </div>
-
-              {/* Step 3: Pending */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  padding: "12px 18px",
-                  borderRadius: "18px",
-                  background: "#141416",
-                  border: "1px solid rgba(255, 255, 255, 0.04)",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "#242426",
-                    color: "rgba(255, 255, 255, 0.35)",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {MAP_ROWS[2].n}
-                </span>
-                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  <span style={{ color: "rgba(255, 255, 255, 0.45)", fontWeight: 550, fontSize: "15px" }}>
-                    {MAP_ROWS[2].name}
-                  </span>
-                  <span style={{ color: "#48484A", fontSize: "12.5px" }}>
-                    {MAP_ROWS[2].meta}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <MumbaiSpotlightSection
+        id="local-seo"
+        headingLines={["Local SEO That", "Puts You"]}
+        highlightText="on the Map"
+        paragraphs={[
+          "Connect with local customers right when they are searching for what you offer. We fine-tune your Google Business Profile, map listings, and citations for maximum visibility.",
+          "From geo-targeted keyword strategies to review management and NAP consistency, we make sure your business earns trust and ranks at the top.",
+        ]}
+        closingHighlight="No shortcuts,"
+        closingText=" just strategic moves that help nearby customers discover and choose your business."
+        ctaText="Let’s make your brand the go-to name"
+        ctaHref="#audit"
+        imageSrc="/images/oneimpact_seo.webp"
+        imageAlt="SEO services that put you on the map"
+        steps={MAP_ROWS.map((r) => ({
+          stepNumber: r.n,
+          title: r.name,
+          subtitle: r.meta,
+        }))}
+      />
 
       {/* ── REELS SHOWCASE (IN-WEBSITE) */}
       <ServiceReelsSection

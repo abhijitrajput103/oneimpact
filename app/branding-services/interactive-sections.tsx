@@ -1,6 +1,42 @@
 "use client";
 
 import React, { useRef, useState } from "react";
+import {
+  Palette,
+  Compass,
+  MessageSquareQuote,
+  SearchCheck,
+  BookOpen,
+  Sparkles,
+  ShoppingCart,
+  MapPin,
+  Globe,
+  Fingerprint,
+  Layers,
+  Target,
+  Heart,
+  Lightbulb,
+} from "lucide-react";
+
+const SERVICE_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  "Brand identity development": Palette,
+  "Brand positioning": Compass,
+  "Brand messaging and storytelling": MessageSquareQuote,
+  "Brand audits and research": SearchCheck,
+  "Brand consistency and guidelines": BookOpen,
+  "Brand naming": Sparkles,
+  "E-commerce brand strategy": ShoppingCart,
+  "Local brand strategy": MapPin,
+  "Digital brand strategy": Globe,
+};
+
+const USP_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  "Distinct": Fingerprint,
+  "End-to-end": Layers,
+  "Positioned": Target,
+  "Emotive": Heart,
+  "Strategy-led": Lightbulb,
+};
 
 const USP_CARDS = [
   {
@@ -1064,11 +1100,40 @@ export function ServiceTabs() {
                 boxShadow: "0 16px 36px -28px rgba(0,0,0,0.5)",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <span aria-hidden="true" style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#f9d230", flex: "none" }} />
-                <h3 className="branding-heading" style={{ margin: 0, fontSize: "19px", letterSpacing: "-0.025em", fontWeight: 700, color: "#FFFFFF" }}>
-                  {s.t}
-                </h3>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <span aria-hidden="true" style={{ width: "10px", height: "10px", borderRadius: "50%", background: s.dot || "#f9d230", flex: "none" }} />
+                  <h3 className="branding-heading" style={{ margin: 0, fontSize: "19px", letterSpacing: "-0.025em", fontWeight: 700, color: "#FFFFFF" }}>
+                    {s.t}
+                  </h3>
+                </div>
+                {(() => {
+                  const IconComp = SERVICE_ICONS[s.t] || Sparkles;
+                  const isYellow = s.dot === "#f9d230";
+                  const iconColor = isYellow ? "#ffd60a" : "#60a5fa";
+                  const glowColor = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                  const badgeBg = isYellow ? "rgba(255, 214, 10, 0.08)" : "rgba(96, 165, 250, 0.08)";
+                  const badgeBorder = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                  return (
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "14px",
+                        background: badgeBg,
+                        border: `1.5px solid ${badgeBorder}`,
+                        boxShadow: `0 4px 16px ${glowColor}`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        color: iconColor,
+                      }}
+                    >
+                      <IconComp size={22} strokeWidth={2.2} />
+                    </div>
+                  );
+                })()}
               </div>
               <p style={{ margin: 0, color: "rgba(255, 255, 255, 0.72)", fontSize: "14.5px", lineHeight: 1.55 }}>{s.a}</p>
             </div>
@@ -1447,24 +1512,28 @@ export function WorkCarousel() {
                       }}
                     />
                   </div>
-                  <span
-                    style={{
-                      width: "44px",
-                      height: "44px",
-                      borderRadius: "12px",
-                      background: "#2563eb",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flex: "none",
-                      color: "#FFFFFF",
-                      boxShadow: "0 4px 12px rgba(37, 99, 235, 0.35)",
-                    }}
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d={u.d} />
-                    </svg>
-                  </span>
+                  {(() => {
+                    const UspIcon = USP_ICONS[u.head] || Sparkles;
+                    return (
+                      <div
+                        style={{
+                          width: "48px",
+                          height: "48px",
+                          borderRadius: "14px",
+                          background: "rgba(37, 99, 235, 0.12)",
+                          border: "1.5px solid rgba(37, 99, 235, 0.28)",
+                          boxShadow: "0 4px 16px rgba(37, 99, 235, 0.25)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flex: "none",
+                          color: "#60a5fa",
+                        }}
+                      >
+                        <UspIcon size={24} strokeWidth={2.2} />
+                      </div>
+                    );
+                  })()}
                 </div>
                 <p
                   style={{

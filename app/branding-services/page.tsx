@@ -1,7 +1,18 @@
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
+import { MumbaiSpotlightSection } from "@/components/common/MumbaiSpotlightSection";
 import { HeroForm, ApproachTabs, ServiceTabs, OfferSection, WorkCarousel, FaqSection, InquirySection } from "./interactive-sections";
+import { Target, Eye, HeartHandshake, TrendingUp, Gem, Users, Sparkles } from "lucide-react";
+
+const HELPS_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  "Clear positioning": Target,
+  "Stronger first impressions": Eye,
+  "Customer loyalty": HeartHandshake,
+  "Better marketing results": TrendingUp,
+  "Higher perceived value": Gem,
+  "Improved internal alignment": Users,
+};
 
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
@@ -989,24 +1000,34 @@ export default function BrandingServicesPage() {
                   gap: "10px",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <span
-                    style={{
-                      width: "42px",
-                      height: "42px",
-                      borderRadius: "12px",
-                      background: "rgba(37, 99, 235, 0.18)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flex: "none",
-                      color: "#60a5fa",
-                    }}
-                  >
-                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d={b.d} />
-                    </svg>
-                  </span>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                  {(() => {
+                    const HelpsIcon = HELPS_ICONS[b.t] || Sparkles;
+                    const isYellow = b.chip === "#f9d230";
+                    const iconColor = isYellow ? "#ffd60a" : "#60a5fa";
+                    const glowColor = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    const badgeBg = isYellow ? "rgba(255, 214, 10, 0.08)" : "rgba(96, 165, 250, 0.08)";
+                    const badgeBorder = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    return (
+                      <div
+                        style={{
+                          width: "48px",
+                          height: "48px",
+                          borderRadius: "14px",
+                          background: badgeBg,
+                          border: `1.5px solid ${badgeBorder}`,
+                          boxShadow: `0 4px 16px ${glowColor}`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flex: "none",
+                          color: iconColor,
+                        }}
+                      >
+                        <HelpsIcon size={24} strokeWidth={2.2} />
+                      </div>
+                    );
+                  })()}
                   <h3 className="branding-heading" style={{ margin: 0, fontSize: "19px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#FFFFFF" }}>
                     {b.t}
                   </h3>
@@ -1052,231 +1073,39 @@ export default function BrandingServicesPage() {
       {/* ── USP CAROUSEL */}
       <WorkCarousel />
 
-      <section
-        id="mumbai"
-        style={{
-          backgroundColor: "#000000",
-          color: "#FFFFFF",
-          padding: "clamp(48px, 6vw, 96px) clamp(16px, 3vw, 32px)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1320px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
-            gap: "clamp(36px, 6vw, 84px)",
-            alignItems: "center",
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <h2
-              className="branding-heading"
-              style={{
-                margin: 0,
-                fontSize: "clamp(2.4rem, 4.2vw, 3.8rem)",
-                lineHeight: 1.08,
-                letterSpacing: "-0.02em",
-                fontWeight: 700,
-                color: "#ffd60a",
-              }}
-            >
-              Branding for
-              <br />
-              Mumbai businesses
-            </h2>
-
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
-              Mumbai, the financial hub of the country, offers businesses plenty of opportunities to grow with a blend of innovation and traditional values. With people coming from every part of the country, your business needs to stand out from the clutter and earn its place in your customers’ minds.
-            </p>
-
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
-              At OneImpact, we help you stay on top by creating a unique brand identity that resonates with your target audience. With experience across industries and a deep understanding of brand growth, we make sure your brand looks good and works effectively in the real world.
-            </p>
-
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "#FFFFFF", fontWeight: 500, margin: 0 }}>
-              Our approach is simple, practical, and focused on long-term impact.
-            </p>
-
-            <div style={{ paddingTop: "8px" }}>
-              <a
-                href="#audit"
-                className="group inline-flex items-center justify-center font-sans font-bold text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
-                style={{
-                  background: "#5b8def",
-                  padding: "14px 34px",
-                  borderRadius: "999px",
-                  fontSize: "16.5px",
-                  textDecoration: "none",
-                  boxShadow: "0 6px 24px rgba(91, 141, 239, 0.35)",
-                }}
-              >
-                Let’s build a brand Mumbai remembers
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Dark Rounded Card with Collage & Process Pills */}
-          <div
-            style={{
-              background: "#08080a",
-              border: "1.5px solid rgba(255, 255, 255, 0.16)",
-              borderRadius: "32px",
-              padding: "clamp(20px, 3.5vw, 36px)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              boxShadow: "0 24px 60px -20px rgba(0, 0, 0, 0.9)",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            {/* Collage Artwork */}
-            <div style={{ position: "relative", width: "100%", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                loading="lazy"
-                src="/media/mumbai-influencer-collage-9dff9b265237.webp"
-                srcSet="/media/mumbai-influencer-collage-9dff9b265237.webp 640w, /media/mumbai-influencer-collage-a91d989521c9.webp 1200w"
-                sizes="(max-width: 768px) 95vw, 50vw"
-                width={1200}
-                height={800}
-                alt="Collage of a creator filming beside the Gateway of India, a Mumbai taxi and a local train"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  maxHeight: "360px",
-                  objectFit: "contain",
-                  display: "block",
-                }}
-              />
-            </div>
-
-            {/* 3 Step Pill Rows */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
-              {/* Step 1: Active */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  padding: "12px 18px",
-                  borderRadius: "18px",
-                  background: "#2a2a2e",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "#ffd60a",
-                    color: "#000000",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  1
-                </span>
-                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  <span style={{ color: "#FFFFFF", fontWeight: 650, fontSize: "15px" }}>
-                    Your Brand
-                  </span>
-                  <span style={{ color: "#A1A1A6", fontSize: "12.5px" }}>
-                    Open now. Easy to recognise.
-                  </span>
-                </div>
-              </div>
-
-              {/* Step 2: Next */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  padding: "12px 18px",
-                  borderRadius: "18px",
-                  background: "#1c1c1f",
-                  border: "1px solid rgba(255, 255, 255, 0.06)",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "#403710",
-                    color: "#ffd60a",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  2
-                </span>
-                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  <span style={{ color: "rgba(255, 255, 255, 0.72)", fontWeight: 550, fontSize: "15px" }}>
-                    Nearby Competitor
-                  </span>
-                  <span style={{ color: "#6E6E73", fontSize: "12.5px" }}>
-                    Closes soon
-                  </span>
-                </div>
-              </div>
-
-              {/* Step 3: Pending */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  padding: "12px 18px",
-                  borderRadius: "18px",
-                  background: "#141416",
-                  border: "1px solid rgba(255, 255, 255, 0.04)",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "#242426",
-                    color: "rgba(255, 255, 255, 0.35)",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  3
-                </span>
-                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  <span style={{ color: "rgba(255, 255, 255, 0.45)", fontWeight: 550, fontSize: "15px" }}>
-                    Another Listing
-                  </span>
-                  <span style={{ color: "#48484A", fontSize: "12.5px" }}>
-                    1.8 km away
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── SPOTLIGHT: BRANDING BUILT TO STAND OUT */}
+      <MumbaiSpotlightSection
+        id="branding-spotlight"
+        headingLines={["Branding Built"]}
+        highlightText="to Stand Out"
+        paragraphs={[
+          "In a crowded market, your business needs a distinct identity that earns attention and builds long-term customer trust.",
+          "At OneImpact, we create cohesive visual systems and strategic positioning designed to make your brand memorable in the real world.",
+        ]}
+        closingHighlight="Ready to make your mark?"
+        closingText=" Let’s build a brand that people remember."
+        ctaText="Let’s build a memorable brand"
+        ctaHref="#audit"
+        imageSrc="/images/oneimpact_branding.webp"
+        imageAlt="OneImpact Branding for modern businesses"
+        steps={[
+          {
+            stepNumber: "1",
+            title: "Brand Strategy & Positioning",
+            subtitle: "Distinct market voice and strategic positioning for growth",
+          },
+          {
+            stepNumber: "2",
+            title: "Visual Identity & Design",
+            subtitle: "Logos, color systems, typography & packaging design",
+          },
+          {
+            stepNumber: "3",
+            title: "Brand Guidelines & Touchpoints",
+            subtitle: "Cohesive touchpoints across digital, print & physical retail",
+          },
+        ]}
+      />
 
       {/* ── REELS SHOWCASE (IN-WEBSITE) */}
       <ServiceReelsSection

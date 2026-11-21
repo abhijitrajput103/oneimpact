@@ -1,7 +1,18 @@
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
+import { MumbaiSpotlightSection } from "@/components/common/MumbaiSpotlightSection";
 import { HeroForm, WorkCarousel, ServiceTabs, OfferSection, FaqSection, InquirySection } from "./interactive-sections";
+import { Eye, Smile, TrendingUp, Rocket, Boxes, BarChart3, Sparkles } from "lucide-react";
+
+const HELPS_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  "Create a strong first impression": Eye,
+  "Improve user experience": Smile,
+  "Drive more conversions": TrendingUp,
+  "Boost SEO performance": Rocket,
+  "Ensure scalability": Boxes,
+  "Enable data-driven decisions": BarChart3,
+};
 
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
@@ -135,19 +146,19 @@ const WHY_HIGHLIGHT_CARDS = [
 
 const SPOTLIGHT = {
   id: "local",
-  title: "Websites Built for Mumbai’s Local Search",
+  title: "Websites Built for Conversions",
   paragraphs: [
-    "In a bustling city like Mumbai, being visible online can make all the difference. A well-developed website isn’t just about aesthetics. It’s your gateway to local customers actively searching for services like yours. That’s why we build websites with local relevance at their core: clean architecture, fast-loading pages, mobile-first designs and SEO-friendly structures that boost your presence in local search results.",
-    "Whether you run a café in Bandra, a salon in Andheri or a law firm in Fort, your website should speak to the community you’re part of and be easily found by them. We optimise your site for local SEO, so your business appears where it matters: in front of people nearby, ready to engage.",
+    "A great website isn't just about aesthetics—it's your high-converting digital storefront. We build lightning-fast, mobile-first websites designed to turn visitors into paying customers.",
+    "With clean architecture, fast-loading pages, and technical SEO at the core, your site stays easy to find and seamless to browse.",
   ],
-  closing: "With OneImpact by your side, you’ll have a website that’s functional, beautifully built, discoverable and rooted in your local market.",
-  cta: "Let’s make your website easy to find locally",
+  closing: "With OneImpact by your side, you get a website that is fast, functional, discoverable, and built to scale.",
+  cta: "Let’s build your high-converting website",
   visual: {
-    label: "Illustration of a local search result with a business website listed first",
+    label: "High-performance web development deliverables",
     rows: [
-      { title: "Your Business", meta: "Open now. Website and directions." },
-      { title: "Nearby Competitor", meta: "Closes soon" },
-      { title: "Another Listing", meta: "2.4 km away" },
+      { title: "High-Performance Website", meta: "Sub-second load times, mobile-first design & conversion UX" },
+      { title: "Search-First Architecture", meta: "Structured schema, fast indexing & technical SEO foundation" },
+      { title: "Modern Scalable Tech Stack", meta: "Next.js architecture, CMS integration & continuous support" },
     ],
   },
 };
@@ -989,24 +1000,34 @@ export default function WebDevelopmentPage() {
                   gap: "10px",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <span
-                    style={{
-                      width: "42px",
-                      height: "42px",
-                      borderRadius: "12px",
-                      background: "rgba(37, 99, 235, 0.18)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flex: "none",
-                      color: "#60a5fa",
-                    }}
-                  >
-                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d={b.d} />
-                    </svg>
-                  </span>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                  {(() => {
+                    const HelpsIcon = HELPS_ICONS[b.title] || Sparkles;
+                    const isYellow = b.chip === "#FFE7B8" || b.chip === "#f9d230";
+                    const iconColor = isYellow ? "#ffd60a" : "#60a5fa";
+                    const glowColor = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    const badgeBg = isYellow ? "rgba(255, 214, 10, 0.08)" : "rgba(96, 165, 250, 0.08)";
+                    const badgeBorder = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    return (
+                      <div
+                        style={{
+                          width: "48px",
+                          height: "48px",
+                          borderRadius: "14px",
+                          background: badgeBg,
+                          border: `1.5px solid ${badgeBorder}`,
+                          boxShadow: `0 4px 16px ${glowColor}`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flex: "none",
+                          color: iconColor,
+                        }}
+                      >
+                        <HelpsIcon size={24} strokeWidth={2.2} />
+                      </div>
+                    );
+                  })()}
                   <h3 className="webdev-heading" style={{ margin: 0, fontSize: "19px", letterSpacing: "-0.025em", fontWeight: 700, lineHeight: 1.25, color: "#FFFFFF" }}>
                     {b.title}
                   </h3>
@@ -1127,174 +1148,24 @@ export default function WebDevelopmentPage() {
       {/* ── WHAT WE OFFER: TOPIC PILLS & ACCORDIONS */}
       <OfferSection />
 
-      {/* ── SPOTLIGHT: WEBSITES BUILT FOR MUMBAI'S LOCAL SEARCH */}
-      <section
-        id="local"
-        style={{
-          backgroundColor: "#000000",
-          color: "#FFFFFF",
-          padding: "clamp(36px, 4.5vw, 60px) clamp(16px, 3vw, 32px)",
-          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1360px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))",
-            gap: "clamp(32px, 6vw, 88px)",
-            alignItems: "center",
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            <h2
-              className="webdev-heading"
-              style={{
-                margin: 0,
-                fontSize: "clamp(2.2rem, 4.4vw, 3.6rem)",
-                lineHeight: 1.08,
-                letterSpacing: "-0.03em",
-                fontWeight: 700,
-                maxWidth: "14ch",
-                color: "#FFFFFF",
-              }}
-            >
-              Websites Built for <span style={{ color: "#f9d230" }}>Mumbai’s</span> Local Search
-            </h2>
-            {SPOTLIGHT.paragraphs.map((p, i) => (
-              <p key={i} style={{ fontSize: "17.5px", color: "rgba(255, 255, 255, 0.72)", margin: 0, lineHeight: 1.6 }}>
-                {p}
-              </p>
-            ))}
-            <p style={{ color: "#FFFFFF", fontWeight: 600, fontSize: "18px", margin: 0 }}>
-              {SPOTLIGHT.closing}
-            </p>
-            <a
-              className="press y btn-sheen"
-              href="#audit"
-              style={{
-                alignSelf: "flex-start",
-                fontWeight: 700,
-                fontSize: "16px",
-                padding: "13px 26px",
-                minHeight: "50px",
-                background: "#f9d230",
-                color: "#000000",
-                textDecoration: "none",
-                border: 0,
-                borderRadius: "999px",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 4px 14px rgba(249, 210, 48, 0.4)",
-              }}
-            >
-              {SPOTLIGHT.cta}
-            </a>
-          </div>
-
-          {/* Visual: Map mockup in Dark Mode */}
-          <figure
-            style={{
-              margin: 0,
-              borderRadius: "28px",
-              overflow: "hidden",
-              background: "#08080a",
-              border: "1px solid rgba(255, 255, 255, 0.12)",
-              boxShadow: "0 24px 60px -20px rgba(0,0,0,0.6)",
-            }}
-            aria-label={SPOTLIGHT.visual.label}
-          >
-            <div
-              style={{
-                position: "relative",
-                height: "230px",
-                background: "#0F172A",
-                backgroundImage:
-                  "linear-gradient(115deg,transparent 46%,rgba(255,255,255,0.06) 46%,rgba(255,255,255,0.06) 50%,transparent 50%),linear-gradient(25deg,transparent 58%,rgba(255,255,255,0.06) 58%,rgba(255,255,255,0.06) 61%,transparent 61%),linear-gradient(0deg,transparent 30%,rgba(37,99,235,0.15) 30%,rgba(37,99,235,0.15) 44%,transparent 44%)",
-                overflow: "hidden",
-              }}
-            >
-              <span
-                style={{
-                  position: "absolute",
-                  left: "22%",
-                  top: "34%",
-                  width: "22px",
-                  height: "22px",
-                  borderRadius: "50% 50% 50% 0",
-                  transform: "rotate(-45deg)",
-                  background: "#475569",
-                }}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  left: "70%",
-                  top: "60%",
-                  width: "22px",
-                  height: "22px",
-                  borderRadius: "50% 50% 50% 0",
-                  transform: "rotate(-45deg)",
-                  background: "#475569",
-                }}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  left: "47%",
-                  top: "30%",
-                  width: "36px",
-                  height: "36px",
-                  borderRadius: "50% 50% 50% 0",
-                  transform: "rotate(-45deg)",
-                  background: "#f9d230",
-                  boxShadow: "0 8px 18px rgba(0,0,0,0.5)",
-                }}
-              />
-            </div>
-            <div style={{ padding: "12px 16px 16px", display: "flex", flexDirection: "column", gap: "8px" }}>
-              {SPOTLIGHT.visual.rows.map((r, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    padding: "12px 14px",
-                    borderRadius: "16px",
-                    background: i === 0 ? "rgba(249, 210, 48, 0.12)" : "rgba(255, 255, 255, 0.04)",
-                    border: i === 0 ? "1px solid rgba(249, 210, 48, 0.35)" : "1px solid rgba(255, 255, 255, 0.06)",
-                  }}
-                >
-                  <span
-                    style={{
-                      flex: "none",
-                      width: "34px",
-                      height: "34px",
-                      borderRadius: "50%",
-                      fontSize: "13px",
-                      fontWeight: 700,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      background: i === 0 ? "#f9d230" : "rgba(255, 255, 255, 0.12)",
-                      color: i === 0 ? "#000000" : "#FFFFFF",
-                    }}
-                  >
-                    {i + 1}
-                  </span>
-                  <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                    <span style={{ fontWeight: 650, fontSize: "15.5px", color: "#FFFFFF" }}>{r.title}</span>
-                    <span style={{ fontSize: "13px", color: "rgba(255, 255, 255, 0.65)", letterSpacing: 0 }}>{r.meta}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </figure>
-        </div>
-      </section>
+      {/* ── SPOTLIGHT: WEBSITES BUILT FOR CONVERSIONS */}
+      <MumbaiSpotlightSection
+        id="web-spotlight"
+        headingLines={["Websites Built for"]}
+        highlightText="Conversions"
+        paragraphs={SPOTLIGHT.paragraphs}
+        closingHighlight=""
+        closingText="With OneImpact by your side, you get a website that is fast, functional, discoverable, and built to scale."
+        ctaText={SPOTLIGHT.cta}
+        ctaHref="#audit"
+        imageSrc="/images/oneimpact_web_development.webp"
+        imageAlt="Websites built for conversions"
+        steps={SPOTLIGHT.visual.rows.map((r, i) => ({
+          stepNumber: (i + 1).toString(),
+          title: r.title,
+          subtitle: r.meta,
+        }))}
+      />
 
       {/* ── REELS SHOWCASE (IN-WEBSITE) */}
       <ServiceReelsSection

@@ -1,7 +1,18 @@
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
+import { MumbaiSpotlightSection } from "@/components/common/MumbaiSpotlightSection";
 import { HeroForm, ApproachTabs, ServiceTabs, OfferSection, WorkCarousel, FaqSection, InquirySection } from "./interactive-sections";
+import { MessageSquareQuote, Repeat, BarChart3, Users, Target, Palette, Sparkles } from "lucide-react";
+
+const HELPS_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  "Content strategies in your brand's voice": MessageSquareQuote,
+  "Consistency and engagement on your socials": Repeat,
+  "Performance tracking via paid tools": BarChart3,
+  "Managed online communities": Users,
+  "Paid campaigns, set up and managed": Target,
+  "A creative approach": Palette,
+};
 
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
@@ -785,25 +796,34 @@ export default function SmmLandingPage() {
                   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.35)",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <span
-                    style={{
-                      width: "42px",
-                      height: "42px",
-                      borderRadius: "12px",
-                      background: "#2563eb",
-                      color: "#FFFFFF",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flex: "none",
-                      boxShadow: "0 3px 10px rgba(37, 99, 235, 0.35)",
-                    }}
-                  >
-                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d={b.d} />
-                    </svg>
-                  </span>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                  {(() => {
+                    const HelpsIcon = HELPS_ICONS[b.t] || Sparkles;
+                    const isYellow = b.chip === "#f9d230";
+                    const iconColor = isYellow ? "#ffd60a" : "#60a5fa";
+                    const glowColor = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    const badgeBg = isYellow ? "rgba(255, 214, 10, 0.08)" : "rgba(96, 165, 250, 0.08)";
+                    const badgeBorder = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    return (
+                      <div
+                        style={{
+                          width: "48px",
+                          height: "48px",
+                          borderRadius: "14px",
+                          background: badgeBg,
+                          border: `1.5px solid ${badgeBorder}`,
+                          boxShadow: `0 4px 16px ${glowColor}`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flex: "none",
+                          color: iconColor,
+                        }}
+                      >
+                        <HelpsIcon size={24} strokeWidth={2.2} />
+                      </div>
+                    );
+                  })()}
                   <h3
                     className="smm-heading"
                     style={{
@@ -861,158 +881,39 @@ export default function SmmLandingPage() {
       {/* ── USP CAROUSEL */}
       <WorkCarousel />
 
-      {/* ── SPOTLIGHT: SOCIAL MEDIA MARKETING IN MUMBAI */}
-      <section
-        id="mumbai"
-        style={{
-          backgroundColor: "#000000",
-          color: "#FFFFFF",
-          padding: "clamp(48px, 6vw, 96px) clamp(16px, 3vw, 32px)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1320px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
-            gap: "clamp(36px, 6vw, 84px)",
-            alignItems: "center",
-          }}
-        >
-          {/* Left Column: Copy & CTA */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "22px", maxWidth: "620px" }}>
-            <h2
-              className="smm-heading"
-              style={{
-                margin: 0,
-                fontSize: "clamp(2.4rem, 4.8vw, 4.2rem)",
-                lineHeight: 1.06,
-                letterSpacing: "-0.025em",
-                fontWeight: 700,
-                color: "#ffd60a",
-              }}
-            >
-              Social Media Marketing
-              <br />
-              in Mumbai
-            </h2>
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
-              Mumbai is not only India&apos;s financial and entertainment hub, it&apos;s a city beaming with opportunities. With its superfast lifestyle, mixed crowd and lucrative industries, Mumbai is &ldquo;THE&rdquo; place for businesses aiming to create an impact, and a social media game that appeals to your target group is no longer optional.
-            </p>
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
-              Showing up consistently on Instagram, Facebook, LinkedIn and X can set your business apart. At One Impact, every business we partner with gets a plan built from scratch and tailored to its audience, goals and brand voice, with solutions that bundle creativity and performance marketing, backed by data.
-            </p>
-            <p style={{ color: "#FFFFFF", fontWeight: 600, fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, margin: 0 }}>
-              We don&apos;t just provide a service, we partner with you like a team.
-            </p>
-            <div style={{ paddingTop: "8px" }}>
-              <a
-                className="press y btn-sheen"
-                href="#audit"
-                style={{
-                  alignSelf: "flex-start",
-                  fontWeight: 650,
-                  fontSize: "16.5px",
-                  padding: "14px 28px",
-                  minHeight: "52px",
-                  background: "#f9d230",
-                  color: "#000000",
-                  textDecoration: "none",
-                  border: 0,
-                  borderRadius: "999px",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0 6px 20px rgba(249, 210, 48, 0.35)",
-                }}
-              >
-                Let&apos;s build something that leaves a lasting impression
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Dark Styled Feed Mockup Card */}
-          <figure
-            style={{
-              margin: 0,
-              borderRadius: "32px",
-              overflow: "hidden",
-              background: "#08080a",
-              border: "1.5px solid rgba(255, 255, 255, 0.16)",
-              boxShadow: "0 24px 60px -20px rgba(0, 0, 0, 0.9)",
-            }}
-            aria-label="Illustration of a social media feed"
-          >
-            <div style={{ position: "relative", height: "230px", background: "#0e182e", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ position: "absolute", left: "50%", top: "22px", bottom: "-30px", width: "132px", marginLeft: "-66px", borderRadius: "26px", background: "#000000", padding: "8px", border: "1px solid rgba(255,255,255,0.15)" }}>
-                <div style={{ height: "100%", borderRadius: "19px", background: "#141416", padding: "10px", display: "flex", flexDirection: "column", gap: "8px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                    <span style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#f9d230" }} />
-                    <span style={{ height: "6px", width: "46px", borderRadius: "4px", background: "rgba(255,255,255,0.2)" }} />
-                  </div>
-                  <div style={{ height: "98px", borderRadius: "10px", background: "#1c2b54", position: "relative" }}>
-                    <span style={{ position: "absolute", right: "12px", top: "12px", width: "22px", height: "22px", borderRadius: "50%", background: "#f9d230" }} />
-                  </div>
-                  <div style={{ display: "flex", gap: "6px", color: "#FFFFFF" }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></svg>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 5h16v11H9l-5 4z" /></svg>
-                  </div>
-                  <span style={{ height: "6px", width: "80%", borderRadius: "4px", background: "rgba(255,255,255,0.2)" }} />
-                </div>
-              </div>
-            </div>
-            <div style={{ padding: "16px 18px", display: "flex", flexDirection: "column", gap: "10px" }}>
-              {[
-                { title: "Your Brand", meta: "New reel. Posted 2h ago" },
-                { title: "Another Account", meta: "Posted yesterday" },
-                { title: "Nearby Competitor", meta: "Sponsored" },
-              ].map((r, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "14px",
-                    padding: "12px 18px",
-                    borderRadius: "18px",
-                    background: i === 0 ? "#241f0a" : i === 1 ? "#1c1c1f" : "#141416",
-                    border: i === 0 ? "1px solid rgba(255, 214, 10, 0.3)" : "1px solid rgba(255, 255, 255, 0.06)",
-                  }}
-                >
-                  <span
-                    style={{
-                      flexShrink: 0,
-                      width: "32px",
-                      height: "32px",
-                      borderRadius: "50%",
-                      fontSize: "14px",
-                      fontWeight: 700,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      background: i === 0 ? "#ffd60a" : i === 1 ? "#403710" : "#242426",
-                      color: i === 0 ? "#000000" : i === 1 ? "#ffd60a" : "rgba(255, 255, 255, 0.35)",
-                    }}
-                  >
-                    {i + 1}
-                  </span>
-                  <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                    <span style={{ fontWeight: 650, fontSize: "15px", color: i === 0 ? "#FFFFFF" : "rgba(255, 255, 255, 0.72)" }}>
-                      {r.title}
-                    </span>
-                    <span style={{ fontSize: "12.5px", color: "#8E8E93", letterSpacing: 0 }}>
-                      {r.meta}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </figure>
-        </div>
-      </section>
+      {/* ── SPOTLIGHT: SOCIAL MEDIA MARKETING THAT CONVERTS */}
+      <MumbaiSpotlightSection
+        id="social-spotlight"
+        headingLines={["Social Media", "Marketing"]}
+        highlightText="That Converts"
+        paragraphs={[
+          "Showing up consistently with content that resonates is how brands win today. We craft tailored social strategies combining creative storytelling with data-backed performance.",
+          "From scroll-stopping Reels to paid amplification across Meta, LinkedIn, and YouTube, we turn casual scrollers into loyal customers.",
+        ]}
+        closingHighlight="We don't just post content,"
+        closingText=" we build brand momentum that drives real business results."
+        ctaText="Let's build something impactful"
+        ctaHref="#audit"
+        imageSrc="/images/oneimpact_social_media.webp"
+        imageAlt="Social media marketing that converts"
+        steps={[
+          {
+            stepNumber: "1",
+            title: "Scroll-Stopping Content",
+            subtitle: "Reels, carousels & stories tailored for your target audience",
+          },
+          {
+            stepNumber: "2",
+            title: "Active Community Growth",
+            subtitle: "Engagement & DM management converting scrollers to buyers",
+          },
+          {
+            stepNumber: "3",
+            title: "Paid Social Amplification",
+            subtitle: "High-ROI targeted ad campaigns across Meta, LinkedIn & YouTube",
+          },
+        ]}
+      />
 
       {/* ── REELS SHOWCASE (IN-WEBSITE) */}
       <ServiceReelsSection

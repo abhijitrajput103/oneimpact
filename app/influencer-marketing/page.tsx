@@ -1,7 +1,18 @@
 import { Navbar } from "@/components/common/Navbar";
 import { Footer } from "@/components/common/Footer";
 import { ServiceReelsSection } from "@/components/showroom/ServiceReelsSection";
+import { MumbaiSpotlightSection } from "@/components/common/MumbaiSpotlightSection";
 import { HeroForm, ApproachTabs, ServiceTabs, OfferSection, WorkCarousel, FaqSection, InquirySection } from "./interactive-sections";
+import { ShieldCheck, Share2, TrendingUp, LineChart, Coins, Activity, Sparkles } from "lucide-react";
+
+const HELPS_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  "Build trust": ShieldCheck,
+  "Expand reach": Share2,
+  "Boost conversions": TrendingUp,
+  "Sustainable growth": LineChart,
+  "Cost-effective marketing": Coins,
+  "Measurable results": Activity,
+};
 
 const CLIENT_LOGOS = [
   { name: "LiveLaw", src: "/LOGO/transparent/livelaw-logo.webp" },
@@ -59,69 +70,6 @@ const QUOTES = [
   },
 ];
 
-function renderHelpIcon(index: number) {
-  switch (index) {
-    case 0:
-      // Build trust: Handshake
-      return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="m11 17 2 2a1 1 0 0 0 1.4 0l4.3-4.3a1 1 0 0 0 0-1.4l-2.6-2.6a1 1 0 0 0-1.4 0L13 12" />
-          <path d="m13 12 1.4-1.4a1 1 0 0 0 0-1.4L11.8 6.6a1 1 0 0 0-1.4 0L6.1 11a1 1 0 0 0 0 1.4l4.3 4.3a1 1 0 0 0 1.4 0L13 15.5" />
-          <path d="m18 11 3-3" />
-          <path d="m3 14 3-3" />
-        </svg>
-      );
-    case 1:
-      // Expand reach: Plant seedling / sprout
-      return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M7 20h10" />
-          <path d="M12 20v-8" />
-          <path d="M12 12a5 5 0 0 1 5-5h1v1a5 5 0 0 1-5 5h-1z" />
-          <path d="M12 14a5 5 0 0 0-5-5H6v1a5 5 0 0 0 5 5h1z" />
-        </svg>
-      );
-    case 2:
-      // Boost conversions: Arrow up-right
-      return (/*  */
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M7 17L17 7" />
-          <path d="M7 7h10v10" />
-        </svg>
-      );
-    case 3:
-      // Sustainable growth: Target with dart/arrow
-      return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" />
-          <circle cx="12" cy="12" r="6" />
-          <circle cx="12" cy="12" r="2" />
-          <path d="m19 5-4.5 4.5" />
-        </svg>
-      );
-    case 4:
-      // Cost-effective marketing: Rupee symbol
-      return (
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M6 3h12" />
-          <path d="M6 8h12" />
-          <path d="M6 13l8.5 8" />
-          <path d="M6 13h3a4 4 0 0 0 0-8" />
-        </svg>
-      );
-    case 5:
-      // Measurable results: Bar chart
-      return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M18 20V4" />
-          <path d="M12 20V10" />
-          <path d="M6 20v-5" />
-        </svg>
-      );
-    default:
-      return null;
-  }
-}
 
 const HELPS_CARDS = [
   {
@@ -1260,20 +1208,33 @@ export default function InfluencerMarketingPage() {
                       }}
                     />
                   </div>
-                  <div
-                    style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "14px",
-                      backgroundColor: "#2F6FE4",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flex: "none",
-                    }}
-                  >
-                    {renderHelpIcon(i)}
-                  </div>
+                  {(() => {
+                    const HelpsIcon = HELPS_ICONS[b.t] || Sparkles;
+                    const isYellow = b.chip === "#f9d230";
+                    const iconColor = isYellow ? "#ffd60a" : "#60a5fa";
+                    const glowColor = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    const badgeBg = isYellow ? "rgba(255, 214, 10, 0.08)" : "rgba(96, 165, 250, 0.08)";
+                    const badgeBorder = isYellow ? "rgba(255, 214, 10, 0.22)" : "rgba(96, 165, 250, 0.22)";
+                    return (
+                      <div
+                        style={{
+                          width: "48px",
+                          height: "48px",
+                          borderRadius: "14px",
+                          background: badgeBg,
+                          border: `1.5px solid ${badgeBorder}`,
+                          boxShadow: `0 4px 16px ${glowColor}`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flex: "none",
+                          color: iconColor,
+                        }}
+                      >
+                        <HelpsIcon size={24} strokeWidth={2.2} />
+                      </div>
+                    );
+                  })()}
                 </div>
                 <p
                   style={{
@@ -1330,233 +1291,39 @@ export default function InfluencerMarketingPage() {
       {/* ── USP CAROUSEL */}
       <WorkCarousel />
 
-      {/* ── SPOTLIGHT: INFLUENCER MARKETING MADE FOR MUMBAI */}
-      <section
-        id="mumbai"
-        style={{
-          backgroundColor: "#000000",
-          color: "#FFFFFF",
-          padding: "clamp(48px, 6vw, 96px) clamp(16px, 3vw, 32px)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1320px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
-            gap: "clamp(36px, 6vw, 84px)",
-            alignItems: "center",
-          }}
-        >
-          {/* Left Column: Copy & CTA */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "620px" }}>
-            <h2
-              style={{
-                margin: 0,
-                fontFamily: "var(--font-display), Georgia, serif",
-                fontSize: "clamp(2.4rem, 4.8vw, 4.2rem)",
-                lineHeight: 1.06,
-                letterSpacing: "-0.025em",
-                fontWeight: 700,
-                color: "#ffd60a",
-              }}
-            >
-              Influencer Marketing
-              <br />
-              Made for Mumbai
-            </h2>
-
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
-              In a city like Mumbai, where culture, commerce and creativity collide, influencers shape conversations and drive consumer choices. Mumbai’s creator landscape is incredibly diverse, and we tailor campaigns that reflect this diversity, whether you’re targeting a niche Gen Z audience or a broader urban demographic.
-            </p>
-
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "rgba(255, 255, 255, 0.78)", margin: 0 }}>
-              Our team manages the entire process, from influencer discovery and outreach to content planning, approvals and performance reporting. We share detailed metrics on reach, engagement, audience quality and ROI, and we build long-term brand-influencer partnerships that grow with your business.
-            </p>
-
-            <p style={{ fontSize: "clamp(15px, 1.25vw, 17px)", lineHeight: 1.65, color: "#FFFFFF", fontWeight: 500, margin: 0 }}>
-              Looking to make an impact in Mumbai’s competitive digital space? Turn local influence into lasting brand value.
-            </p>
-
-            <div style={{ paddingTop: "8px" }}>
-              <a
-                href="#audit"
-                className="group inline-flex items-center justify-center font-sans font-bold text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
-                style={{
-                  background: "#5b8def",
-                  padding: "14px 34px",
-                  borderRadius: "999px",
-                  fontSize: "16.5px",
-                  textDecoration: "none",
-                  boxShadow: "0 6px 24px rgba(91, 141, 239, 0.35)",
-                }}
-              >
-                Partner with OneImpact
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Dark Rounded Card with Collage & Process Pills */}
-          <div
-            style={{
-              background: "#08080a",
-              border: "1.5px solid rgba(255, 255, 255, 0.16)",
-              borderRadius: "32px",
-              padding: "clamp(20px, 3.5vw, 36px)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              boxShadow: "0 24px 60px -20px rgba(0, 0, 0, 0.9)",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            {/* Collage Artwork */}
-            <div style={{ position: "relative", width: "100%", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                loading="lazy"
-                src="/media/mumbai-influencer-collage-9dff9b265237.webp"
-                srcSet="/media/mumbai-influencer-collage-9dff9b265237.webp 640w, /media/mumbai-influencer-collage-a91d989521c9.webp 1200w"
-                sizes="(max-width: 768px) 95vw, 50vw"
-                width={1200}
-                height={800}
-                alt="Collage of a creator filming beside the Gateway of India, a Mumbai taxi and a local train"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  maxHeight: "360px",
-                  objectFit: "contain",
-                  display: "block",
-                }}
-              />
-            </div>
-
-            {/* 3 Step Pill Rows */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
-              {/* Step 1: Active */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  padding: "12px 18px",
-                  borderRadius: "18px",
-                  background: "#2a2a2e",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "#ffd60a",
-                    color: "#000000",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  1
-                </span>
-                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  <span style={{ color: "#FFFFFF", fontWeight: 650, fontSize: "15px" }}>
-                    Your Brand Collab
-                  </span>
-                  <span style={{ color: "#A1A1A6", fontSize: "12.5px" }}>
-                    Reel with a local creator. Posted 2h ago.
-                  </span>
-                </div>
-              </div>
-
-              {/* Step 2: Next */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  padding: "12px 18px",
-                  borderRadius: "18px",
-                  background: "#1c1c1f",
-                  border: "1px solid rgba(255, 255, 255, 0.06)",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "#403710",
-                    color: "#ffd60a",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  2
-                </span>
-                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  <span style={{ color: "rgba(255, 255, 255, 0.72)", fontWeight: 550, fontSize: "15px" }}>
-                    Creator Shortlist
-                  </span>
-                  <span style={{ color: "#6E6E73", fontSize: "12.5px" }}>
-                    Fashion and lifestyle, Mumbai
-                  </span>
-                </div>
-              </div>
-
-              {/* Step 3: Pending */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "14px",
-                  padding: "12px 18px",
-                  borderRadius: "18px",
-                  background: "#141416",
-                  border: "1px solid rgba(255, 255, 255, 0.04)",
-                }}
-              >
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    background: "#242426",
-                    color: "rgba(255, 255, 255, 0.35)",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  3
-                </span>
-                <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
-                  <span style={{ color: "rgba(255, 255, 255, 0.45)", fontWeight: 550, fontSize: "15px" }}>
-                    Content Approval
-                  </span>
-                  <span style={{ color: "#48484A", fontSize: "12.5px" }}>
-                    Draft ready for review
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── SPOTLIGHT: INFLUENCER MARKETING BUILT FOR IMPACT */}
+      <MumbaiSpotlightSection
+        id="creators"
+        headingLines={["Influencer", "Marketing"]}
+        highlightText="Built for Impact"
+        paragraphs={[
+          "We pair your brand with creators who shape real conversations and inspire consumer action across every platform.",
+          "From targeted discovery to content approvals and ROI tracking, our team builds partnerships that drive measurable value.",
+        ]}
+        closingHighlight="Ready to grow your creator reach?"
+        closingText=" Turn authentic influence into lasting brand value."
+        ctaText="Partner with OneImpact"
+        ctaHref="#audit"
+        imageSrc="/images/oneimpact_influencer.webp"
+        imageAlt="Influencer marketing built for impact"
+        steps={[
+          {
+            stepNumber: "1",
+            title: "Targeted Creator Selection",
+            subtitle: "Handpicked creators matching your exact target audience",
+          },
+          {
+            stepNumber: "2",
+            title: "Authentic Storytelling",
+            subtitle: "High-performing Reels, shorts & organic brand integrations",
+          },
+          {
+            stepNumber: "3",
+            title: "Measurable Reach & ROI",
+            subtitle: "Real-time campaign analytics, engagement tracking & verified ROI",
+          },
+        ]}
+      />
 
       {/* ── REELS SHOWCASE (IN-WEBSITE) */}
       <ServiceReelsSection

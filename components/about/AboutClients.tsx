@@ -1028,7 +1028,7 @@ export function AboutClients() {
           <div className="mobile-shout-bar">
             <button className="mobile-mega-btn" onClick={handleShout} aria-label="Shout brand impact">
               <div className="mobile-mega-img">
-                <Image src="/images/megaphone-v2.webp" alt="Megaphone" width={56} height={56} />
+                <Image src="/images/megaphone-v2.webp" alt="Megaphone" width={56} height={56} loading="eager" />
               </div>
               <span className="font-extrabold text-sm tracking-wide">Sound the Horn</span>
             </button>
@@ -1114,7 +1114,7 @@ export function AboutClients() {
               alt="Megaphone"
               width={400}
               height={300}
-              priority={false}
+              loading="eager"
             />
           </div>
 

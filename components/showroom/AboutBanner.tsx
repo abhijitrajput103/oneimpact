@@ -171,9 +171,9 @@ export function AboutBanner({ className }: AboutBannerProps) {
       <div
         className="relative z-0 pt-14 sm:pt-16 md:pt-20 pb-10 sm:pb-14 md:pb-16 -mt-6 sm:-mt-8 md:-mt-10"
         style={{
-          backgroundColor: "#FFFFFF",
           position: "relative",
           overflow: "hidden",
+          backgroundColor: "#FFFFFF",
         }}
       >
         <p

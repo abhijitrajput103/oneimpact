@@ -56,12 +56,6 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
   const isSimulatingRef = useRef(false);
   const isIntersectingRef = useRef(false);
 
-  const getContainerBounds = useCallback(() => {
-    if (!containerRef.current) return { width: 0, height: 0 };
-    const rect = containerRef.current.getBoundingClientRect();
-    return { width: rect.width, height: rect.height };
-  }, [containerRef]);
-
   const registerSticker = useCallback(
     (
       id: string,
@@ -319,7 +313,7 @@ export function usePhysicsStickers(containerRef: React.RefObject<HTMLDivElement 
     };
 
     rafRef.current = requestAnimationFrame(tick);
-  }, [getContainerBounds, resolveCollisions, getElement]);
+  }, [containerRef, resolveCollisions, getElement]);
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent, stickerId: string) => {
